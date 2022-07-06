@@ -4,11 +4,11 @@
 * 공부 + 통과
 
 ## ☝🏻How
-1. 이슈 및 태스크 나누기
-2. 태스크 구현
-3. 풀 & 리퀘스트
-4. 코드 리뷰
-5. 머지
+1. issue 및 task 나누기
+2. task 구현
+3. PULL & REQUEST
+4. Code Review
+5. MERGE
 … 더 있음 …
 
 ## ☝🏻Period
