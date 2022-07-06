@@ -16,3 +16,6 @@
 
 ## ☝🏻Coding Time
 * 월 ~ 금 : 하루 최소 4시
+
+## ☝🏻Jira
+https://jaekim42.atlassian.net/jira/software/projects/HS/boards/29/roadmap
