@@ -33,6 +33,7 @@ tgoto, tputs
 ### 참고하면 좋을 링크
 
 - [bash manual](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/)
+- [Korean_bash_manual](https://runebook.dev/ko/docs/bash/)
 
 ### 깃브런치 전략
 - [트렁크 기반 개발](https://code-masterjung.tistory.com/73)
