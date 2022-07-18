@@ -10,6 +10,8 @@
 ## 과제에서 배울 것
 
  1. 프로세스(proceses)
+   a. IPC(Inter-Process Communication)
+
  2. 파일 식별자(file descriptors)
  3. 허용 함수들이 어떤 일을 하는지
 
