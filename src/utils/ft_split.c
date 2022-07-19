@@ -1,4 +1,6 @@
-void	make_result_from_line(char **result, char *line, int size)
+#include "../../include/minishell.h"
+
+static void	make_result_from_line(char **result, char *line, int size)
 {
 	int		i;
 	int		idx;
