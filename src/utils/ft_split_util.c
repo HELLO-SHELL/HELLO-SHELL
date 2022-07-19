@@ -7,6 +7,21 @@ int	check_white_space(char c)
 	return (0);
 }
 
+void	handle_quote(char *line, int *count, int *idx)
+{
+	int	qoute_num;
+
+	qoute_num = line[*idx];
+	(*idx)++;
+	while (line[*idx] != qoute_num)
+	{
+		if (line[*idx] == '\0')
+			exit(0);
+		(*count)++;
+		(*idx)++;
+	}
+}
+
 int	count_split_size(char *str)
 {
 	int	i;
@@ -31,7 +46,7 @@ int	count_split_size(char *str)
 
 int	check_size(char *line, char **str, int *i)
 {
-	int		rtn;
+	int	rtn;
 
 	rtn = 0;
 	while (check_white_space(line[*i]))
@@ -42,13 +57,17 @@ int	check_size(char *line, char **str, int *i)
 	}
 	while (!check_white_space(line[*i]) && line[*i] != '\0')
 	{
+		if (line[*i] == 34 || line[*i] == 39)
+		{
+			handle_quote(line, &rtn, i);
+			break ;
+		}
 		rtn++;
 		(*i)++;
 	}
 	(*str) = malloc(sizeof(char) * rtn + 1);
 	if (!(*str))
 		exit(1);
-	ft_strlcpy((*str), line + (*i) - rtn , rtn + 1);
-	printf("ft_strlcpy %s\n", (*str));
+	ft_strlcpy((*str), line + (*i) - rtn, rtn + 1);
 	return (rtn);
 }

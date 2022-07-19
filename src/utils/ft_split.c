@@ -13,7 +13,6 @@ static void	make_result_from_line(char **result, char *line, int size)
 	{
 		if (!check_size(line, &str, &i))
 			break;
-		printf("%dst split_size %s\n", i,str);
 		result[idx] = str;
 		str = NULL;
 		idx++;
@@ -21,7 +20,7 @@ static void	make_result_from_line(char **result, char *line, int size)
 	}
 }
 
-char	**ft_split(char *str)
+char	**command_split(char *str)
 {
 	int		split_size;
 	char	**result;
@@ -36,4 +35,14 @@ char	**ft_split(char *str)
 	result[split_size + 1] = NULL;
 	make_result_from_line(result, str, split_size);
 	return (result);
+}
+
+int main()
+{
+	char *str = readline("front: ");
+	int i = 0;
+	char **rtn = command_split(str);
+
+	while (rtn[i])
+		printf("%s\n", rtn[i++]);
 }
