@@ -11,8 +11,7 @@ static void	make_result_from_line(char **result, char *line, int size)
 	str = NULL;
 	while (line[i] != '\0' && idx < size)
 	{
-		if (!check_size(line, &str, &i))
-			break;
+		check_size(line, &str, &i);
 		result[idx] = str;
 		str = NULL;
 		idx++;
@@ -37,12 +36,12 @@ char	**command_split(char *str)
 	return (result);
 }
 
-int main()
-{
-	char *str = readline("front: ");
-	int i = 0;
-	char **rtn = command_split(str);
+// int main()
+// {
+// 	char *str = readline("front: ");
+// 	int i = 0;
+// 	char **rtn = command_split(str);
 
-	while (rtn[i])
-		printf("%s\n", rtn[i++]);
-}
+// 	while (rtn[i])
+// 		printf("%s\n", rtn[i++]);
+// }
