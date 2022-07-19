@@ -1,16 +1,16 @@
 NAME=minishell
 
-CC=cc
-CFLAGS= -Wall -Wextra -Werror
+CC = cc
+# CFLAGS= -Wall -Wextra -Werror
 
-RM=rm -f
-CP=cp
-SRC= ./src/main.c
+RM = rm -f
+SRC = ./src/main.c
 	
 OBJ=$(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) -lreadline -fsanitize=address $(OBJ) -o $(NAME)
+# $(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 all : $(NAME)
 	./minishell
