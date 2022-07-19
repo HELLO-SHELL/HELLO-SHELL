@@ -1,13 +1,13 @@
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	print_env(t_env *env)
+int	print_env(t_list *env)
 {
 	while (env && env->next != NULL)
 	{
-		ft_putendl_fd(env->value, 1);
+		printf("%s\n", (char *)env->content);
 		env = env->next;
 	}
 	if (env)
-		ft_putendl_fd(env->value, 1);
+		printf("%s\n", (char *)env->content);
 	return (SUCCESS);
 }
