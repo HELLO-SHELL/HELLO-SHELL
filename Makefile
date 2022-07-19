@@ -10,7 +10,6 @@ OBJ=$(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
 	$(CC) -lreadline -fsanitize=address $(OBJ) -o $(NAME)
-# $(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 all : $(NAME)
 	./minishell
@@ -18,7 +17,7 @@ all : $(NAME)
 clean :
 	$(RM) $(OBJ)
 
-fclean : fclean
+fclean : clean
 	$(RM) $(NAME)
 
 re : 
