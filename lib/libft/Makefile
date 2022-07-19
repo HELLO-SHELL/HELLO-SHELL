@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kyungsle <kyungsle@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/14 16:53:07 by kyungsle          #+#    #+#              #
-#    Updated: 2022/04/09 16:49:23 by kyungsle         ###   ########seoul.kr   #
+#    Updated: 2022/07/19 15:44:52 by seongyle         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-CC		= gcc
+CC		= cc
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 LIBC	= ar rc
