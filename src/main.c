@@ -2,8 +2,8 @@
 
 int main(int ac, char **av, char **env)
 {
-    
     char *input;
+    
     while(1)
     {
         input = readline("HELLO-SHELL-0.0$ ");
