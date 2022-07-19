@@ -19,13 +19,13 @@ void	print_arg_with_idx(char **argv, int idx, int is_flag)
 {
 	while (argv[idx])
 	{
-		printf("%s", argv[idx]);
+		ft_putstr_fd(argv[idx], 1);
 		if (argv[idx + 1] != NULL)
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 		idx++;
 	}
 	if (!is_flag)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 	clear_double_pointer(argv);
 }
 
@@ -72,29 +72,29 @@ int main()
 {
 	// char *str = "aa bb c ";
 	// echo(str);
-	// printf("+++++++++++++++++");
+	// ft_putstr_fd("+++++++++++++++++", 1);
 
 	// char *str1 = "-n aa bb c ";
 	// echo(str1);
-	// printf("+++++++++++++++++");
+	// ft_putstr_fd("+++++++++++++++++", 1);
 
 	// char *str2 = "----n aa bb c ";
 	// echo(str2);
-	// printf("+++++++++++++++++");
+	// ft_putstr_fd("+++++++++++++++++", 1);
 
 	// char *str3 = "-nnnnnn aa bb c ";
 	// echo(str3);
-	// printf("+++++++++++++++++");
+	// ft_putstr_fd("+++++++++++++++++", 1);
 
-	// char *str4 = "------n -nnn -n aa bb cc";
-	// echo(str4);
-	// printf("+++++++++++++++++");
+	char *str4 = "------n -nnn -n aa bb cc";
+	echo(str4);
+	ft_putstr_fd("+++++++++++++++++", 1);
 
-	// char *str5 = "-n -n -n -n ---n aa bb c ";
-	// echo(str5);
-	// printf("+++++++++++++++++");
+	char *str5 = "-n -n -n -n ---n aa bb c ";
+	echo(str5);
+	ft_putstr_fd("+++++++++++++++++", 1);
 
 	// char *str6 = "-nnn -nnn aa bb c ";
 	// echo(str6);
-	// printf("+++++++++++++++++");
+	// ft_putstr_fd("+++++++++++++++++", 1);
 }
