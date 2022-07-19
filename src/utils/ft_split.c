@@ -43,5 +43,5 @@ char	**command_split(char *str)
 // 	char **rtn = command_split(str);
 
 // 	while (rtn[i])
-// 		printf("%s\n", rtn[i++]);
+// 		printf("%s", rtn[i++]);
 // }
