@@ -3,16 +3,16 @@
 int main(int ac, char **av, char **env)
 {
     
-    char *str;
+    char *input;
     while(1)
     {
-        str = readline("HELLO-SHELL-0.0$ ");
-        if (str)
-            printf("%s\n", str);
+        input = readline("HELLO-SHELL-0.0$ ");
+        if (input)
+            printf("%s\n", input);
         else
             break ;
-        add_history(str);
-        free(str);
+        add_history(input);
+        free(input);
     }
     system("leaks minishell");
     return(0);
