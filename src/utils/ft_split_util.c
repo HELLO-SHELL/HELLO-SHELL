@@ -1,86 +1,52 @@
+int	check_white_space(char c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return (0);
+}
 
-int	count_size(char **av)
+int	count_split_size(char *str)
 {
 	int	i;
-	int	j;
 	int	length;
 
-	i = 1;
+	i = 0;
 	length = 0;
-	while (0 != av[i])
+	while (str[i] != '\0')
 	{
-		j = 0;
-		while (0 != av[i][j])
+		if (check_white_space(str[i]))
+			i++;
+		else
 		{
-			if ((9 <= av[i][j] && 13 >= av[i][j]) || 32 == av[i][j])
-				j++;
-			else
-			{
-				while (0 != av[i][j]
-					&& (9 > av[i][j] || 13 < av[i][j]) && 32 != av[i][j])
-					j++;
-				length++;
-			}
+			while (str[i] != 0
+				&& !check_white_space(str[i]))
+				i++;
+			length++;
 		}
-		i++;
 	}
 	return (length);
 }
 
-void	make_str(char *word, char *av, int position, int length)
+int	check_size(char *line, char **str, int *i)
 {
-	int		i;
+	int		rtn;
 
-	i = 0;
-	while (i < length)
+	rtn = 0;
+	while (check_white_space(line[*i]))
 	{
-		word[i] = av[position];
-		position++;
-		i++;
-	}
-	word[i] = '\0';
-}
-
-int	check_size(char **av, int i, int j)
-{
-	while ((9 <= av[i][j] && 13 >= av[i][j]) || 32 == av[i][j])
-	{
-		j++;
-		if (0 == av[i][j])
+		(*i)++;
+		if (line[*i] == 0)
 			return (0);
 	}
-	while (('0' <= av[i][j] && '9' >= av[i][j])
-	|| '+' == av[i][j] || '-' == av[i][j])
-		j++;
-	return (j);
-}
-
-int	check_index(char **result, int index)
-{
-	if (0 == result[index])
+	while (!check_white_space(line[*i]) && line[*i] != '\0')
 	{
-		index--;
-		return (1);
+		rtn++;
+		(*i)++;
 	}
-	return (0);
-}
-
-void	create_result(char **result, int *index, int *j, int *position)
-{
-	if (0 != *j)
-		result[*index] = (char *)malloc(sizeof(char) * (*j - *position + 1));
-	else
-		return ;
-	if (0 == result[*index])
-	{
-		while (0 <= (*index)--)
-		{
-			free(result[*index]);
-			result[*index] = 0;
-		}
-		free(result);
-		result = 0;
-		ft_putstr_fd("Error\n", 2);
+	(*str) = malloc(sizeof(char) * rtn + 1);
+	if (!(*str))
 		exit(1);
-	}
+	ft_strlcpy((*str), line + (*i) - rtn , rtn + 1);
+	printf("ft_strlcpy %s\n", (*str));
+	return (rtn);
 }

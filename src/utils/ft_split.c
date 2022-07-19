@@ -1,61 +1,37 @@
-static int	check_rest(char **av, int i, int j)
-{
-	while (0 != av[i][j])
-	{
-		if ((9 <= av[i][j] && 13 >= av[i][j]) || av[i][j] == 32)
-		{
-			if (av[i][j + 1] == 0)
-				return (1);
-			j++;
-		}
-		else
-			return (0);
-	}
-	return (1);
-}
-
-static void	ft_second_split(char **result, char **av)
+void	make_result_from_line(char **result, char *line, int size)
 {
 	int		i;
-	int		j;
-	int		index;
-	int		position;
+	int		idx;
+	char	*str;
 
-	i = 1;
-	index = 0;
-	while (0 != av[i])
+	i = 0;
+	idx = 0;
+	str = NULL;
+	while (line[i] != '\0' && idx < size)
 	{
-		j = 0;
-		while (0 != av[i][j])
-		{
-			position = j;
-			j = check_size(av, i, j);
-			create_result(result, &index, &j, &position);
-			if (check_index(result, index))
-				break ;
-			make_str(result[index], av[i], position, j - position);
-			if (0 == av[i][j] || check_rest(av, i, j))
-				break ;
-			index++;
-		}
-		index++;
+		if (!check_size(line, &str, &i))
+			break;
+		printf("%dst split_size %s\n", i,str);
+		result[idx] = str;
+		str = NULL;
+		idx++;
 		i++;
 	}
 }
 
-char	**ft_split(char **av)
+char	**ft_split(char *str)
 {
 	int		split_size;
-	int		i;
 	char	**result;
 
-	result = 0;
-	i = 0;
-	split_size = count_size(av);
+	if (!str)
+		return (NULL);
+	result = NULL;
+	split_size = count_split_size(str);
 	result = (char **)malloc(sizeof(char *) * split_size + 1);
-	if (result == 0)
-		return (0);
-	result[split_size + 1] = 0;
-	ft_second_split(result, av);
+	if (result == NULL)
+		exit (1);
+	result[split_size + 1] = NULL;
+	make_result_from_line(result, str, split_size);
 	return (result);
 }
