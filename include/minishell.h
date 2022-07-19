@@ -9,6 +9,10 @@
 # include <readline/history.h>
 # include "libft.h"
 
+# define TRUE 1
+# define FALSE 0
+# define NO_ECHO_FLAG -1
+
 char	**command_split(char *str);
 int		check_white_space(char c);
 int		count_split_size(char *str);
