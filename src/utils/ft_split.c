@@ -30,7 +30,7 @@ char	**command_split(char *str)
 	split_size = count_split_size(str);
 	result = (char **)malloc(sizeof(char *) * split_size + 1);
 	if (result == NULL)
-		exit (1);
+		exit (EXIT_FAILURE);
 	result[split_size + 1] = NULL;
 	make_result_from_line(result, str, split_size);
 	return (result);

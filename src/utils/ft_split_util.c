@@ -16,7 +16,7 @@ void	handle_quote(char *line, int *count, int *idx)
 	while (line[*idx] != qoute_num)
 	{
 		if (line[*idx] == '\0')
-			exit(0);
+			exit(EXIT_SUCCESS);
 		(*count)++;
 		(*idx)++;
 	}
@@ -67,7 +67,7 @@ int	check_size(char *line, char **str, int *i)
 	}
 	(*str) = malloc(sizeof(char) * rtn + 1);
 	if (!(*str))
-		exit(1);
+		exit(EXIT_FAILURE);
 	ft_strlcpy((*str), line + (*i) - rtn, rtn + 1);
 	return (rtn);
 }
