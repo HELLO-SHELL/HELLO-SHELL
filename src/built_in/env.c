@@ -1,9 +1,6 @@
-typedef struct s_env{
-	char			*value;
-	struct s_env	next;
-}	t_env;
+#include "../include/minishell.h"
 
-int	env(t_env *env)
+int	print_env(t_env *env)
 {
 	while (env && env->next != NULL)
 	{
