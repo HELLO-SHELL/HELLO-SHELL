@@ -11,8 +11,8 @@
 # include "constant.h"
 
 typedef struct s_env {
-	char			*value;
-	struct s_env	*next;
+	char	*key;
+	char	*value;
 }	t_env;
 
 int	print_env(t_list *env);
