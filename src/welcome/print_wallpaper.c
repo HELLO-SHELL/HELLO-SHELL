@@ -45,5 +45,6 @@ void	print_wallpaper(void)
 		}
 		free(line);
 	}
+	printf("\n");
 	close(fd);
 }
