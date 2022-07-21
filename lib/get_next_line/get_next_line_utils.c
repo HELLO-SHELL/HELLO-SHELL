@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:34:15 by seongyle          #+#    #+#             */
-/*   Updated: 2022/04/23 22:05:06 by seongyle         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:35:55 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*delete_node(t_list **node)
+void	*delete_node(t_gnl_list **node)
 {
 	free((*node)->save);
 	(*node)->prev->next = (*node)->next;
@@ -23,7 +23,7 @@ void	*delete_node(t_list **node)
 	return (NULL);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_gnl_strchr(const char *s, int c)
 {
 	while (*s)
 	{
@@ -44,23 +44,23 @@ char	*append_buffer(char *save, char const *buffer)
 		return (NULL);
 	else if (save == NULL && buffer)
 	{
-		new = malloc(ft_strlen(buffer) + 1);
+		new = malloc(ft_gnl_strlen(buffer) + 1);
 		if (!new)
 			return (NULL);
-		ft_strlcpy(new, buffer, ft_strlen(buffer) + 1);
+		ft_gnl_strlcpy(new, buffer, ft_gnl_strlen(buffer) + 1);
 		return (new);
 	}
-	new = malloc(ft_strlen(save) + ft_strlen(buffer) + 1);
+	new = malloc(ft_gnl_strlen(save) + ft_gnl_strlen(buffer) + 1);
 	if (!new)
 		return (NULL);
-	ft_strlcpy(new, save, ft_strlen(save) + 1);
-	ft_strlcpy(new + ft_strlen(save), buffer, ft_strlen(buffer) + 1);
+	ft_gnl_strlcpy(new, save, ft_gnl_strlen(save) + 1);
+	ft_gnl_strlcpy(new + ft_gnl_strlen(save), buffer, ft_gnl_strlen(buffer) + 1);
 	free(save);
 	save = NULL;
 	return (new);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_gnl_strlen(const char *s)
 {
 	size_t	i;
 
@@ -70,7 +70,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
+size_t	ft_gnl_strlcpy(char *dst, const char *src, size_t dst_size)
 {
 	size_t	i;
 
@@ -84,5 +84,5 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size)
 		}
 		dst[i] = '\0';
 	}
-	return (ft_strlen(src));
+	return (ft_gnl_strlen(src));
 }

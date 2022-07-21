@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 20:48:37 by seongyle          #+#    #+#             */
-/*   Updated: 2022/04/23 22:03:02 by seongyle         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:36:01 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static	t_list	*get_node(t_list *head, int fd)
+static	t_gnl_list	*get_node(t_gnl_list *head, int fd)
 {
-	t_list	*node;
+	t_gnl_list	*node;
 
 	node = head->next;
 	while (node)
@@ -23,7 +23,7 @@ static	t_list	*get_node(t_list *head, int fd)
 			return (node);
 		node = node->next;
 	}
-	node = malloc(sizeof(t_list));
+	node = malloc(sizeof(t_gnl_list));
 	if (!node)
 		return (NULL);
 	node->fd = fd;
@@ -46,7 +46,7 @@ static char	*get_save_in_node(char **save, int fd)
 	if (!buffer)
 		return (NULL);
 	new = *save;
-	while (!new || !ft_strchr(new, '\n'))
+	while (!new || !ft_gnl_strchr(new, '\n'))
 	{
 		ret_read = read(fd, buffer, BUFFER_SIZE);
 		if (ret_read <= 0)
@@ -68,14 +68,14 @@ static char	*get_line(char const *save)
 	size_t	len;
 	char	*line;
 
-	if (ft_strchr(save, '\n'))
-		len = ft_strchr(save, '\n') - save + 1;
+	if (ft_gnl_strchr(save, '\n'))
+		len = ft_gnl_strchr(save, '\n') - save + 1;
 	else
-		len = ft_strchr(save, '\0') - save;
+		len = ft_gnl_strchr(save, '\0') - save;
 	line = malloc(len + 1);
 	if (!line)
 		return (NULL);
-	ft_strlcpy(line, save, len + 1);
+	ft_gnl_strlcpy(line, save, len + 1);
 	return (line);
 }
 
@@ -83,10 +83,10 @@ static char	*set_remains(char **save, size_t offset)
 {
 	char	*new;
 
-	new = malloc(ft_strlen(*save + offset) + 1);
+	new = malloc(ft_gnl_strlen(*save + offset) + 1);
 	if (!new)
 		return (NULL);
-	ft_strlcpy(new, *save + offset, ft_strlen(*save + offset) + 1);
+	ft_gnl_strlcpy(new, *save + offset, ft_gnl_strlen(*save + offset) + 1);
 	free(*save);
 	*save = NULL;
 	return (new);
@@ -94,8 +94,8 @@ static char	*set_remains(char **save, size_t offset)
 
 char	*get_next_line(int fd)
 {
-	static t_list	head;
-	t_list			*node;
+	static t_gnl_list	head;
+	t_gnl_list			*node;
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	line = get_line(node->save);
 	if (!line)
 		return (delete_node(&node));
-	node->save = set_remains(&(node->save), ft_strlen(line));
+	node->save = set_remains(&(node->save), ft_gnl_strlen(line));
 	if (!(node->save))
 		return (delete_node(&node));
 	return (line);

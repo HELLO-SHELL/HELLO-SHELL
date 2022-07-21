@@ -20,19 +20,19 @@
 # define BUFFER_SIZE 42
 #endif
 
-typedef struct s_list
+typedef struct s_gnl_list
 {
 	int				fd;
 	char			*save;
-	struct s_list	*next;
-	struct s_list	*prev;
-}	t_list;
+	struct s_gnl_list	*next;
+	struct s_gnl_list	*prev;
+}	t_gnl_list;
 
 char	*get_next_line(int fd);
-void	*delete_node(t_list **node);
+void	*delete_node(t_gnl_list **node);
 char	*append_buffer(char *save, char const *buffer);
-size_t	ft_strlen(char const *s);
-char	*ft_strchr(char const *s, int c);
-size_t	ft_strlcpy(char *dst, char const *src, size_t dstsize);
+size_t	ft_gnl_strlen(char const *s);
+char	*ft_gnl_strchr(char const *s, int c);
+size_t	ft_gnl_strlcpy(char *dst, char const *src, size_t dstsize);
 
 #endif
