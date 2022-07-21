@@ -7,7 +7,9 @@ CC = cc
 CFLAGS= -Wall -Wextra -Werror
 
 RM = rm -f
-SRC = ./src/main.c
+SRC = ./src/main.c \
+	  ./src/utils/env.c \
+	  ./src/utils/init.c
 	
 OBJ=$(SRC:.c=.o)
 

@@ -19,6 +19,10 @@ typedef struct s_node {
 	t_list	*env_list;
 }	t_node;
 
-int	print_env(t_list *env);
+// int	print_env(t_list *env);
+void    init_minishell(void);
+
+void    split_env(t_env *env_node, char **env, int i);
+void    env_linked_list(t_node *minishell, char **env);
 
 #endif
