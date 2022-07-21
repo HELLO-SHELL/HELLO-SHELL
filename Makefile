@@ -16,7 +16,8 @@ $(NAME) : $(OBJ)
 	make -C $(LIB_DIR)/libft
 	make -C $(LIB_DIR)/get_next_line
 	$(CC) -lreadline -fsanitize=address $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) $(OBJ) -o $(NAME)
-	make fclean -C $(LIB_DIR)
+	make fclean -C $(LIB_DIR)/libft
+	make fclean -C $(LIB_DIR)/get_next_line
 
 all : $(NAME)
 	./minishell
@@ -25,7 +26,6 @@ clean :
 	$(RM) $(OBJ)
 
 fclean : clean
-	make -C $(LIB_DIR) fclean
 	$(RM) $(NAME)
 
 re : 
