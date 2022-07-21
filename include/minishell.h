@@ -15,6 +15,10 @@ typedef struct s_env {
 	char	*value;
 }	t_env;
 
+typedef struct s_node {
+	t_list	*env_list;
+}	t_node;
+
 int	print_env(t_list *env);
 
 #endif
