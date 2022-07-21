@@ -35,6 +35,22 @@ void    env_linked_list(t_node *minishell, char **env)
     }
 }
 
+void    init_minishell(void)
+{
+    char *input;
+
+    while(1)
+    {
+        input = readline("HELLO-SHELL-0.0$ ");
+        if (input)
+            printf("%s\n", input);
+        else
+            break ;
+        add_history(input);
+        free(input);
+    }
+}
+
 int main(int ac, char **av, char **env)
 {
     (void) ac;
@@ -45,23 +61,14 @@ int main(int ac, char **av, char **env)
     if (minishell == 0)
         return (0);
     env_linked_list(minishell, env);
-    // 연결 리스트 출력
-    t_list  *curr;    
-    curr = minishell->env_list;
-    while (curr->next)
-    {
-        printf("key = %s, value = %s\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
-        curr = curr->next;
-    }
-    // while(1)
+    init_minishell();
+
+    // t_list  *curr;    
+    // curr = minishell->env_list;
+    // while (curr->next)
     // {
-    //     input = readline("HELLO-SHELL-0.0$ ");
-    //     if (input)
-    //         printf("%s\n", input);
-    //     else
-    //         break ;
-    //     add_history(input);
-    //     free(input);
+    //     printf("key = %s, value = %s\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+    //     curr = curr->next;
     // }
     system("leaks minishell");
     return(0);
