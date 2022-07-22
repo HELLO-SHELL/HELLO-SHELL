@@ -12,6 +12,20 @@
 # include "get_next_line.h"
 # include "color.h"
 
+typedef enum e_token_type
+{
+	TK_EOF = 0,
+	TK_PAREN_L = '(',
+	TK_PAREN_R = ')',
+	TK_RDINPUT = '<',
+	TK_RDOUTPUT = '>',
+	TK_HEREDOC = '<<',
+	TK_APPEND = '>>',
+	TK_PIPE = '|',
+	TK_COMMAND,
+	TK_WORD
+}	t_token_type;
+
 char	**command_split(char *str);
 int		check_white_space(char c);
 int		count_split_size(char *str);
