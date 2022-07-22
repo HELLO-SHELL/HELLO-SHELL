@@ -44,7 +44,7 @@ int	count_split_size(char *str)
 	return (length);
 }
 
-int	check_size(char *line, char **str, int *i)
+int	split_line(char *line, char **str, int *i)
 {
 	int	rtn;
 

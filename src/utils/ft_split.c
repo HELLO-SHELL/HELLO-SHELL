@@ -11,7 +11,7 @@ static void	make_result_from_line(char **result, char *line, int size)
 	str = NULL;
 	while (line[i] != '\0' && idx < size)
 	{
-		check_size(line, &str, &i);
+		split_line(line, &str, &i);
 		result[idx] = str;
 		str = NULL;
 		idx++;

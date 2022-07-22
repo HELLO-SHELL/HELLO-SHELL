@@ -37,7 +37,7 @@ typedef struct s_token
 char	**command_split(char *str);
 int		check_white_space(char c);
 int		count_split_size(char *str);
-int		check_size(char *line, char **str, int *i);
+int		split_line(char *line, char **str, int *i);
 void	print_wallpaper(void);
 
 #endif
