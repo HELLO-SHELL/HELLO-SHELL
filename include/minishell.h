@@ -7,6 +7,8 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <errorno.h>
+# include <string.h>
 # include <fcntl.h>
 # include "libft.h"
 # include "get_next_line.h"
