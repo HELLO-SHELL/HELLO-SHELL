@@ -3,7 +3,8 @@
 int main(int ac, char **av, char **env)
 {
     char *input;
-    
+
+    print_wallpaper(); 
     while(1)
     {
         input = readline("HELLO-SHELL-0.0$ ");
