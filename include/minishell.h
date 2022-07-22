@@ -15,8 +15,6 @@
 enum e_token_type
 {
 	TK_EOF = 0,
-	TK_PAREN_L = '(',
-	TK_PAREN_R = ')',
 	TK_RDINPUT = '<',
 	TK_RDOUTPUT = '>',
 	TK_HEREDOC = '<<',
@@ -39,5 +37,6 @@ int		check_white_space(char c);
 int		count_split_size(char *str);
 int		split_line(char *line, char **str, int *i);
 void	print_wallpaper(void);
+int		ft_strcmp(const char *str1, const char *str2);
 
 #endif
