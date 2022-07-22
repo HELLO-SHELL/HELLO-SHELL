@@ -18,4 +18,11 @@ int		count_split_size(char *str);
 int		check_size(char *line, char **str, int *i);
 void	print_wallpaper(void);
 
+/* built-in */
+
+int		ft_exit(int status);
+
+/* utils */
+int		is_same_string(char *str1, char *str2);
+
 #endif
