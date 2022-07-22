@@ -10,6 +10,8 @@
 # include "libft.h"
 # include "constant.h"
 
+# define ENV "env\n"
+
 typedef struct s_env {
 	char	*key;
 	char	*value;
@@ -20,7 +22,7 @@ typedef struct s_node {
 }	t_node;
 
 // int	print_env(t_list *env);
-void    init_minishell(void);
+void    init_minishell(t_node *minishell);
 
 void    split_env(t_env *env_node, char **env, int i);
 void    env_linked_list(t_node *minishell, char **env);
