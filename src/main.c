@@ -13,7 +13,7 @@ int main(int ac, char **av, char **env)
             if (is_same_string(input, "exit"))
             {
                 free(input);
-                ft_exit(0);
+                ft_exit(EXIT_SUCCESS);
             }
             printf("%s\n", input);
         }
