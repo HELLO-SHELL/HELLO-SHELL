@@ -3,7 +3,7 @@ typedef struct s_env{
 	struct s_env	next;
 }	t_env;
 
-int	env(t_env *env)
+int	ft_env(t_env *env)
 {
 	while (env && env->next != NULL)
 	{
