@@ -2,7 +2,7 @@
 
 int	ft_exit(int status)
 {
-	printf("ERROR: write error reason");
+	printf("%sERROR: error status is %d%s\n", RED, status, COLOR_RESET);
 	exit(status);
+	return (0);
 }
-
