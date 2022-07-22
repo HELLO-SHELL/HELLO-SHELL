@@ -31,17 +31,7 @@ char	**command_split(char *str)
 	result = (char **)malloc(sizeof(char *) * split_size + 1);
 	if (result == NULL)
 		exit (EXIT_FAILURE);
-	result[split_size + 1] = NULL;
+	result[split_size] = NULL;
 	make_result_from_line(result, str, split_size);
 	return (result);
 }
-
-// int main()
-// {
-// 	char *str = readline("front: ");
-// 	int i = 0;
-// 	char **rtn = command_split(str);
-
-// 	while (rtn[i])
-// 		printf("%s\n", rtn[i++]);
-// }

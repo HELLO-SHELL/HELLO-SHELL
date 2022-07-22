@@ -31,12 +31,12 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (check_white_space(str[i]))
+		if (check_white_space(str[i]) || str[i] == '\'' || str[i] == '\"')
 			i++;
 		else
 		{
 			while (str[i] != 0
-				&& !check_white_space(str[i]))
+				&& !(check_white_space(str[i]) || str[i] == '\'' || str[i] == '\"'))
 				i++;
 			length++;
 		}
