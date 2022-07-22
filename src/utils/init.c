@@ -7,16 +7,8 @@ void    init_minishell(t_node *minishell)
     while(1)
     {
         input = readline("HELLO-SHELL-0.0$ ");
-        if (!(ft_strncmp(input, ENV, ft_strlen(input))))
-        {
-            t_list  *curr;    
-            curr = minishell->env_list;
-            while (curr->next)
-            {
-                printf("%s=%s\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
-                curr = curr->next;
-            }
-        }
+        if (is_same_string(input, ENV))
+            ft_env(minishell->env_list);
         else if (input)
             printf("%s\n", input);
         else

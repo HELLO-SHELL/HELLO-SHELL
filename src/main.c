@@ -6,6 +6,7 @@ int main(int ac, char **av, char **env)
     (void) av;
     t_node  *minishell;
 
+    print_wallpaper();
     minishell = (t_node *)malloc(sizeof(t_node));
     if (minishell == 0)
         return (0);
