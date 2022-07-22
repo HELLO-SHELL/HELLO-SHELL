@@ -12,7 +12,7 @@
 # include "get_next_line.h"
 # include "color.h"
 
-typedef enum e_token_type
+enum e_token_type
 {
 	TK_EOF = 0,
 	TK_PAREN_L = '(',
@@ -24,7 +24,15 @@ typedef enum e_token_type
 	TK_PIPE = '|',
 	TK_COMMAND,
 	TK_WORD
-}	t_token_type;
+};
+
+typedef struct s_token
+{
+	int				type;
+	char			*str;
+	struct s_token	*prev;
+	struct s_token	*next;
+}	t_token;
 
 char	**command_split(char *str);
 int		check_white_space(char c);
