@@ -8,7 +8,8 @@ CC = cc
 # CFLAGS= -Wall -Wextra -Werror
 
 RM = rm -f
-SRC = ./src/main.c ./src/welcome/print_wallpaper.c
+SRC = ./src/main.c ./src/welcome/print_wallpaper.c ./src/built_in/ft_exit.c \
+		./src/utils/is_same_string.c
 	
 OBJ=$(SRC:.c=.o)
 
