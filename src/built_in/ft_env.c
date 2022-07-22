@@ -1,16 +1,13 @@
-typedef struct s_env{
-	char			*value;
-	struct s_env	next;
-}	t_env;
+#include "../../include/minishell.h"
 
-int	ft_env(t_env *env)
+int	ft_env(t_list *env)
 {
 	while (env && env->next != NULL)
 	{
-		ft_putendl_fd(env->value, 1);
+		printf("%s = %s\n", ((t_env *)(env->content))->key, ((t_env *)(env->content))->value);
 		env = env->next;
 	}
 	if (env)
-		ft_putendl_fd(env->value, 1);
+		printf("%s = %s\n", ((t_env *)(env->content))->key, ((t_env *)(env->content))->value);
 	return (SUCCESS);
 }

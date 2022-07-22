@@ -2,26 +2,16 @@
 
 int main(int ac, char **av, char **env)
 {
-    char *input;
+    (void) ac;
+    (void) av;
+    t_node  *minishell;
 
-    print_wallpaper(); 
-    while(1)
-    {
-        input = readline("HELLO-SHELL-0.0$ ");
-        if (input)
-        {
-            if (is_same_string(input, "exit"))
-            {
-                free(input);
-                ft_exit(EXIT_SUCCESS);
-            }
-            printf("%s\n", input);
-        }
-        else
-            break ;
-        add_history(input);
-        free(input);
-    }
+    print_wallpaper();
+    minishell = (t_node *)malloc(sizeof(t_node));
+    if (minishell == 0)
+        return (0);
+    env_linked_list(minishell, env);
+    init_minishell(minishell);
     system("leaks minishell");
     return(0);
 }
