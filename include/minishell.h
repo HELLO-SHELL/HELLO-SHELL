@@ -7,7 +7,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <errorno.h>
+# include <errno.h>
 # include <string.h>
 # include <fcntl.h>
 # include "libft.h"
