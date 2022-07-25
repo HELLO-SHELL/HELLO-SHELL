@@ -16,11 +16,11 @@ SRC = ./src/main.c \
 OBJ=$(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
-	make bonus -C $(LIB_DIR)/libft
-	make -C $(LIB_DIR)/get_next_line
+	make bonus -j 6 -C $(LIB_DIR)/libft
+	make -j 6 -C $(LIB_DIR)/get_next_line
 	$(CC) -lreadline -fsanitize=address $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) $(OBJ) -o $(NAME)
-	make fclean -C $(LIB_DIR)/libft
-	make fclean -C $(LIB_DIR)/get_next_line
+	make -j 6 fclean -C $(LIB_DIR)/libft
+	make -j 6 fclean -C $(LIB_DIR)/get_next_line
 
 all : $(NAME)
 	./minishell
