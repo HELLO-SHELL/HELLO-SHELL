@@ -1,7 +1,6 @@
-#include <unistd.h>
-#include <stdio.h>
+#include "../../include/minishell.h"
 
-int pwd(void)
+int ft_pwd(void)
 {
 	char	*buf;
 

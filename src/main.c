@@ -10,12 +10,12 @@ int main(int ac, char **av, char **env)
 	print_wallpaper(); 
 	while(1)
 	{
-		input = readline("HELLO-SHELL-0.0$ ");
+		input = "123 123 123";
 		if (input)
 			printf("%s\n", input);
 		else
 			break ;
-		add_history(input);
+		// add_history(input);
 		str = command_split(input);
 		token_list = init_token_list(str);
 		printf("------------------\n");
@@ -31,7 +31,7 @@ int main(int ac, char **av, char **env)
 		// }
 		token_list = token_list->next->prev;
 		printf("value : %s\n", token_list->value);
-		free(input);
+		// free(input);
 	}
 	return(0);
 }
