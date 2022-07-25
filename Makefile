@@ -8,11 +8,12 @@ CC = cc
 # CFLAGS= -Wall -Wextra -Werror
 
 RM = rm -f
-SRC = ./src/main.c ./src/welcome/print_wallpaper.c ./src/utils/ft_split_util.c \
-./src/utils/ft_split.c ./src/utils/ft_strcpm.c ./src/parser/make_arr_to_list.c \
-./src/utils/env.c ./src/utils/init.c ./src/built_in/ft_exit.c \
-./src/utils/is_same_string.c ./src/built_in/ft_env.c
-	
+SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
+./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_strcpm.c \
+./src/utils/env.c ./src/utils/init.c ./src/utils/is_same_string.c ./src/utils/get_token_head.c \
+./src/built_in/ft_exit.c ./src/built_in/ft_env.c \
+./src/parser/make_arr_to_list.c
+
 OBJ=$(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
@@ -27,8 +28,6 @@ all : $(NAME)
 
 debug :
 	$(CC) src/main.c src/*/*.c -g3 lib/*/*.c -lreadline -g3 -o minishell
-	make fclean
-	rm -rf minishell.dSYM
 
 clean :
 	$(RM) $(OBJ)

@@ -55,7 +55,7 @@ int		count_split_size(char *str);
 int		split_line(char *line, char **str, int *i);
 void	print_wallpaper(void);
 int		ft_strcmp(const char *str1, const char *str2);
-t_token	*init_token_list(char **token_arr);
+t_token	*set_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
 
 /* built-in */
@@ -66,5 +66,6 @@ int		ft_env(t_list *env);
 int		is_same_string(char *str1, char *str2);
 void    split_env(t_env *env_node, char **env, int i);
 void    env_linked_list(t_node *minishell, char **env);
+t_token	*get_token_head(t_token *token);
 
 #endif

@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	check_type(t_token *lst)
+static void	check_and_set_type(t_token *lst)
 {
 	if (!ft_strcmp(lst->value, "<"))
 		lst->type = TK_RDINPUT;
@@ -21,43 +21,61 @@ void	check_type(t_token *lst)
 		lst->type = TK_WORD;
 }
 
-void	insert_str_into_list(t_token *lst, char **str)
+static void insert_first_into_list(t_token **lst, char *str)
 {
-	int	i;
+	t_token *temp;
+
+	temp = malloc(sizeof(t_token));
+	if (!temp)
+		exit(EXIT_FAILURE);
+	temp->type = 0;
+	temp->value = str;
+	temp->next = NULL;
+	temp->prev = NULL;
+	check_and_set_type(temp);
+	*lst = temp;
+}
+
+static void	insert_str_into_list_back(t_token **lst, char *str)
+{
+	t_token *temp;
+
+	temp = malloc(sizeof(t_token));
+	if (!temp)
+		exit(EXIT_FAILURE);
+	temp->type = 0;
+	temp->value = str;
+	temp->next = NULL;
+	temp->prev = *lst;
+	check_and_set_type(temp);
+	(*lst)->next = temp;
+	(*lst) = (*lst)->next;
+}
+
+static void	set_str_into_list(t_token **lst, char **str)
+{
+	int		i;
 
 	i = 0;
-	lst->prev = NULL;
 	while (str[i])
 	{
-		lst->value = str[i];
-		check_type(lst);
-		if (str[i+1])
-		{
-			lst->next = malloc(sizeof(t_token*));
-			if (!(lst->next))
-				exit(EXIT_FAILURE);
-			lst->next->prev = lst;
-			lst = lst->next;
-		}
+		if (i == 0)
+			insert_first_into_list(lst, str[i]);
 		else
-			lst->next = NULL;
+			insert_str_into_list_back(lst, str[i]);
 		i++;
 	}
 	free(str);
 	str = NULL;
 }
 
-t_token	*init_token_list(char **token_arr)
+t_token	*set_token_list(char **token_arr)
 {
-	t_token	*head;
-	t_token	*curr;
+	t_token	*token_list_head;
 
 	if (!token_arr || !*token_arr)
 		exit(EXIT_FAILURE);
-	curr = malloc(sizeof(t_token *));
-	if (!curr)
-		exit(EXIT_FAILURE);
-	head = curr;
-	insert_str_into_list(curr, token_arr);
-	return (head);
+	set_str_into_list(&token_list_head, token_arr);
+	token_list_head = get_token_head(token_list_head);
+	return (token_list_head);
 }
