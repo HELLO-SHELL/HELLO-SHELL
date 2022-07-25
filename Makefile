@@ -27,6 +27,8 @@ all : $(NAME)
 
 debug :
 	$(CC) src/main.c src/*/*.c -g3 lib/*/*.c -lreadline -g3 -o minishell
+	make fclean
+	rm -rf minishell.dSYM
 
 clean :
 	$(RM) $(OBJ)
