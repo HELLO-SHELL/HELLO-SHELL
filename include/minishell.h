@@ -17,17 +17,19 @@ enum e_token_type
 	TK_EOF = 0,
 	TK_RDINPUT = '<',
 	TK_RDOUTPUT = '>',
-	TK_HEREDOC,
 	TK_APPEND,
 	TK_PIPE = '|',
 	TK_COMMAND,
+	TK_FILE,
+	TK_HEREDOC,
+	TK_DELIM,
 	TK_WORD
 };
 
 typedef struct s_token
 {
 	int				type;
-	char			*str;
+	char			*value;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;

@@ -18,11 +18,19 @@ int main(int ac, char **av, char **env)
 		add_history(input);
 		str = command_split(input);
 		token_list = init_token_list(str);
-		while(token_list)
-		{
-			printf("%s\n", token_list->str);
-			token_list = token_list->next;
-		}
+		printf("------------------\n");
+		// while(token_list)
+		// {
+		// 	printf("value : %s\n", token_list->value);
+		// 	printf("prev : %p\n", token_list->prev);
+		// 	printf("next : %p\n", token_list->next);
+		// 	printf("type : %d\n", token_list->type);
+		// 	printf("me : %p\n", token_list);
+		// 	printf("------------------\n");
+		// 	token_list = token_list->next;
+		// }
+		token_list = token_list->next->prev;
+		printf("value : %s\n", token_list->value);
 		free(input);
 	}
 	return(0);

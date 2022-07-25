@@ -1,52 +1,63 @@
 #include "../../include/minishell.h"
 
-int	check_type(char *str)
+void	check_type(t_token *lst)
 {
-	if (!ft_strcmp(str, "<"))
-		return (TK_RDINPUT);
-	if (!ft_strcmp(str, ">"))
-		return (TK_RDOUTPUT);
-	if (!ft_strcmp(str, "<<"))
-		return (TK_HEREDOC);
-	if (!ft_strcmp(str, ">>"))
-		return (TK_APPEND);
-	if (!ft_strcmp(str, "|"))
-		return (TK_PIPE);
-	return (TK_WORD);
+	if (!ft_strcmp(lst->value, "<"))
+		lst->type = TK_RDINPUT;
+	else if (!ft_strcmp(lst->value, ">"))
+		lst->type =  TK_RDOUTPUT;
+	else if (!ft_strcmp(lst->value, "<<"))
+		lst->type =  TK_HEREDOC;
+	else if (!ft_strcmp(lst->value, ">>"))
+		lst->type =  TK_APPEND;
+	else if (!ft_strcmp(lst->value, "|"))
+		lst->type =  TK_PIPE;
+	else if (lst->prev && (lst->prev->type == TK_RDOUTPUT \
+	|| lst->prev->type == TK_RDINPUT || lst->prev->type == TK_APPEND))
+		lst->type = TK_FILE;
+	else if (lst->prev && lst->prev->type == TK_HEREDOC)
+		lst->type = TK_DELIM;
+	else
+		lst->type = TK_WORD;
+}
+
+void	insert_str_into_list(t_token *lst, char **str)
+{
+	int	i;
+
+	i = 0;
+	lst->prev = NULL;
+	while (str[i])
+	{
+		lst->value = str[i];
+		check_type(lst);
+		if (str[i+1])
+		{
+			lst->next = malloc(sizeof(t_token*));
+			if (!(lst->next))
+				exit(EXIT_FAILURE);
+			lst->next->prev = lst;
+			lst = lst->next;
+		}
+		else
+			lst->next = NULL;
+		i++;
+	}
+	free(str);
+	str = NULL;
 }
 
 t_token	*init_token_list(char **token_arr)
 {
 	t_token	*head;
 	t_token	*curr;
-	int		i;
 
-	i = 0;
-	if (!token_arr)
+	if (!token_arr || !*token_arr)
 		exit(EXIT_FAILURE);
-	curr = malloc(sizeof(t_token*));
-	while (token_arr[i])
-	{
-		if (i == 0)
-			head = curr;
-		curr->str = token_arr[i];
-		curr->type = check_type(token_arr[i]);
-		curr->prev = NULL;
-		if (token_arr[i+1])
-		{
-			curr->next = malloc(sizeof(t_token*));
-			curr = curr->next;
-		}
-		else
-			curr->next = NULL;
-		i++;
-	}
-	curr = head;
-	while (curr)
-	{
-		if (curr->next)
-			curr->next->prev = curr;
-		curr = curr->next;
-	}
+	curr = malloc(sizeof(t_token *));
+	if (!curr)
+		exit(EXIT_FAILURE);
+	head = curr;
+	insert_str_into_list(curr, token_arr);
 	return (head);
 }
