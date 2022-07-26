@@ -2,15 +2,15 @@
 
 static void	check_and_set_type(t_token *lst)
 {
-	if (!ft_strcmp(lst->value, "<"))
+	if (is_same_string(lst->value, "<"))
 		lst->type = TK_RDINPUT;
-	else if (!ft_strcmp(lst->value, ">"))
+	else if (is_same_string(lst->value, ">"))
 		lst->type =  TK_RDOUTPUT;
-	else if (!ft_strcmp(lst->value, "<<"))
+	else if (is_same_string(lst->value, "<<"))
 		lst->type =  TK_HEREDOC;
-	else if (!ft_strcmp(lst->value, ">>"))
+	else if (is_same_string(lst->value, ">>"))
 		lst->type =  TK_APPEND;
-	else if (!ft_strcmp(lst->value, "|"))
+	else if (is_same_string(lst->value, "|"))
 		lst->type =  TK_PIPE;
 	else if (lst->prev && (lst->prev->type == TK_RDOUTPUT \
 	|| lst->prev->type == TK_RDINPUT || lst->prev->type == TK_APPEND))

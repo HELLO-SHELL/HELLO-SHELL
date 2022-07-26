@@ -54,7 +54,6 @@ int		check_white_space(char c);
 int		count_split_size(char *str);
 int		split_line(char *line, char **str, int *i);
 void	print_wallpaper(void);
-int		ft_strcmp(const char *str1, const char *str2);
 t_token	*set_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
 
