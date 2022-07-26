@@ -1,5 +1,6 @@
 *.o
 */*.o
+.vscode
 .DS_Store
 .dSYM/
 minishell
