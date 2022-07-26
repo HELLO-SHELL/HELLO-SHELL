@@ -9,7 +9,7 @@ CC = cc
 
 RM = rm -f
 SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
-./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_strcpm.c \
+./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_strcmp.c \
 ./src/utils/env.c ./src/utils/init.c ./src/utils/is_same_string.c ./src/utils/get_token_head.c \
 ./src/built_in/ft_exit.c ./src/built_in/ft_env.c \
 ./src/parser/make_arr_to_list.c
