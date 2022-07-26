@@ -7,21 +7,6 @@ int	check_white_space(char c)
 	return (0);
 }
 
-void	handle_quote(char *line, int *count, int *idx)
-{
-	int	qoute_num;
-
-	qoute_num = line[*idx];
-	(*idx)++;
-	while (line[*idx] != qoute_num)
-	{
-		if (line[*idx] == '\0')
-			exit(EXIT_SUCCESS);
-		(*count)++;
-		(*idx)++;
-	}
-}
-
 int	count_split_size(char *str)
 {
 	int	i;
@@ -36,7 +21,7 @@ int	count_split_size(char *str)
 		else
 		{
 			while (str[i] != 0
-				&& !check_white_space(str[i]))
+				&& !(check_white_space(str[i])))
 				i++;
 			length++;
 		}
@@ -44,7 +29,7 @@ int	count_split_size(char *str)
 	return (length);
 }
 
-int	check_size(char *line, char **str, int *i)
+int	split_line(char *line, char **str, int *i)
 {
 	int	rtn;
 
@@ -57,11 +42,6 @@ int	check_size(char *line, char **str, int *i)
 	}
 	while (!check_white_space(line[*i]) && line[*i] != '\0')
 	{
-		if (line[*i] == 34 || line[*i] == 39)
-		{
-			handle_quote(line, &rtn, i);
-			break ;
-		}
 		rtn++;
 		(*i)++;
 	}
