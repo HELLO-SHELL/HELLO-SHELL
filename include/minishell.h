@@ -17,11 +17,11 @@
 
 enum e_token_type
 {
-	TK_EOF = 0,
-	TK_RDINPUT = '<',
-	TK_RDOUTPUT = '>',
+	TK_EOF,
+	TK_RDINPUT,
+	TK_RDOUTPUT,
 	TK_APPEND,
-	TK_PIPE = '|',
+	TK_PIPE,
 	TK_COMMAND,
 	TK_FILE,
 	TK_HEREDOC,
