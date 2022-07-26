@@ -8,8 +8,22 @@ int main(int ac, char **av, char **env)
 	int i = 0;
 
 	print_wallpaper(); 
-	input = "1 2 3 4 5 6 7 8";
-	str = command_split(input);
-	token_list = set_token_list(str);
-	return(0);
+	while(1)
+	{
+		input = readline("HELLO-SHELL-0.0$ ");
+		if (input)
+			printf("%s$\n", input);
+		else
+			break ;
+		add_history(input);
+		str = command_split(input);
+		token_list = set_token_list(str);
+		while(token_list)
+		{
+			printf("%s$\n", token_list->value);
+			token_list = token_list->next;
+		}
+		free(input);
+	}
+	return (0);
 }
