@@ -53,6 +53,10 @@ void	ft_export(t_node *minishell)
                 write(2, token->next->value, ft_strlen(token->next->value));
                 write(2, "': command not found\n", 22);
 			}
+			else if (export_key_check(token))
+			{
+				// 덮어씌우기 구현
+			}
 			else
 			{
 				env_node = malloc(sizeof(t_env));
@@ -60,8 +64,7 @@ void	ft_export(t_node *minishell)
 				value = ft_substr(ft_strchr(token->next->value, '=') + 1, 0, ft_strlen(ft_strchr(token->next->value, '=')));
 				env_node->key = key;
 				env_node->value = value;
-				ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));// = 확인, 앞 뒤로 쪼개서 키&값 넣기
-				// 덮어씌우기 구현
+				ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
 			}
 			token = token->next;
 		}
