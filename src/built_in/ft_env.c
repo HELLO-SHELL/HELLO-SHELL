@@ -1,7 +1,8 @@
 #include "../../include/minishell.h"
 
-int	ft_env(t_list *env)
+void	ft_env(t_list *env)
 {
+	// = 있는지 없는지 확인하기
 	while (env && env->next != NULL)
 	{
 		printf("%s = %s\n", ((t_env *)(env->content))->key, ((t_env *)(env->content))->value);
@@ -9,5 +10,4 @@ int	ft_env(t_list *env)
 	}
 	if (env)
 		printf("%s = %s\n", ((t_env *)(env->content))->key, ((t_env *)(env->content))->value);
-	return (SUCCESS);
 }
