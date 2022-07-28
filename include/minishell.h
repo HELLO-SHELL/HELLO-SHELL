@@ -15,6 +15,9 @@
 # include "get_next_line.h"
 # include "color.h"
 
+# define TRUE 1
+# define FALSE 0
+
 enum e_token_type
 {
 	TK_EOF,
