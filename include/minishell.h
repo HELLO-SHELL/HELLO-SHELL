@@ -31,11 +31,20 @@ enum e_token_type
 
 typedef struct s_token
 {
-	int				type;
-	char			*value;
-	struct s_token	*prev;
-	struct s_token	*next;
+	int		type;
+	char	*value;
+	t_token	*prev;
+	t_token	*next;
 }	t_token;
+
+typedef struct s_command
+{
+	t_token		*command;
+	t_token		*prefix;
+	t_token		*suffix;
+	t_command	*prev;
+	t_command	*next;
+}	t_command;
 
 typedef struct s_env {
 	char	*key;
