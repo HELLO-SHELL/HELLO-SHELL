@@ -5,14 +5,13 @@ int	export_error_check(t_token *token)
 	t_token	*curr;
 
 	curr = token;
-	while (curr->next != NULL)
+	if (curr->next != NULL)
 	{
-		if (curr->next->value[0] == '='
-			|| ft_isdigit(curr->next->value[0]) || curr->next->value[0] == '-')
+		if (curr->value[0] == '='
+			|| ft_isdigit(curr->value[0]) || curr->value[0] == '-')
 			return (1);
-		curr = curr->next;
 	}
-	if (curr->value[0] == '='
+	else if (curr->value[0] == '='
 			|| ft_isdigit(curr->value[0]) || curr->value[0] == '-')
 			return (1);
 	return (0);
@@ -47,15 +46,12 @@ void	ft_export(t_node *minishell)
 	{
 		while (token->next)
 		{
-			if (export_error_check(token))
+			if (export_error_check(token->next))
 			{
+				token = token->next;
                 write(2,"HELLO-SHELL: `", 14);
-                write(2, token->next->value, ft_strlen(token->next->value));
+                write(2, token->value, ft_strlen(token->value));
                 write(2, "': command not found\n", 22);
-			}
-			else if (export_key_check(token))
-			{
-				// 덮어씌우기 구현
 			}
 			else
 			{
@@ -65,8 +61,8 @@ void	ft_export(t_node *minishell)
 				env_node->key = key;
 				env_node->value = value;
 				ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
+				token = token->next;
 			}
-			token = token->next;
 		}
 	}
 }
