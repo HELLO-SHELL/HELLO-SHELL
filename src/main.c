@@ -4,8 +4,6 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 	t_token	*token_list;
-	char **str;
-	int i = 0;
 
 	print_wallpaper(); 
 	while(1)
@@ -16,8 +14,7 @@ int main(int ac, char **av, char **env)
 		else
 			break ;
 		add_history(input);
-		str = command_split(input);
-		token_list = set_token_list(str);
+		token_list = set_token_list(command_split(input));
 		while(token_list)
 		{
 			printf("%s$\n", token_list->value);
