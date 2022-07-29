@@ -62,6 +62,7 @@ int		check_size(char *line, char **str, int *i);
 void	ft_exit(int status);
 void	ft_env(t_list *env);
 void	ft_export(t_node *minishell);
+int		ft_pwd(void);
 
 /* utils */
 int		is_same_string(char *str1, char *str2);
