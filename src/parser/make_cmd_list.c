@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int is_command(char *str)
+static int is_command(char *str)
 {
 	if (is_same_string(str, 'echo') || is_same_string(str, 'cd')
 		|| is_same_string(str, 'exit') || is_same_string(str, 'export') 
@@ -10,7 +10,7 @@ int is_command(char *str)
 	return (FALSE);
 }
 
-void init_command_list(t_command *cmd_list)
+static void init_command_list(t_command *cmd_list)
 {
 	cmd_list = malloc(sizeof(t_command *));
 	if (!cmd_list)
@@ -21,7 +21,7 @@ void init_command_list(t_command *cmd_list)
 	cmd_list->suffix = NULL;
 }
 
-int count_pipe(t_token *tk_lst)
+static int count_pipe(t_token *tk_lst)
 {
 	t_token	*curr;
 	int		cnt;
@@ -37,7 +37,7 @@ int count_pipe(t_token *tk_lst)
 	return (cnt);
 }
 
-void cmdlst_new(t_cmdlst **lst)
+static void cmdlst_new(t_cmdlst **lst)
 {
 	t_cmdlst	*lst_temp;
 	t_command	*cmd_temp;
@@ -52,7 +52,7 @@ void cmdlst_new(t_cmdlst **lst)
 	(*lst) = lst_temp;
 }
 
-void cmdlst_addback(t_cmdlst **lst)
+static void cmdlst_addback(t_cmdlst **lst)
 {
 	t_cmdlst	*lst_temp;
 	t_command	*cmd_temp;
@@ -68,7 +68,7 @@ void cmdlst_addback(t_cmdlst **lst)
 	(*lst) = (*lst)->next;
 }
 
-void init_cmdlst(t_cmdlst **lst, int cnt)
+static void init_cmdlst(t_cmdlst **lst, int cnt)
 {
 	int	i;
 
@@ -83,26 +83,51 @@ void init_cmdlst(t_cmdlst **lst, int cnt)
 	}
 }
 
-void insert_token_to_command(t_cmdlst **cmd_lst, t_token *tk_lst)
+static void cut_tail(t_token **tk_lst)
+{
+	while ((*tk_lst)->next->value != '|')
+		(*tk_lst) = (*tk_lst)->next;
+	(*tk_lst)->next->prev = NULL;
+	(*tk_lst)->next = NULL;
+}
+
+static void tk_lstdelone(t_token **tk_lst)
+{
+	if ((*tk_lst)->prev)
+		(*tk_lst)->prev->next = (*tk_lst)->next;
+	if ((*tk_lst)->next)
+		(*tk_lst)->next->prev = (*tk_lst)->prev;
+	(*tk_lst)->prev = NULL;
+	(*tk_lst)->next = NULL;
+	free(*tk_lst);
+	(*tk_lst) = NULL;
+}
+
+static void insert_token_to_command(t_cmdlst **cmd_lst, t_token *tk_lst)
 {
 	t_cmdlst	*cmdlst_curr;
 	t_token		*cmd_head;
 	t_token		*cmd_curr;
+	t_token		*temp;
 
 	cmdlst_curr = *cmd_lst;
 	cmd_curr = tk_lst;
 	while (cmdlst_curr)
 	{
 		cmd_head = cmd_curr;
-		while (cmd_curr && *(cmd_curr->value) != '|')
-			cmd_curr = cmd_curr->next;
-		if (*(cmd_curr->value) == '|')
+		while (cmd_curr)
 		{
-			cmdlst_curr->value->head = cmd_head;
+			if (*(cmd_curr->value) == '|')
+			{
+				cmdlst_curr->value->head = cmd_head;
+				cut_tail(&(cmdlst_curr->value->head));
+				temp = cmd_curr;
+				tk_lstdelone(&temp);
+				cmd_curr = cmd_curr->next;
+			}
 		}
 		cmdlst_curr = cmdlst_curr->next;
 	}
-	
 }
 
 void split_command(t_token *tk_lst)
