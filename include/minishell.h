@@ -60,6 +60,7 @@ int		check_size(char *line, char **str, int *i);
 /* built-in */
 int		ft_exit(int status);
 int		ft_env(t_list *env);
+int		ft_pwd(void);
 
 /* utils */
 int		is_same_string(char *str1, char *str2);
