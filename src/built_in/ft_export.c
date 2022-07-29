@@ -3,16 +3,39 @@
 int	export_error_check(t_token *token)
 {
 	t_token	*curr;
+	t_token	*curr2;
+	int	i;
 
+	i = 0;
 	curr = token->next;
 	if (curr->next != NULL)
 	{
-		if (ft_isalpha(curr->value[0]) || curr->value[0] == '_')
-			return (0);
+		if (!(ft_isalpha(curr->value[i]) || curr->value[0] == '_'))
+			return (1);
 	}
-	else if (ft_isalpha(curr->value[0]) || curr->value[0] == '_')
-			return (0);
-	return (1);
+	else if (!(ft_isalpha(curr->value[i]) || curr->value[0] == '_'))
+		return (1);
+	curr2 = token->next;
+	i++;
+	while (curr2->next != NULL)
+	{
+		while (curr2->value[i] != '=' && curr2->value[i] != '\0')
+		{
+			if (ft_isalnum(curr2->value[i]) || curr2->value[0] == '_')
+				i++;
+			else
+				return (1);	
+		}
+		curr2 = curr2->next;
+	}
+	while (curr2->value[i] != '=' && curr2->value[i] != '\0')
+	{
+		if (ft_isalnum(curr2->value[i]) || curr2->value[0] == '_')
+			i++;
+		else
+			return (1);	
+	}
+	return (0);
 }
 // export: usage: export [-nf] [name[=value] ...] or export -p
 void	ft_export(t_node *minishell)
@@ -29,8 +52,6 @@ void	ft_export(t_node *minishell)
 	{
 		while (curr->next)
 		{
-			// value 에 값이 없으면 다음으로 넘어감
-            // export a-1 처럼 중간에 숫자와 영문이 아닌것
 			if (((t_env *)(curr->content))->value == NULL)
 				printf("declare -x %s\n", ((t_env *)(curr->content))->key);	
 			else
@@ -57,7 +78,6 @@ void	ft_export(t_node *minishell)
 			{
 				// '=' 찾을 때
 				char *str;
-				// value 초기화
 				env_node = malloc(sizeof(t_env));
 				str = ft_strchr(token->next->value, '=');
 				key = ft_substr(token->next->value, 0, str - token->next->value);
