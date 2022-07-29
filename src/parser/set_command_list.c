@@ -2,10 +2,10 @@
 
 static int is_command(char *str)
 {
-	if (is_same_string(str, 'echo') || is_same_string(str, 'cd')
-		|| is_same_string(str, 'exit') || is_same_string(str, 'export') 
-			|| is_same_string(str, 'unset') || is_same_string(str, 'env') 
-				|| is_same_string(str, 'pwd'))
+	if (is_same_string(str, "echo") || is_same_string(str, "cd")
+		|| is_same_string(str, "exit") || is_same_string(str, "export") 
+			|| is_same_string(str, "unset") || is_same_string(str, "env") 
+				|| is_same_string(str, "pwd"))
 		return (TRUE);
 	return (FALSE);
 }
@@ -85,7 +85,7 @@ static void init_cmdlst(t_cmdlst **lst, int cnt)
 
 static void cut_tail(t_token **tk_lst)
 {
-	while ((*tk_lst)->next->value != '|')
+	while (*((*tk_lst)->next->value) != '|')
 		(*tk_lst) = (*tk_lst)->next;
 	(*tk_lst)->next->prev = NULL;
 	(*tk_lst)->next = NULL;
@@ -130,11 +130,11 @@ static void insert_token_to_command(t_cmdlst **cmd_lst, t_token *tk_lst)
 	}
 }
 
-void split_command(t_token *tk_lst)
+void set_command_list(t_cmdlst	**cmd_lst, t_token *tk_lst)
 {
-	t_cmdlst	*cmd_lst;
 	int			pipe_cnt;
 
 	pipe_cnt = count_pipe(tk_lst);
-	init_cmdlst(&cmd_lst, pipe_cnt);
+	printf("pipe: %d\n", pipe_cnt);
+	// init_cmdlst(&cmd_lst, pipe_cnt);
 }

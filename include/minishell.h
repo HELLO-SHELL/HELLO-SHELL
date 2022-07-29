@@ -34,10 +34,10 @@ enum e_token_type
 
 typedef struct s_token
 {
-	int		type;
-	char	*value;
-	t_token	*prev;
-	t_token	*next;
+	int				type;
+	char			*value;
+	struct s_token	*prev;
+	struct s_token	*next;
 }	t_token;
 
 typedef struct s_command
@@ -50,9 +50,9 @@ typedef struct s_command
 
 typedef struct s_cmdlst
 {
-	t_command	*value;
-	t_cmdlst	*prev;
-	t_cmdlst	*next;
+	t_command		*value;
+	struct s_cmdlst	*prev;
+	struct s_cmdlst	*next;
 }	t_cmdlst;
 
 typedef struct s_env {
@@ -65,7 +65,7 @@ typedef struct s_node {
 }	t_node;
 
 void	print_wallpaper(void);
-void    init_minishell(t_node *minishell);
+void	init_minishell(t_node *minishell);
 
 char	**command_split(char *str);
 int		check_white_space(char c);
@@ -81,8 +81,10 @@ int		ft_env(t_list *env);
 
 /* utils */
 int		is_same_string(char *str1, char *str2);
-void    split_env(t_env *env_node, char **env, int i);
-void    env_linked_list(t_node *minishell, char **env);
+void	split_env(t_env *env_node, char **env, int i);
+void	env_linked_list(t_node *minishell, char **env);
 t_token	*get_token_head(t_token *token);
+
+void	set_command_list(t_cmdlst **cmd_lst, t_token *tk_lst);
 
 #endif
