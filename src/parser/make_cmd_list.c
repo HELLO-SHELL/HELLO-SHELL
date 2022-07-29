@@ -21,12 +21,12 @@ void init_command_list(t_command *cmd_list)
 	cmd_list->suffix = NULL;
 }
 
-int count_pipe(t_token *tk_list)
+int count_pipe(t_token *tk_lst)
 {
 	t_token	*curr;
 	int		cnt;
 
-	curr = tk_list;
+	curr = tk_lst;
 	cnt = 0;
 	while (curr)
 	{
@@ -83,11 +83,33 @@ void init_cmdlst(t_cmdlst **lst, int cnt)
 	}
 }
 
-void split_command(t_token *tk_list)
+void insert_token_to_command(t_cmdlst **cmd_lst, t_token *tk_lst)
+{
+	t_cmdlst	*cmdlst_curr;
+	t_token		*cmd_head;
+	t_token		*cmd_curr;
+
+	cmdlst_curr = *cmd_lst;
+	cmd_curr = tk_lst;
+	while (cmdlst_curr)
+	{
+		cmd_head = cmd_curr;
+		while (cmd_curr && *(cmd_curr->value) != '|')
+			cmd_curr = cmd_curr->next;
+		if (*(cmd_curr->value) == '|')
+		{
+			cmdlst_curr->value->head = cmd_head;
+		}
+		cmdlst_curr = cmdlst_curr->next;
+	}
+	
+}
+
+void split_command(t_token *tk_lst)
 {
 	t_cmdlst	*cmd_lst;
 	int			pipe_cnt;
 
-	pipe_cnt = count_pipe(tk_list);
+	pipe_cnt = count_pipe(tk_lst);
 	init_cmdlst(&cmd_lst, pipe_cnt);
 }
