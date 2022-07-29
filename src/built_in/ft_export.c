@@ -1,38 +1,9 @@
 #include "../../include/minishell.h"
 
-// int	is_space()
-
-// int	check_qoute(char *str)
-// {
-// 	char	*curr;
-
-// 	curr = str;
-// 	while (	{
-// 		if (curr == '\"' || curr->value == '\'')
-// 		{
-// 			while (curr && !(curr->value == '\"' || curr->value == '\''))
-// 			{
-// 				if () 
-// 				curr = curr->next;
-// 			}
-			
-// 		}
-		
-// 		curr = curr->next;
-// 	}
-	
-// }
-
-// export: usage: export [-nf] [name[=value] ...] or export -p
 int	export_check_error(t_token *token)
 {
-	t_token	*curr;
-	int	i;
-
-	i = 0;
-	curr = token->next;
 	/**************************************************************
-	//따옴표 체크
+	// 따옴표 체크
 	// 키 따옴표
 	// 1. 따옴표 출력하면 안됨
 	// 2. 따옴표 안에 공백있으면 안됨
@@ -40,15 +11,17 @@ int	export_check_error(t_token *token)
 	// value 따옴표
 	// 1. 띄어쓰기도 포함해서 하나의 벨루가 됨
 	 *************************************************************/
-	// export_check_first_char();
-	// export a=1
+	// if (export_check_first_char(token));
+	t_token	*curr;
+	int	i;
+
+	i = 0;
+	curr = token->next;
 	if (!(ft_isalpha(curr->value[i]) || curr->value[i] == '_'))
 		return (1);
-	// else if (!(ft_isalpha(curr->value[i]) || curr->value[i] == '_'))
-	// 	return (1);
 	i++;
-	// export_check_argu();
-	// export a=1
+	// if (export_check_argu(curr))
+	// 	return (1);
 	while (curr->value[i] != '=' && curr->value[i] != '\0')
 	{
 		if (ft_isalnum(curr->value[i]) || curr->value[i] == '_')
@@ -59,36 +32,38 @@ int	export_check_error(t_token *token)
 	return (0);
 }
 
-void	ft_export(t_node *minishell)
+void	export_display(t_node *minishell)
 {
 	t_list	*curr;
+
+	curr = minishell->env_list;
+	while (curr)
+	{
+		if (((t_env *)(curr->content))->value == NULL)
+			printf("declare -x %s\n", ((t_env *)(curr->content))->key);
+		else
+			printf("declare -x %s=\"%s\"\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+		curr = curr->next;
+	}
+}
+
+// void	export_check_argu(t_node minishell, t_token *token)
+// {}
+
+void	ft_export(t_node *minishell)
+{
 	t_token *token;
 	t_env	*env_node;
 	
 
-	curr = minishell->env_list;
 	token = minishell->token_list;
-	// export_display();
-	// env_list 는 
-	// env_list 는 key, value 로 만들어진 연결리스트
-	// token_list 는 export a=1 커맨드가 들어오면 token 첫번쨰는 export 두번째는 a=1
 	if (token->next == NULL)
-	{
-		while (curr)
-		{
-			if (((t_env *)(curr->content))->value == NULL)
-				printf("declare -x %s\n", ((t_env *)(curr->content))->key);
-			else
-				printf("declare -x %s=\"%s\"\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
-			curr = curr->next;
-		}
-	}
+		export_display(minishell);
 	else
 	{
-		// export_check_argu();
-		// export _a=dd b=cc 12
 		while (token->next)
 		{
+		// 	export_check_argu();
 			if (export_check_error(token))
 			{
 				token = token->next;
