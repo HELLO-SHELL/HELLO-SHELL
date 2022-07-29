@@ -4,17 +4,15 @@ int	export_error_check(t_token *token)
 {
 	t_token	*curr;
 
-	curr = token;
+	curr = token->next;
 	if (curr->next != NULL)
 	{
-		if (curr->value[0] == '='
-			|| ft_isdigit(curr->value[0]) || curr->value[0] == '-')
-			return (1);
+		if (ft_isalpha(curr->value[0]) || curr->value[0] == '_')
+			return (0);
 	}
-	else if (curr->value[0] == '='
-			|| ft_isdigit(curr->value[0]) || curr->value[0] == '-')
-			return (1);
-	return (0);
+	else if (ft_isalpha(curr->value[0]) || curr->value[0] == '_')
+			return (0);
+	return (1);
 }
 // export: usage: export [-nf] [name[=value] ...] or export -p
 void	ft_export(t_node *minishell)
@@ -32,21 +30,23 @@ void	ft_export(t_node *minishell)
 		while (curr->next)
 		{
 			// value 에 값이 없으면 다음으로 넘어감
-			if (!strchr(((t_env *)(curr->content))->value, 0))
-				curr = curr->next;
+            // export a-1 처럼 중간에 숫자와 영문이 아닌것
+			if (((t_env *)(curr->content))->value == NULL)
+				printf("declare -x %s\n", ((t_env *)(curr->content))->key);	
 			else
-			{
-				printf("declare -x %s=%s\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);	
-				curr = curr->next;
-			}
+				printf("declare -x %s=\"%s\"\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+			curr = curr->next;
 		}
-		printf("declare -x %s=%s\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+		if (((t_env *)(curr->content))->value == NULL)
+			printf("declare -x %s\n", ((t_env *)(curr->content))->key);	
+		else
+			printf("declare -x %s=\"%s\"\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
 	}
 	else
 	{
 		while (token->next)
 		{
-			if (export_error_check(token->next))
+			if (export_error_check(token))
 			{
 				token = token->next;
                 write(2,"HELLO-SHELL: `", 14);
@@ -55,9 +55,16 @@ void	ft_export(t_node *minishell)
 			}
 			else
 			{
+				// '=' 찾을 때
+				char *str;
+				// value 초기화
 				env_node = malloc(sizeof(t_env));
-				key = ft_substr(token->next->value, 0, ft_strchr(token->next->value, '=') - token->next->value);
-				value = ft_substr(ft_strchr(token->next->value, '=') + 1, 0, ft_strlen(ft_strchr(token->next->value, '=')));
+				str = ft_strchr(token->next->value, '=');
+				key = ft_substr(token->next->value, 0, str - token->next->value);
+				if (str)
+					value = ft_substr(str + 1, 0, ft_strlen(str));
+				else if (str == NULL)
+					value = 0;
 				env_node->key = key;
 				env_node->value = value;
 				ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
