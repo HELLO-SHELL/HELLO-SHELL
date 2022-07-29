@@ -42,12 +42,18 @@ typedef struct s_token
 
 typedef struct s_command
 {
-	t_token		*command;
-	t_token		*prefix;
-	t_token		*suffix;
-	t_command	*prev;
-	t_command	*next;
+	t_token	*head;
+	t_token	*command;
+	t_token	*prefix;
+	t_token	*suffix;
 }	t_command;
+
+typedef struct s_cmdlst
+{
+	t_command	*value;
+	t_cmdlst	*prev;
+	t_cmdlst	*next;
+}	t_cmdlst;
 
 typedef struct s_env {
 	char	*key;
