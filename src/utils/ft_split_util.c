@@ -1,5 +1,20 @@
 #include "../../include/minishell.h"
 
+void	handle_quote(char *line, int *count, int *idx)
+{
+	int	qoute_num;
+
+	qoute_num = line[*idx];
+	(*idx)++;
+	while (line[*idx] != qoute_num)
+	{
+		if (line[*idx] == '\0')
+			exit(EXIT_FAILURE);
+		(*count)++;
+		(*idx)++;
+	}
+}
+
 int	check_white_space(char c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
@@ -42,6 +57,11 @@ int	split_line(char *line, char **str, int *i)
 	}
 	while (!check_white_space(line[*i]) && line[*i] != '\0')
 	{
+		if (line[*i] == 34 || line[*i] == 39)
+		{
+			handle_quote(line, &rtn, i);
+			break ;
+		}
 		rtn++;
 		(*i)++;
 	}
