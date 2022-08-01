@@ -10,15 +10,18 @@ static int is_command(char *str)
 	return (FALSE);
 }
 
-static void init_command_list(t_command *cmd_list)
+static void init_command(t_command **cmd_list)
 {
-	cmd_list = malloc(sizeof(t_command *));
-	if (!cmd_list)
+	t_command *temp;
+
+	temp = malloc(sizeof(t_command *));
+	if (!temp)
 		exit(FAILURE);
-	cmd_list->head = NULL;
-	cmd_list->command = NULL;
-	cmd_list->prefix = NULL;
-	cmd_list->suffix = NULL;
+	temp->head = NULL;
+	temp->command = NULL;
+	temp->prefix = NULL;
+	temp->suffix = NULL;
+	(*cmd_list) = temp;
 }
 
 static int count_pipe(t_token *tk_lst)
@@ -42,8 +45,8 @@ static void cmdlst_new(t_cmdlst **lst)
 	t_cmdlst	*lst_temp;
 	t_command	*cmd_temp;
 
-	lst_temp = malloc(sizeof(t_cmdlst));
-	cmd_temp = malloc(sizeof(t_command));
+	lst_temp = malloc(sizeof(t_cmdlst *));
+	init_command(&cmd_temp);
 	if (!lst_temp || !cmd_temp)
 		exit(EXIT_FAILURE);
 	lst_temp->value = cmd_temp;
@@ -57,8 +60,8 @@ static void cmdlst_addback(t_cmdlst **lst)
 	t_cmdlst	*lst_temp;
 	t_command	*cmd_temp;
 
-	lst_temp = malloc(sizeof(t_cmdlst));
-	cmd_temp = malloc(sizeof(t_command));
+	lst_temp = malloc(sizeof(t_cmdlst *));
+	init_command(&cmd_temp);
 	if (!lst_temp || !cmd_temp)
 		exit(EXIT_FAILURE);
 	lst_temp->value = cmd_temp;
@@ -85,8 +88,10 @@ static void init_cmdlst(t_cmdlst **lst, int cnt)
 
 static void cut_tail(t_token **tk_lst)
 {
-	while (*((*tk_lst)->next->value) != '|')
+	while ((*tk_lst)->next && *((*tk_lst)->next->value) != '|')
 		(*tk_lst) = (*tk_lst)->next;
+	if (!(*tk_lst)->next)
+		return;
 	(*tk_lst)->next->prev = NULL;
 	(*tk_lst)->next = NULL;
 }
@@ -136,5 +141,6 @@ void set_command_list(t_cmdlst	**cmd_lst, t_token *tk_lst)
 
 	pipe_cnt = count_pipe(tk_lst);
 	printf("pipe: %d\n", pipe_cnt);
-	// init_cmdlst(&cmd_lst, pipe_cnt);
+	init_cmdlst(&cmd_lst, pipe_cnt);
+
 }

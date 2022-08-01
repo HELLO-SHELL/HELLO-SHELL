@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "split.h": "c",
+    "history.h": "c",
+    "readline.h": "c",
+    "stdio.h": "c",
+    "minishell.h": "c"
+  }
+}
