@@ -67,5 +67,7 @@ int		is_same_string(char *str1, char *str2);
 void    split_env(t_env *env_node, char **env, int i);
 void    env_linked_list(t_node *minishell, char **env);
 t_token	*get_token_head(t_token *token);
+void    ft_error(char *str);
+void    *safe_malloc(size_t size);
 
 #endif
