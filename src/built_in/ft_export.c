@@ -1,17 +1,34 @@
 #include "../../include/minishell.h"
 
+// void	export_check_quotes(t_token *token)
+// {
+
+// }
+
 int	export_check_error(t_token *token)
 {
 	/**************************************************************
-	// 따옴표 체크
-	// 키 따옴표
-	// 1. 따옴표 출력하면 안됨
-	// 2. 따옴표 안에 공백있으면 안됨
-	// 3. 따옴표 여러개 사이에 공백이 없으면 하나의 문자열로 합쳐짐
-	// value 따옴표
-	// 1. 띄어쓰기도 포함해서 하나의 벨루가 됨
+	따옴표 체크
+	
+	따옴표 함수
+	1. 맨 앞이 쿼트면,
+	쿼트 개수 짝수인지 파악하기
+	(홀수면 에러)
+
+	2. 언더바 문자 시작하는지 파악(해놓음)
+
+	3. 쿼트부터 문자 언더바 숫자만 개수 파악하기
+	(0이면 에러)
+	- 기존 것 프리
+
+	4. 개수 크기로 할당해서 값 넣기
+	(연속이 아니라서 주소로 안됨)
+
+	value 따옴표
+	1. 띄어쓰기도 포함해서 하나의 벨루가 됨
+	2. 백슬래쉬는 예외 (\)
 	 *************************************************************/
-	// if (export_check_first_char(token));
+	// if (export_check_quotes(token))
 	t_token	*curr;
 	int	i;
 
@@ -21,7 +38,7 @@ int	export_check_error(t_token *token)
 		return (1);
 	i++;
 	// if (export_check_argu(curr))
-	// 	return (1);
+// 	return (1);
 	while (curr->value[i] != '=' && curr->value[i] != '\0')
 	{
 		if (ft_isalnum(curr->value[i]) || curr->value[i] == '_')
@@ -47,9 +64,6 @@ void	export_display(t_node *minishell)
 	}
 }
 
-// void	export_check_argu(t_node minishell, t_token *token)
-// {}
-
 void	ft_export(t_node *minishell)
 {
 	t_token *token;
@@ -63,7 +77,7 @@ void	ft_export(t_node *minishell)
 	{
 		while (token->next)
 		{
-		// 	export_check_argu();
+			// 	export_check_argu();
 			if (export_check_error(token))
 			{
 				token = token->next;
