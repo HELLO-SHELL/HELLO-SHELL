@@ -12,8 +12,22 @@ void	handle_quote(char *line, int *count, int *idx)
 		// qoute_num 도 바꿀 것
 		if (line[*idx] == '\0')
 			exit(EXIT_FAILURE);
-		(*count)++;
-		(*idx)++;
+		if (line[(*idx) + 1] == qoute_num)
+		{
+			if (ft_isalnum(line[(*idx) + 2]))
+			{
+				;
+			}
+			else if (line[(*idx) + 2] == '\"' || line[(*idx) + 2] == '\'' )
+			{
+				;
+			}
+		}
+		else
+		{
+			(*count)++;
+			(*idx)++;
+		}
 	}
 }
 
