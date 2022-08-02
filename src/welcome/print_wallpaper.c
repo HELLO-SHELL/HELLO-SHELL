@@ -18,7 +18,7 @@ void	print_wallpaper(void)
 {
 	int		fd;
 	char	*line;
-	int		i;
+	size_t	i;
 
 	fd = open("./assest/wallpaper", O_RDONLY);
 	if (fd < 0)

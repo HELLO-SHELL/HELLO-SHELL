@@ -2,26 +2,28 @@
 
 int main(int ac, char **av, char **env)
 {
-    char *input;
+	char	*input;
+	t_token	*token_list;
+	char **str;
+	int i = 0;
 
-    print_wallpaper(); 
-    while(1)
-    {
-        input = readline("HELLO-SHELL-0.0$ ");
-        if (input)
-        {
-            if (is_same_string(input, "exit"))
-            {
-                free(input);
-                ft_exit(EXIT_SUCCESS);
-            }
-            printf("%s\n", input);
-        }
-        else
-            break ;
-        add_history(input);
-        free(input);
-    }
-    system("leaks minishell");
-    return(0);
+	print_wallpaper(); 
+	while(1)
+	{
+		input = readline("HELLO-SHELL-0.0$ ");
+		if (input)
+			printf("%s$\n", input);
+		else
+			break ;
+		add_history(input);
+		str = command_split(input);
+		token_list = set_token_list(str);
+		while(token_list)
+		{
+			printf("%s$\n", token_list->value);
+			token_list = token_list->next;
+		}
+		free(input);
+	}
+	return (0);
 }

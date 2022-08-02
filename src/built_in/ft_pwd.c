@@ -1,5 +1,4 @@
-#include <unistd.h>
-#include <stdio.h>
+#include "../../include/minishell.h"
 
 int ft_pwd(void)
 {

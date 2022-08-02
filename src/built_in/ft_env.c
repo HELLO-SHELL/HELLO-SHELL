@@ -1,3 +1,5 @@
+#include "../../include/minishell.h"
+
 typedef struct s_env{
 	char			*value;
 	struct s_env	next;
