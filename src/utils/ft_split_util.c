@@ -1,34 +1,29 @@
 #include "../../include/minishell.h"
 
-void	handle_quote(char *line, int *count, int *idx)
+int	handle_quote(char *line, int *count, int *idx)
 {
-	int	qoute_num;
+	int	quotes;
 
-	qoute_num = line[*idx];
-	(*idx)++;
-	while (line[*idx] != qoute_num)
+	while (line[*idx] != '\0')
 	{
-		//조건 추가 - 뒤에 쿼트있는지(싱글, 더블)
-		// qoute_num 도 바꿀 것
-		if (line[*idx] == '\0')
-			exit(EXIT_FAILURE);
-		if (line[(*idx) + 1] == qoute_num)
+		// "abc"de
+		if (line[*idx] == 34 || line[*idx] == 39)
 		{
-			if (ft_isalnum(line[(*idx) + 2]))
-			{
-				;
-			}
-			else if (line[(*idx) + 2] == '\"' || line[(*idx) + 2] == '\'' )
-			{
-				;
-			}
-		}
-		else
-		{
-			(*count)++;
+			quotes = line[*idx];
 			(*idx)++;
 		}
+		while ((line[*idx] != 34 || line[*idx] != 39) && ft_isalnum(line[*idx])) // 따옴표 확인
+		{
+			(*idx)++;
+			(*count)++;
+		}
+		if ((quotes != line[*idx]) && (line[*idx] != '\0'))
+			return (1); //ft_error 로 바꿔야함.
+		else if (line[*idx] == '\0')
+			return (0);
+		(*idx)++;
 	}
+	return (0);
 }
 
 int	check_white_space(char c)
@@ -75,7 +70,8 @@ int	split_line(char *line, char **str, int *i)
 	{
 		if (line[*i] == 34 || line[*i] == 39)
 		{
-			handle_quote(line, &rtn, i);
+			if (handle_quote(line, &rtn, i))
+				return (0);
 			break ;
 		}
 		rtn++;
