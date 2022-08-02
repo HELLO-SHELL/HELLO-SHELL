@@ -29,7 +29,9 @@ int	handle_quote(char *line, int *count, int *idx)
 			quotes = line[*idx];
 			(*idx)++;
 		}
-		while ((line[*idx] != '\'' || line[*idx] != '\"') && ft_isalnum(line[*idx])) // 따옴표 확인
+		while ((line[*idx] != '\'' || line[*idx] != '\"')
+				&& (ft_isalnum(line[*idx]) || (line[*idx] >= 9 && line[*idx] <= 13)
+				|| line[*idx] == 32) ) // 따옴표 확인
 		{
 			(*idx)++;
 			(*count)++;
