@@ -17,11 +17,23 @@ int main(int ac, char **av, char **env)
 		add_history(input);
 		token_list = set_token_list(command_split(input));
 		set_command_list(&cmd_lst, token_list);
-		while(token_list)
+		// token list print test
+		// while(token_list)
+		// {
+		// 	printf("%s$\n", token_list->value);
+		// 	token_list = token_list->next;
+		// }
+		// cmd list print test
+		while (cmd_lst)
 		{
-			printf("%s$\n", token_list->value);
-			token_list = token_list->next;
+			while (cmd_lst->value->head)
+			{
+				printf("%s$\n", cmd_lst->value->head->value);
+				cmd_lst->value->head = cmd_lst->value->head->next;
+			}
+			cmd_lst = cmd_lst->next;
 		}
+
 		free(input);
 	}
 	return (0);

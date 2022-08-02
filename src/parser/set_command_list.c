@@ -1,14 +1,14 @@
 #include "../../include/minishell.h"
 
-static int is_command(char *str)
-{
-	if (is_same_string(str, "echo") || is_same_string(str, "cd")
-		|| is_same_string(str, "exit") || is_same_string(str, "export") 
-			|| is_same_string(str, "unset") || is_same_string(str, "env") 
-				|| is_same_string(str, "pwd"))
-		return (TRUE);
-	return (FALSE);
-}
+// static int is_command(char *str)
+// {
+// 	if (is_same_string(str, "echo") || is_same_string(str, "cd")
+// 		|| is_same_string(str, "exit") || is_same_string(str, "export") 
+// 			|| is_same_string(str, "unset") || is_same_string(str, "env") 
+// 				|| is_same_string(str, "pwd"))
+// 		return (TRUE);
+// 	return (FALSE);
+// }
 
 static void init_command(t_command **cmd_list)
 {
@@ -76,7 +76,7 @@ static void init_cmdlst(t_cmdlst **lst, int cnt)
 	int	i;
 
 	i = 0;
-	while (i < cnt)
+	while (i <= cnt)
 	{
 		if (i == 0)
 			cmdlst_new(lst);
@@ -88,12 +88,13 @@ static void init_cmdlst(t_cmdlst **lst, int cnt)
 
 static void cut_tail(t_token **tk_lst)
 {
-	while ((*tk_lst)->next && *((*tk_lst)->next->value) != '|')
-		(*tk_lst) = (*tk_lst)->next;
-	if (!(*tk_lst)->next)
-		return;
-	(*tk_lst)->next->prev = NULL;
-	(*tk_lst)->next = NULL;
+	t_token	*curr;
+
+	curr = *tk_lst;
+	while (*(curr->next->value) != '|')
+		curr = curr->next;
+	curr->next->prev = NULL;
+	curr->next = NULL;
 }
 
 static void tk_lstdelone(t_token **tk_lst)
@@ -108,7 +109,7 @@ static void tk_lstdelone(t_token **tk_lst)
 	(*tk_lst) = NULL;
 }
 
-static void insert_token_to_command(t_cmdlst **cmd_lst, t_token *tk_lst)
+static void insert_command_head(t_cmdlst **cmd_lst, t_token *tk_lst)
 {
 	t_cmdlst	*cmdlst_curr;
 	t_token		*cmd_head;
@@ -120,17 +121,18 @@ static void insert_token_to_command(t_cmdlst **cmd_lst, t_token *tk_lst)
 	while (cmdlst_curr)
 	{
 		cmd_head = cmd_curr;
-		while (cmd_curr)
+		while (cmd_curr && *(cmd_curr->value) != '|')
+			cmd_curr = cmd_curr->next;
+		if (cmd_curr && *(cmd_curr->value) == '|')
 		{
-			if (*(cmd_curr->value) == '|')
-			{
-				cmdlst_curr->value->head = cmd_head;
-				cut_tail(&(cmdlst_curr->value->head));
-				temp = cmd_curr;
-				tk_lstdelone(&temp);
-				cmd_curr = cmd_curr->next;
-			}
+			cmdlst_curr->value->head = cmd_head;
+			cut_tail(&(cmdlst_curr->value->head));
+			temp = cmd_curr;
+			cmd_curr = cmd_curr->next;
+			tk_lstdelone(&temp);
 		}
+		else
+			cmdlst_curr->value->head = cmd_head;
 		cmdlst_curr = cmdlst_curr->next;
 	}
 }
@@ -140,7 +142,7 @@ void set_command_list(t_cmdlst	**cmd_lst, t_token *tk_lst)
 	int			pipe_cnt;
 
 	pipe_cnt = count_pipe(tk_lst);
-	printf("pipe: %d\n", pipe_cnt);
-	init_cmdlst(&cmd_lst, pipe_cnt);
-
+	// printf("pipe: %d\n", pipe_cnt);
+	init_cmdlst(cmd_lst, pipe_cnt);
+	insert_command_head(cmd_lst, tk_lst);
 }
