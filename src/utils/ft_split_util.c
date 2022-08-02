@@ -3,7 +3,24 @@
 int	handle_quote(char *line, int *count, int *idx)
 {
 	int	quotes;
+	int	i;
+	int	single_quotes;
+	int	double_quotes;
 
+	// 홀수 체크 check_odd_quotes(line)
+	i = 0;
+	single_quotes = 0;
+	double_quotes = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'')
+			single_quotes++;
+		else if (line[i] == '\"')
+			double_quotes++;
+		i++;
+	}
+	if ((single_quotes % 2) || (double_quotes % 2))
+		return (0);
 	while (line[*idx] != '\0')
 	{
 		// "abc"de
@@ -12,16 +29,15 @@ int	handle_quote(char *line, int *count, int *idx)
 			quotes = line[*idx];
 			(*idx)++;
 		}
-		while ((quotes != line[*idx]) && ft_isalnum(line[*idx])) // 따옴표 확인
+		while ((line[*idx] != '\'' || line[*idx] != '\"') && ft_isalnum(line[*idx])) // 따옴표 확인
 		{
 			(*idx)++;
 			(*count)++;
+			if ((line[*idx] == '\'' || line[*idx] == '\"'))
+				quotes = line[*idx];
 		}
-		// 큰따옴표에서 작은따옴표로 바뀔 때 quote는 큰따옴표로 기억하기 때문에 에러가남
-		// 음... 바로 위의 while문에 quote를 확인하고 변경하는 게 어떨까?
-		// 공백 처리까지 해야함
 		if ((quotes != line[*idx]) && (line[*idx] != '\0'))
-			return (1); //ft_error 로 바꿔야함.
+			return (1);
 		else if (line[*idx] == '\0')
 			return (0);
 		(*idx)++;
