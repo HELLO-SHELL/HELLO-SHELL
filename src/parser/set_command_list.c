@@ -58,17 +58,22 @@ static void cmdlst_new(t_cmdlst **lst)
 static void cmdlst_addback(t_cmdlst **lst)
 {
 	t_cmdlst	*lst_temp;
+	t_cmdlst	*lst_idx;
 	t_command	*cmd_temp;
 
+	lst_idx = *lst;
 	lst_temp = malloc(sizeof(t_cmdlst *));
 	init_command(&cmd_temp);
 	if (!lst_temp || !cmd_temp)
 		exit(EXIT_FAILURE);
+	while (lst_idx->next)
+	{
+		lst_idx = lst_idx->next;
+	}
 	lst_temp->value = cmd_temp;
 	lst_temp->next = NULL;
-	lst_temp->prev = (*lst);
-	(*lst)->next = lst_temp;
-	(*lst) = (*lst)->next;
+	lst_temp->prev = lst_idx;
+	lst_idx->next = lst_temp;
 }
 
 static void init_cmdlst(t_cmdlst **lst, int cnt)
@@ -142,7 +147,9 @@ void set_command_list(t_cmdlst	**cmd_lst, t_token *tk_lst)
 	int			pipe_cnt;
 
 	pipe_cnt = count_pipe(tk_lst);
-	// printf("pipe: %d\n", pipe_cnt);
+	printf("pipe count: %d\n", pipe_cnt);
 	init_cmdlst(cmd_lst, pipe_cnt);
 	insert_command_head(cmd_lst, tk_lst);
+	// temp tester for cmdlist
+	command_list_tester(*cmd_lst);
 }

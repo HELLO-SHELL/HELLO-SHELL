@@ -85,6 +85,12 @@ void	split_env(t_env *env_node, char **env, int i);
 void	env_linked_list(t_node *minishell, char **env);
 t_token	*get_token_head(t_token *token);
 
+/* parser */
 void	set_command_list(t_cmdlst **cmd_lst, t_token *tk_lst);
+
+/* temp tester!
+delete this before submit */
+void token_list_tester(t_token *token_list);
+void command_list_tester(t_cmdlst *cmd_lst);
 
 #endif
