@@ -80,6 +80,23 @@ int	split_line(char *line, char **str, int *i)
 	(*str) = malloc(sizeof(char) * rtn + 1);
 	if (!(*str))
 		exit(EXIT_FAILURE);
-	ft_strlcpy((*str), line + (*i) - rtn, rtn + 1);
+	// line, 0부터 쿼트 뺴고 넣기
+	int	z;
+	int	j;
+
+	z = 0;
+	j = 0;
+	while (z < rtn)
+	{
+		if (line[j] == '\'' || line[j] == '\"')
+			j++;
+		else
+		{
+			(*str)[z] = line[j];
+			z++;
+			j++;
+		}
+	}
+	(*str)[z] = '\0';
 	return (rtn);
 }
