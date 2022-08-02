@@ -12,7 +12,7 @@ SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
 ./src/utils/ft_split_util.c ./src/utils/ft_split.c \
 ./src/utils/env.c ./src/utils/init.c ./src/utils/is_same_string.c ./src/utils/get_token_head.c \
 ./src/built_in/ft_exit.c ./src/built_in/ft_env.c \
-./src/parser/make_arr_to_list.c ./src/parser/set_command_list.c ./src/temp_tester/command_list_test.c
+./src/parser/make_arr_to_list.c ./src/parser/set_process_list.c ./src/temp_tester/command_list_test.c
 
 OBJ=$(SRC:.c=.o)
 

@@ -40,20 +40,20 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-typedef struct s_command
+typedef struct s_process
 {
 	t_token	*head;
 	t_token	*command;
 	t_token	*prefix;
 	t_token	*suffix;
-}	t_command;
+}	t_process;
 
-typedef struct s_cmdlst
+typedef struct s_pslist
 {
-	t_command		*value;
-	struct s_cmdlst	*prev;
-	struct s_cmdlst	*next;
-}	t_cmdlst;
+	t_process		*value;
+	struct s_pslist	*prev;
+	struct s_pslist	*next;
+}	t_pslist;
 
 typedef struct s_env {
 	char	*key;
@@ -86,11 +86,11 @@ void	env_linked_list(t_node *minishell, char **env);
 t_token	*get_token_head(t_token *token);
 
 /* parser */
-void	set_command_list(t_cmdlst **cmd_lst, t_token *tk_lst);
+void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
 
 /* temp tester!
 delete this before submit */
 void token_list_tester(t_token *token_list);
-void command_list_tester(t_cmdlst *cmd_lst);
+void command_list_tester(t_pslist *ps_list);
 
 #endif

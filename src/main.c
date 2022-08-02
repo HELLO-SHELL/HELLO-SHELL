@@ -4,7 +4,7 @@ int main(int ac, char **av, char **env)
 {
 	char		*input;
 	t_token		*token_list;
-	t_cmdlst	*cmd_lst;
+	t_pslist	*cmd_lst;
 
 	print_wallpaper(); 
 	while(1)

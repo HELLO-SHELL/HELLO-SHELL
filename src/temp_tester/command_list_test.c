@@ -13,11 +13,11 @@ void token_list_tester(t_token *token_list)
 
 // 2) cmd list print tester
 // kyungsle
-void command_list_tester(t_cmdlst *cmd_lst)
+void command_list_tester(t_pslist *cmd_lst)
 {
 	while (cmd_lst)
 	{
-		printf("cmdlst pointer: %p$\n", cmd_lst);
+		printf("pslist pointer: %p$\n", cmd_lst);
 		while (cmd_lst->value->head)
 		{
 			printf("head value: %s$\n", cmd_lst->value->head->value);
