@@ -8,6 +8,8 @@ void	handle_quote(char *line, int *count, int *idx)
 	(*idx)++;
 	while (line[*idx] != qoute_num)
 	{
+		//조건 추가 - 뒤에 쿼트있는지(싱글, 더블)
+		// qoute_num 도 바꿀 것
 		if (line[*idx] == '\0')
 			exit(EXIT_FAILURE);
 		(*count)++;
