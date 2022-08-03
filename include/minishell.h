@@ -44,6 +44,7 @@ typedef struct s_env {
 
 typedef struct s_node {
 	t_list	*env_list;
+	t_token	*token_list;
 }	t_node;
 
 void	print_wallpaper(void);
@@ -58,7 +59,8 @@ t_token	*set_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
 
 /* built-in */
-int		ft_env(t_list *env);
+void	ft_env(t_list *env);
+void	ft_export(t_node *minishell);
 int		ft_pwd(void);
 void		ft_exit(int status, char *err_msg);
 

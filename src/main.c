@@ -2,28 +2,13 @@
 
 int main(int ac, char **av, char **env)
 {
-	char	*input;
-	t_token	*token_list;
-	char **str;
-	int i = 0;
+    t_node  *minishell;
 
 	print_wallpaper(); 
-	while(1)
-	{
-		input = readline("HELLO-SHELL-0.0$ ");
-		if (input)
-			printf("%s$\n", input);
-		else
-			break ;
-		add_history(input);
-		str = command_split(input);
-		token_list = set_token_list(str);
-		while(token_list)
-		{
-			printf("%s$\n", token_list->value);
-			token_list = token_list->next;
-		}
-		free(input);
-	}
+    minishell = (t_node *)malloc(sizeof(t_node));
+    if (minishell == 0)
+        return (0);
+    env_linked_list(minishell, env);
+    init_minishell(minishell);
 	return (0);
 }
