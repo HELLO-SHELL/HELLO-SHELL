@@ -59,15 +59,18 @@ t_token	*set_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
 
 /* built-in */
-void	ft_exit(int status);
 void	ft_env(t_list *env);
 void	ft_export(t_node *minishell);
 int		ft_pwd(void);
+void		ft_exit(int status, char *err_msg);
 
 /* utils */
 int		is_same_string(char *str1, char *str2);
 void    split_env(t_env *env_node, char **env, int i);
 void    env_linked_list(t_node *minishell, char **env);
 t_token	*get_token_head(t_token *token);
+void    *safe_malloc(size_t size);
+void    print_error_message(char *str);
+void    ft_error_exit(char *str);
 
 #endif
