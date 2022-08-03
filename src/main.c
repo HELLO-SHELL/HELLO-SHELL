@@ -5,8 +5,14 @@ int main(int ac, char **av, char **env)
 	char		*input;
 	t_token		*token_list;
 	t_pslist	*cmd_lst;
+  t_node  *minishell;
 
 	print_wallpaper(); 
+  minishell = (t_node *)malloc(sizeof(t_node));
+  if (minishell == 0)
+      return (0);
+  env_linked_list(minishell, env);
+  init_minishell(minishell);
 	while(1)
 	{
 		input = readline("HELLO-SHELL-0.0$ ");

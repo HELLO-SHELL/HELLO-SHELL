@@ -52,7 +52,7 @@ static void	insert_str_into_list_back(t_token **lst, char *str)
 	(*lst) = (*lst)->next;
 }
 
-static void	set_str_into_list(t_token **lst, char **str)
+static int	set_str_into_list(t_token **lst, char **str)
 {
 	int		i;
 
@@ -67,6 +67,7 @@ static void	set_str_into_list(t_token **lst, char **str)
 	}
 	free(str);
 	str = NULL;
+	return (1);
 }
 
 t_token	*set_token_list(char **token_arr)
@@ -75,7 +76,9 @@ t_token	*set_token_list(char **token_arr)
 
 	if (!token_arr || !*token_arr)
 		exit(EXIT_FAILURE);
-	set_str_into_list(&token_list_head, token_arr);
-	token_list_head = get_token_head(token_list_head);
+	if (set_str_into_list(&token_list_head, token_arr))
+		token_list_head = get_token_head(token_list_head);
+	else
+		return (0);
 	return (token_list_head);
 }

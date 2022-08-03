@@ -2,16 +2,23 @@
 
 void    init_minishell(t_node *minishell)
 {
-    char *input;
+    t_token *curr;
+    char    *input;
+	char    **str;
+	int     i = 0;
 
     while(1)
     {
         input = readline("HELLO-SHELL-0.0$ ");
-       
+        str = command_split(input);
+		minishell->token_list = set_token_list(str);
+        curr = minishell->token_list;
         if (input)
         {
             if (is_same_string(input, ENV))
                 ft_env(minishell->env_list);
+            else if (is_same_string(curr->value, EXPORT))
+                ft_export(minishell);
             else
             {
                 write(2,"HELLO-SHELL: ", 13);
@@ -21,6 +28,7 @@ void    init_minishell(t_node *minishell)
         }
         else
             break ;
+        // system("leaks minishell");
         add_history(input);
         free(input);
     }
