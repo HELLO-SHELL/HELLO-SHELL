@@ -15,6 +15,9 @@
 # include "get_next_line.h"
 # include "color.h"
 
+# define TRUE 1
+# define FALSE 0
+
 enum e_token_type
 {
 	TK_EOF,
@@ -37,6 +40,21 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_process
+{
+	t_token	*head;
+	t_token	*command;
+	t_token	*prefix;
+	t_token	*suffix;
+}	t_process;
+
+typedef struct s_pslist
+{
+	t_process		*value;
+	struct s_pslist	*prev;
+	struct s_pslist	*next;
+}	t_pslist;
+
 typedef struct s_env {
 	char	*key;
 	char	*value;
@@ -48,7 +66,7 @@ typedef struct s_node {
 }	t_node;
 
 void	print_wallpaper(void);
-void    init_minishell(t_node *minishell);
+void	init_minishell(t_node *minishell);
 
 char	**command_split(char *str);
 int		check_white_space(char c);
@@ -66,11 +84,19 @@ void		ft_exit(int status, char *err_msg);
 
 /* utils */
 int		is_same_string(char *str1, char *str2);
-void    split_env(t_env *env_node, char **env, int i);
-void    env_linked_list(t_node *minishell, char **env);
+void	split_env(t_env *env_node, char **env, int i);
+void	env_linked_list(t_node *minishell, char **env);
 t_token	*get_token_head(t_token *token);
 void    *safe_malloc(size_t size);
 void    print_error_message(char *str);
 void    ft_error_exit(char *str);
+
+/* parser */
+void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
+
+/* temp tester!
+delete this before submit */
+void token_list_tester(t_token *token_list);
+void command_list_tester(t_pslist *ps_list);
 
 #endif

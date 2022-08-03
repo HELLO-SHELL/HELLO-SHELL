@@ -21,7 +21,7 @@ static void	check_and_set_type(t_token *lst)
 		lst->type = TK_WORD;
 }
 
-static void insert_first_into_list(t_token **lst, char *str)
+static void	insert_first_into_list(t_token **lst, char *str)
 {
 	t_token *temp;
 
