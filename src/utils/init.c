@@ -6,6 +6,7 @@ void    init_minishell(t_node *minishell)
     char    *input;
 	char    **str;
 	int     i = 0;
+    t_pslist	*cmd_lst;
 
     while(1)
     {
@@ -30,6 +31,7 @@ void    init_minishell(t_node *minishell)
             break ;
         // system("leaks minishell");
         add_history(input);
+        set_command_list(&cmd_lst, minishell->token_list);
         free(input);
     }
 }
