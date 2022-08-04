@@ -4,9 +4,7 @@ static void init_process_struct(t_process **cmd_list)
 {
 	t_process *temp;
 
-	temp = malloc(sizeof(t_process *));
-	if (!temp)
-		exit(FAILURE);
+	temp = safe_malloc(sizeof(t_process *));
 	temp->head = NULL;
 	temp->command = NULL;
 	temp->prefix = NULL;
@@ -35,10 +33,8 @@ static void pslist_new(t_pslist **lst)
 	t_pslist	*list_temp;
 	t_process	*ps_temp;
 
-	list_temp = malloc(sizeof(t_pslist *));
+	list_temp = safe_malloc(sizeof(t_pslist *));
 	init_process_struct(&ps_temp);
-	if (!list_temp || !ps_temp)
-		exit(EXIT_FAILURE);
 	list_temp->value = ps_temp;
 	list_temp->next = NULL;
 	list_temp->prev = NULL;
@@ -52,10 +48,8 @@ static void pslist_addback(t_pslist **lst)
 	t_process	*ps_temp;
 
 	lst_idx = *lst;
-	list_temp = malloc(sizeof(t_pslist *));
+	list_temp = safe_malloc(sizeof(t_pslist *));
 	init_process_struct(&ps_temp);
-	if (!list_temp || !ps_temp)
-		exit(EXIT_FAILURE);
 	while (lst_idx->next)
 	{
 		lst_idx = lst_idx->next;
@@ -197,4 +191,5 @@ void set_command_list(t_pslist	**ps_list, t_token *tk_list)
 	printf("pipe count: %d\n", pipe_cnt);
 	init_pslist(ps_list, pipe_cnt);
 	insert_command_head(ps_list, tk_list);
+	// command_list_tester(*ps_list);
 }
