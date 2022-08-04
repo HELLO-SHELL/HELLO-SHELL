@@ -101,10 +101,6 @@ int	split_line(char *line, char **str, int *i, int *j)
 	(*str) = malloc(sizeof(char) * rtn + 1);
 	if (!(*str))
 		exit(EXIT_FAILURE);
-	// export a=b 가 들어오면
-	// 처음에는 export 를 리스트에 넣고
-	// 그 다음은 a=b 를 리스트에 넣어야하는데
-	// exp 를 넣음... line의 인덱스를 기억하고 있어야함...
 	int	z;
 
 	z = 0;

@@ -40,6 +40,7 @@ minishell
 *.i*86
 *.x86_64
 *.hex
+minishell
 
 # Debug files
 *.dSYM
@@ -75,7 +76,8 @@ dkms.conf
 # General
 .DS_Store
 .AppleDouble
-.LSOverride
+*.dSYM
+*.dSYM/
 
 # Icon must end with two \r
 Icon
