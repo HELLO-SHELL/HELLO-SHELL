@@ -29,7 +29,8 @@ enum e_token_type
 	TK_FILE,
 	TK_HEREDOC,
 	TK_DELIM,
-	TK_WORD
+	TK_WORD,
+	TK_CMD
 };
 
 typedef struct s_token
