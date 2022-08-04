@@ -9,10 +9,10 @@ CC = cc
 
 RM = rm -f
 SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
-./src/utils/ft_split_util.c ./src/utils/ft_split.c \
+./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_error.c \
 ./src/utils/env.c ./src/utils/init.c ./src/utils/is_same_string.c ./src/utils/get_token_head.c \
-./src/built_in/ft_exit.c ./src/built_in/ft_env.c \
-./src/parser/make_arr_to_list.c
+./src/built_in/ft_exit.c ./src/built_in/ft_env.c ./src/built_in/ft_export.c\
+./src/parser/make_arr_to_list.c ./src/parser/set_process_list.c ./src/temp_tester/command_list_test.c
 
 OBJ=$(SRC:.c=.o)
 
@@ -27,7 +27,7 @@ all : $(NAME)
 	./minishell
 
 debug :
-	$(CC) src/main.c src/*/*.c -g3 lib/*/*.c -lreadline -g3 -o minishell
+	$(CC) src/main.c src/*/*.c -g3 lib/*/*.c -lreadline -o minishell
 
 clean :
 	$(RM) $(OBJ)

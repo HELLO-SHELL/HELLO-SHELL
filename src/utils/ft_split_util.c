@@ -31,7 +31,7 @@ int	handle_quote(char *line, int *count, int *idx)
 		}
 		while ((line[*idx] != '\'' || line[*idx] != '\"')
 				&& (ft_isalnum(line[*idx]) || (line[*idx] >= 9 && line[*idx] <= 13)
-				|| line[*idx] == 32) ) // 따옴표 확인
+				|| line[*idx] == 32) || line[*idx] == '=') // 따옴표 확인
 		{
 			(*idx)++;
 			(*count)++;
@@ -76,7 +76,7 @@ int	count_split_size(char *str)
 	return (length);
 }
 
-int	split_line(char *line, char **str, int *i)
+int	split_line(char *line, char **str, int *i, int *j)
 {
 	int	rtn;
 
@@ -101,21 +101,22 @@ int	split_line(char *line, char **str, int *i)
 	(*str) = malloc(sizeof(char) * rtn + 1);
 	if (!(*str))
 		exit(EXIT_FAILURE);
-	// line, 0부터 쿼트 뺴고 넣기
 	int	z;
-	int	j;
 
 	z = 0;
-	j = 0;
+	//export a=b 일때 t와 a 사이의 공백을 넘기는 식
+	if ((line[*j] >= 9 && line[*j] <= 13) || line[*j] == 32)
+		(*j)++;
 	while (z < rtn)
 	{
-		if (line[j] == '\'' || line[j] == '\"')
-			j++;
+		if (line[*j] == '\'' || line[*j] == '\"')
+			(*j)++;
 		else
 		{
-			(*str)[z] = line[j];
+			(*str)[z] = line[*j];
 			z++;
-			j++;
+			//여기서 왜 갑자기 *J가 커지지...?
+			(*j)++;
 		}
 	}
 	(*str)[z] = '\0';
