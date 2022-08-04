@@ -4,9 +4,7 @@ static void init_process_struct(t_process **cmd_list)
 {
 	t_process *temp;
 
-	temp = malloc(sizeof(t_process *));
-	if (!temp)
-		exit(FAILURE);
+	temp = safe_malloc(sizeof(t_process *));
 	temp->head = NULL;
 	temp->command = NULL;
 	temp->prefix = NULL;
@@ -35,10 +33,8 @@ static void pslist_new(t_pslist **lst)
 	t_pslist	*list_temp;
 	t_process	*ps_temp;
 
-	list_temp = malloc(sizeof(t_pslist *));
+	list_temp = safe_malloc(sizeof(t_pslist *));
 	init_process_struct(&ps_temp);
-	if (!list_temp || !ps_temp)
-		exit(EXIT_FAILURE);
 	list_temp->value = ps_temp;
 	list_temp->next = NULL;
 	list_temp->prev = NULL;
@@ -52,10 +48,8 @@ static void pslist_addback(t_pslist **lst)
 	t_process	*ps_temp;
 
 	lst_idx = *lst;
-	list_temp = malloc(sizeof(t_pslist *));
+	list_temp = safe_malloc(sizeof(t_pslist *));
 	init_process_struct(&ps_temp);
-	if (!list_temp || !ps_temp)
-		exit(EXIT_FAILURE);
 	while (lst_idx->next)
 	{
 		lst_idx = lst_idx->next;
@@ -104,6 +98,17 @@ static void tk_listdelone(t_token **tk_list)
 	(*tk_list) = NULL;
 }
 
+static void cut_tail_by_cmd(t_token **tk_list)
+{
+	t_token	*curr;
+
+	curr = *tk_list;
+	while (curr->type != TK_CMD)
+		curr = curr->next;
+	curr->next->prev = NULL;
+	curr->next = NULL;
+}
+
 static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 {
 	t_pslist	*pslist_curr;
@@ -121,7 +126,7 @@ static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 		if (token_curr && *(token_curr->value) == '|')
 		{
 			pslist_curr->value->head = token_head;
-			cut_tail_by_cmd(&(pslist_curr->value->head));
+			cut_tail_by_pipe(&(pslist_curr->value->head));
 			for_delete = token_curr;
 			token_curr = token_curr->next;
 			tk_listdelone(&for_delete);
@@ -130,17 +135,6 @@ static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 			pslist_curr->value->head = token_head;
 		pslist_curr = pslist_curr->next;
 	}
-}
-
-static void cut_tail_by_cmd(t_token **tk_list)
-{
-	t_token	*curr;
-
-	curr = *tk_list;
-	while (curr->type != TK_CMD)
-		curr = curr->next;
-	curr->next->prev = NULL;
-	curr->next = NULL;
 }
 
 static t_token *cut_link_token(t_token *tk_list)
@@ -197,4 +191,5 @@ void set_command_list(t_pslist	**ps_list, t_token *tk_list)
 	printf("pipe count: %d\n", pipe_cnt);
 	init_pslist(ps_list, pipe_cnt);
 	insert_command_head(ps_list, tk_list);
+	// command_list_tester(*ps_list);
 }
