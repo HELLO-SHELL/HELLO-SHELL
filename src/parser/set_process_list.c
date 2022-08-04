@@ -104,6 +104,17 @@ static void tk_listdelone(t_token **tk_list)
 	(*tk_list) = NULL;
 }
 
+static void cut_tail_by_cmd(t_token **tk_list)
+{
+	t_token	*curr;
+
+	curr = *tk_list;
+	while (curr->type != TK_CMD)
+		curr = curr->next;
+	curr->next->prev = NULL;
+	curr->next = NULL;
+}
+
 static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 {
 	t_pslist	*pslist_curr;
@@ -121,7 +132,7 @@ static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 		if (token_curr && *(token_curr->value) == '|')
 		{
 			pslist_curr->value->head = token_head;
-			cut_tail_by_cmd(&(pslist_curr->value->head));
+			cut_tail_by_pipe(&(pslist_curr->value->head));
 			for_delete = token_curr;
 			token_curr = token_curr->next;
 			tk_listdelone(&for_delete);
@@ -130,17 +141,6 @@ static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 			pslist_curr->value->head = token_head;
 		pslist_curr = pslist_curr->next;
 	}
-}
-
-static void cut_tail_by_cmd(t_token **tk_list)
-{
-	t_token	*curr;
-
-	curr = *tk_list;
-	while (curr->type != TK_CMD)
-		curr = curr->next;
-	curr->next->prev = NULL;
-	curr->next = NULL;
 }
 
 static t_token *cut_link_token(t_token *tk_list)
