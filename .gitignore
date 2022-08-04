@@ -33,6 +33,7 @@
 *.dylib
 
 # Executables
+minishell
 *.exe
 *.out
 *.app
@@ -41,7 +42,7 @@
 *.hex
 
 # Debug files
-*.dSYM/
+*.dSYM
 *.su
 *.idb
 *.pdb
