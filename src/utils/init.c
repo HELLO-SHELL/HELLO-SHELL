@@ -10,6 +10,7 @@ void    init_minishell(t_node *minishell)
 
 	while(1)
 	{
+		signal(SIGINT, get_new_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		input = readline("HELLO-SHELL-0.0$ ");
 		str = command_split(input);
