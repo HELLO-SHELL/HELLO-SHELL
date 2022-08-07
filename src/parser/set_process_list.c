@@ -1,22 +1,10 @@
 #include "../../include/minishell.h"
 
-// static int is_command(char *str)
-// {
-// 	if (is_same_string(str, "echo") || is_same_string(str, "cd")
-// 		|| is_same_string(str, "exit") || is_same_string(str, "export") 
-// 			|| is_same_string(str, "unset") || is_same_string(str, "env") 
-// 				|| is_same_string(str, "pwd"))
-// 		return (TRUE);
-// 	return (FALSE);
-// }
-
 static void init_process_struct(t_process **cmd_list)
 {
 	t_process *temp;
 
-	temp = malloc(sizeof(t_process *));
-	if (!temp)
-		exit(FAILURE);
+	temp = safe_malloc(sizeof(t_process *));
 	temp->head = NULL;
 	temp->command = NULL;
 	temp->prefix = NULL;
@@ -45,10 +33,8 @@ static void pslist_new(t_pslist **lst)
 	t_pslist	*list_temp;
 	t_process	*ps_temp;
 
-	list_temp = malloc(sizeof(t_pslist *));
+	list_temp = safe_malloc(sizeof(t_pslist *));
 	init_process_struct(&ps_temp);
-	if (!list_temp || !ps_temp)
-		exit(EXIT_FAILURE);
 	list_temp->value = ps_temp;
 	list_temp->next = NULL;
 	list_temp->prev = NULL;
@@ -62,10 +48,8 @@ static void pslist_addback(t_pslist **lst)
 	t_process	*ps_temp;
 
 	lst_idx = *lst;
-	list_temp = malloc(sizeof(t_pslist *));
+	list_temp = safe_malloc(sizeof(t_pslist *));
 	init_process_struct(&ps_temp);
-	if (!list_temp || !ps_temp)
-		exit(EXIT_FAILURE);
 	while (lst_idx->next)
 	{
 		lst_idx = lst_idx->next;
@@ -91,7 +75,7 @@ static void init_pslist(t_pslist **lst, int cnt)
 	}
 }
 
-static void cut_tail(t_token **tk_list)
+static void cut_tail_by_pipe(t_token **tk_list)
 {
 	t_token	*curr;
 
@@ -114,6 +98,17 @@ static void tk_listdelone(t_token **tk_list)
 	(*tk_list) = NULL;
 }
 
+static void cut_tail_by_cmd(t_token **tk_list)
+{
+	t_token	*curr;
+
+	curr = *tk_list;
+	while (curr->type != TK_CMD)
+		curr = curr->next;
+	curr->next->prev = NULL;
+	curr->next = NULL;
+}
+
 static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 {
 	t_pslist	*pslist_curr;
@@ -131,13 +126,59 @@ static void insert_command_head(t_pslist **ps_list, t_token *tk_list)
 		if (token_curr && *(token_curr->value) == '|')
 		{
 			pslist_curr->value->head = token_head;
-			cut_tail(&(pslist_curr->value->head));
+			cut_tail_by_pipe(&(pslist_curr->value->head));
 			for_delete = token_curr;
 			token_curr = token_curr->next;
 			tk_listdelone(&for_delete);
 		}
 		else
 			pslist_curr->value->head = token_head;
+		pslist_curr = pslist_curr->next;
+	}
+}
+
+static t_token *cut_link_token(t_token *tk_list)
+{
+	t_token *rtn_token;
+
+	rtn_token = tk_list;
+	if (rtn_token->prev)
+		rtn_token->prev->next = NULL;
+	rtn_token->prev = NULL;
+	if (rtn_token->next)
+		rtn_token->next->prev = NULL;
+	rtn_token->next = NULL;
+	return (rtn_token);
+}
+
+void insert_process_info(t_pslist	**ps_list)
+{
+	t_pslist	*pslist_curr;
+	t_token		*token_head;
+	t_token		*token_curr;
+	t_token		*command;
+
+	pslist_curr = *ps_list;
+	token_curr = pslist_curr->value->head;
+	while (pslist_curr)
+	{
+		token_head = token_curr;
+		while (token_curr && token_curr->type != TK_CMD)
+			token_curr = token_curr->next;
+		if (token_curr && token_curr->type == TK_CMD)
+		{
+			if (token_curr != token_head)
+			{
+				pslist_curr->value->prefix = token_head;
+				cut_tail_by_cmd(&(pslist_curr->value->prefix));
+			}
+			command = token_curr;
+			token_curr = token_curr->next;
+			pslist_curr->value->command = cut_link_token(command);
+		}
+		else
+			ft_error_exit("no command!");
+		pslist_curr->value->suffix = token_curr;
 		pslist_curr = pslist_curr->next;
 	}
 }
@@ -150,6 +191,5 @@ void set_command_list(t_pslist	**ps_list, t_token *tk_list)
 	printf("pipe count: %d\n", pipe_cnt);
 	init_pslist(ps_list, pipe_cnt);
 	insert_command_head(ps_list, tk_list);
-	// deleted_token tester for cmdlist
-	command_list_tester(*ps_list);
+	// command_list_tester(*ps_list);
 }

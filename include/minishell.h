@@ -29,7 +29,8 @@ enum e_token_type
 	TK_FILE,
 	TK_HEREDOC,
 	TK_DELIM,
-	TK_WORD
+	TK_WORD,
+	TK_CMD
 };
 
 typedef struct s_token
@@ -87,9 +88,10 @@ int		is_same_string(char *str1, char *str2);
 void	split_env(t_env *env_node, char **env, int i);
 void	env_linked_list(t_node *minishell, char **env);
 t_token	*get_token_head(t_token *token);
-void    *safe_malloc(size_t size);
-void    print_error_message(char *str);
-void    ft_error_exit(char *str);
+void	*safe_malloc(size_t size);
+void	print_error_message(char *str);
+void	ft_error_exit(char *str);
+void	get_new_prompt(int sig);
 
 /* parser */
 void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
