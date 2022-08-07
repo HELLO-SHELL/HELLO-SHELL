@@ -92,6 +92,7 @@ void	*safe_malloc(size_t size);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 void	get_new_prompt(int sig);
+t_env *get_env_by_key(t_list *env_list, char *key);
 
 /* parser */
 void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
