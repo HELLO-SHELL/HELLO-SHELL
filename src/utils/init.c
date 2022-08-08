@@ -15,6 +15,7 @@ void    init_minishell(t_node *minishell)
 		input = readline("HELLO-SHELL-0.0$ ");
 		if (!input)
 			exit(EXIT_SUCCESS);
+		printf("%s debug: %s %s\n", MAG, (ft_strchr(input, '$')), COLOR_RESET);
 		str = command_split(input);
 		minishell->token_list = set_token_list(str);
 		curr = minishell->token_list;
