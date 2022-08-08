@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int	env_checker(char *str)
+int	env_key_valid_chechker(char *str)
 {
 	char *temp;
 
