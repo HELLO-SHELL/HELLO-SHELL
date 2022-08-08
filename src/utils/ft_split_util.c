@@ -92,11 +92,24 @@ int	count_split_size(char *str)
 	return (length);
 }
 
-void	fill_char(t_split *split, char *line, int *i)
+void	fill_char(t_split *split, char *line, int *i, char quote)
 {
-	split->str[*i] = line[split->j];
-	(*i)++;
-	(split->j)++;
+	if (quote == '\0')
+	{
+		split->str[*i] = line[split->j];
+		(*i)++;
+		split->j++;
+	}	
+	else
+	{
+		(split->j)++;
+		while (line[split->j] != '\0' && line[split->j] != quote)
+		{
+			split->str[*i] = line[split->j];
+			(*i)++;
+			(split->j)++;
+		}
+	}
 }
 
 int	fill_str(t_split *split, char *line)
@@ -110,21 +123,13 @@ int	fill_str(t_split *split, char *line)
 	while (i < (split->rtn))
 	{
 		if (line[split->j] == '\'')
-		{
-			(split->j)++;
-			while (line[split->j] != '\0' && line[split->j] != '\'')
-				fill_char(split, line, &i);
-		}
+			fill_char(split, line, &i, '\'');
 		else if (line[split->j] == '\"')
-		{
-			(split->j)++;
-			while (line[split->j] != '\0' && line[split->j] != '\"')
-				fill_char(split, line, &i);
-		}
+			fill_char(split, line, &i, '\"');
 		else
-			fill_char(split, line, &i);
+			fill_char(split, line, &i, '\0');
 	}
-	(split->str)[i] = '\0';
+	split->str[i] = '\0';
 	return (split->rtn);
 }
 
