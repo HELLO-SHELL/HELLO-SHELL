@@ -1,16 +1,5 @@
 #include "../../include/minishell.h"
 
-void init_process_struct(t_process **cmd_list)
-{
-	t_process *temp;
-
-	temp = safe_malloc(sizeof(t_process *));
-	temp->head = NULL;
-	temp->argc = 0;
-	temp->argv = NULL;
-	(*cmd_list) = temp;
-}
-
 void cut_tail_by_pipe(t_token **tk_list)
 {
 	t_token	*curr;
@@ -30,6 +19,8 @@ void tk_listdelone(t_token **tk_list)
 		(*tk_list)->next->prev = (*tk_list)->prev;
 	(*tk_list)->prev = NULL;
 	(*tk_list)->next = NULL;
+	free((*tk_list)->value);
+	(*tk_list)->value = NULL;
 	free(*tk_list);
 	(*tk_list) = NULL;
 }

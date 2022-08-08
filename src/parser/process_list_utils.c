@@ -16,7 +16,37 @@ int count_pipe(t_token *tk_list)
 	return (cnt);
 }
 
-void init_pslist(t_pslist **lst, int cnt)
+void pslist_new(t_process **lst)
+{
+	t_process	*ps_temp;
+
+	ps_temp = safe_malloc(sizeof(t_process *));
+	ps_temp->argv = NULL;
+	ps_temp->argc = 0;
+	ps_temp->head = NULL;
+	ps_temp->next = NULL;
+	(*lst) = ps_temp;
+}
+
+void pslist_addback(t_process **lst)
+{
+	t_process	*lst_idx;
+	t_process	*ps_temp;
+
+	lst_idx = *lst;
+	ps_temp = safe_malloc(sizeof(t_process *));
+	while (lst_idx->next)
+	{
+		lst_idx = lst_idx->next;
+	}
+	ps_temp->argv = NULL;
+	ps_temp->argc = 0;
+	ps_temp->head = NULL;
+	ps_temp->next = NULL;
+	lst_idx->next = ps_temp;
+}
+
+void init_pslist(t_process **lst, int cnt)
 {
 	int	i;
 
@@ -29,36 +59,4 @@ void init_pslist(t_pslist **lst, int cnt)
 			pslist_addback(lst);
 		i++;
 	}
-}
-
-void pslist_new(t_pslist **lst)
-{
-	t_pslist	*list_temp;
-	t_process	*ps_temp;
-
-	list_temp = safe_malloc(sizeof(t_pslist *));
-	init_process_struct(&ps_temp);
-	list_temp->value = ps_temp;
-	list_temp->next = NULL;
-	list_temp->prev = NULL;
-	(*lst) = list_temp;
-}
-
-void pslist_addback(t_pslist **lst)
-{
-	t_pslist	*list_temp;
-	t_pslist	*lst_idx;
-	t_process	*ps_temp;
-
-	lst_idx = *lst;
-	list_temp = safe_malloc(sizeof(t_pslist *));
-	init_process_struct(&ps_temp);
-	while (lst_idx->next)
-	{
-		lst_idx = lst_idx->next;
-	}
-	list_temp->value = ps_temp;
-	list_temp->next = NULL;
-	list_temp->prev = lst_idx;
-	lst_idx->next = list_temp;
 }

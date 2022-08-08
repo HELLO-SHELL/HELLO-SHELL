@@ -43,17 +43,11 @@ typedef struct s_token
 
 typedef struct s_process
 {
-	char	*argv;
-	int		argc;
-	t_token	*head;
+	char				*argv;
+	int					argc;
+	t_token				*head;
+	struct s_process	*next;
 }	t_process;
-
-typedef struct s_pslist
-{
-	t_process		*value;
-	struct s_pslist	*prev;
-	struct s_pslist	*next;
-}	t_pslist;
 
 typedef struct s_env {
 	char	*key;
@@ -91,14 +85,14 @@ void	*safe_malloc(size_t size);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 void	get_new_prompt(int sig);
-t_env *get_env_by_key(t_list *env_list, char *key);
+t_env	*get_env_by_key(t_list *env_list, char *key);
 
 /* parser */
-void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
+void	set_process_list(t_process **ps_list, t_token *tk_lst);
 int		count_pipe(t_token *tk_list);
-void	init_pslist(t_pslist **lst, int cnt);
-void	pslist_new(t_pslist **lst);
-void	pslist_addback(t_pslist **lst);
+void	init_pslist(t_process **lst, int cnt);
+void	pslist_new(t_process **lst);
+void	pslist_addback(t_process **lst);
 void	init_process_struct(t_process **cmd_list);
 void	cut_tail_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
@@ -106,6 +100,6 @@ void	tk_listdelone(t_token **tk_list);
 /* temp tester!
 delete this before submit */
 void token_list_tester(t_token *token_list);
-void command_list_tester(t_pslist *ps_list);
+void command_list_tester(t_process *ps_list);
 
 #endif
