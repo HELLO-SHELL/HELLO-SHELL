@@ -43,10 +43,9 @@ typedef struct s_token
 
 typedef struct s_process
 {
+	char	*argv;
+	int		argc;
 	t_token	*head;
-	t_token	*command;
-	t_token	*prefix;
-	t_token	*suffix;
 }	t_process;
 
 typedef struct s_pslist
@@ -97,6 +96,13 @@ int		env_key_valid_chechker(char *str);
 
 /* parser */
 void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
+int		count_pipe(t_token *tk_list);
+void	init_pslist(t_pslist **lst, int cnt);
+void	pslist_new(t_pslist **lst);
+void	pslist_addback(t_pslist **lst);
+void	init_process_struct(t_process **cmd_list);
+void	cut_tail_by_pipe(t_token **tk_list);
+void	tk_listdelone(t_token **tk_list);
 
 /* temp tester!
 delete this before submit */
