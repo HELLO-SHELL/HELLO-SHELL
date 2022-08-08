@@ -44,11 +44,33 @@ void	export_display(t_node *minishell)
 	}
 }
 
+// void	export_get_key_value();
+
+// void	export_get_list(t_node *minishell, t_token *token)
+// {
+// 	char *key;
+// 	char *value;
+// 	char *str;
+// 	t_env	*env_node;
+
+// 	env_node = malloc(sizeof(t_env));
+// 	// export_get_key_value();
+// 	str = ft_strchr(token->next->value, '='); //  =abcd
+// 	key = ft_substr(token->next->value, 0, str - token->next->value);
+// 	if (str)
+// 		value = ft_substr(str + 1, 0, ft_strlen(str));
+// 	else if (str == NULL)
+// 		value = 0;
+// 	env_node->key = key;
+// 	env_node->value = value;
+// 	ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
+// 	token = token->next;
+// }
+
 void	ft_export(t_node *minishell)
 {
-	t_token *token;
 	t_env	*env_node;
-	
+	t_token *token;	
 
 	token = minishell->token_list;
 	if (token->next == NULL)
@@ -57,7 +79,6 @@ void	ft_export(t_node *minishell)
 	{
 		while (token->next)
 		{
-			// 	export_check_argu();
 			if (export_check_error(token))
 			{
 				token = token->next;
@@ -67,7 +88,7 @@ void	ft_export(t_node *minishell)
 			}
 			else
 			{
-				// export_get_lst();
+				// export_get_list(minishell, token);
 				// '=' 찾을 때
 				char *key;
 				char *value;

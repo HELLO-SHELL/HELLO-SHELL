@@ -1,54 +1,60 @@
 #include "../../include/minishell.h"
 
+void	handle_single_quote(char *line, int *count, int *idx, int *flag)
+{
+	*flag = 1;
+	(*idx)++;
+	while (line[*idx] != '\0' && *flag == 1)
+	{
+		if (line[*idx] != '\'')
+		{
+			(*idx)++;
+			(*count)++;
+		}
+		else if (line[*idx] == '\'')
+		{
+			*flag = 0;
+			(*idx)++;
+		}
+		else
+			ft_error_exit("error");
+	}
+}
+
+void	handle_double_quote(char *line, int *count, int *idx, int *flag)
+{
+	*flag = 1;
+	(*idx)++;
+	while (line[*idx] != '\0' && *flag == 1)
+	{
+		if (line[*idx] != '\"')
+		{
+			(*idx)++;
+			(*count)++;
+		}
+		else if (line[*idx] == '\"')
+		{
+			*flag = 0;
+			(*idx)++;
+		}
+		else
+			ft_error_exit("error");
+	}
+}
+
 int	handle_quote(char *line, int *count, int *idx)
 {
 	int flag;
 
 	flag = 0;
-	while (line[*idx] != '\0') //echo 'abc'"de" abc'def'
+	while (line[*idx] != '\0')
 	{
-		if ((flag == 0 && line[*idx] == ' ') || line[*idx] == '\0')//
+		if ((flag == 0 && line[*idx] == ' ') || line[*idx] == '\0')
 			break ;
 		else if (line[*idx] == '\'')
-		{
-			flag = 1;
-			(*idx)++;
-			while (line[*idx] != '\0' && flag == 1)
-			{
-				if (line[*idx] != '\'')
-				{
-					(*idx)++;
-					(*count)++;
-				}
-				else if (line[*idx] == '\'')
-				{
-					flag = 0;
-					(*idx)++;
-				}
-				else
-					ft_error_exit("error");
-			}
-		}
+			handle_single_quote(line, count, idx, &flag);
 		else if (line[*idx] == '\"')
-		{
-			flag = 1;
-			(*idx)++;
-			while (line[*idx] != '\0' && flag == 1)
-			{
-				if (line[*idx] != '\"')
-				{
-					(*idx)++;
-					(*count)++;
-				}
-				else if (line[*idx] == '\"')
-				{
-					flag = 0;
-					(*idx)++;
-				}
-				else
-					ft_error_exit("error");
-			}
-		}
+			handle_double_quote(line, count, idx, &flag);
 		else
 		{
 			(*idx)++;
@@ -87,6 +93,32 @@ int	count_split_size(char *str)
 	return (length);
 }
 
+int	fill_str(char *line, char **str, int *rtn, int *j)
+{
+	int	i;
+
+	i = 0;
+	*str = safe_malloc(sizeof(char) * (*rtn + 1));
+	// *str = malloc(sizeof(char) * (*rtn + 1));
+	if (!(*str))
+		exit(EXIT_FAILURE);
+	while (check_white_space(line[*j]) || (line[*j] == '\'' || line[*j] == '\"'))
+		(*j)++;
+	while (i < (*rtn))
+	{
+		if (line[*j] == '\'' || line[*j] == '\"')
+			(*j)++;
+		else
+		{
+			(*str)[i] = line[*j];
+			i++;
+			(*j)++;
+		}
+	}
+	(*str)[i] = '\0';
+	return (*rtn);
+}
+
 int	split_line(char *line, char **str, int *i, int *j)
 {
 	int	rtn;
@@ -109,25 +141,5 @@ int	split_line(char *line, char **str, int *i, int *j)
 		rtn++;
 		(*i)++;
 	}
-	(*str) = malloc(sizeof(char) * rtn + 1);
-	if (!(*str))
-		exit(EXIT_FAILURE);
-	int	z;
-
-	z = 0;
-	while (check_white_space(line[*j]) || (line[*j] == '\'' || line[*j] == '\"'))
-		(*j)++;
-	while (z < rtn)
-	{
-		if (line[*j] == '\'' || line[*j] == '\"')
-			(*j)++;
-		else
-		{
-			(*str)[z] = line[*j];
-			z++;
-			(*j)++;
-		}
-	}
-	(*str)[z] = '\0';
-	return (rtn);
+	return (fill_str(line, str, &rtn, j));
 }
