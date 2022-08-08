@@ -93,27 +93,39 @@ int	count_split_size(char *str)
 	return (length);
 }
 
+void	fill_char(char *line, char *str, int *i, int *j)
+{
+	str[*i] = line[*j];
+	(*i)++;
+	(*j)++;
+}
+
 int	fill_str(char *line, char **str, int *rtn, int *j)
 {
 	int	i;
 
 	i = 0;
 	*str = safe_malloc(sizeof(char) * (*rtn + 1));
-	// *str = malloc(sizeof(char) * (*rtn + 1));
-	if (!(*str))
-		exit(EXIT_FAILURE);
-	while (check_white_space(line[*j]) || (line[*j] == '\'' || line[*j] == '\"'))
+	// printf("%s\n", line);
+	while (check_white_space(line[*j]))//쿼트
 		(*j)++;
+	// quote 를 define??
 	while (i < (*rtn))
 	{
-		if (line[*j] == '\'' || line[*j] == '\"')
-			(*j)++;
-		else
+		if (line[*j] == '\'') //작은따옴표, 큰따옴표
 		{
-			(*str)[i] = line[*j];
-			i++;
 			(*j)++;
+			while (line[*j] != '\'')
+				fill_char(line, *str, &i, j);
 		}
+		else if (line[*j] == '\"') //작은따옴표, 큰따옴표
+		{
+			(*j)++;
+			while (line[*j] != '\"')
+				fill_char(line, *str, &i, j);
+		}
+		else
+			fill_char(line, *str, &i, j);
 	}
 	(*str)[i] = '\0';
 	return (*rtn);

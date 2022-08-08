@@ -26,7 +26,6 @@ char	**command_split(char *str)
 	int		split_size;
 	char	**result;
 
-	// split free
 	if (!str)
 		return (NULL);
 	result = NULL;
