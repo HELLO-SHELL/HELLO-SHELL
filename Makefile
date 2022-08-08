@@ -7,7 +7,7 @@ GNL = get_next_line/libgnl.a
 CC = cc
 # CFLAGS= -Wall -Wextra -Werror
 # 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
-READLINE = -lreadline -L -fsanitize=address ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
+READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
 RM = rm -f
 SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
 ./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_error.c \
@@ -23,7 +23,7 @@ OBJ=$(SRC:.c=.o)
 $(NAME) : $(OBJ)
 	make bonus -j -C $(LIB_DIR)/libft
 	make -j -C $(LIB_DIR)/get_next_line
-	$(CC) $(OBJ) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
+	$(CC) $(OBJ) $(READLINE) -fsanitize=address $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
 
