@@ -15,7 +15,9 @@ SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
 ./src/utils/env.c ./src/utils/init.c ./src/utils/is_same_string.c ./src/utils/get_token_head.c \
 ./src/utils/signal.c ./src/utils/safe_malloc.c ./src/utils/get_env_by_key.c\
 ./src/built_in/ft_exit.c ./src/built_in/ft_env.c ./src/built_in/ft_export.c\
-./src/parser/make_arr_to_list.c ./src/parser/set_process_list.c ./src/temp_tester/command_list_test.c
+./src/parser/make_arr_to_list.c ./src/parser/set_process_list.c  ./src/parser/process_list_utils.c \
+./src/parser/process_utils.c \
+./src/temp_tester/command_list_test.c
 
 OBJ=$(SRC:.c=.o)
 
