@@ -62,6 +62,16 @@ typedef struct s_env {
 	char	*value;
 }	t_env;
 
+typedef struct s_split {
+	int		split_size;
+	char	**result;
+	char	*str;
+	int		flag;
+	int		rtn;
+	int		i;
+	int		j;
+}	t_split;
+
 typedef struct s_node {
 	t_list	*env_list;
 	t_token	*token_list;
@@ -73,7 +83,7 @@ void	init_minishell(t_node *minishell);
 char	**command_split(char *str);
 int		check_white_space(char c);
 int		count_split_size(char *str);
-int		split_line(char *line, char **str, int *i, int *j);
+int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);
 t_token	*set_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);

@@ -1,64 +1,63 @@
 #include "../../include/minishell.h"
 
-void	handle_single_quote(char *line, int *count, int *idx, int *flag)
+void	handle_single_quote(t_split *split, char *line)
 {
-	*flag = 1;
-	(*idx)++;
-	while (line[*idx] != '\0' && *flag == 1)
+	split->flag = 1;
+	split->i++;
+	while (line[split->i] != '\0' && split->flag == 1)
 	{
-		if (line[*idx] != '\'')
+		if (line[split->i] != '\'')
 		{
-			(*idx)++;
-			(*count)++;
+			split->i++;
+			split->rtn++;
 		}
-		else if (line[*idx] == '\'')
+		else if (line[split->i] == '\'')
 		{
-			*flag = 0;
-			(*idx)++;
+			split->flag = 0;
+			split->i++;
 		}
 		else
 			ft_error_exit("error");
 	}
 }
 
-void	handle_double_quote(char *line, int *count, int *idx, int *flag)
+void	handle_double_quote(t_split *split, char *line)
 {
-	*flag = 1;
-	(*idx)++;
-	while (line[*idx] != '\0' && *flag == 1)
+	split->flag = 1;
+	split->i++;
+	while (line[split->i] != '\0' && split->flag == 1)
 	{
-		if (line[*idx] != '\"')
+		if (line[split->i] != '\"')
 		{
-			(*idx)++;
-			(*count)++;
+			split->i++;
+			split->rtn++;
 		}
-		else if (line[*idx] == '\"')
+		else if (line[split->i] == '\"')
 		{
-			*flag = 0;
-			(*idx)++;
+			split->flag = 0;
+			split->i++;
 		}
 		else
 			ft_error_exit("error");
 	}
 }
 
-int	handle_quote(char *line, int *count, int *idx)
+int	handle_quote(t_split *split, char *line)
 {
-	int flag;
-
-	flag = 0;
-	while (line[*idx] != '\0')
+	split->flag = 0;
+	while (line[split->i] != '\0')
 	{
-		if ((flag == 0 && line[*idx] == ' ') || line[*idx] == '\0')
+		if ((split->flag == 0 && line[split->i] == ' ')
+			|| line[split->i] == '\0')
 			break ;
-		else if (line[*idx] == '\'')
-			handle_single_quote(line, count, idx, &flag);
-		else if (line[*idx] == '\"')
-			handle_double_quote(line, count, idx, &flag);
+		else if (line[split->i] == '\'')
+			handle_single_quote(split, line);
+		else if (line[split->i] == '\"')
+			handle_double_quote(split, line);
 		else
 		{
-			(*idx)++;
-			(*count)++;
+			split->i++;
+			split->rtn++;
 		}
 	}
 	return (0);
@@ -93,65 +92,61 @@ int	count_split_size(char *str)
 	return (length);
 }
 
-void	fill_char(char *line, char *str, int *i, int *j)
+void	fill_char(t_split *split, char *line, int *i)
 {
-	str[*i] = line[*j];
+	split->str[*i] = line[split->j];
 	(*i)++;
-	(*j)++;
+	(split->j)++;
 }
 
-int	fill_str(char *line, char **str, int *rtn, int *j)
+int	fill_str(t_split *split, char *line)
 {
 	int	i;
 
 	i = 0;
-	*str = safe_malloc(sizeof(char) * (*rtn + 1));
-	// printf("%s\n", line);
-	while (check_white_space(line[*j]))//쿼트
-		(*j)++;
-	// quote 를 define??
-	while (i < (*rtn))
+	split->str = safe_malloc(sizeof(char) * (split->rtn + 1));
+	while (check_white_space(line[split->j]))
+		(split->j)++;
+	while (i < (split->rtn))
 	{
-		if (line[*j] == '\'') //작은따옴표, 큰따옴표
+		if (line[split->j] == '\'')
 		{
-			(*j)++;
-			while (line[*j] != '\'')
-				fill_char(line, *str, &i, j);
+			(split->j)++;
+			while (line[split->j] != '\0' && line[split->j] != '\'')
+				fill_char(split, line, &i);
 		}
-		else if (line[*j] == '\"') //작은따옴표, 큰따옴표
+		else if (line[split->j] == '\"')
 		{
-			(*j)++;
-			while (line[*j] != '\"')
-				fill_char(line, *str, &i, j);
+			(split->j)++;
+			while (line[split->j] != '\0' && line[split->j] != '\"')
+				fill_char(split, line, &i);
 		}
 		else
-			fill_char(line, *str, &i, j);
+			fill_char(split, line, &i);
 	}
-	(*str)[i] = '\0';
-	return (*rtn);
+	(split->str)[i] = '\0';
+	return (split->rtn);
 }
 
-int	split_line(char *line, char **str, int *i, int *j)
+int	split_line(t_split *split, char *line)
 {
-	int	rtn;
-
-	rtn = 0;
-	while (check_white_space(line[*i]))
+	split->rtn = 0;
+	while (check_white_space(line[split->i]))
 	{
-		(*i)++;
-		if (line[*i] == 0)
+		split->i++;
+		if (line[split->i] == 0)
 			return (0);
 	}
-	while (!check_white_space(line[*i]) && line[*i] != '\0')
+	while (!check_white_space(line[split->i]) && line[split->i] != '\0')
 	{
-		if (line[*i] == '\'' || line[*i] == '\"')
+		if (line[split->i] == '\'' || line[split->i] == '\"')
 		{
-			if (handle_quote(line, &rtn, i))
+			if (handle_quote(split, line))
 				return (0);
 			break ;
 		}
-		rtn++;
-		(*i)++;
+		split->rtn++;
+		split->i++;
 	}
-	return (fill_str(line, str, &rtn, j));
+	return (fill_str(split, line));
 }
