@@ -11,7 +11,6 @@ static void	make_result_from_line(t_split *split, char *line)
 	while (line[split->i] != '\0' && idx < split->split_size)
 	{
 		split_line(split, line);
-		// split_line(line, &split->str, &split->i, &split->j);
 		split->result[idx] = split->str;
 		split->str = NULL;
 		idx++;
@@ -22,8 +21,6 @@ static void	make_result_from_line(t_split *split, char *line)
 char	**command_split(char *str)
 {
 	t_split	*split;
-	// int		split_size;
-	// char	**result;
 
 	if (!str)
 		return (NULL);
@@ -35,6 +32,5 @@ char	**command_split(char *str)
 		ft_error_exit("malloc failed");
 	split->result[split->split_size] = NULL;
 	make_result_from_line(split, str);
-	// make_result_from_line(split->result, str, split->split_size);
 	return (split->result);
 }
