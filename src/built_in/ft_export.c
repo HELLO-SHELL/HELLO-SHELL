@@ -2,13 +2,6 @@
 
 int	export_check_error(t_token *token)
 {
-	/**************************************************************
-	key&value
-	1. 띄어씌기 에러처리
-	2. 중복 처리
-	value 따옴표
-	1. 백슬래쉬는 예외 (\)
-	 *************************************************************/
 	t_token	*curr;
 	int	i;
 
@@ -44,20 +37,49 @@ void	export_display(t_node *minishell)
 	}
 }
 
+static t_env	*get_overlap_env(t_list *env_list, char *key)
+{
+	t_env	*temp;
+	
+	temp = get_env_by_key(env_list, key);
+	if (temp)
+	{
+		free(key);
+		key = NULL;
+		return (temp);
+	}
+	return (NULL);
+}
+
+static void	update_value_when_overlap(t_env *temp, char *str)
+{
+	t_env	*updated_env;
+
+	if (temp == NULL || str == NULL)
+		return ;
+	updated_env = temp;
+	free(updated_env->value);
+	updated_env->value = ft_substr(str + 1, 0, ft_strlen(str));
+}
+
 void	export_get_list(t_node *minishell, t_token *token)
 {
 	char *key;
 	char *value;
 	char *str;
 	t_env	*env_node;
+	t_env	*overlap_env;
 
-	env_node = safe_malloc(sizeof(t_env));
 	str = ft_strchr(token->next->value, '=');
 	key = ft_substr(token->next->value, 0, str - token->next->value);
-	if (str)
-		value = ft_substr(str + 1, 0, ft_strlen(str));
-	else if (str == NULL)
+	overlap_env = get_overlap_env(minishell->env_list, key);
+	if (overlap_env)
+		return (update_value_when_overlap(overlap_env, str));
+	if (str == NULL)
 		value = 0;
+	else 
+		value = ft_substr(str + 1, 0, ft_strlen(str));
+	env_node = safe_malloc(sizeof(t_env));
 	env_node->key = key;
 	env_node->value = value;
 	ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
