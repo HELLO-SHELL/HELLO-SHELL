@@ -27,9 +27,7 @@ char	**command_split(char *str)
 	split = safe_malloc(sizeof(t_split));
 	split->result = NULL;
 	split->split_size = count_split_size(str);
-	split->result = (char **)malloc(sizeof(char *) * (split->split_size + 1));
-	if (split->result == NULL)
-		ft_error_exit("malloc failed");
+	split->result = (char **)safe_malloc(sizeof(char *) * (split->split_size + 1));
 	split->result[split->split_size] = NULL;
 	make_result_from_line(split, str);
 	return (split->result);

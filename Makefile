@@ -7,15 +7,16 @@ GNL = get_next_line/libgnl.a
 CC = cc
 # CFLAGS= -Wall -Wextra -Werror
 # 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
-READLINE = -lreadline -L /usr/local/Cellar/readline/8.1.2/lib -I /usr/local/Cellar/readline/8.1.2/include
-#jaekim READLINE = -lreadline -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/readline/lib
-
+READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
 RM = rm -f
 SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
-	  ./src/utils/ft_split.c ./src/utils/ft_split_util.c ./src/utils/ft_split_quote_util.c ./src/utils/ft_error.c ./src/utils/safe_malloc.c \
-	  ./src/utils/env.c ./src/utils/init.c ./src/utils/is_same_string.c ./src/utils/get_token_head.c ./src/utils/signal.c \
-	  ./src/built_in/ft_exit.c ./src/built_in/ft_env.c ./src/built_in/ft_export.c \
-	  ./src/parser/make_arr_to_list.c ./src/parser/set_process_list.c ./src/temp_tester/command_list_test.c
+	  ./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_split_quote_util.c ./src/utils/ft_error.c \
+	  ./src/utils/env.c ./src/utils/init.c ./src/utils/is_same_string.c ./src/utils/get_token_head.c \
+	  ./src/utils/signal.c ./src/utils/safe_malloc.c ./src/utils/get_env_by_key.c\
+	  ./src/built_in/ft_exit.c ./src/built_in/ft_env.c ./src/built_in/ft_export.c\
+	  ./src/parser/make_arr_to_list.c ./src/parser/set_process_list.c  ./src/parser/process_list_utils.c \
+	  ./src/parser/process_utils.c \
+	  ./src/temp_tester/command_list_test.c
 
 OBJ=$(SRC:.c=.o)
 
@@ -41,5 +42,8 @@ fclean : clean
 re : 
 	make fclean
 	make all
+
+%.o :	%.c
+	$(CC) $(READLINE) -c $^ -o $@
 
 .PHONY : all clean fclean re
