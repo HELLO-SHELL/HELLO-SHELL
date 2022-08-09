@@ -20,8 +20,7 @@ int	count_split_size(char *str)
 			i++;
 		else
 		{
-			while (str[i] != 0
-				&& !(check_white_space(str[i])))
+			while (str[i] != 0 && !(check_white_space(str[i])))
 				i++;
 			length++;
 		}

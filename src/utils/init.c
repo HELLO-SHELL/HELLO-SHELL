@@ -17,8 +17,6 @@ void    init_minishell(t_node *minishell)
 		if (!input)
 			exit(EXIT_SUCCESS);
 		str = command_split(input);
-		// printf("%s DEBUG: -%s- %s\n", GRN, str[0], COLOR_RESET);
-		// printf("%s DEBUG: -%d- %s\n", GRN, str[1], COLOR_RESET);
 		minishell->token_list = set_token_list(str);
 		curr = minishell->token_list;
 		if (input)
