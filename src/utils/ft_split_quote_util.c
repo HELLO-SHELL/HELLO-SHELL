@@ -19,6 +19,8 @@ void	handle_single_quote(t_split *split, char *line)
 		else
 			ft_error_exit("error");
 	}
+	if (split->flag == 1)
+		ft_error_exit("error");
 }
 
 void	handle_double_quote(t_split *split, char *line)
@@ -40,6 +42,8 @@ void	handle_double_quote(t_split *split, char *line)
 		else
 			ft_error_exit("error");
 	}
+	if (split->flag == 1)
+		ft_error_exit("error");
 }
 
 int	handle_quote(t_split *split, char *line)
