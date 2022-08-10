@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int	is_acceccable();
+int	is_accessable();
 void	redirection(t_process *ps_list, int ps_id)
 {
 	//ps_list 의 ps_id 번째 node 의 head
