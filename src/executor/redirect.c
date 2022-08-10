@@ -1,6 +1,8 @@
 #include "../../include/minishell.h"
 
-void	apply_redirection(t_token *cmd_line)
+void	apply_redirection();
+
+void	apply_redirections(t_token *cmd_line)
 {
 	// 돌면서 redirect 를 찾습니다. < > >>
 	// TK_RDINPUT TK_RDOUTPUT TK_APPEND
