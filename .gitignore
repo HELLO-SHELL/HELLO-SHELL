@@ -150,4 +150,6 @@ tags
 # Ignore code-workspaces
 *.code-workspace
 
+.gitpod.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,c,visualstudiocode,vim
