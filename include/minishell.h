@@ -93,6 +93,7 @@ void	ft_error_exit(char *str);
 void	get_new_prompt(int sig);
 t_env *get_env_by_key(t_list *env_list, char *key);
 int		env_key_valid_chechker(char *str);
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 
 /* parser */
 void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
