@@ -10,35 +10,48 @@
 // 	return ;
 // }
 
-// void    *del(t_list **env_lsit, char *key)
-// {
-//     safe_free((t_list *)(*env_list->conten)->key));
-//     safe_free((t_list *)(*env_list->conten)->value));
-// }
+void    lst_delete_one(t_list *env_list, t_env *temp)
+{
+    t_list  *curr;
+
+    curr = env_list;
+    while (curr)
+    {
+		if (((t_env *)curr->content) == temp)
+        {
+            if (curr == env_list)
+                env_list = curr->next;
+            else
+                
+            free (temp->key);
+            temp->key = NULL;
+            free (temp->value);
+            temp->value = NULL;
+            return ;
+        }
+        curr = curr->next;
+    }
+    
+}
 
 void    ft_unset(t_node *minishell)
 {
     t_list  *env_list;
+    t_env   *temp;
     t_token *token;
 
     env_list = minishell->env_list;
     token = minishell->token_list;
     if (token->next == NULL)
         return ;
-    
-    // env_list를 들고 다닐 커서 지정
-    // t_list *curr;
-    // t_token *커서지정;
-
-    // curr = minishell->env_list;
-    // // 첫 번째 토큰은 unset
-    // if (두 번째 토큰이 없는 경우)
-    //     새로운 프롬프트 출력;
-    // while (2 ~ n 번째 토큰 순회)
-    // {
-    //     // 두 번째 토큰 확인
-    //     if (토큰이 있을 경우)
-    //         ft_lstdelone(토큰, del함수(&env_list));
-    //     커서지정 = 커서지정->next;
-    // }
+    token = token->next;
+    while (token)
+    {
+        temp = get_env_by_key(env_list, token->value);
+        if (temp)
+            lst_delete_one(env_list, temp);
+        else
+            return ;
+        token = token->next;
+    }
 }

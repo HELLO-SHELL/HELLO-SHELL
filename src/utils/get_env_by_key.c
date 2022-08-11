@@ -7,7 +7,7 @@ t_env *get_env_by_key(t_list *env_list, char *key)
     temp = env_list;
     while (temp)
 	{
-		if (is_same_string(((t_env *)(temp->content))->key, key))
+		if (is_same_string(((t_env *)temp->content)->key, key))
 			return ((t_env *)temp->content);
 		temp = temp->next;
 	}
