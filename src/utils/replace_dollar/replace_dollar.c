@@ -60,7 +60,7 @@ char	*replace_whole_input_dollar(char *input, t_node *minishell)
 		input_ptr = ft_strchr(input_ptr, '$');
 		if (input_ptr)
 			input_ptr += 1;
-		if (env_key_valid_chechker(input_ptr))
+		if (env_key_valid_checker(input_ptr))
 			input_buffer = replace_dollar(input_buffer, input_ptr, minishell);
 		if (!input_ptr)
 			break ;

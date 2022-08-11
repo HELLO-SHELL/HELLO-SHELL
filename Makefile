@@ -13,7 +13,7 @@ SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
 ./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_error.c \
 ./src/utils/env_utils/env.c ./src/init.c ./src/utils/chore_utils/is_same_string.c ./src/utils/get_token_head.c \
 ./src/utils/signal.c ./src/utils/chore_utils/safe_malloc.c ./src/utils/chore_utils/ft_memccpy.c ./src/utils/env_utils/get_env_by_key.c\
-./src/utils/env_utils/env_key_valid_chechker.c ./src/utils/replace_dollar/replace_dollar.c\
+./src/utils/env_utils/env_key_valid_checker.c ./src/utils/replace_dollar/replace_dollar.c\
 ./src/built_in/ft_exit.c ./src/built_in/ft_env.c ./src/built_in/ft_export.c\
 ./src/parser/make_arr_to_list.c ./src/parser/set_process_list.c  ./src/parser/process_list_utils.c \
 ./src/parser/process_utils.c \
