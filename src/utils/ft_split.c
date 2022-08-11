@@ -20,14 +20,14 @@ static void	make_result_from_line(t_split *split, char *line)
 
 char	**command_split(char *str)
 {
-	t_split	*split;
+	t_split		*split;
 
 	if (!str)
 		return (NULL);
 	split = safe_malloc(sizeof(t_split));
 	split->result = NULL;
 	split->split_size = count_split_size(str);
-	split->result = (char **)safe_malloc(sizeof(char *) * (split->split_size + 1));
+	split->result = safe_malloc(sizeof(char *) * (split->split_size) + 1);
 	split->result[split->split_size - 1] = NULL;
 	make_result_from_line(split, str);
 	return (split->result);
