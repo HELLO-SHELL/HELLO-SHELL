@@ -2,17 +2,17 @@
 
 static void	make_result_from_line(t_split *split, char *line)
 {
+	int		i;
 	int		idx;
 
-	split->i = 0;
-	split->j = 0;
+	i = 0;
 	idx = 0;
 	split->str = NULL;
 	while (line[split->i] != '\0' && idx < split->split_size)
 	{
-		split_line(split, line);
-		split->result[idx] = split->str;
-		split->str = NULL;
+		split_line(line, &str, &i);
+		result[idx] = str;
+		str = NULL;
 		idx++;
 		split->i++;
 	}
