@@ -31,7 +31,7 @@ void	execute_single_cmdline(t_token *head)
 void	executor(t_process *ps_list)
 {
 	heredoc_to_temp_files(ps_list);
-	if (is_single_cmdline(ps_list))
+	if (ps_list->size == 1)
 		execute_single_cmdline(ps_list->head);
 	else
 		execute_pipeline(ps_list);

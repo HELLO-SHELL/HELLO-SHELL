@@ -1,17 +1,36 @@
 #include "../../include/minishell.h"
 
-int	is_built_in(t_token *head)
+char	*get_accessable_command(t_token *cmd_list, char **paths)
 {
-//	built_in 함수인지 검사
+	t_token	*curr;
+	char	*tmp;
+	char	*command;
+
+	while (curr->type == TK_COMMAND)
+		curr = curr->next;
+
+	if (!access(command, 0))
+		return (command);
+	while (*paths)
+	{
+		tmp = ft_strjoin(*paths, "/");
+		command = ft_strjoin(tmp, command);
+		free(tmp);
+		tmp = 0;
+		if (!access(command, 0))
+			return (command);
+		free(command);
+		command = 0;
+		paths++;
+	}
+	ft_error_exit(ft_strjoin(": command not found", command));
 	return (0);
 }
 
-int	is_single_cmdline();
-int	is_accessable_command()
+int	is_accessable_command(t_token *cmd_list, char **paths)
 {
-	// 실행 가능한 COMMAND 인지 검사
-	// 자체적으로 실행 가능한지 
-	// 환경변수와 결합해서 실행 가능한지
-	// 검사
-	return (0);
+	if (get_accessable_command(cmd_list, paths))
+		return (TRUE);
+	else
+		return (FALSE);
 }
