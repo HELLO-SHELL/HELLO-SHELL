@@ -1,40 +1,34 @@
 #include "../../include/minishell.h"
 
-static void	make_result_from_line(char **result, char *line, int size)
+static void	make_result_from_line(t_split *split, char *line)
 {
-	int		i;
-	int		j;
 	int		idx;
-	char	*str;
 
-	i = 0;
-	j = 0;
+	split->i = 0;
+	split->j = 0;
 	idx = 0;
-	str = NULL;
-	while (line[i] != '\0' && idx < size)
+	split->str = NULL;
+	while (line[split->i] != '\0' && idx < split->split_size)
 	{
-		split_line(line, &str, &i, &j);
-		result[idx] = str;
-		str = NULL;
+		split_line(split, line);
+		split->result[idx] = split->str;
+		split->str = NULL;
 		idx++;
-		i++;
+		split->i++;
 	}
 }
 
 char	**command_split(char *str)
 {
-	int		split_size;
-	char	**result;
+	t_split	*split;
 
-	// split free
 	if (!str)
 		return (NULL);
-	result = NULL;
-	split_size = count_split_size(str);
-	result = (char **)malloc(sizeof(char *) * split_size + 1);
-	if (result == NULL)
-		exit (EXIT_FAILURE);
-	result[split_size] = NULL;
-	make_result_from_line(result, str, split_size);
-	return (result);
+	split = safe_malloc(sizeof(t_split));
+	split->result = NULL;
+	split->split_size = count_split_size(str);
+	split->result = (char **)safe_malloc(sizeof(char *) * (split->split_size + 1));
+	split->result[split->split_size - 1] = NULL;
+	make_result_from_line(split, str);
+	return (split->result);
 }
