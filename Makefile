@@ -32,7 +32,7 @@ all : $(NAME)
 	./minishell
 
 debug :
-	$(CC) src/main.c src/*/*.c -g3 lib/*/*.c -lreadline -o minishell
+	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c -lreadline -o minishell
 
 clean :
 	$(RM) $(OBJ)
