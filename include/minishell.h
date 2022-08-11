@@ -33,6 +33,13 @@ enum e_token_type
 	TK_CMD
 };
 
+enum file_type
+{
+	READ,
+	WRITE,
+	APPEND
+};
+
 typedef struct s_token
 {
 	int				type;
