@@ -11,7 +11,7 @@ READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/rea
 RM = rm -f
 SRC = ./src/main.c ./src/welcome/print_wallpaper.c \
 ./src/utils/ft_split_util.c ./src/utils/ft_split.c ./src/utils/ft_error.c \
-./src/utils/env_utils/env.c ./src/utils/init.c ./src/utils/chore_utils/is_same_string.c ./src/utils/get_token_head.c \
+./src/utils/env_utils/env.c ./src/init.c ./src/utils/chore_utils/is_same_string.c ./src/utils/get_token_head.c \
 ./src/utils/signal.c ./src/utils/chore_utils/safe_malloc.c ./src/utils/env_utils/get_env_by_key.c\
 ./src/utils/env_utils/env_key_valid_chechker.c\
 ./src/built_in/ft_exit.c ./src/built_in/ft_env.c ./src/built_in/ft_export.c\
