@@ -24,6 +24,8 @@ int	env_key_valid_checker(char *str)
 {
 	char *temp;
 
+	if (!str)
+		return (FALSE);
 	temp = str;
 	if (*temp == '?' && possible_next_question(temp + 1))
 		return (ENV_KEY_QUESTION);
