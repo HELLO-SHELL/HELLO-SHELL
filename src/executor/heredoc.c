@@ -21,22 +21,16 @@ int	openfile(char *filename, int mode)
 	return (fd);
 }
 
-char 	*get_temp_file_name(int idx)
+void	make_temp_file(int file_index, char *delim)
 {
+	char	*line;
+	int		fd;
 	char		filename[6];
 	const char	*idx_char = "0123456789abcdef";
 
 	ft_strlcpy(filename, ".temp.", 6);
-	filename[5] = idx_char[idx];
-	return (filename);
-}
-
-void	make_temp_file(int file_index, char *delim)
-{
-	char		*line;
-	int			fd;
-
-	fd = openfile(get_temp_file_name(file_index), APPEND);
+	filename[5] = idx_char[file_index];
+	fd = openfile(filename, APPEND);
 	line = get_next_line(STDIN_FILENO);
 	while (is_same_string(line, delim) == FALSE)
 	{
@@ -51,11 +45,17 @@ void	make_temp_file(int file_index, char *delim)
 
 void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx)
 {
+	char		filename[6];
+	const char	*idx_char = "0123456789abcdef";
+
+	ft_strlcpy(filename, ".temp.", 6);
+	filename[5] = idx_char[idx];
 	free(cmd_curr->value);
 	free(cmd_curr->next->value);
 	cmd_curr->value = ft_strdup("<");
 	cmd_curr->type = TK_RDINPUT;
-	cmd_curr->next->value = get_temp_file_name(idx);
+	cmd_curr->next->value = filename;
+	//여기서 에러날것 같아요 근데 그냥 덮고 넘어감
 	cmd_curr->next->type = TK_FILE;
 }
 
