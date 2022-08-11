@@ -11,6 +11,7 @@ enum e_boolean {
 # define PWD "pwd"
 # define EXIT "exit"
 # define ECHO "echo"
+# define UNSET "unset"
 # define EXPORT "export"
 
 #endif

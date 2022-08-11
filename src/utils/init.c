@@ -25,6 +25,8 @@ void    init_minishell(t_node *minishell)
 				ft_env(minishell->env_list);
 			else if (is_same_string(curr->value, EXPORT))
 				ft_export(minishell);
+			else if (is_same_string(curr->value, UNSET))
+				ft_unset(minishell);
 			else
 			{
 				write(2,"HELLO-SHELL: ", 13);
