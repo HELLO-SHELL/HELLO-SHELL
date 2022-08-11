@@ -16,28 +16,8 @@ void    init_minishell(t_node *minishell)
 		input = readline("HELLO-SHELL-0.0$ ");
 		if (!input)
 			exit(EXIT_SUCCESS);
-		if (!ft_strchr(input, '$'))
-		{
-			input_buffer = safe_malloc(ft_strlen(input));
-			ft_strlcpy(input_buffer, input, ft_strlen(input) + 1);
-		}
-		else
-		{
-			input_buffer = safe_malloc(ft_strlen(input) + 1024);
-			ft_strlcpy(input_buffer, input, ft_strchr(input, '$') - input);
-		}
-		char *head = input_buffer;
-		while (*input_buffer)
-		{
-			if (*input_buffer == '$')
-			{
-				input_buffer++;	
-				*input_buffer = 'R';
-			}
-			input_buffer++;
-		}
-		printf("%s debug: %s %s\n", MAG, head, COLOR_RESET);
-		str = command_split(input);
+		input_buffer = replace_whole_input_dollar(input, minishell);
+		str = command_split(input_buffer);
 		minishell->token_list = set_token_list(str);
 		curr = minishell->token_list;
 		if (input)
