@@ -27,12 +27,12 @@ int	env_key_valid_checker(char *str)
 	temp = str;
 	if (*temp == '?' && possible_next_question(temp + 1))
 		return (ENV_KEY_QUESTION);
-	if (!(ft_isalpha(*temp) || *temp != '_'))
+	if (!(ft_isalpha(*temp) || *temp == '_'))
 		return (FALSE);
 	temp++;
 	while (*temp)
 	{
-		if (!ft_isalnum(*temp) || *temp != '_')
+		if (!(ft_isalnum(*temp) || *temp == '_'))
 			return (FALSE);
 		temp++;
 	}
