@@ -10,30 +10,6 @@
 // 	return ;
 // }
 
-// void    lst_delete_one(t_list *env_list, t_env *unsetting)
-// {
-//     t_list  *curr;
-
-//     curr = env_list;
-//     while (curr)
-//     {
-// 		if (((t_env *)curr->content) == unsetting)
-//         {
-//             if (curr == env_list)
-//                 env_list = curr->next;
-//             else
-//                 unsetting = curr->next;
-
-//             free (unsetting->key);
-//             unsetting->key = NULL;
-//             free (unsetting->value);
-//             unsetting->value = NULL;
-//             return ;
-//         }
-//         curr = curr->next;
-//     }
-// }
-
 void    ft_unset(t_node *minishell)
 {
     t_list  *env_list;
@@ -44,21 +20,21 @@ void    ft_unset(t_node *minishell)
 
     token = minishell->token_list;
     env_list = minishell->env_list;
-    curr = env_list;
-    if (token->next == NULL) // 유효하지 않은 것 error, 유효하지만 없는 것 return
+    // 유효하지 않은 것 error, 유효하지만 없는 것 return
+    if (token->next == NULL)
         return ;
     token = token->next;
     while (token)
     {
+        curr = env_list;
         while (curr)
         {
             temp = curr;
             if (is_same_string(((t_env *)temp->content)->key, token->value))
             {
-                // 첫번째 노드일 때
                 if (token->value == ((t_env *)temp->content)->key)
                     env_list = temp->next;
-                else // 첫번째 노드가 아닐 때
+                else
                     env_prev->next = temp->next;
                 free (((t_env *)temp->content)->key);
                 ((t_env *)temp->content)->key = NULL;
