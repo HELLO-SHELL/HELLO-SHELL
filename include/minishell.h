@@ -26,8 +26,14 @@ enum e_token_type
 	TK_FILE,
 	TK_HEREDOC,
 	TK_DELIM,
-	TK_WORD,
-	TK_CMD
+	TK_WORD
+};
+
+enum file_type
+{
+	READ,
+	WRITE,
+	APPEND
 };
 
 typedef struct s_token
@@ -40,26 +46,32 @@ typedef struct s_token
 
 typedef struct s_process
 {
-	char	*argv;
-	int		argc;
-	t_token	*head;
+	int					argc;
+	char				**argv;
+	char				**envp;
+	t_token				*head;
+	struct s_process	*next;
 }	t_process;
-
-typedef struct s_pslist
-{
-	t_process		*value;
-	struct s_pslist	*prev;
-	struct s_pslist	*next;
-}	t_pslist;
 
 typedef struct s_env {
 	char	*key;
 	char	*value;
 }	t_env;
 
+typedef struct s_split {
+	int		split_size;
+	char	**result;
+	char	*str;
+	int		flag;
+	int		rtn;
+	int		i;
+	int		j;
+}	t_split;
+
 typedef struct s_node {
-	t_list	*env_list;
-	t_token	*token_list;
+	t_list		*env_list;
+	t_process	*ps_list;
+	t_token		*token_list;
 }	t_node;
 
 void	print_wallpaper(void);
@@ -68,7 +80,7 @@ void	init_minishell(t_node *minishell);
 char	**command_split(char *str);
 int		check_white_space(char c);
 int		count_split_size(char *str);
-int		split_line(char *line, char **str, int *i, int *j);
+int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);
 t_token	*set_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
@@ -92,13 +104,14 @@ t_env *get_env_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 char	*replace_whole_input_dollar(char *input, t_node *minishell);
+int		handle_quote(t_split *split, char *line);
 
 /* parser */
-void	set_command_list(t_pslist **ps_list, t_token *tk_lst);
+void	set_process_list(t_process **ps_list, t_token *tk_lst);
 int		count_pipe(t_token *tk_list);
-void	init_pslist(t_pslist **lst, int cnt);
-void	pslist_new(t_pslist **lst);
-void	pslist_addback(t_pslist **lst);
+void	init_pslist(t_process **lst, int cnt);
+void	pslist_new(t_process **lst);
+void	pslist_addback(t_process **lst);
 void	init_process_struct(t_process **cmd_list);
 void	cut_tail_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
@@ -106,6 +119,6 @@ void	tk_listdelone(t_token **tk_list);
 /* temp tester!
 delete this before submit */
 void token_list_tester(t_token *token_list);
-void command_list_tester(t_pslist *ps_list);
+void command_list_tester(t_process *ps_list);
 
 #endif

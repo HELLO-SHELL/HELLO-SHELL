@@ -33,6 +33,7 @@
 *.dylib
 
 # Executables
+minishell
 *.exe
 *.out
 *.app
@@ -42,7 +43,7 @@
 minishell
 
 # Debug files
-*.dSYM/
+*.dSYM
 *.su
 *.idb
 *.pdb
@@ -127,7 +128,6 @@ tags
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json

@@ -6,13 +6,14 @@ void    init_minishell(t_node *minishell)
 	char		*input;
 	char		*input_buffer;
 	char		**str;
-
-	t_pslist	*cmd_lst;
+	int			i = 0;
+	t_process	*ps_list;
 
 	while(1)
 	{
 		signal(SIGINT, get_new_prompt);
 		signal(SIGQUIT, SIG_IGN);
+		ps_list = NULL;
 		input = readline("HELLO-SHELL-0.0$ ");
 		if (!input)
 			exit(EXIT_SUCCESS);
@@ -37,7 +38,8 @@ void    init_minishell(t_node *minishell)
 			break ;
 		// system("leaks minishell");
 		add_history(input);
-		set_command_list(&cmd_lst, minishell->token_list);
+		set_process_list(&ps_list, minishell->token_list);
+		// heredoc_to_temp_files(ps_list);
 		free(input);
 	}
 }

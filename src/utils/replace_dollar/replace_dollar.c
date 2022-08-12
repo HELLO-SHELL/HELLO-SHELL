@@ -53,11 +53,11 @@ char	*replace_whole_input_dollar(char *input, t_node *minishell)
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
+	ft_memccpy(input_buffer, input, '$', ft_strlen(input));
 	input_ptr = input;
 	while (TRUE)
 	{
 		input_ptr = ft_strchr(input_ptr, '$');
-		ft_memccpy(input_buffer, input_ptr, '$', ft_strlen(input_ptr));
 		if (input_ptr)
 			input_ptr += 1;
 		if (env_key_valid_checker(input_ptr))
@@ -65,5 +65,7 @@ char	*replace_whole_input_dollar(char *input, t_node *minishell)
 		if (!input_ptr)
 			break ;
 	}
+	free (input);
+	input = NULL;
 	return (input_buffer);
 }

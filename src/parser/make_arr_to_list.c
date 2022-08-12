@@ -25,9 +25,7 @@ static void	insert_first_into_list(t_token **lst, char *str)
 {
 	t_token *temp;
 
-	temp = malloc(sizeof(t_token));
-	if (!temp)
-		exit(EXIT_FAILURE);
+	temp = safe_malloc(sizeof(t_token));
 	temp->type = 0;
 	temp->value = str;
 	temp->next = NULL;
@@ -40,9 +38,7 @@ static void	insert_str_into_list_back(t_token **lst, char *str)
 {
 	t_token *temp;
 
-	temp = malloc(sizeof(t_token));
-	if (!temp)
-		exit(EXIT_FAILURE);
+	temp = safe_malloc(sizeof(t_token));
 	temp->type = 0;
 	temp->value = str;
 	temp->next = NULL;
