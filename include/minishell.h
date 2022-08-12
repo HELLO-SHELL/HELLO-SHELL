@@ -33,12 +33,14 @@ typedef struct s_process
 	struct s_process	*next;
 }	t_process;
 
-typedef struct s_env {
+typedef struct s_env
+{
 	char	*key;
 	char	*value;
 }	t_env;
 
-typedef struct s_split {
+typedef struct s_split
+{
 	int		split_size;
 	char	**result;
 	char	*str;
@@ -48,10 +50,17 @@ typedef struct s_split {
 	int		j;
 }	t_split;
 
-typedef struct s_node {
+typedef struct	s_pipes
+{
+	int	prev_pipe[2];
+	int	next_pipe[2];
+}	t_pipes;
+
+typedef struct s_node
+{
 	t_list		*env_list;
 	t_process	*ps_list;
-	t_token		*token_list;
+	t_pipes		pipes;
 }	t_node;
 
 void	print_wallpaper(void);
