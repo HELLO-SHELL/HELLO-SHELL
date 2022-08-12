@@ -16,14 +16,14 @@ static void insert_process_head(t_process **ps_list, t_token *tk_list)
 			token_curr = token_curr->next;
 		if (token_curr && *(token_curr->value) == '|')
 		{
-			pslist_curr->head = token_head;
-			cut_tail_by_pipe(&(pslist_curr->head));
+			pslist_curr->cmd_line = token_head;
+			cut_tail_by_pipe(&(pslist_curr->cmd_line));
 			for_delete = token_curr;
 			token_curr = token_curr->next;
 			tk_listdelone(&for_delete);
 		}
 		else
-			pslist_curr->head = token_head;
+			pslist_curr->cmd_line = token_head;
 		pslist_curr = pslist_curr->next;
 	}
 }

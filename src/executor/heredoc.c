@@ -75,7 +75,7 @@ void	heredoc_to_temp_files(t_process *ps_list)
 		return ;
 	while (ps_curr == NULL)
 	{
-		cmd_curr = ps_list->head;
+		cmd_curr = ps_list->cmd_line;
 		while (cmd_curr)
 		{
 			if (cmd_curr->type == TK_HEREDOC)

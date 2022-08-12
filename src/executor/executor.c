@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 
-void	execute_command(t_token *head);
-void	execute_built_in(t_token *head);
+void	execute_command(t_token *cmd_line);
+void	execute_built_in(t_token *cmd_line);
 void	execute_pipeline(t_process *ps_list)
 {
 	//pipe 만들고 관리 (jimin_pipex 참조);
@@ -19,20 +19,20 @@ void	execute_pipeline(t_process *ps_list)
 	//		에러 출력
 }
 
-void	execute_single_cmdline(t_token *head)
+void	execute_single_cmdline(t_token *cmd_line)
 {
-	apply_redirections(head);
-	if (is_built_in(head))
-		execute_built_in(head);
+	apply_redirections(cmd_line);
+	if (is_built_in(cmd_line))
+		execute_built_in(cmd_line);
 	else
-		execute_command(head);
+		execute_command(cmd_line);
 }
 
 void	executor(t_process *ps_list)
 {
 	heredoc_to_temp_files(ps_list);
 	if (ps_list->size == 1)
-		execute_single_cmdline(ps_list->head);
+		execute_single_cmdline(ps_list->cmd_line);
 	else
 		execute_pipeline(ps_list);
 }
