@@ -50,8 +50,8 @@ typedef struct s_token
 typedef struct s_process
 {
 	int					argc;
-	char				*argv;
-	char				*envp;
+	char				**argv;
+	char				**envp;
 	t_token				*head;
 	struct s_process	*next;
 }	t_process;
