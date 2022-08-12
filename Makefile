@@ -9,13 +9,14 @@ CC = cc
 READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
 RM = rm -f
 
-MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c
+MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
 MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 
 UTILS_DIR = src/utils/
-UTILS_SRCS = ft_split_util.c ft_split.c ft_split_quote_util.c ft_error.c \
-      env.c init.c signal.c is_same_string.c get_token_head.c \
-      safe_malloc.c get_env_by_key.c
+UTILS_SRCS = env_utils/env.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
+	  replace_dollar/replace_dollar.c chore_utils/ft_memccpy_under.c \
+	  chore_utils/is_same_string.c chore_utils/safe_malloc.c \
+	  signal.c get_token_head.c ft_error.c
 UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 UTILS_OBJS = $(UTILS_PATH:.c=.o)
 
@@ -25,7 +26,8 @@ BUILT_IN_PATH = $(addprefix $(BUILT_IN_DIR), $(BUILT_IN_SRCS))
 BUILT_IN_OBJS = $(BUILT_IN_PATH:.c=.o)
 
 PARSER_DIR = src/parser/
-PARSER_SRCS = make_arr_to_list.c set_process_list.c  process_list_utils.c process_utils.c
+PARSER_SRCS = make_arr_to_list.c set_process_list.c  process_list_utils.c process_utils.c \
+	split/ft_split_util.c split/ft_split.c split/ft_split_quote_util.c
 PARSER_PATH = $(addprefix $(PARSER_DIR), $(PARSER_SRCS))
 PARSER_OBJS = $(PARSER_PATH:.c=.o)
 

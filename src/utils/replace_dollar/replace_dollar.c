@@ -53,7 +53,7 @@ char	*replace_whole_input_dollar(char *input, t_node *minishell)
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
-	ft_memccpy(input_buffer, input, '$', ft_strlen(input));
+	ft_memccpy_under(input_buffer, input, '$', ft_strlen(input));
 	input_ptr = input;
 	while (TRUE)
 	{

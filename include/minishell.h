@@ -81,7 +81,7 @@ void	ft_error_exit(char *str);
 void	get_new_prompt(int sig);
 t_env *get_env_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
+void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 char	*replace_whole_input_dollar(char *input, t_node *minishell);
 int		handle_quote(t_split *split, char *line);
 
