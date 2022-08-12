@@ -10,8 +10,6 @@ int	export_check_error(t_token *token)
 	if (!(ft_isalpha(curr->value[i]) || curr->value[i] == '_'))
 		return (1);
 	i++;
-	// if (export_check_argu(curr))
-// 	return (1);
 	while (curr->value[i] != '=' && curr->value[i] != '\0')
 	{
 		if (ft_isalnum(curr->value[i]) || curr->value[i] == '_')

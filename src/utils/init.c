@@ -17,7 +17,7 @@ void    init_minishell(t_node *minishell)
 		if (!input)
 			exit(EXIT_SUCCESS);
 		str = command_split(input);
-  	minishell->token_list = NULL;
+  		minishell->token_list = NULL;
 		minishell->token_list = set_token_list(str);
 		curr = minishell->token_list;
 		if (input)
@@ -37,9 +37,22 @@ void    init_minishell(t_node *minishell)
 		}
 		else
 			break ;
-		// system("leaks minishell");
 		add_history(input);
-		set_process_list(&ps_list, minishell->token_list);
+		// set_process_list(&ps_list, minishell->token_list);
 		free(input);
+		i=-1;
+		while (str[++i])
+			free(str[i]);
+		free(str);
+		str = NULL;
+		t_token *temp;
+		while (curr)
+		{
+			// free(curr->value);
+			temp = curr;
+			free(temp);
+			curr = curr->next;
+		}
+		system("leaks minishell");
 	}
 }
