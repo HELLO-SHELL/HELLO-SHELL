@@ -28,7 +28,9 @@ typedef struct s_process
 	int					argc;
 	char				**argv;
 	char				**envp;
+	char				**paths;
 	int					size;
+	pid_t				pid;
 	t_token				*cmd_line;
 	struct s_process	*next;
 }	t_process;
@@ -108,10 +110,11 @@ void	tk_listdelone(t_token **tk_list);
 
 /* executor */
 /* 		executor	*/
-void	executor(t_process *ps_list);
+void	execute_pipeline(t_node *minishell);
 void	execute_single_cmdline(t_token *cmd_line);
 void	execute_pipeline(t_process *ps_list);
-void	execute_command(t_token *cmd_line);
+void	execute_process(t_process *process);
+void	execute_command(t_process *process);
 void	execute_built_in(t_token *cmd_line);
 /* 		heredoc 	*/
 void	heredoc_to_temp_files(t_process *ps_list);
