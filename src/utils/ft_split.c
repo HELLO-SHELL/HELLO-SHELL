@@ -28,7 +28,7 @@ char	**command_split(char *str)
 	split->result = NULL;
 	split->split_size = count_split_size(str);
 	split->result = safe_malloc(sizeof(char *) * (split->split_size) + 1);
-	split->result[split->split_size - 1] = NULL;
+	split->result[split->split_size] = NULL;
 	make_result_from_line(split, str);
 	return (split->result);
 }

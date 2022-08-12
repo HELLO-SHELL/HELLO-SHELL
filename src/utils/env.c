@@ -23,6 +23,8 @@ void    env_linked_list(t_node *minishell, char **env)
     while (env[i])
     {
         env_node = safe_malloc(sizeof(t_env));
+        env_node->key = NULL;
+        env_node->value = NULL;
         split_env(env_node, env, i);
         ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
         i++;

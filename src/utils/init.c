@@ -17,6 +17,7 @@ void    init_minishell(t_node *minishell)
 		if (!input)
 			exit(EXIT_SUCCESS);
 		str = command_split(input);
+  	minishell->token_list = NULL;
 		minishell->token_list = set_token_list(str);
 		curr = minishell->token_list;
 		if (input)
