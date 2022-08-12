@@ -15,27 +15,6 @@
 # include "get_next_line.h"
 # include "color.h"
 
-enum e_token_type
-{
-	TK_EOF,
-	TK_RDINPUT,
-	TK_RDOUTPUT,
-	TK_APPEND,
-	TK_PIPE,
-	TK_COMMAND,
-	TK_FILE,
-	TK_HEREDOC,
-	TK_DELIM,
-	TK_WORD
-};
-
-enum file_type
-{
-	READ,
-	WRITE,
-	APPEND
-};
-
 typedef struct s_token
 {
 	int				type;
@@ -49,7 +28,7 @@ typedef struct s_process
 	int					argc;
 	char				**argv;
 	char				**envp;
-	t_token				*head;
+	t_token				*cmd_line;
 	struct s_process	*next;
 }	t_process;
 
@@ -102,7 +81,7 @@ void	ft_error_exit(char *str);
 void	get_new_prompt(int sig);
 t_env *get_env_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
-void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
+void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 char	*replace_whole_input_dollar(char *input, t_node *minishell);
 int		handle_quote(t_split *split, char *line);
 
@@ -115,10 +94,5 @@ void	pslist_addback(t_process **lst);
 void	init_process_struct(t_process **cmd_list);
 void	cut_tail_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
-
-/* temp tester!
-delete this before submit */
-//void token_list_tester(t_token *token_list);
-//void command_list_tester(t_process *ps_list);
 
 #endif

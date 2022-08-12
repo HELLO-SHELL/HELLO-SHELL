@@ -1,6 +1,27 @@
 #ifndef CONSTANT_H
 # define CONSTANT_H
 
+enum e_token_type
+{
+	TK_EOF,
+	TK_RDINPUT,
+	TK_RDOUTPUT,
+	TK_APPEND,
+	TK_PIPE,
+	TK_COMMAND,
+	TK_FILE,
+	TK_HEREDOC,
+	TK_DELIM,
+	TK_WORD
+};
+
+enum file_type
+{
+	READ,
+	WRITE,
+	APPEND
+};
+
 enum e_boolean {
 	FAILURE = 0,
 	SUCCESS = 1,
