@@ -2,11 +2,11 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <errno.h>
 # include <string.h>
 # include <fcntl.h>
@@ -118,7 +118,7 @@ void	tk_listdelone(t_token **tk_list);
 
 /* temp tester!
 delete this before submit */
-void token_list_tester(t_token *token_list);
-void command_list_tester(t_process *ps_list);
+//void token_list_tester(t_token *token_list);
+//void command_list_tester(t_process *ps_list);
 
 #endif
