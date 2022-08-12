@@ -15,9 +15,6 @@
 # include "get_next_line.h"
 # include "color.h"
 
-# define TRUE 1
-# define FALSE 0
-
 enum e_token_type
 {
 	TK_EOF,
@@ -103,8 +100,11 @@ void	*safe_malloc(size_t size);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 void	get_new_prompt(int sig);
+t_env *get_env_by_key(t_list *env_list, char *key);
+int		env_key_valid_checker(char *str);
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
+char	*replace_whole_input_dollar(char *input, t_node *minishell);
 int		handle_quote(t_split *split, char *line);
-t_env	*get_env_by_key(t_list *env_list, char *key);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);

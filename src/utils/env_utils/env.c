@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void    split_env(t_env *env_node, char **env, int i)
 {

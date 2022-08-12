@@ -1,9 +1,10 @@
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 void    init_minishell(t_node *minishell)
 {
 	t_token		*curr;
 	char		*input;
+	char		*input_buffer;
 	char		**str;
 	int			i = 0;
 	t_process	*ps_list;
@@ -16,7 +17,8 @@ void    init_minishell(t_node *minishell)
 		input = readline("HELLO-SHELL-0.0$ ");
 		if (!input)
 			exit(EXIT_SUCCESS);
-		str = command_split(input);
+		input_buffer = replace_whole_input_dollar(input, minishell);
+		str = command_split(input_buffer);
 		minishell->token_list = set_token_list(str);
 		curr = minishell->token_list;
 		if (input)
