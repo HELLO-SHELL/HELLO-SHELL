@@ -37,6 +37,7 @@ void    init_minishell(t_node *minishell)
 		// system("leaks minishell");
 		add_history(input);
 		set_process_list(&ps_list, minishell->token_list);
+		// heredoc_to_temp_files(ps_list);
 		free(input);
 	}
 }

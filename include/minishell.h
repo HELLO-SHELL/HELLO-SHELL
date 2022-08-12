@@ -29,8 +29,14 @@ enum e_token_type
 	TK_FILE,
 	TK_HEREDOC,
 	TK_DELIM,
-	TK_WORD,
-	TK_CMD
+	TK_WORD
+};
+
+enum file_type
+{
+	READ,
+	WRITE,
+	APPEND
 };
 
 typedef struct s_token
@@ -43,8 +49,9 @@ typedef struct s_token
 
 typedef struct s_process
 {
-	char				*argv;
 	int					argc;
+	char				**argv;
+	char				**envp;
 	t_token				*head;
 	struct s_process	*next;
 }	t_process;
@@ -65,8 +72,9 @@ typedef struct s_split {
 }	t_split;
 
 typedef struct s_node {
-	t_list	*env_list;
-	t_token	*token_list;
+	t_list		*env_list;
+	t_process	*ps_list;
+	t_token		*token_list;
 }	t_node;
 
 void	print_wallpaper(void);
