@@ -28,6 +28,7 @@ typedef struct s_process
 	int					argc;
 	char				**argv;
 	char				**envp;
+	int					size;
 	t_token				*cmd_line;
 	struct s_process	*next;
 }	t_process;
@@ -94,5 +95,30 @@ void	pslist_addback(t_process **lst);
 void	init_process_struct(t_process **cmd_list);
 void	cut_tail_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
+
+
+/* executor */
+/* 		executor	*/
+void	executor(t_process *ps_list);
+void	execute_single_cmdline(t_token *cmd_line);
+void	execute_pipeline(t_process *ps_list);
+void	execute_command(t_token *cmd_line);
+void	execute_built_in(t_token *cmd_line);
+/* 		heredoc 	*/
+void	heredoc_to_temp_files(t_process *ps_list);
+void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx);
+void	make_temp_file(int file_index, char *delim);
+int	openfile(char *filename, int mode);
+/* 		is_func 	*/
+int	is_accessable_command(t_token *cmd_list, char **paths);
+char	*get_accessable_command(t_token *cmd_list, char **paths);
+/* 		pipe	 	*/
+void	close_pipes(t_pipes *p);
+void	close_pipe(int *fd);
+void	init_pipe(t_pipes *p);
+void	swap_pipe(t_pipes *p);
+/* 		redirect 	*/
+void	apply_redirection(char *filename, int mode);
+void	apply_redirections(t_token *cmd_line);
 
 #endif
