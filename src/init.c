@@ -1,9 +1,10 @@
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 void    init_minishell(t_node *minishell)
 {
 	t_token		*curr;
 	char		*input;
+	char		*input_buffer;
 	char		**str;
 	int			i = 0;
 	t_process	*ps_list;
@@ -16,10 +17,10 @@ void    init_minishell(t_node *minishell)
 		input = readline("HELLO-SHELL-0.0$ ");
 		if (!input)
 			exit(EXIT_SUCCESS);
-		str = command_split(input);
-  		minishell->token_list = NULL;
-		minishell->token_list = set_token_list(str);
-		curr = minishell->token_list;
+		input_buffer = replace_whole_input_dollar(input, minishell);
+		str = command_split(input_buffer);
+		minishell->ps_list->cmd_line = set_token_list(str);
+		curr = minishell->ps_list->cmd_line;
 		if (input)
 		{
 			if (is_same_string(input, ENV))
@@ -38,7 +39,8 @@ void    init_minishell(t_node *minishell)
 		else
 			break ;
 		add_history(input);
-		// set_process_list(&ps_list, minishell->token_list);
+		set_process_list(&ps_list, minishell->ps_list->cmd_line);
+		// heredoc_to_temp_files(ps_list);
 		free(input);
 		i=-1;
 		while (str[++i])

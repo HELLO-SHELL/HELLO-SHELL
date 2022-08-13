@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static void	make_result_from_line(t_split *split, char *line)
 {
