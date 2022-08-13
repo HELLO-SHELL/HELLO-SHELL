@@ -33,6 +33,9 @@ void    init_minishell(t_minishell *minishell)
 			free(str[i]);
 		free(str);
 		str = NULL;
+		t_token *temp;
+		while (curr)
+		{
 		t_token	*temp;
 		while (curr)
 		{
