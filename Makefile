@@ -7,7 +7,7 @@ CC = cc
 # 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
 
 READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
-RM = rm -f
+RM = rm -rf
 
 MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
 MAIN_OBJS = $(MAIN_SRCS:.c=.o)
@@ -40,7 +40,7 @@ OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJ
 $(NAME) : $(OBJS)
 	make bonus -j -C $(LIB_DIR)/libft
 	make -j -C $(LIB_DIR)/get_next_line
-	$(CC) $(OBJS) $(READLINE) -fsanitize=address $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
+	$(CC) $(OBJS) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
 #  -fsanitize=address
@@ -48,13 +48,14 @@ all : $(NAME)
 	./minishell
 
 debug :
-	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c -lreadline -o minishell
+	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c $(READLINE) -o minishell
 
 clean :
 	$(RM) $(OBJS)
 
 fclean : clean
 	$(RM) $(NAME)
+	$(RM) minishell.dSYM
 
 re :
 	make fclean
