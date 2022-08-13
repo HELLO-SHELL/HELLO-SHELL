@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void  ft_cd(t_node *minishell)
+void  ft_cd(t_minishell *minishell)
 {
     /*
     1. 메시지를 전달하 듯한 변수명 사용해볼까?

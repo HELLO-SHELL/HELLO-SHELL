@@ -47,7 +47,7 @@ int unset_have_no_parm(t_token *token)
     return (0);
 }
 
-void    ft_unset(t_node *minishell)
+void    ft_unset(t_minishell *minishell)
 {
     t_list  *env_list;
     t_token *token;

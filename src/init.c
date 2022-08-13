@@ -14,7 +14,7 @@ void    init_minishell(t_minishell *minishell)
 		signal(SIGINT, get_new_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		ps_list = NULL;
-		input = readline("HELLO-SHELL-0.0$ ");
+		input = readline("HELLO-SHELL-0.0$ DEBUG ");
 		if (!input)
 			exit(EXIT_SUCCESS);
 		input_buffer = replace_whole_input_dollar(input, minishell);
@@ -22,12 +22,26 @@ void    init_minishell(t_minishell *minishell)
 		minishell->ps_list.cmd_line = set_token_list(str);
 		curr = minishell->ps_list.cmd_line;
 		add_history(input);
-		set_process_list(&ps_list, minishell->ps_list.cmd_line);
 		if (input_buffer)
 			executor(minishell);
 		else
 			break ;
 		// system("leaks minishell");
 		free(input);
+		free(input_buffer);
+		i = -1;
+		while (str[++i])
+			free(str[i]);
+		free(str);
+		str = NULL;
+		t_token	*temp;
+		while (curr)
+		{
+			temp = curr;
+			free(temp);
+			curr = curr->next;
+		}
+		// set_process_list(&ps_list, minishell->ps_list.cmd_line);
+		system("leaks minishell");
 	}
 }
