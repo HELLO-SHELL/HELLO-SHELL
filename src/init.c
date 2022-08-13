@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void    init_minishell(t_node *minishell)
+void    init_minishell(t_minishell *minishell)
 {
 	t_token		*curr;
 	char		*input;

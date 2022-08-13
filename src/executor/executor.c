@@ -39,7 +39,7 @@ void	execute_process(t_process *ps_info, t_pipes *pipes)
 		execute_command(ps_info);
 }
 
-void	execute_pipeline(t_node *minishell)
+void	execute_pipeline(t_minishell *minishell)
 {
 	int			idx;
 	t_process	*ps_curr;
@@ -75,7 +75,7 @@ void	execute_single_cmdline(t_process *process)
 		execute_command(process);
 }
 
-void	executor(t_node *minishell)
+void	executor(t_minishell *minishell)
 {
 	t_process	*ps_list;
 

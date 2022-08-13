@@ -18,7 +18,7 @@ static int	get_env_len(char *str)
 	return (len);
 }
 
-static char	*replace_dollar(char *input_buffer, char *temp, t_node *minishell)
+static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishell)
 {
 	char	*replaced_value;
 	char	*new_input_buffer;
@@ -45,7 +45,7 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_node *minishell)
 	return (new_input_buffer);
 }
 
-char	*replace_whole_input_dollar(char *input, t_node *minishell)
+char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 {
 	char	*input_buffer;
 	char	*input_ptr;

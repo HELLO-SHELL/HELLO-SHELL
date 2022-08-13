@@ -2,10 +2,10 @@
 
 int main(int ac, char **av, char **env)
 {
-	t_node	*minishell;
+	t_minishell	*minishell;
 
 	print_wallpaper(); 
-	minishell = (t_node *)malloc(sizeof(t_node));
+	minishell = (t_minishell *)malloc(sizeof(t_minishell));
 	if (minishell == 0)
 			return (0);
 	env_linked_list(minishell, env);
