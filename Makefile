@@ -31,7 +31,11 @@ PARSER_SRCS = make_arr_to_list.c set_process_list.c  process_list_utils.c proces
 PARSER_PATH = $(addprefix $(PARSER_DIR), $(PARSER_SRCS))
 PARSER_OBJS = $(PARSER_PATH:.c=.o)
 
-OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJS) 
+EXECUTOR_DIR = src/executor/
+EXECUTOR_SRCS = executor.c heredoc.c is_func.c pipe.c redirect.c safe_func.c
+EXECUTOR_PATH = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_SRCS))
+EXECUTOR_OBJS = $(EXECUTOR_PATH:.c=.o)
+OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJS) $(EXECUTOR_OBJS)
 
 $(NAME) : $(OBJS)
 	make bonus -j -C $(LIB_DIR)/libft

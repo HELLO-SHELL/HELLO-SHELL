@@ -28,6 +28,9 @@ typedef struct s_process
 	int					argc;
 	char				**argv;
 	char				**envp;
+	char				**paths;
+	int					size;
+	pid_t				pid;
 	t_token				*cmd_line;
 	struct s_process	*next;
 }	t_process;
@@ -77,7 +80,7 @@ int		check_size(char *line, char **str, int *i);
 void	ft_env(t_list *env);
 void	ft_export(t_node *minishell);
 int		ft_pwd(void);
-void		ft_exit(int status, char *err_msg);
+void	ft_exit(int status, char *err_msg);
 
 /* utils */
 int		is_same_string(char *str1, char *str2);
@@ -88,7 +91,7 @@ void	*safe_malloc(size_t size);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 void	get_new_prompt(int sig);
-t_env *get_env_by_key(t_list *env_list, char *key);
+t_env	*get_env_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
 void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 char	*replace_whole_input_dollar(char *input, t_node *minishell);
@@ -104,4 +107,32 @@ void	init_process_struct(t_process **cmd_list);
 void	cut_tail_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
 
+
+/* executor */
+/* 		executor	*/
+void	execute_pipeline(t_node *minishell);
+void	execute_single_cmdline(t_process *process);
+void	execute_process(t_process *process, t_pipes *pipes);
+int		execute_command(t_process *process);
+void	execute_built_in(t_process *process);
+int		is_built_in(t_process *ps_info);
+/* 		heredoc 	*/
+void	heredoc_to_temp_files(t_process *ps_list);
+void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx);
+void	make_temp_file(int file_index, char *delim);
+/* 		is_func 	*/
+int		is_accessable_command(t_token *cmd_list, char **paths);
+char	*get_accessable_command(t_token *cmd_list, char **paths);
+/* 		pipe	 	*/
+void	init_pipe(t_pipes *p);
+void	swap_pipe(t_pipes *p);
+/* 		redirect 	*/
+void	apply_redirection(char *filename, int mode);
+void	apply_redirections(t_token *cmd_line);
+
+/* 		safe_func.c	*/
+void	safe_dup2(int fd, int to_fd);
+int		safe_openfile(char *filename, int mode);
+void	safe_close_pipes(t_pipes *p);
+void	safe_close_pipe(int *fd);
 #endif

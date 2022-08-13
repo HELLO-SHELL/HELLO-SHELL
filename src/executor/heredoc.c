@@ -1,26 +1,5 @@
 #include "../../include/minishell.h"
 
-int	openfile(char *filename, int mode)
-{
-	int	fd;
-
-	fd = -1;
-	if (mode == READ)
-	{
-		if (access(filename, F_OK))
-			ft_error_exit(ft_strjoin("No Such File: ", filename));
-		else
-			fd = open(filename, O_RDONLY);
-	}
-	else if (mode == WRITE)
-		fd = open(filename, O_TRUNC | O_CREAT | O_RDWR, 0644);
-	else if (mode == APPEND)
-		fd = open(filename,  O_WRONLY | O_APPEND | O_CREAT, 0644);
-	if (fd < 0)
-		ft_error_exit(ft_strjoin("No Such File: ", filename));
-	return (fd);
-}
-
 void	make_temp_file(int file_index, char *delim)
 {
 	char	*line;
@@ -30,7 +9,7 @@ void	make_temp_file(int file_index, char *delim)
 
 	ft_strlcpy(filename, ".temp.", 6);
 	filename[5] = idx_char[file_index];
-	fd = openfile(filename, APPEND);
+	fd = safe_openfile(filename, APPEND);
 	line = get_next_line(STDIN_FILENO);
 	while (is_same_string(line, delim) == FALSE)
 	{
