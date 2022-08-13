@@ -27,7 +27,6 @@ void    init_minishell(t_minishell *minishell)
 		else
 			break ;
 		// system("leaks minishell");
-		free(input);
 		free(input_buffer);
 		i = -1;
 		while (str[++i])

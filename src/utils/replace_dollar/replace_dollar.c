@@ -65,7 +65,5 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 		if (!input_ptr)
 			break ;
 	}
-	free (input);
-	input = NULL;
 	return (input_buffer);
 }
