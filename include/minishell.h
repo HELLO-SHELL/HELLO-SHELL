@@ -61,7 +61,7 @@ typedef struct	s_pipes
 typedef struct s_node
 {
 	t_list		*env_list;
-	t_process	*ps_list;
+	t_process	ps_list;
 	t_pipes		pipes;
 }	t_minishell;
 

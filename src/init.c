@@ -19,10 +19,10 @@ void    init_minishell(t_minishell *minishell)
 			exit(EXIT_SUCCESS);
 		input_buffer = replace_whole_input_dollar(input, minishell);
 		str = command_split(input_buffer);
-		minishell->ps_list->cmd_line = set_token_list(str);
-		curr = minishell->ps_list->cmd_line;
+		minishell->ps_list.cmd_line = set_token_list(str);
+		curr = minishell->ps_list.cmd_line;
 		add_history(input);
-		set_process_list(&ps_list, minishell->ps_list->cmd_line);
+		set_process_list(&ps_list, minishell->ps_list.cmd_line);
 		if (input_buffer)
 			executor(minishell);
 		else
