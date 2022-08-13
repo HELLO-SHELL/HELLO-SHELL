@@ -1,5 +1,6 @@
 #include "../../include/minishell.h"
 
+int	is_built_in(t_process *ps_info);
 int	execute_command(t_process *process)
 {
 	char	*command;
@@ -16,8 +17,8 @@ void	execute_process(t_process *ps_info, t_pipes *pipes)
 	apply_redirections(ps_info->cmd_line);
 	safe_dup2(pipes->prev_pipe[READ], STDIN_FILENO);
 	safe_dup2(pipes->next_pipe[WRITE], STDOUT_FILENO);
-	safe_close_pipes(p);
-	if (is_built_in(ps_info->cmd_line))
+	safe_close_pipes(pipes);
+	if (is_built_in(ps_info))
 		execute_built_in(ps_info);
 	else
 		execute_command(ps_info);
@@ -40,7 +41,7 @@ void	execute_pipeline(t_node *minishell)
 		if (ps_curr->pid == -1)
 			ft_error_exit("fail fork()\n");
 		else if (ps_curr->pid == 0)
-			execute_command(ps_curr, minishell->pipes);
+			execute_command(ps_curr);
 		else
 		{
 			safe_close_pipe(&minishell->pipes.prev_pipe[READ]);
@@ -48,18 +49,6 @@ void	execute_pipeline(t_node *minishell)
 		}
 		ps_curr = ps_curr->next;
 	}
-	//pipe 만들고 관리 (jimin_pipex 참조);
-	//while (fork 뜨기(총 process 개수)
-	//	ps_id
-	//  redirection 처리
-	//	apply_redirections(ps_list, ps_id);
-	//	is_accessable() command 검사 (실행가능한지, built-in 함수인지)
-	//	if built-in 함수면
-	//		execute_builtin
-	//	else if 실행가능하면
-	//		execute_command
-	//	else
-	//		에러 출력
 }
 
 void	execute_single_cmdline(t_process *process)

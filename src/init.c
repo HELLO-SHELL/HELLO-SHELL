@@ -19,8 +19,8 @@ void    init_minishell(t_node *minishell)
 			exit(EXIT_SUCCESS);
 		input_buffer = replace_whole_input_dollar(input, minishell);
 		str = command_split(input_buffer);
-		minishell->token_list = set_token_list(str);
-		curr = minishell->token_list;
+		minishell->ps_list->cmd_line = set_token_list(str);
+		curr = minishell->ps_list->cmd_line;
 		if (input)
 		{
 			if (is_same_string(input, ENV))
@@ -38,7 +38,7 @@ void    init_minishell(t_node *minishell)
 			break ;
 		// system("leaks minishell");
 		add_history(input);
-		set_process_list(&ps_list, minishell->token_list);
+		set_process_list(&ps_list, minishell->ps_list->cmd_line);
 		// heredoc_to_temp_files(ps_list);
 		free(input);
 	}

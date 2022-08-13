@@ -115,6 +115,7 @@ void	execute_single_cmdline(t_process *process);
 void	execute_process(t_process *process, t_pipes *pipes);
 int		execute_command(t_process *process);
 void	execute_built_in(t_process *process);
+int		is_built_in(t_process *ps_info);
 /* 		heredoc 	*/
 void	heredoc_to_temp_files(t_process *ps_list);
 void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx);
