@@ -21,25 +21,13 @@ void    init_minishell(t_node *minishell)
 		str = command_split(input_buffer);
 		minishell->ps_list->cmd_line = set_token_list(str);
 		curr = minishell->ps_list->cmd_line;
-		if (input)
-		{
-			if (is_same_string(input, ENV))
-				ft_env(minishell->env_list);
-			else if (is_same_string(curr->value, EXPORT))
-				ft_export(minishell);
-			else
-			{
-				write(2,"HELLO-SHELL: ", 13);
-				write(2, input, ft_strlen(input));
-				write(2, ": command not found\n", 21);
-			}
-		}
+		add_history(input);
+		set_process_list(&ps_list, minishell->ps_list->cmd_line);
+		if (input_buffer)
+			executor(minishell);
 		else
 			break ;
 		// system("leaks minishell");
-		add_history(input);
-		set_process_list(&ps_list, minishell->ps_list->cmd_line);
-		// heredoc_to_temp_files(ps_list);
 		free(input);
 	}
 }
