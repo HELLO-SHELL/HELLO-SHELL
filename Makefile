@@ -43,7 +43,7 @@ $(NAME) : $(OBJS)
 	$(CC) $(OBJS) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
-
+#  -fsanitize=address
 all : $(NAME)
 	./minishell
 

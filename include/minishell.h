@@ -81,6 +81,7 @@ void	ft_env(t_list *env);
 void	ft_export(t_minishell *minishell);
 int		ft_pwd(void);
 void	ft_exit(int status, char *err_msg);
+void    ft_unset(t_minishell *minishell);
 
 /* utils */
 int		is_same_string(char *str1, char *str2);

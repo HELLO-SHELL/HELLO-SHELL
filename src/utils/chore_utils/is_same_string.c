@@ -15,6 +15,7 @@ static size_t	longer_strlen(char *str1, char *str2)
 int	is_same_string(char *str1, char *str2)
 {
 	size_t	size;
+	
 	if (!str1 || !str2)
 		return (0);
 	size = longer_strlen(str1, str2);
