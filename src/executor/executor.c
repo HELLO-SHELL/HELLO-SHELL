@@ -1,6 +1,21 @@
 #include "../../include/minishell.h"
 
-int	is_built_in(t_process *ps_info);
+int	is_built_in(t_process *ps_info)
+{
+	int	condition;
+
+	condition = 1; // must be rewrited, and delete comments!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if (condition == 1)
+		return (1);
+	else
+		return (0);
+};
+
+void	execute_built_in(t_process *process)
+{
+	return ;
+};
+
 int	execute_command(t_process *process)
 {
 	char	*command;
