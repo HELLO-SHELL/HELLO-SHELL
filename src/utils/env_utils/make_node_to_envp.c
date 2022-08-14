@@ -1,24 +1,38 @@
 #include "../../../include/minishell.h"
 
-static void count_envp_size(t_list *env_list)
+char	*ft_env_strjoin(char *s1, char *s2)
 {
-	int		count;
-	t_list	*curr;
+	char	*result;
+	char	*temp;
 
-	count = 0;
-	curr = env_list;
-	while (curr)
-	{
-		count += ft_strlen(((t_env *)(curr->content))->key) + 1;
-		count += ft_strlen(((t_env *)(curr->content))->value) + 1;
-		curr = curr->next;
-	}
-	return (count);
+	temp = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	if (!temp)
+		return (0);
+	result = temp;
+	while (*s1)
+		*(temp++) = *(s1++);
+	*(temp++) = '=';
+	while (*s2)
+		*(temp++) = *(s2++);
+	*temp = '\0';
+	return (result);
 }
 
-void make_node_to_envp(t_list *env_list)
+void make_node_to_envp(t_minishell *minishell)
 {
-	// key와 value의 크기를 모두 더해주고, 할당해주는 함수 필요
-	// key와 value size 에 맞춰서 envp 에 욱여넣음
+	char	**envp;
+	t_list	*lst_curr;
+	int		idx;
 
+	envp = (char **)malloc(sizeof(char *) * ft_lstsize(minishell->env_list));
+	lst_curr = minishell->env_list;
+	idx = 0;
+	while (lst_curr)
+	{
+		envp[idx] = ft_env_strjoin(((t_env *)(lst_curr->content))->key,
+			((t_env *)(lst_curr->content))->value);
+		idx += 1;
+		lst_curr = lst_curr->next;
+	}
+	minishell->ps_list.envp = envp;
 }
