@@ -1,6 +1,6 @@
 #include "../../../include/minishell.h"
 
-char	*ft_env_strjoin(char *s1, char *s2)
+static char	*ft_env_strjoin(char *s1, char *s2)
 {
 	char	*result;
 	char	*temp;
