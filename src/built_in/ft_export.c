@@ -98,7 +98,7 @@ void	ft_export(t_minishell *minishell)
 			if (export_check_error(token))
 			{
 				token = token->next;
-                write(2,"HELLO-SHELL: ", 14);
+                write(2,"HELLO-SHELL: `", 14);
                 write(2, token->value, ft_strlen(token->value));
                 write(2, "': command not found\n", 22);
 			}
