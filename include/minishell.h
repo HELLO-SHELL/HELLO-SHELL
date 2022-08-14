@@ -71,7 +71,7 @@ void	init_minishell(t_minishell *minishell);
 char	**command_split(char *str);
 int		check_white_space(char c);
 int		count_split_size(char *str);
-int		split_line(char *line, char **str, int *i);
+int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);
 t_token	*set_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
