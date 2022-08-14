@@ -20,6 +20,7 @@ void    init_minishell(t_minishell *minishell)
 		add_history(input);
 		input_buffer = replace_whole_input_dollar(input, minishell);
 		str = command_split(input_buffer);
+		free(input_buffer);
 		minishell->ps_list.cmd_line = set_token_list(str);
 		set_process_list(&ps_list, minishell->ps_list.cmd_line);
 		curr = minishell->ps_list.cmd_line;
@@ -28,7 +29,6 @@ void    init_minishell(t_minishell *minishell)
 			printf("%s \n", input_buffer); // exexutor 수정 후 executor로 대체 예정
 		else
 			break ;
-		free(input_buffer);
 		i = -1;
 		while (str[++i])
 			free(str[i]);
