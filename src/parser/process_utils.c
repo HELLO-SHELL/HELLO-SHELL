@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void cut_tail_by_pipe(t_token **tk_list)
+void cut_token_by_pipe(t_token **tk_list)
 {
 	t_token	*curr;
 

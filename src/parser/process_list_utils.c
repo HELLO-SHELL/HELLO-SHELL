@@ -22,7 +22,6 @@ void pslist_new(t_process **lst)
 
 	ps_temp = safe_malloc(sizeof(t_process *));
 	ps_temp->argv = NULL;
-	ps_temp->argc = 0;
 	ps_temp->cmd_line = NULL;
 	ps_temp->next = NULL;
 	(*lst) = ps_temp;
@@ -40,7 +39,6 @@ void pslist_addback(t_process **lst)
 		lst_idx = lst_idx->next;
 	}
 	ps_temp->argv = NULL;
-	ps_temp->argc = 0;
 	ps_temp->cmd_line = NULL;
 	ps_temp->next = NULL;
 	lst_idx->next = ps_temp;

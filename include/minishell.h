@@ -25,7 +25,6 @@ typedef struct s_token
 
 typedef struct s_process
 {
-	int					argc;
 	char				**argv;
 	char				**envp;
 	char				**paths;
@@ -105,7 +104,7 @@ void	init_pslist(t_process **lst, int cnt);
 void	pslist_new(t_process **lst);
 void	pslist_addback(t_process **lst);
 void	init_process_struct(t_process **cmd_list);
-void	cut_tail_by_pipe(t_token **tk_list);
+void	cut_token_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
 
 
