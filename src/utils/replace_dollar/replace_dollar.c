@@ -36,7 +36,7 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 		temp_key = safe_malloc(get_env_len(temp));
 		ft_memcpy(temp_key, temp, get_env_len(temp));
 		temp += get_env_len(temp);
-		replaced_value = get_env_by_key(minishell->env_list, temp_key)->value;
+		replaced_value = get_env_value_by_key(minishell->env_list, temp_key);
 		free(temp_key);
 		temp_key = NULL;
 		if (replaced_value)
