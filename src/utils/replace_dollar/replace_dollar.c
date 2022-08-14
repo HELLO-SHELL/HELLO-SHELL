@@ -43,6 +43,32 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 	return (new_input_buffer);
 }
 
+char	*append_buffer_under_dollar(char *save, char const *buffer)
+{
+	char	*new;
+	char	*temp;
+	char	origin_value;
+
+	temp = ft_strchr(buffer, '$');
+	if (buffer == NULL || temp == NULL)
+		return (save);
+	origin_value = *temp;
+	*temp = '\0';
+	if (save == NULL && buffer)
+	{
+		new = safe_malloc(ft_strlen(buffer) + 1);
+		ft_strlcpy(new, buffer, ft_strlen(buffer) + 1);
+		return (new);
+	}
+	new = safe_malloc(ft_strlen(save) + ft_strlen(buffer) + 1);
+	ft_strlcpy(new, save, ft_strlen(save) + 1);
+	ft_strlcpy(new + ft_strlen(save), buffer, ft_strlen(buffer) + 1);
+	free(save);
+	save = NULL;
+	*temp = origin_value;
+	return (new);
+}
+
 char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 {
 	char	*input_buffer;
@@ -51,15 +77,20 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
-	ft_memccpy_under(input_buffer, input, '$', ft_strlen(input));
 	input_ptr = input;
+	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input));
 	while (TRUE)
 	{
 		input_ptr = ft_strchr(input_ptr, '$');
 		if (input_ptr)
 			input_ptr += 1;
 		if (env_key_valid_checker(input_ptr))
+		{
 			input_buffer = replace_dollar(input_buffer, input_ptr, minishell);
+			input_ptr += get_env_len(input_ptr);
+		}
+		input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
+		input_ptr += (ft_strchr(input_ptr, '$') - input_ptr);
 		if (!input_ptr)
 			break ;
 	}
