@@ -61,8 +61,6 @@ static int	set_str_into_list(t_token **lst, char **str)
 			insert_str_into_list_back(lst, str[i]);
 		i++;
 	}
-	free(str);
-	str = NULL;
 	return (1);
 }
 
