@@ -34,7 +34,6 @@ void    init_minishell(t_minishell *minishell)
 			break ;
 		free(replaced_input);
 		replaced_input = NULL;
-		free(replaced_input);
 		i = -1;
 		while (splitted_input[++i])
 			free(splitted_input[i]);
