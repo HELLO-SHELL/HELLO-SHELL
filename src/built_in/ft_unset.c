@@ -1,15 +1,5 @@
 #include "../../include/minishell.h"
 
-void	safe_free(void *p)
-{
-	if (p)
-	{
-		free(p);
-		p = NULL;
-	}
-	return ;
-}
-
 void    unsetting(t_list *env_list, t_token *token)
 {
     t_list  *curr;
