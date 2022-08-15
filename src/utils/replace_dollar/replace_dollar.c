@@ -28,7 +28,6 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 	{
 		temp++;
 		replaced_value = get_env_by_key(minishell->env_list, "?")->value;
-		new_input_buffer = append_buffer(input_buffer, replaced_value);
 	}
 	else
 	{
@@ -38,8 +37,14 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 		replaced_value = get_env_value_by_key(minishell->env_list, temp_key);
 		free(temp_key);
 		temp_key = NULL;
-		new_input_buffer = append_buffer(input_buffer, replaced_value);
 	}
+	if (replaced_value)
+	{
+		new_input_buffer = append_buffer(input_buffer, replaced_value);
+		printf("new_input_buffer : %s \n", new_input_buffer);
+	}
+	else
+		new_input_buffer = input_buffer;
 	return (new_input_buffer);
 }
 
@@ -94,5 +99,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 		if (!input_ptr)
 			break ;
 	}
+	free(input);
+	input = NULL;
 	return (input_buffer);
 }
