@@ -13,7 +13,7 @@ MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
 MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 
 UTILS_DIR = src/utils/
-UTILS_SRCS = env_utils/env.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
+UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
 	  replace_dollar/replace_dollar.c chore_utils/ft_memccpy_under.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c \
 	  signal.c get_token_head.c ft_error.c
