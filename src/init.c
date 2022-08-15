@@ -44,6 +44,16 @@ void    init_minishell(t_minishell *minishell)
 			free(temp);
 			curr_token = curr_token->next;
 		}
+		t_process	*curr_process;
+		t_process	*temp_process;
+		curr_process = minishell->ps_list;
+		while (curr_process)
+		{
+			temp_process = curr_process;
+			curr_process = curr_process->next;
+			free(temp_process);
+			temp_process = NULL;
+		}
 		system("leaks minishell");
 	}
 }
