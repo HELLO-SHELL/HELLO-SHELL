@@ -41,7 +41,7 @@ char	*append_buffer(char *save, char const *buffer)
 	char	*new;
 
 	if (buffer == NULL)
-		return (N);
+		return (NULL);
 	else if (save == NULL && buffer)
 	{
 		new = malloc(ft_gnl_strlen(buffer) + 1);
