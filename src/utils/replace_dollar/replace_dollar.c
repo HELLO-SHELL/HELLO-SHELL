@@ -39,7 +39,10 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 		temp_key = NULL;
 	}
 	if (replaced_value)
+	{
 		new_input_buffer = append_buffer(input_buffer, replaced_value);
+		printf("new_input_buffer : %s \n", new_input_buffer);
+	}
 	else
 		new_input_buffer = input_buffer;
 	return (new_input_buffer);
