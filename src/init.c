@@ -20,7 +20,7 @@ void    init_minishell(t_minishell *minishell)
 		add_history(input);
 		input_buffer = replace_whole_input_dollar(input, minishell);
 		splitted_input = command_split(input_buffer);
-		curr = set_token_list(splitted_input);
+		curr = make_token_list(splitted_input);
 		set_process_list(&ps_list, minishell->ps_list->cmd_line);
 		minishell->ps_list->cmd_line = curr;
 		if (input_buffer)

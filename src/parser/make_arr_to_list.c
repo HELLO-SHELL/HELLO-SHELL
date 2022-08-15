@@ -64,7 +64,7 @@ static int	set_str_into_list(t_token **lst, char **str)
 	return (1);
 }
 
-t_token	*set_token_list(char **token_arr)
+t_token	*make_token_list(char **token_arr)
 {
 	t_token	*token_list_head;
 
