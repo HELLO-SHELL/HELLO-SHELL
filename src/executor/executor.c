@@ -46,7 +46,7 @@ void	execute_pipeline(t_minishell *minishell)
 
 	idx = 0;
 	ps_curr = minishell->ps_list;
-	init_pipe(&(minishell->pipes));
+	init_pipe(&minishell->pipes);
 	while (ps_curr)
 	{
 		swap_pipe(&minishell->pipes);
