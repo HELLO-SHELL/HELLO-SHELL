@@ -2,9 +2,9 @@
 
 void    init_minishell(t_minishell *minishell)
 {
-	t_token		*curr;
+	t_token		*curr_token;
 	char		*input;
-	char		*input_buffer;
+	char		*replaced_input;
 	char		**splitted_input;
 	int			i = 0;
 	t_process	*ps_list;
@@ -18,28 +18,28 @@ void    init_minishell(t_minishell *minishell)
 		if (!input)
 			exit(EXIT_SUCCESS);
 		add_history(input);
-		input_buffer = replace_whole_input_dollar(input, minishell);
-		splitted_input = command_split(input_buffer);
-		curr = make_token_list(splitted_input);
-		set_process_list(&ps_list, minishell->ps_list->cmd_line);
-		minishell->ps_list->cmd_line = curr;
-		if (input_buffer)
+		replaced_input = replace_whole_input_dollar(input, minishell);
+		splitted_input = command_split(replaced_input);
+		curr_token = make_token_list(splitted_input);
+		set_process_list(&(minishell->ps_list), curr_token);
+		minishell->ps_list->cmd_line = curr_token;
+		if (replaced_input)
 			// executor(minishell); wait 추가되야  함.
-			printf("%s \n", input_buffer); // exexutor 수정 후 executor로 대체 예정
+			printf("%s \n", replaced_input); // exexutor 수정 후 executor로 대체 예정
 		else
 			break ;
-		free(input_buffer);
+		free(replaced_input);
 		i = -1;
 		while (splitted_input[++i])
 			free(splitted_input[i]);
 		free(splitted_input);
 		splitted_input = NULL;
 		t_token *temp;
-		while (curr)
+		while (curr_token)
 		{
-			temp = curr;
+			temp = curr_token;
 			free(temp);
-			curr = curr->next;
+			curr_token = curr_token->next;
 		}
 	}
 }
