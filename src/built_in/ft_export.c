@@ -88,7 +88,7 @@ void	ft_export(t_minishell *minishell)
 	t_env	*env_node;
 	t_token *token;	
 
-	token = minishell->ps_list.cmd_line;
+	token = minishell->ps_list->cmd_line;
 	if (token->next == NULL)
 		export_display(minishell);
 	else

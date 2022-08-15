@@ -53,7 +53,7 @@ void    ft_unset(t_minishell *minishell)
     t_token *token;
 
     env_list = minishell->env_list;
-    token = minishell->ps_list.cmd_line;
+    token = minishell->ps_list->cmd_line;
     if (unset_have_no_parm(token))
         return ;
     token = token->next;

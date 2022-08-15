@@ -58,10 +58,10 @@ typedef struct	s_pipes
 	int	next_pipe[2];
 }	t_pipes;
 
-typedef struct s_node
+typedef struct s_minishell
 {
 	t_list		*env_list;
-	t_process	ps_list;
+	t_process	*ps_list;
 	t_pipes		pipes;
 }	t_minishell;
 
@@ -91,8 +91,8 @@ t_token	*get_token_head(t_token *token);
 void	*safe_malloc(size_t size);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
-void	get_new_prompt(void);
-void	heredoc_new_prompt(void);
+void	get_new_prompt();
+void	heredoc_new_prompt();
 t_env *get_env_by_key(t_list *env_list, char *key);
 char	*get_env_value_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
