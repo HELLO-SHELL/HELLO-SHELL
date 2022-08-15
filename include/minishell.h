@@ -99,6 +99,7 @@ t_token	*get_token_head(t_token *token);
 
 /*		free_utils		*/
 void	safe_free(void *p);
+void    free_all(t_minishell *minishell, char *replaced_input, char **splitted_input);
 
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
