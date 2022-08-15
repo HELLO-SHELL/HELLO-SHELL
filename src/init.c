@@ -19,13 +19,15 @@ void    init_minishell(t_minishell *minishell)
 			exit(EXIT_SUCCESS);
 		add_history(input);
 		replaced_input = replace_whole_input_dollar(input, minishell);
-		splitted_input = command_split(replaced_input);
-		curr_token = make_token_list(splitted_input);
-		set_process_list(&(minishell->ps_list), curr_token);
-		minishell->ps_list->cmd_line = curr_token;
 		if (replaced_input)
+		{
+			splitted_input = command_split(replaced_input);
+			curr_token = make_token_list(splitted_input);
+			set_process_list(&(minishell->ps_list), curr_token);
+			minishell->ps_list->cmd_line = curr_token;
 			// executor(minishell); wait 추가되야  함.
 			printf("%s \n", replaced_input); // exexutor 수정 후 executor로 대체 예정
+		}
 		else
 			break ;
 		free(replaced_input);
