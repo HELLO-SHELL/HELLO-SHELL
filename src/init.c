@@ -21,7 +21,6 @@ void    init_minishell(t_minishell *minishell)
 		replaced_input = replace_whole_input_dollar(input, minishell);
 		if (replaced_input)
 		{
-			printf("replaced_input: %s\n", replaced_input); // exexutor 수정 후 executor로 대체 예정
 			if (*replaced_input)
 			{
 				splitted_input = command_split(replaced_input);
@@ -35,6 +34,19 @@ void    init_minishell(t_minishell *minishell)
 			break ;
 		free(replaced_input);
 		replaced_input = NULL;
-	
+		free(replaced_input);
+		i = -1;
+		while (splitted_input[++i])
+			free(splitted_input[i]);
+		free(splitted_input);
+		splitted_input = NULL;
+		t_token *temp;
+		while (curr_token)
+		{
+			temp = curr_token;
+			free(temp);
+			curr_token = curr_token->next;
+		}
+		system("leaks minishell");
 	}
 }
