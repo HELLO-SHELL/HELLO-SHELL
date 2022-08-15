@@ -3,7 +3,7 @@ LIB_DIR = ./lib/
 LIBFT = libft/libft.a
 GNL = get_next_line/libgnl.a
 CC = cc
-# CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror
 # 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
 
 READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
@@ -32,7 +32,7 @@ PARSER_PATH = $(addprefix $(PARSER_DIR), $(PARSER_SRCS))
 PARSER_OBJS = $(PARSER_PATH:.c=.o)
 
 EXECUTOR_DIR = src/executor/
-EXECUTOR_SRCS = executor.c heredoc.c is_func.c pipe.c redirect.c safe_func.c
+EXECUTOR_SRCS = executor.c heredoc.c is_func.c pipe.c redirect.c safe_func.c wait.c
 EXECUTOR_PATH = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_SRCS))
 EXECUTOR_OBJS = $(EXECUTOR_PATH:.c=.o)
 OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJS) $(EXECUTOR_OBJS)
@@ -40,10 +40,10 @@ OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJ
 $(NAME) : $(OBJS)
 	make bonus -j -C $(LIB_DIR)/libft
 	make -j -C $(LIB_DIR)/get_next_line
-	$(CC) $(OBJS) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
-
+#  -fsanitize=address
 all : $(NAME)
 	./minishell
 
