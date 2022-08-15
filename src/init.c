@@ -7,13 +7,11 @@ void    init_minishell(t_minishell *minishell)
 	char		*replaced_input;
 	char		**splitted_input;
 	int			i = 0;
-	t_process	*ps_list;
 
 	while(1)
 	{
 		signal(SIGINT, get_new_prompt);
 		signal(SIGQUIT, SIG_IGN);
-		ps_list = NULL;
 		input = readline("HELLO-SHELL-0.0$ :");
 		if (!input)
 			exit(EXIT_SUCCESS);
