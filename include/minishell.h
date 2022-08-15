@@ -139,4 +139,12 @@ void	safe_dup2(int fd, int to_fd);
 int		safe_openfile(char *filename, int mode);
 void	safe_close_pipes(t_pipes *p);
 void	safe_close_pipe(int *fd);
+
+/*		wait.c		*/
+int		wait_childs(t_process *ps_list);
+pid_t	_get_last_pid(t_process *ps_list);
+int		wait_child(pid_t pid);
+int		_signal_print(int status);
+int		_trans_status(int status);
+
 #endif

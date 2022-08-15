@@ -71,4 +71,5 @@ void	heredoc_to_temp_files(t_process *ps_list)
 		}
 		ps_curr = ps_curr->next;
 	}
+	wait_child(pid);
 }
