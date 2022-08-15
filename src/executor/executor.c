@@ -45,7 +45,7 @@ void	execute_pipeline(t_minishell *minishell)
 	t_process	*ps_curr;
 
 	idx = 0;
-	ps_curr = &(minishell->ps_list);
+	ps_curr = minishell->ps_list;
 	init_pipe(&minishell->pipes);
 	while (ps_curr)
 	{
@@ -79,7 +79,7 @@ void	executor(t_minishell *minishell)
 {
 	t_process	*ps_list;
 
-	ps_list = &(minishell->ps_list);
+	ps_list = minishell->ps_list;
 	heredoc_to_temp_files(ps_list);
 	if (ps_list->size == 1)
 		execute_single_cmdline(ps_list);
