@@ -20,6 +20,8 @@ void    free_all(t_minishell *minishell, char *replaced_input, char **splitted_i
 
     safe_free(replaced_input);
 	i = -1;
+	if (!(*replaced_input))
+		return ;
 	while (splitted_input[++i])
 		safe_free(splitted_input[i]);
 	safe_free(splitted_input);
