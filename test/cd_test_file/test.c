@@ -4,17 +4,17 @@
 #include <string.h> 
 
 int main(void) { 
-    // char * path = "/Users/kimjaehwan" ; 
-    // char dir[30] = "Current Directory: "; 
-    // int ch = chdir(path); 
+    char * path = "../" ; 
+    char dir[30] = "Current Directory: "; 
+    int ch = chdir(path);
     
-    // if( ch == 0 ) { 
-    //     printf("Change directory\n") ; // 디렉토리 이동 성공 
-    // }else { 
-    //     printf("Failed change directory!\n") ; // 디렉토리 이동 실패 
-    // }   
+    if( ch == 0 ) { 
+        printf("Change directory\n") ; // 디렉토리 이동 성공 
+    }else { 
+        printf("Failed change directory!\n") ; // 디렉토리 이동 실패 
+    }   
     
-    // write(1, dir, sizeof(char) * strlen(dir)) ; 
+    write(1, dir, sizeof(char) * strlen(dir)) ; 
 
     // 현재 디렉토리 위치 확인  
     if ( system("pwd") == -1) { 
