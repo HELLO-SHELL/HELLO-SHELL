@@ -28,6 +28,10 @@ void    init_minishell(t_node *minishell)
 				ft_export(minishell);
 			else if (is_same_string(curr->value, UNSET))
 				ft_unset(minishell);
+			else if (is_same_string(curr->value, CD))
+				ft_cd(minishell);
+			else if (is_same_string(curr->value, PWD))
+				ft_pwd();
 			else
 			{
 				write(2,"HELLO-SHELL: ", 13);
@@ -53,6 +57,6 @@ void    init_minishell(t_node *minishell)
 			free(temp);
 			curr = curr->next;
 		}
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 }
