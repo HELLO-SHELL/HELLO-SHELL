@@ -16,13 +16,14 @@ void  ft_cd(t_node *minishell)
     // go_to_home_directory
     if (token_list == NULL || token_list->value[0] == '~')
     {
-        path = ft_strdup(get_env_by_key(env_list, "HOME")->value);
+        // path = ft_strdup(get_env_by_key(env_list, "HOME")->value);
+        path = get_env_by_key(env_list, "HOME")->value;
     }
-    printf("%s\n", path);
+
     if (chdir(path) != 0)
         print_error_message("fail CD _ 수정 필요");
-    free(path);
-    path = NULL;
+    // free(path);
+    // path = NULL;
     /*
     if (cd 뒤에 토큰 존재 여부)
         없으면 홈 디렉토리로 이동
