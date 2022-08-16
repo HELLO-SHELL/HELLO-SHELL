@@ -53,8 +53,7 @@ void  ft_cd(t_node *minishell)
         ;
     else
         go_to_path_directory(token_list, &path);
-    // 예외 조건에 대한 에러 출력 필요
     if (chdir(path) != 0)
-        print_error_message("fail CD _ 수정 필요");
+        print_error_message("bash: cd: No such file or directory");
     update_env_pwd(&env_list, &change_pwd);
 }
