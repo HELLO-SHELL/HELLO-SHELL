@@ -10,7 +10,7 @@ int ft_pwd(void)
 		free(buf);
 		return (0);
 	}
-	printf("%s", buf);
+	printf("%s\n", buf);
 	free(buf);
 	return (1);
 }
