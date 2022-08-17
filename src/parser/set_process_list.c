@@ -9,7 +9,7 @@ static void word_token_to_char_list(t_process *ps_list)
 
 	idx = 0;
 	count = word_type_count(ps_list->cmd_line);
-	new_argv = (char **)malloc(sizeof(char *) * (count + 1));
+	new_argv = safe_malloc(sizeof(char *) * (count + 1));
 	token_curr = ps_list->cmd_line;
 	while(token_curr)
 	{
