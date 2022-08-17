@@ -91,6 +91,11 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 			input_buffer = replace_dollar(input_buffer, input_ptr, minishell);
 			input_ptr += get_env_len(input_ptr);
 		}
+		if (!ft_strchr(input_ptr, '$'))
+		{
+			input_buffer = append_buffer(input_buffer, input_ptr);
+			break ;
+		}
 		input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
 		input_ptr += (ft_strchr(input_ptr, '$') - input_ptr);
 		if (!input_ptr)
