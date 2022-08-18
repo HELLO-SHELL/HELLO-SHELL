@@ -1,15 +1,5 @@
 #include "../../include/minishell.h"
 
-void	safe_free(void *p)
-{
-	if (p)
-	{
-		free(p);
-		p = NULL;
-	}
-	return ;
-}
-
 void    unsetting(t_list *env_list, t_token *token)
 {
     t_list  *curr;
@@ -47,13 +37,13 @@ int unset_have_no_parm(t_token *token)
     return (0);
 }
 
-void    ft_unset(t_node *minishell)
+void    ft_unset(t_minishell *minishell)
 {
     t_list  *env_list;
     t_token *token;
 
     env_list = minishell->env_list;
-    token = minishell->token_list;
+    token = minishell->ps_list->cmd_line;
     if (unset_have_no_parm(token))
         return ;
     token = token->next;

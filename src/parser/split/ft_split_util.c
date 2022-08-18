@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int	check_white_space(char c)
 {
@@ -9,6 +9,7 @@ int	check_white_space(char c)
 
 int	count_split_size(char *str)
 {
+	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
 	int	i;
 	int	length;
 

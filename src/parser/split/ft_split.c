@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static void	make_result_from_line(t_split *split, char *line)
 {
@@ -28,6 +28,7 @@ char	**command_split(char *str)
 		return (NULL);
 	split = safe_malloc(sizeof(t_split));
 	split->result = NULL;
+	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
 	split->split_size = count_split_size(str);
 	split->result = safe_malloc(sizeof(char *) * (split->split_size + 1));
 	split->result[split->split_size] = NULL;

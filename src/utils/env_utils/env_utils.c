@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void    split_env(t_env *env_node, char **env, int i)
 {
@@ -14,7 +14,7 @@ void    split_env(t_env *env_node, char **env, int i)
     env_node->value = ft_strdup(value);
 }
 
-void    env_linked_list(t_node *minishell, char **env)
+void    env_linked_list(t_minishell *minishell, char **env)
 {
     t_env   *env_node;
     int     i;

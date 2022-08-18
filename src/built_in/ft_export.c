@@ -20,7 +20,7 @@ int	export_check_error(t_token *token)
 	return (0);
 }
 
-void	export_display(t_node *minishell)
+void	export_display(t_minishell *minishell)
 {
 	t_list	*curr;
 
@@ -60,7 +60,7 @@ static void	update_value_when_overlap(t_env *temp, char *str)
 	updated_env->value = ft_substr(str + 1, 0, ft_strlen(str));
 }
 
-void	export_get_list(t_node *minishell, t_token *token)
+void	export_get_list(t_minishell *minishell, t_token *token)
 {
 	char *key;
 	char *value;
@@ -83,12 +83,12 @@ void	export_get_list(t_node *minishell, t_token *token)
 	ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
 }
 
-void	ft_export(t_node *minishell)
+void	ft_export(t_minishell *minishell)
 {
 	t_env	*env_node;
 	t_token *token;	
 
-	token = minishell->token_list;
+	token = minishell->ps_list->cmd_line;
 	if (token->next == NULL)
 		export_display(minishell);
 	else
