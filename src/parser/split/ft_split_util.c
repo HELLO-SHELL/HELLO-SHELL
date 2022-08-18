@@ -18,7 +18,6 @@ void	skip_qoute_in_split(char *str, int *i, int *len)
 		(*len)++;
 		(*i)++;
 	}
-	// "a  b  c"
 }
 
 int	count_split_size(char *str)
