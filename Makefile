@@ -3,7 +3,7 @@ LIB_DIR = ./lib/
 LIBFT = libft/libft.a
 GNL = get_next_line/libgnl.a
 CC = cc
-# CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror
 # 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
 
 READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
@@ -13,9 +13,10 @@ MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
 MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 
 UTILS_DIR = src/utils/
-UTILS_SRCS = env_utils/env.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
+UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
 	  replace_dollar/replace_dollar.c chore_utils/ft_memccpy_under.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c \
+	  free_utils/free_utils.c \
 	  signal.c get_token_head.c ft_error.c
 UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 UTILS_OBJS = $(UTILS_PATH:.c=.o)
@@ -32,7 +33,7 @@ PARSER_PATH = $(addprefix $(PARSER_DIR), $(PARSER_SRCS))
 PARSER_OBJS = $(PARSER_PATH:.c=.o)
 
 EXECUTOR_DIR = src/executor/
-EXECUTOR_SRCS = executor.c heredoc.c is_func.c pipe.c redirect.c safe_func.c
+EXECUTOR_SRCS = executor.c heredoc.c is_func.c pipe.c redirect.c safe_func.c wait.c
 EXECUTOR_PATH = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_SRCS))
 EXECUTOR_OBJS = $(EXECUTOR_PATH:.c=.o)
 OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJS) $(EXECUTOR_OBJS)
@@ -40,7 +41,7 @@ OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJ
 $(NAME) : $(OBJS)
 	make bonus -j -C $(LIB_DIR)/libft
 	make -j -C $(LIB_DIR)/get_next_line
-	$(CC) $(OBJS) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
 #  -fsanitize=address

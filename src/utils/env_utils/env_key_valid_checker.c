@@ -34,6 +34,9 @@ int	env_key_valid_checker(char *str)
 	temp++;
 	while (*temp)
 	{
+		if (check_white_space(*temp) || *temp == '\'' || *temp == '\"' || *temp == '$'
+			|| *temp == '|' || *temp == '=' || *temp == '/' || *temp == '\\')
+			break ;
 		if (!(ft_isalnum(*temp) || *temp == '_'))
 			return (FALSE);
 		temp++;

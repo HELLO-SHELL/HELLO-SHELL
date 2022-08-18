@@ -27,7 +27,7 @@ static void	insert_first_into_list(t_token **lst, char *str)
 
 	temp = safe_malloc(sizeof(t_token));
 	temp->type = 0;
-	temp->value = str;
+	temp->value = ft_strdup(str);
 	temp->next = NULL;
 	temp->prev = NULL;
 	check_and_set_type(temp);
@@ -40,7 +40,7 @@ static void	insert_str_into_list_back(t_token **lst, char *str)
 
 	temp = safe_malloc(sizeof(t_token));
 	temp->type = 0;
-	temp->value = str;
+	temp->value = ft_strdup(str);
 	temp->next = NULL;
 	temp->prev = *lst;
 	check_and_set_type(temp);
@@ -64,7 +64,7 @@ static int	set_str_into_list(t_token **lst, char **str)
 	return (1);
 }
 
-t_token	*set_token_list(char **token_arr)
+t_token	*make_token_list(char **token_arr)
 {
 	t_token	*token_list_head;
 

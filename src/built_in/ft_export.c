@@ -88,7 +88,7 @@ void	ft_export(t_minishell *minishell)
 	t_env	*env_node;
 	t_token *token;	
 
-	token = minishell->ps_list.cmd_line;
+	token = minishell->ps_list->cmd_line;
 	if (token->next == NULL)
 		export_display(minishell);
 	else
@@ -97,8 +97,9 @@ void	ft_export(t_minishell *minishell)
 		{
 			if (export_check_error(token))
 			{
+				// print_error 로 수정해야함
 				token = token->next;
-                write(2,"HELLO-SHELL: ", 14);
+                write(2,"HELLO-SHELL: `", 14);
                 write(2, token->value, ft_strlen(token->value));
                 write(2, "': command not found\n", 22);
 			}

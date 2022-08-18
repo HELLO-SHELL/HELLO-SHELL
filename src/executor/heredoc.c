@@ -48,10 +48,14 @@ void	heredoc_to_temp_files(t_process *ps_list)
 	
 	idx = 0;
 	pid = fork();
-	// signal 처리
+	// pid 에러처리 해라
 	ps_curr = ps_list;
-	if (pid)
+	if (pid > 0)
+	{
+		signal(SIGINT, SIG_IGN);
 		return ;
+	}
+	signal(SIGINT, heredoc_new_prompt);
 	while (ps_curr == NULL)
 	{
 		cmd_curr = ps_list->cmd_line;
@@ -67,4 +71,5 @@ void	heredoc_to_temp_files(t_process *ps_list)
 		}
 		ps_curr = ps_curr->next;
 	}
+	wait_child(pid);
 }
