@@ -17,7 +17,7 @@ int set_path_at_home(t_list *env_list, t_token *cmd_list, char **path)
 {
     if (cmd_list->value[0] == '~' && cmd_list->value[1] == '/')
     {
-        *path = get_env_by_key(env_list, "HOME")->value;
+        *path = get_env_value_by_key(env_list, "HOME");
         if (chdir(*path) != 0)
             print_error_message("bash: cd: No such file or directory");
         *path = NULL;
