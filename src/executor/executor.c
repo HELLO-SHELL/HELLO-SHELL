@@ -22,7 +22,20 @@ void	execute_built_in(t_process *process)
 	char *cmd;
 
 	cmd = process->cmd_line->value[0];
-	
+	if (cmd == CD)
+		ft_cd(void);
+	else if (cmd == ENV)
+		ft_env(void);
+	else if (cmd == PWD)
+		ft_pwd(void);
+	else if (cmd == EXIT)
+		ft_exit(void);
+	else if (cmd == ECHO)
+		ft_echo(void);
+	else if (cmd == UNSET)
+		ft_unset(void);
+	else if (cmd == EXPORT)
+		ft_export(void);	
 	return ;
 };
 
