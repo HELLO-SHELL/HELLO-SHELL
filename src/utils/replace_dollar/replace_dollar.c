@@ -24,9 +24,11 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 	char	*new_input_buffer;
 	char	*temp_key;
 
+	// $USER $PWD 에서 PWD가 안나옴..?
 	if (*temp == '?')
 	{
 		temp++;
+		// 실행부에서 ? 처리예정 (ex. last status ...)
 		replaced_value = get_env_by_key(minishell->env_list, "?")->value;
 	}
 	else
@@ -75,7 +77,8 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 {
 	char	*input_buffer;
 	char	*input_ptr;
-
+	
+	// 작은 따옴표 안에 있는 $는 치환 x
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
