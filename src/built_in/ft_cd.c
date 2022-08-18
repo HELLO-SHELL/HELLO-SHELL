@@ -7,7 +7,7 @@ int set_path_to_home(t_list *env_list, t_token *cmd_list, char **path)
         || (cmd_list->value[0] == '~' && cmd_list->value[1] == '/'
             && cmd_list->value[2] == '\0'))
     {
-        *path = get_env_by_key(env_list, "HOME")->value;
+        *path = get_env_value_by_key(env_list, "HOME");
         return (1);
     }
     return (0);
