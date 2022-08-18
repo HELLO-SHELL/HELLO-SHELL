@@ -1,6 +1,6 @@
 #include "../../../include/minishell.h"
 
-void	skip_qoute_in_split(char *str, int *i, int *len)
+static void	skip_qoute_in_split(char *str, int *i)
 {
 	char	qoute;
 
@@ -14,10 +14,7 @@ void	skip_qoute_in_split(char *str, int *i, int *len)
 	if (!str[*i])
 		ft_error_exit("qoute parse error");
 	else
-	{
-		(*len)++;
 		(*i)++;
-	}
 }
 
 int	count_split_size(char *str)
@@ -29,14 +26,23 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (check_white_space(str[i]))
+		if (ft_strchr(" ", str[i]))
 			i++;
-		else if (check_qoute(str[i]))
-			skip_qoute_in_split(str, &i, &length);
 		else
 		{
-			while (str[i] != 0 && !(check_white_space(str[i])))
+			if (ft_strchr("<>", str[i]))
+			{
+				if (ft_strchr("<>", str[i + 1]))
+					i++;
 				i++;
+			}
+			else if (ft_strchr("\'\"", str[i]))
+				skip_qoute_in_split(str, &i);
+			else
+			{
+				while (str[i] != 0 && !(ft_strchr(" <>\'\"", str[i])))
+					i++;
+			}
 			length++;
 		}
 	}

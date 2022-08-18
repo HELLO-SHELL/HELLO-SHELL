@@ -107,7 +107,6 @@ void	ft_error_exit(char *str);
 void	get_new_prompt();
 void	heredoc_new_prompt();
 char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
-int		check_qoute(char c);
 int		check_white_space(char c);
 
 /* parser */

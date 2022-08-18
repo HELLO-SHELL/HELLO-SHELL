@@ -6,17 +6,3 @@ int	check_white_space(char c)
 		return (1);
 	return (0);
 }
-
-int	check_qoute(char c)
-{
-	if (c == '\'' || c == '\"')
-		return (1);
-	return (0);
-}
-
-int	check_arrow(char c)
-{
-	if (c == '<' || c == '>')
-		return (1);
-	return (0);
-}
