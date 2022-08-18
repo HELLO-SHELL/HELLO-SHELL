@@ -84,21 +84,30 @@ void	ft_exit(int status, char *err_msg);
 void    ft_unset(t_minishell *minishell);
 
 /* utils */
+/*		chore_utils		*/
 int		is_same_string(char *str1, char *str2);
+void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
+void	*safe_malloc(size_t size);
+
+/*		env_utils		*/
 void	split_env(t_env *env_node, char **env, int i);
 void	env_linked_list(t_minishell *minishell, char **env);
+t_env *get_env_by_key(t_list *env_list, char *key);
+char	*get_env_value_by_key(t_list *env_list, char *key);
+int		env_key_valid_checker(char *str);
 t_token	*get_token_head(t_token *token);
-void	*safe_malloc(size_t size);
+
+/*		free_utils		*/
+void	safe_free(void *p);
+void    free_all(t_minishell *minishell, char *replaced_input, char **splitted_input);
+
+/*		other			*/
+int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 void	get_new_prompt();
 void	heredoc_new_prompt();
-t_env *get_env_by_key(t_list *env_list, char *key);
-char	*get_env_value_by_key(t_list *env_list, char *key);
-int		env_key_valid_checker(char *str);
-void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
-int		handle_quote(t_split *split, char *line);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);
