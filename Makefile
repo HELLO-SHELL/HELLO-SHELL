@@ -17,7 +17,7 @@ UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/g
 	  replace_dollar/replace_dollar.c chore_utils/ft_memccpy_under.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c \
 	  free_utils/free_utils.c \
-	  signal.c get_token_head.c ft_error.c check_white_space.c
+	  signal.c get_token_head.c ft_error.c check_white_space.c check_qoute.c
 UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 UTILS_OBJS = $(UTILS_PATH:.c=.o)
 
