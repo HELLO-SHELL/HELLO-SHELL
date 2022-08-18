@@ -1,12 +1,5 @@
 #include "../../../include/minishell.h"
 
-int	check_white_space(char c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
-}
-
 int	count_split_size(char *str)
 {
 	int	i;
@@ -25,6 +18,8 @@ int	count_split_size(char *str)
 			length++;
 		}
 	}
+	// 나중에 아래 줄 삭제하기
+	printf("split length: %d\n", length);
 	return (length);
 }
 
