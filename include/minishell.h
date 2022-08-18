@@ -15,6 +15,8 @@
 # include "get_next_line.h"
 # include "color.h"
 
+extern t_minishell minishell;
+
 typedef struct s_token
 {
 	int				type;

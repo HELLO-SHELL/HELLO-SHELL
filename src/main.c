@@ -1,9 +1,10 @@
 #include "../include/minishell.h"
 
+t_minishell	minishell;
+
 int main(int ac, char **av, char **env)
 {
 	// 전역으로 바꾸기
-	t_minishell	*minishell;
 
 	minishell = safe_malloc(sizeof(t_minishell));
 	print_wallpaper();
