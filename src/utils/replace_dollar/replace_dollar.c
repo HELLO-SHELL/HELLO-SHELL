@@ -83,7 +83,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
 	input_ptr = input;
-	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input));
+	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input_ptr));
 	while (TRUE)
 	{
 		input_ptr = ft_strchr(input_ptr, '$');
@@ -99,8 +99,11 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 			input_buffer = append_buffer(input_buffer, input_ptr);
 			break ;
 		}
-		input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
-		input_ptr += (ft_strchr(input_ptr, '$') - input_ptr);
+		else
+		{
+			input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
+			input_ptr += (ft_strchr(input_ptr, '$') - input_ptr);
+		}
 		if (!input_ptr)
 			break ;
 	}
