@@ -1,18 +1,25 @@
 #include "../../include/minishell.h"
 
+int	check_cmd(char *word)
+{
+	if (word == CD
+		|| word == ENV
+		|| word == PWD
+		|| word == EXIT
+		|| word == ECHO
+		|| word == UNSET
+		|| word == EXPORT
+		)
+		return (1);
+	return (0);
+}
+
 int	is_built_in(t_process *ps_info)
 {
-	char *cmd;
+	char *word;
 
-	cmd = ps_info->cmd_line->value[0];
-	if (cmd == CD
-		|| cmd == ENV
-		|| cmd == PWD
-		|| cmd == EXIT
-		|| cmd == ECHO
-		|| cmd == UNSET
-		|| cmd == EXPORT
-		)
+	word = ps_info->cmd_line->value[0];
+	if (check_cmd(word))
 		return (1);
 	return (0);
 };
