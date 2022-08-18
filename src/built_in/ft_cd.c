@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int go_to_home_directory(t_list *env_list, t_token *token_list, char **path)
+int set_path_to_home(t_list *env_list, t_token *token_list, char **path)
 {
     if (token_list == NULL
         || (token_list->value[0] == '~' && token_list->value[1] == '\0')
@@ -13,7 +13,7 @@ int go_to_home_directory(t_list *env_list, t_token *token_list, char **path)
     return (0);
 }
 
-int go_to_path_directory_via_home(t_list *env_list, t_token *token_list, char **path)
+int set_path_at_home(t_list *env_list, t_token *token_list, char **path)
 {
     if (token_list->value[0] == '~' && token_list->value[1] == '/')
     {
@@ -27,7 +27,7 @@ int go_to_path_directory_via_home(t_list *env_list, t_token *token_list, char **
     return (0);
 }
 
-void    go_to_path_directory(t_token *token_list, char **path)
+void    set_path_to_input(t_token *token_list, char **path)
 {
     *path = token_list->value;
 }
@@ -51,12 +51,12 @@ void  ft_cd(t_node *minishell)
     change_pwd = NULL;
     env_list = minishell->env_list;
     token_list = minishell->token_list->next;
-    if (go_to_home_directory(env_list, token_list, &path))
+    if (set_path_to_home(env_list, token_list, &path))
         ;
-    else if (go_to_path_directory_via_home(env_list, token_list, &path))
+    else if (set_path_at_home(env_list, token_list, &path))
         ;
     else
-        go_to_path_directory(token_list, &path);
+        set_path_to_input(token_list, &path);
     if (chdir(path) != 0)
         print_error_message("bash: cd: No such file or directory");
     update_env_pwd(&env_list, &change_pwd);
