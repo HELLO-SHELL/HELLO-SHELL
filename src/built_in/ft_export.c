@@ -97,6 +97,7 @@ void	ft_export(t_minishell *minishell)
 		{
 			if (export_check_error(token))
 			{
+				// print_error 로 수정해야함
 				token = token->next;
                 write(2,"HELLO-SHELL: `", 14);
                 write(2, token->value, ft_strlen(token->value));
