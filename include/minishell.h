@@ -77,11 +77,12 @@ t_token	*make_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
 
 /* built-in */
-void	ft_env(t_list *env);
-void	ft_export(t_minishell *minishell);
 int		ft_pwd(void);
-void	ft_exit(int status, char *err_msg);
+void	ft_env(t_list *env);
+void	ft_cd(t_minishell *minishell);
 void    ft_unset(t_minishell *minishell);
+void	ft_export(t_minishell *minishell);
+void	ft_exit(int status, char *err_msg);
 
 /* utils */
 /*		chore_utils		*/
