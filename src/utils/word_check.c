@@ -14,7 +14,7 @@ int	check_qoute(char c)
 	return (0);
 }
 
-int	check_redirect_heredoc(char c)
+int	check_arrow(char c)
 {
 	if (c == '<' || c == '>')
 		return (1);
