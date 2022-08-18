@@ -17,6 +17,25 @@ static void	skip_qoute_in_split(char *str, int *i)
 		(*i)++;
 }
 
+void	skip_word(char *str, int *i)
+{
+	if (ft_strchr("<>", str[*i]))
+	{
+		if (ft_strchr("<>", str[*i + 1]))
+			(*i)++;
+		(*i)++;
+	}
+	else if (ft_strchr("\'\"", str[*i]))
+		skip_qoute_in_split(str, i);
+	else if (ft_strchr("|", str[*i]))
+		(*i)++;
+	else
+	{
+		while (str[*i] != 0 && !(ft_strchr(" <>|\'\"", str[*i])))
+			(*i)++;
+	}
+}
+
 int	count_split_size(char *str)
 {
 	int	i;
@@ -30,19 +49,7 @@ int	count_split_size(char *str)
 			i++;
 		else
 		{
-			if (ft_strchr("<>", str[i]))
-			{
-				if (ft_strchr("<>", str[i + 1]))
-					i++;
-				i++;
-			}
-			else if (ft_strchr("\'\"", str[i]))
-				skip_qoute_in_split(str, &i);
-			else
-			{
-				while (str[i] != 0 && !(ft_strchr(" <>\'\"", str[i])))
-					i++;
-			}
+			skip_word(str, &i);
 			length++;
 		}
 	}
