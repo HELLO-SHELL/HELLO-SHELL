@@ -25,7 +25,7 @@ void    init_minishell(t_minishell *minishell)
 				splitted_input = command_split(replaced_input);
 				curr_token = make_token_list(splitted_input);
 				set_process_list(&(minishell->ps_list), curr_token);
-				executor(minishell); //wait 추가되야  함.
+				// executor(minishell); wait 추가되야  함.
 			}
 		}
 		else
