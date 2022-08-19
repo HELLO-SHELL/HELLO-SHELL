@@ -29,13 +29,12 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 	{
 		temp++;
 		// 실행부에서 ? 처리예정 (ex. last status ...)
-		replaced_value = get_env_by_key(minishell->env_list, "?")->value;
+		replaced_value = get_env_value_by_key(minishell->env_list, "?");
 	}
 	else
 	{
 		temp_key = safe_malloc(get_env_len(temp));
-		ft_memcpy(temp_key, temp, get_env_len(temp));
-		temp += get_env_len(temp);
+		ft_strlcpy(temp_key, temp, get_env_len(temp) + 1);
 		replaced_value = get_env_value_by_key(minishell->env_list, temp_key);
 		free(temp_key);
 		temp_key = NULL;
@@ -83,9 +82,10 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
 	input_ptr = input;
-	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input));
+	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input_ptr));
 	while (TRUE)
 	{
+		printf("input_ptr : %s\n", input_ptr);
 		input_ptr = ft_strchr(input_ptr, '$');
 		if (input_ptr)
 			input_ptr += 1;
@@ -99,8 +99,11 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 			input_buffer = append_buffer(input_buffer, input_ptr);
 			break ;
 		}
-		input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
-		input_ptr += (ft_strchr(input_ptr, '$') - input_ptr);
+		else
+		{
+			input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
+			input_ptr += (ft_strchr(input_ptr, '$') - input_ptr);
+		}
 		if (!input_ptr)
 			break ;
 	}

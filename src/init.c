@@ -17,7 +17,6 @@ void    init_minishell(t_minishell *minishell)
 			exit(EXIT_SUCCESS);
 		add_history(input);
 		replaced_input = replace_whole_input_dollar(input, minishell);
-		printf("%s%s%s\n", GRN,replaced_input,COLOR_RESET);
 		if (replaced_input) 
 		{
 			if (*replaced_input)
@@ -30,7 +29,7 @@ void    init_minishell(t_minishell *minishell)
 		}
 		else
 			break ;
-		free_all(minishell, replaced_input, splitted_input);
+		// free_all(minishell, replaced_input, splitted_input);
 		// system("leaks minishell");
 	}
 }
