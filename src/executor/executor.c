@@ -1,50 +1,50 @@
 #include "../../include/minishell.h"
 
-int	check_cmd(char *word)
-{
-	if (word == CD
-		|| word == ENV
-		|| word == PWD
-		|| word == EXIT
-		|| word == ECHO
-		|| word == UNSET
-		|| word == EXPORT
-		)
-		return (1);
-	return (0);
-}
+// int	check_cmd(char *word)
+// {
+// 	if (word == CD
+// 		|| word == ENV
+// 		|| word == PWD
+// 		|| word == EXIT
+// 		|| word == ECHO
+// 		|| word == UNSET
+// 		|| word == EXPORT
+// 		)
+// 		return (1);
+// 	return (0);
+// }
 
 int	is_built_in(t_process *ps_info)
 {
-	char *word;
+	// char *word;
 
-	word = ps_info->cmd_line->value[0];
-	if (check_cmd(word))
-		return (1);
+	// word = ps_info->cmd_line->value[0];
+	// if (check_cmd(word))
+	// 	return (1);
 	return (0);
-};
+}
 
 void	execute_built_in(t_process *process)
 {
-	char *cmd;
+	// char *cmd;
 
-	cmd = process->cmd_line->value[0];
-	if (cmd == CD)
-		ft_cd(void);
-	else if (cmd == ENV)
-		ft_env(void);
-	else if (cmd == PWD)
-		ft_pwd(void);
-	else if (cmd == EXIT)
-		ft_exit(void);
-	else if (cmd == ECHO)
-		ft_echo(void);
-	else if (cmd == UNSET)
-		ft_unset(void);
-	else if (cmd == EXPORT)
-		ft_export(void);	
-	return ;
-};
+	// cmd = process->cmd_line->value[0];
+	// if (cmd == CD)
+	// 	ft_cd(void);
+	// else if (cmd == ENV)
+	// 	ft_env(void);
+	// else if (cmd == PWD)
+	// 	ft_pwd(void);
+	// else if (cmd == EXIT)
+	// 	ft_exit(void);
+	// else if (cmd == ECHO)
+	// 	ft_echo(void);
+	// else if (cmd == UNSET)
+	// 	ft_unset(void);
+	// else if (cmd == EXPORT)
+	// 	ft_export(void);	
+	// return ;
+}
 
 int	execute_command(t_process *process)
 {

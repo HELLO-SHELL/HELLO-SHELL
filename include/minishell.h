@@ -15,8 +15,6 @@
 # include "get_next_line.h"
 # include "color.h"
 
-extern t_minishell minishell;
-
 typedef struct s_token
 {
 	int				type;
@@ -67,8 +65,10 @@ typedef struct s_minishell
 	t_pipes		pipes;
 }	t_minishell;
 
+extern t_minishell minishell;
+
 void	print_wallpaper(void);
-void	init_minishell(t_minishell *minishell);
+void	init_minishell(void);
 
 char	**command_split(char *str);
 int		check_white_space(char c);
@@ -94,7 +94,7 @@ void	*safe_malloc(size_t size);
 
 /*		env_utils		*/
 void	split_env(t_env *env_node, char **env, int i);
-void	env_linked_list(t_minishell *minishell, char **env);
+void	env_linked_list(char **env);
 t_env *get_env_by_key(t_list *env_list, char *key);
 char	*get_env_value_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
@@ -102,7 +102,7 @@ t_token	*get_token_head(t_token *token);
 
 /*		free_utils		*/
 void	safe_free(void *p);
-void    free_all(t_minishell *minishell, char *replaced_input, char **splitted_input);
+void    free_all(char *replaced_input, char **splitted_input);
 
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
@@ -110,7 +110,7 @@ void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 void	get_new_prompt();
 void	heredoc_new_prompt();
-char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
+char	*replace_whole_input_dollar(char *input);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);
