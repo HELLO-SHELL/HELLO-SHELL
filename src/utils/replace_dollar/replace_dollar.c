@@ -81,9 +81,19 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
 	input_ptr = input;
+	if (ft_strchr(input_ptr, '\''))
+	{
+		ft_strlcpy(input_buffer, input_ptr, ft_strchr(input_ptr + 1, '\'') - ft_strchr(input_ptr, '\'') + 1);
+		input_ptr += ft_strchr(input_ptr + 1, '\'') - ft_strchr(input_ptr, '\'');
+	}
 	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input_ptr));
 	while (TRUE)
 	{
+		if (ft_strchr(input_ptr, '\''))
+		{
+			ft_strlcpy(input_buffer, input_ptr, ft_strchr(input_ptr + 1, '\'') - ft_strchr(input_ptr, '\'') + 1);
+			input_ptr += ft_strchr(input_ptr + 1, '\'') - ft_strchr(input_ptr, '\'');
+		}
 		input_ptr = ft_strchr(input_ptr, '$');
 		if (input_ptr)
 			input_ptr += 1;
