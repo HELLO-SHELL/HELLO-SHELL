@@ -132,7 +132,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 	if (ft_strchr(input_ptr, '\'') < ft_strchr(input_ptr, '$'))
 	{
 		input_buffer = append_buffer_under_single_quote(input_buffer, input_ptr);
-		input_ptr += (ft_strchr(input_ptr, '\'') - input_ptr) 
+		input_ptr += (ft_strchr(input_ptr, '\'') - input_ptr);
 		input_buffer = append_single_quote(input_buffer, input_ptr, get_single_quote_len(input_ptr));
 	}
 	ft_memccpy_under(input_buffer + single_quote_len, input_ptr, '$', ft_strlen(input_ptr));
