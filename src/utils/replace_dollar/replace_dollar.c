@@ -77,7 +77,6 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 	char	*input_buffer;
 	char	*input_ptr;
 	
-	// 작은 따옴표 안에 있는 $는 치환 x
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
@@ -85,7 +84,6 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input_ptr));
 	while (TRUE)
 	{
-		printf("input_ptr : %s\n", input_ptr);
 		input_ptr = ft_strchr(input_ptr, '$');
 		if (input_ptr)
 			input_ptr += 1;
