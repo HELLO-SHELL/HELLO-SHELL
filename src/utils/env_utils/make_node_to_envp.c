@@ -34,5 +34,5 @@ void make_node_to_envp(t_minishell *minishell)
 		idx++;
 		lst_curr = lst_curr->next;
 	}
-	minishell->ps_list.envp = envp;
+	minishell->ps_list->envp = envp;
 }
