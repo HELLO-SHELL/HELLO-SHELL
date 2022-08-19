@@ -25,7 +25,7 @@ void    free_all(char *replaced_input, char **splitted_input)
 	while (splitted_input[++i])
 		safe_free(splitted_input[i]);
 	safe_free(splitted_input);
-	curr_process = minishell.ps_list;
+	curr_process = g_minishell.ps_list;
 	while (curr_process && curr_process->cmd_line)
 	{
 		temp_process = curr_process;

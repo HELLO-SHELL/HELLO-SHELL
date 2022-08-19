@@ -37,13 +37,13 @@ int unset_have_no_parm(t_token *token)
     return (0);
 }
 
-void    ft_unset(t_minishell *minishell)
+void    ft_unset(void)
 {
     t_list  *env_list;
     t_token *token;
 
-    env_list = minishell->env_list;
-    token = minishell->ps_list->cmd_line;
+    env_list = g_minishell.env_list;
+    token = g_minishell.ps_list->cmd_line;
     if (unset_have_no_parm(token))
         return ;
     token = token->next;

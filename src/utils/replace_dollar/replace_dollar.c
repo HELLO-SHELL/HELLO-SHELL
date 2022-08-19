@@ -29,14 +29,14 @@ static char	*replace_dollar(char *input_buffer, char *temp)
 	{
 		temp++;
 		// 실행부에서 ? 처리예정 (ex. last status ...)
-		replaced_value = get_env_by_key(minishell.env_list, "?")->value;
+		replaced_value = get_env_by_key(g_minishell.env_list, "?")->value;
 	}
 	else
 	{
 		temp_key = safe_malloc(get_env_len(temp));
 		ft_memcpy(temp_key, temp, get_env_len(temp));
 		temp += get_env_len(temp);
-		replaced_value = get_env_value_by_key(minishell.env_list, temp_key);
+		replaced_value = get_env_value_by_key(g_minishell.env_list, temp_key);
 		free(temp_key);
 		temp_key = NULL;
 	}

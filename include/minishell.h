@@ -65,7 +65,7 @@ typedef struct s_minishell
 	t_pipes		pipes;
 }	t_minishell;
 
-extern t_minishell minishell;
+extern t_minishell g_minishell;
 
 void	print_wallpaper(void);
 void	init_minishell(void);
@@ -81,9 +81,9 @@ int		check_size(char *line, char **str, int *i);
 /* built-in */
 int		ft_pwd(void);
 void	ft_env(t_list *env);
-void	ft_cd(t_minishell *minishell);
-void    ft_unset(t_minishell *minishell);
-void	ft_export(t_minishell *minishell);
+void	ft_cd(void);
+void	ft_unset(void);
+void	ft_export(void);
 void	ft_exit(int status, char *err_msg);
 
 /* utils */
@@ -125,8 +125,8 @@ void	tk_listdelone(t_token **tk_list);
 
 /* executor */
 /* 		executor.c	*/
-void	executor(t_minishell *minishell);
-void	execute_pipeline(t_minishell *minishell);
+void	executor(void);
+void	execute_pipeline(void);
 void	execute_single_cmdline(t_process *process);
 void	execute_process(t_process *process, t_pipes *pipes);
 int		execute_command(t_process *process);
