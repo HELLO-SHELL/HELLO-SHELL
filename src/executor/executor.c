@@ -2,13 +2,13 @@
 
 int	check_cmd(char *word)
 {
-	if (word == CD
-		|| word == ENV
-		|| word == PWD
-		|| word == EXIT
-		|| word == ECHO
-		|| word == UNSET
-		|| word == EXPORT
+	if (is_same_string(word, CD)
+		|| is_same_string(word, ENV)
+		|| is_same_string(word, PWD)
+		|| is_same_string(word, EXIT)
+		|| is_same_string(word, ECHO)
+		|| is_same_string(word, UNSET)
+		|| is_same_string(word, EXPORT)
 		)
 		return (1);
 	return (0);
@@ -18,7 +18,7 @@ int	is_built_in(t_process *ps_info)
 {
 	char *word;
 
-	word = ps_info->cmd_line->value[0];
+	word = ps_info->cmd_line->value;
 	if (check_cmd(word))
 		return (1);
 	return (0);
@@ -28,11 +28,11 @@ void	execute_built_in(t_process *process)
 {
 	char *cmd;
 
-	// cmd = process->cmd_line->value[0];
-	// if (cmd == CD)
-	// 	ft_cd();
-	// else if (cmd == PWD)
-	// 	ft_pwd(void);
+	cmd = process->cmd_line->value;
+	if (is_same_string(cmd, CD))
+		ft_cd();
+	else if (is_same_string(cmd, PWD))
+		ft_pwd();
 	// else if (cmd == ENV)
 	// 	ft_env(void);
 	// else if (cmd == EXPORT)
@@ -121,6 +121,7 @@ void	executor(void)
 
 	ps_list = g_minishell.ps_list;
 	heredoc_to_temp_files(ps_list);
+	// size 설정이 잘 안됨 -> 원인 파악 필요
 	if (ps_list->size == 1)
 		execute_single_cmdline(ps_list);
 	else
