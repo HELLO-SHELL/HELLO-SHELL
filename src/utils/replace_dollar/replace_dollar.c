@@ -29,17 +29,23 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 
 static void	handle_single_quote(char **input_buffer, char **input_ptr)
 {
+	int	s_quote_len;
+
+	s_quote_len = get_single_quote_len(*input_ptr);
 	if (ft_strchr(*input_ptr, '\'') < ft_strchr(*input_ptr, '$'))
 	{
-		*input_buffer = append_buffer_under_single_quote(*input_buffer, *input_ptr);
+		*input_buffer = \
+			append_buffer_under_single_quote(*input_buffer, *input_ptr);
 		*input_ptr += get_under_single_quote_len(*input_ptr);
-		*input_buffer = append_single_quote(*input_buffer, *input_ptr, get_single_quote_len(*input_ptr));
-		if (get_single_quote_len(*input_ptr) > 0)
-			*input_ptr += get_single_quote_len(*input_ptr) + 2;
+		*input_buffer = \
+			append_single_quote(*input_buffer, *input_ptr, s_quote_len);
+		if (s_quote_len > 0)
+			*input_ptr += (s_quote_len + 2);
 	}
 }
 
-static int	make_dollar_replaced_input(char **input_buffer, char **input_ptr, t_minishell *minishell)
+static int	make_dollar_replaced_input(\
+	char **input_buffer, char **input_ptr, t_minishell *minishell)
 {
 	while (TRUE)
 	{
@@ -48,7 +54,8 @@ static int	make_dollar_replaced_input(char **input_buffer, char **input_ptr, t_m
 			*input_ptr += 1;
 		if (env_key_valid_checker(*input_ptr))
 		{
-			*input_buffer = replace_dollar(*input_buffer, *input_ptr, minishell);
+			*input_buffer = \
+				replace_dollar(*input_buffer, *input_ptr, minishell);
 			*input_ptr += get_env_len(*input_ptr);
 		}
 		if (!*input_ptr)
@@ -56,7 +63,8 @@ static int	make_dollar_replaced_input(char **input_buffer, char **input_ptr, t_m
 		handle_single_quote(&*input_buffer, &*input_ptr);
 		if (ft_strchr(*input_ptr, '$'))
 		{
-			*input_buffer = append_buffer_under_dollar(*input_buffer, *input_ptr);
+			*input_buffer = \
+				append_buffer_under_dollar(*input_buffer, *input_ptr);
 			*input_ptr += (ft_strchr(*input_ptr, '$') - *input_ptr);
 		}
 		else
@@ -71,7 +79,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 {
 	char	*input_buffer;
 	char	*input_ptr;
-	
+
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
