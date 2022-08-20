@@ -101,6 +101,16 @@ t_token	*get_token_head(t_token *token);
 void	safe_free(void *p);
 void    free_all(t_minishell *minishell, char *replaced_input, char **splitted_input);
 
+/*		replace_dollar	*/
+char	*append_buffer_under_dollar(char *save, char const *buffer);
+char	*append_buffer_under_single_quote(char *save, char const *buffer);
+char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_len);
+int		get_env_len(char *str);
+int		get_single_quote_len(char *input_ptr);
+int		get_under_single_quote_len(char *input_ptr);
+char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
+
+
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
@@ -111,7 +121,6 @@ void	make_node_to_envp(t_minishell *minishell);
 void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	get_new_prompt();
 void	heredoc_new_prompt();
-char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);
