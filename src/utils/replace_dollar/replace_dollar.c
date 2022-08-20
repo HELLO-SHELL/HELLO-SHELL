@@ -39,6 +39,34 @@ static void	handle_single_quote(char **input_buffer, char **input_ptr)
 	}
 }
 
+static int	make_dollar_replaced_input(char **input_buffer, char **input_ptr, t_minishell *minishell)
+{
+	while (TRUE)
+	{
+		*input_ptr = ft_strchr(*input_ptr, '$');
+		if (*input_ptr)
+			*input_ptr += 1;
+		if (env_key_valid_checker(*input_ptr))
+		{
+			*input_buffer = replace_dollar(*input_buffer, *input_ptr, minishell);
+			*input_ptr += get_env_len(*input_ptr);
+		}
+		if (!*input_ptr)
+			break ;
+		handle_single_quote(&*input_buffer, &*input_ptr);
+		if (ft_strchr(*input_ptr, '$'))
+		{
+			*input_buffer = append_buffer_under_dollar(*input_buffer, *input_ptr);
+			*input_ptr += (ft_strchr(*input_ptr, '$') - *input_ptr);
+		}
+		else
+		{
+			*input_buffer = append_buffer(*input_buffer, *input_ptr);
+			break ;
+		}
+	}
+}
+
 char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 {
 	char	*input_buffer;
@@ -50,30 +78,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 	input_ptr = input;
 	handle_single_quote(&input_buffer, &input_ptr);
 	input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
-	while (TRUE)
-	{
-		input_ptr = ft_strchr(input_ptr, '$');
-		if (input_ptr)
-			input_ptr += 1;
-		if (env_key_valid_checker(input_ptr))
-		{
-			input_buffer = replace_dollar(input_buffer, input_ptr, minishell);
-			input_ptr += get_env_len(input_ptr);
-		}
-		if (!input_ptr)
-			break ;
-		handle_single_quote(&input_buffer, &input_ptr);
-		if (ft_strchr(input_ptr, '$'))
-		{
-			input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
-			input_ptr += (ft_strchr(input_ptr, '$') - input_ptr);
-		}
-		else
-		{
-			input_buffer = append_buffer(input_buffer, input_ptr);
-			break ;
-		}
-	}
+	make_dollar_replaced_input(&input_buffer, &input_ptr, minishell);
 	free(input);
 	input = NULL;
 	return (input_buffer);
