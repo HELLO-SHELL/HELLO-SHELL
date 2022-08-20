@@ -49,7 +49,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 	input_buffer = safe_malloc(ft_strlen(input));
 	input_ptr = input;
 	handle_single_quote(&input_buffer, &input_ptr);
-	ft_memccpy_under(input_buffer, input_ptr, '$', ft_strlen(input_ptr));
+	input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
 	while (TRUE)
 	{
 		input_ptr = ft_strchr(input_ptr, '$');
