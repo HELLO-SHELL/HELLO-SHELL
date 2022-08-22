@@ -55,7 +55,7 @@ int	count_split_size(char *str)
 		}
 	}
 	// 나중에 아래 줄 삭제하기
-	printf("split length: %d\n", length);
+	printf("split length = %d\n", length);
 	return (length);
 }
 

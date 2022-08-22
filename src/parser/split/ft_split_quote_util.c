@@ -49,7 +49,7 @@ void	handle_double_quote(t_split *split, char *line)
 int	handle_quote(t_split *split, char *line)
 {
 	split->flag = 0;
-	while (line[split->i] != '\0')
+	while (!ft_strchr("|\0", line[split->i]))
 	{
 		if ((split->flag == 0 && line[split->i] == ' ')
 			|| line[split->i] == '\0')
