@@ -6,7 +6,7 @@ CC = cc
 CFLAGS= -Wall -Wextra -Werror
 # 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
 
-READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
+READLINE = -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
 RM = rm -rf
 
 MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
@@ -22,7 +22,7 @@ UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 UTILS_OBJS = $(UTILS_PATH:.c=.o)
 
 BUILT_IN_DIR = src/built_in/
-BUILT_IN_SRCS = ft_exit.c ft_env.c ft_export.c
+BUILT_IN_SRCS = ft_exit.c ft_env.c ft_export.c ft_cd.c ft_pwd.c
 BUILT_IN_PATH = $(addprefix $(BUILT_IN_DIR), $(BUILT_IN_SRCS))
 BUILT_IN_OBJS = $(BUILT_IN_PATH:.c=.o)
 
