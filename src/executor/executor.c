@@ -35,14 +35,14 @@ void	execute_built_in(t_process *process)
 		ft_pwd();
 	else if (is_same_string(cmd, ENV))
 		ft_env(g_minishell.env_list);
-	// else if (cmd == EXPORT)
-	// 	ft_export(void);	
-	// else if (cmd == EXIT)
-	// 	ft_exit(void);
+	else if (is_same_string(cmd, EXPORT))
+		ft_export();
+	else if (is_same_string(cmd, EXIT))
+		ft_exit(0, "exit");
+	else if (is_same_string(cmd, UNSET))
+		ft_unset();
 	// else if (cmd == ECHO)
 	// 	ft_echo(void);
-	// else if (cmd == UNSET)
-	// 	ft_unset(void);
 	return ;
 }
 
