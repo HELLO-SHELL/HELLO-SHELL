@@ -4,9 +4,18 @@ LIBFT = libft/libft.a
 GNL = get_next_line/libgnl.a
 CC = cc
 CFLAGS= -Wall -Wextra -Werror
-# 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
 
+# readline 경로를 아키텍쳐 별로 변경하는 코드. M1 Mac, Cluster Mac, arm Linux 환경 대응
+detected_OS := $(shell uname -sm)
+ifeq ($(detected_OS), Linux aarch64)
+#### linux 경로대로 변경
+READLINE = -lreadline 
+else ifeq ($(detected_OS), Darwin x86_64)
+READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
+else ifeq ($(detected_OS), Darwin arm64)
 READLINE = -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
+endif
+
 RM = rm -rf
 
 MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
