@@ -14,7 +14,7 @@ void    split_env(t_env *env_node, char **env, int i)
     env_node->value = ft_strdup(value);
 }
 
-void    env_linked_list(t_minishell *minishell, char **env)
+void    env_linked_list(char **env)
 {
     t_env   *env_node;
     int     i;
@@ -26,7 +26,7 @@ void    env_linked_list(t_minishell *minishell, char **env)
         env_node->key = NULL;
         env_node->value = NULL;
         split_env(env_node, env, i);
-        ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
+        ft_lstadd_back(&g_minishell.env_list, ft_lstnew(env_node));
         i++;
     }
 }

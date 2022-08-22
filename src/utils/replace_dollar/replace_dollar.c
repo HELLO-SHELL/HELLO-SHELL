@@ -9,7 +9,7 @@ static int	get_env_len(char *str)
 		return (0);
 	while (*str)
 	{
-		if (check_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
+		if (is_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
 			|| *str == '|' || *str == '=' || *str == '/' || *str == '\\')
 			break ;
 		len++;
@@ -18,7 +18,7 @@ static int	get_env_len(char *str)
 	return (len);
 }
 
-static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishell)
+static char	*replace_dollar(char *input_buffer, char *temp)
 {
 	char	*replaced_value;
 	char	*new_input_buffer;
@@ -29,14 +29,14 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 	{
 		temp++;
 		// 실행부에서 ? 처리예정 (ex. last status ...)
-		replaced_value = get_env_by_key(minishell->env_list, "?")->value;
+		replaced_value = get_env_by_key(g_minishell.env_list, "?")->value;
 	}
 	else
 	{
 		temp_key = safe_malloc(get_env_len(temp));
 		ft_memcpy(temp_key, temp, get_env_len(temp));
 		temp += get_env_len(temp);
-		replaced_value = get_env_value_by_key(minishell->env_list, temp_key);
+		replaced_value = get_env_value_by_key(g_minishell.env_list, temp_key);
 		free(temp_key);
 		temp_key = NULL;
 	}
@@ -73,7 +73,7 @@ char	*append_buffer_under_dollar(char *save, char const *buffer)
 	return (new);
 }
 
-char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
+char	*replace_whole_input_dollar(char *input)
 {
 	char	*input_buffer;
 	char	*input_ptr;
@@ -91,7 +91,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 			input_ptr += 1;
 		if (env_key_valid_checker(input_ptr))
 		{
-			input_buffer = replace_dollar(input_buffer, input_ptr, minishell);
+			input_buffer = replace_dollar(input_buffer, input_ptr);
 			input_ptr += get_env_len(input_ptr);
 		}
 		if (!ft_strchr(input_ptr, '$'))

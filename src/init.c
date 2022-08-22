@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void    init_minishell(t_minishell *minishell)
+void    init_minishell(void)
 {
 	t_token		*curr_token;
 	char		*input;
@@ -16,7 +16,7 @@ void    init_minishell(t_minishell *minishell)
 		if (!input)
 			exit(EXIT_SUCCESS);
 		add_history(input);
-		replaced_input = replace_whole_input_dollar(input, minishell);
+		replaced_input = replace_whole_input_dollar(input);
 		printf("%s%s%s\n", GRN,replaced_input,COLOR_RESET);
 		if (replaced_input) 
 		{
@@ -24,13 +24,12 @@ void    init_minishell(t_minishell *minishell)
 			{
 				splitted_input = command_split(replaced_input);
 				curr_token = make_token_list(splitted_input);
-				set_process_list(&(minishell->ps_list), curr_token);
-				// executor(minishell); wait 추가되야  함.
+				set_process_list(&g_minishell.ps_list, curr_token);
+				executor();
 			}
 		}
 		else
 			break ;
-		free_all(minishell, replaced_input, splitted_input);
-		// system("leaks minishell");
+		free_all(replaced_input, splitted_input);
 	}
 }

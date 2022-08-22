@@ -26,12 +26,12 @@ UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/g
 	  replace_dollar/replace_dollar.c chore_utils/ft_memccpy_under.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c \
 	  free_utils/free_utils.c \
-	  signal.c get_token_head.c ft_error.c
+	  signal.c get_token_head.c ft_error.c word_check.c
 UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 UTILS_OBJS = $(UTILS_PATH:.c=.o)
 
 BUILT_IN_DIR = src/built_in/
-BUILT_IN_SRCS = ft_exit.c ft_env.c ft_export.c
+BUILT_IN_SRCS = ft_exit.c ft_env.c ft_export.c ft_cd.c ft_pwd.c
 BUILT_IN_PATH = $(addprefix $(BUILT_IN_DIR), $(BUILT_IN_SRCS))
 BUILT_IN_OBJS = $(BUILT_IN_PATH:.c=.o)
 

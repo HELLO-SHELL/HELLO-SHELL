@@ -40,7 +40,7 @@ void    update_env_pwd(t_list **env_list, t_env **change_pwd)
     (*change_pwd)->value = getcwd(NULL, 0);
 }
 
-void  ft_cd(t_minishell *minishell)
+void  ft_cd(void)
 {
     t_list *env_list;
     t_token *cmd_list;
@@ -49,14 +49,16 @@ void  ft_cd(t_minishell *minishell)
 
     path = NULL;
     change_pwd = NULL;
-    env_list = minishell->env_list;
-    cmd_list = minishell->ps_list->cmd_line->next;
+    env_list = g_minishell.env_list;
+    cmd_list = g_minishell.ps_list->cmd_line->next;
+    // 리팩토링 필요 set_path
     if (set_path_to_home(env_list, cmd_list, &path))
         ;
     else if (set_path_at_home(env_list, cmd_list, &path))
         ;
     else
         set_path_to_input(cmd_list, &path);
+    // 리팩토링 필요 change_directory
     if (chdir(path) != 0)
         print_error_message("bash: cd: No such file or directory");
     update_env_pwd(&env_list, &change_pwd);
