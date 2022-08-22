@@ -31,6 +31,8 @@ static void	handle_single_quote(char **input_buffer, char **input_ptr)
 {
 	int	s_quote_len;
 
+	if (*input_ptr == NULL)
+		return ;
 	s_quote_len = get_single_quote_len(*input_ptr);
 	if (ft_strchr(*input_ptr, '\'') < ft_strchr(*input_ptr, '$'))
 	{
@@ -50,6 +52,11 @@ static void	make_dollar_replaced_input(\
 {
 	while (TRUE)
 	{
+		if (!ft_strchr(*input_ptr, '$'))
+		{
+			*input_buffer = append_buffer_after_all(*input_buffer, *input_ptr);
+			break ;
+		}
 		*input_ptr = ft_strchr(*input_ptr, '$');
 		if (*input_ptr)
 			*input_ptr += 1;
@@ -59,18 +66,9 @@ static void	make_dollar_replaced_input(\
 				replace_dollar(*input_buffer, *input_ptr, minishell);
 			*input_ptr += get_env_len(*input_ptr);
 		}
-		if (!*input_ptr)
-		{
-			*input_buffer = append_buffer_after_all(*input_buffer, *input_ptr);
-			break ;
-		}
 		handle_single_quote(&*input_buffer, &*input_ptr);
-		if (ft_strchr(*input_ptr, '$'))
-		{
-			*input_buffer = \
-				append_buffer_under_dollar(*input_buffer, *input_ptr);
-			*input_ptr += (ft_strchr(*input_ptr, '$') - *input_ptr);
-		}
+		*input_buffer = append_buffer_under_dollar(*input_buffer, *input_ptr);
+		*input_ptr += get_under_dollar_len(*input_ptr);
 	}
 }
 

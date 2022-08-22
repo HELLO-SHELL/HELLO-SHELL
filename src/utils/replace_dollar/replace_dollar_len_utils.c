@@ -31,3 +31,10 @@ int	get_under_single_quote_len(char *input_ptr)
 		return (ft_strchr(input_ptr, '\'') - input_ptr);
 	return (0);
 }
+
+int get_under_dollar_len(char *input_ptr)
+{
+	if (ft_strchr(input_ptr, '?'))
+		return (ft_strchr(input_ptr, '?') - input_ptr);
+	return (0);	
+}

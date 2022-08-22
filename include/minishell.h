@@ -108,6 +108,7 @@ char	*append_buffer_after_all(char *save, char const *buffer);
 int		get_env_len(char *str);
 int		get_single_quote_len(char *input_ptr);
 int		get_under_single_quote_len(char *input_ptr);
+int		get_under_dollar_len(char *input_ptr);
 char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
 
 
