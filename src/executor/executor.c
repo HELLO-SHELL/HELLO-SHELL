@@ -33,8 +33,8 @@ void	execute_built_in(t_process *process)
 		ft_cd();
 	else if (is_same_string(cmd, PWD))
 		ft_pwd();
-	// else if (cmd == ENV)
-	// 	ft_env(void);
+	else if (is_same_string(cmd, ENV))
+		ft_env(g_minishell.env_list);
 	// else if (cmd == EXPORT)
 	// 	ft_export(void);	
 	// else if (cmd == EXIT)
@@ -122,7 +122,7 @@ void	executor(void)
 	ps_list = g_minishell.ps_list;
 	heredoc_to_temp_files(ps_list);
 	// size 설정이 잘 안됨 -> 원인 파악 필요
-	if (ps_list->size == 1)
+	if (ps_list->size != 1)
 		execute_single_cmdline(ps_list);
 	else
 		execute_pipeline();
