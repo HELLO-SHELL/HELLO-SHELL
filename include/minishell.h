@@ -63,6 +63,7 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
+	int			last_status;
 }	t_minishell;
 
 extern t_minishell g_minishell;
@@ -127,13 +128,13 @@ void	tk_listdelone(t_token **tk_list);
 /* 		executor.c	*/
 void	executor(void);
 void	execute_pipeline(void);
-void	execute_single_cmdline(t_process *process);
+void	execute_single_cmdline(void);
 void	execute_process(t_process *process, t_pipes *pipes);
 int		execute_command(t_process *process);
 void	execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
 /* 		heredoc.c 	*/
-void	heredoc_to_temp_files(t_process *ps_list);
+void	heredoc_to_temp_files(void);
 void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx);
 void	make_temp_file(int file_index, char *delim);
 /* 		is_func.c 	*/
@@ -153,8 +154,8 @@ void	safe_close_pipes(t_pipes *p);
 void	safe_close_pipe(int *fd);
 
 /*		wait.c		*/
-int		wait_childs(t_process *ps_list);
-pid_t	_get_last_pid(t_process *ps_list);
+int		wait_childs(void);
+pid_t	_get_last_pid(void);
 int		wait_child(pid_t pid);
 int		_signal_print(int status);
 int		_trans_status(int status);
