@@ -37,6 +37,7 @@ static void	handle_single_quote(char **input_buffer, char **input_ptr)
 		*input_buffer = \
 			append_buffer_under_single_quote(*input_buffer, *input_ptr);
 		*input_ptr += get_under_single_quote_len(*input_ptr);
+		s_quote_len = get_single_quote_len(*input_ptr);
 		*input_buffer = \
 			append_single_quote(*input_buffer, *input_ptr, s_quote_len);
 		if (s_quote_len > 0)
@@ -44,7 +45,7 @@ static void	handle_single_quote(char **input_buffer, char **input_ptr)
 	}
 }
 
-static int	make_dollar_replaced_input(\
+static void	make_dollar_replaced_input(\
 	char **input_buffer, char **input_ptr, t_minishell *minishell)
 {
 	while (TRUE)
