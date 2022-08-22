@@ -65,7 +65,7 @@ void make_node_to_envp(t_minishell *minishell)
 		idx += 1;
 		lst_curr = lst_curr->next;
 	}
-	minishell->ps_list.envp = envp;
+	minishell->ps_list->envp = envp;
 }
 
 int main(int ac, char **av, char **env)
@@ -76,8 +76,8 @@ int main(int ac, char **av, char **env)
 	make_node_to_envp(minishell);
 	while(minishell->ps_list)
 	{
-		printf("%s", *(minishell.ps_list->envp));
-		minishell.ps_list = minishell.ps_list->next; 
+		printf("%s", *(minishell->ps_list->envp));
+		minishell->ps_list = minishell->ps_list->next; 
 	}
 	return (0);
 }

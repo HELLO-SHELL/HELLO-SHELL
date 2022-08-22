@@ -62,13 +62,15 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
+	int			last_status;
 }	t_minishell;
 
+extern t_minishell g_minishell;
+
 void	print_wallpaper(void);
-void	init_minishell(t_minishell *minishell);
+void	init_minishell(void);
 
 char	**command_split(char *str);
-int		check_white_space(char c);
 int		count_split_size(char *str);
 int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);
@@ -78,9 +80,9 @@ int		check_size(char *line, char **str, int *i);
 /* built-in */
 int		ft_pwd(void);
 void	ft_env(t_list *env);
-void	ft_cd(t_minishell *minishell);
-void    ft_unset(t_minishell *minishell);
-void	ft_export(t_minishell *minishell);
+void	ft_cd(void);
+void	ft_unset(void);
+void	ft_export(void);
 void	ft_exit(int status, char *err_msg);
 
 /* utils */
@@ -90,7 +92,7 @@ void	*safe_malloc(size_t size);
 
 /*		env_utils		*/
 void	split_env(t_env *env_node, char **env, int i);
-void	env_linked_list(t_minishell *minishell, char **env);
+void	env_linked_list(char **env);
 t_env *get_env_by_key(t_list *env_list, char *key);
 char	*get_env_value_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
@@ -98,7 +100,7 @@ t_token	*get_token_head(t_token *token);
 
 /*		free_utils		*/
 void	safe_free(void *p);
-void    free_all(t_minishell *minishell, char *replaced_input, char **splitted_input);
+void    free_all(char *replaced_input, char **splitted_input);
 
 /*		replace_dollar	*/
 char	*append_buffer_under_dollar(char *save, char const *buffer);
@@ -121,6 +123,8 @@ int		env_key_valid_checker(char *str);
 void	make_node_to_envp(t_minishell *minishell);
 void	get_new_prompt();
 void	heredoc_new_prompt();
+char	*replace_whole_input_dollar(char *input);
+int		is_white_space(char c);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);
@@ -135,15 +139,15 @@ int		word_type_count(t_token *token);
 
 /* executor */
 /* 		executor.c	*/
-void	executor(t_minishell *minishell);
-void	execute_pipeline(t_minishell *minishell);
-void	execute_single_cmdline(t_process *process);
+void	executor(void);
+void	execute_pipeline(void);
+void	execute_single_cmdline(void);
 void	execute_process(t_process *process, t_pipes *pipes);
 int		execute_command(t_process *process);
 void	execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
 /* 		heredoc.c 	*/
-void	heredoc_to_temp_files(t_process *ps_list);
+void	heredoc_to_temp_files(void);
 void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx);
 void	make_temp_file(int file_index, char *delim);
 /* 		is_func.c 	*/
@@ -163,8 +167,8 @@ void	safe_close_pipes(t_pipes *p);
 void	safe_close_pipe(int *fd);
 
 /*		wait.c		*/
-int		wait_childs(t_process *ps_list);
-pid_t	_get_last_pid(t_process *ps_list);
+int		wait_childs(void);
+pid_t	_get_last_pid(void);
 int		wait_child(pid_t pid);
 int		_signal_print(int status);
 int		_trans_status(int status);

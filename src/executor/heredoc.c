@@ -38,7 +38,7 @@ void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx)
 	cmd_curr->next->type = TK_FILE;
 }
 
-void	heredoc_to_temp_files(t_process *ps_list)
+void	heredoc_to_temp_files(void)
 {
 	int			pid;
 	t_process	*ps_curr;
@@ -49,7 +49,7 @@ void	heredoc_to_temp_files(t_process *ps_list)
 	idx = 0;
 	pid = fork();
 	// pid 에러처리 해라
-	ps_curr = ps_list;
+	ps_curr = g_minishell.ps_list;
 	if (pid > 0)
 	{
 		signal(SIGINT, SIG_IGN);
@@ -58,7 +58,7 @@ void	heredoc_to_temp_files(t_process *ps_list)
 	signal(SIGINT, heredoc_new_prompt);
 	while (ps_curr == NULL)
 	{
-		cmd_curr = ps_list->cmd_line;
+		cmd_curr = ps_curr->cmd_line;
 		while (cmd_curr)
 		{
 			if (cmd_curr->type == TK_HEREDOC)
