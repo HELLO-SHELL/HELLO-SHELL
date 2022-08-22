@@ -46,7 +46,7 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (check_white_space(str[i]))
+		if (is_white_space(str[i]))
 			i++;
 		else
 		{
@@ -86,7 +86,7 @@ int	fill_str(t_split *split, char *line)
 
 	i = 0;
 	split->str = safe_malloc(sizeof(char) * (split->rtn + 1));
-	while (check_white_space(line[split->j]))
+	while (is_white_space(line[split->j]))
 		(split->j)++;
 	while (i < (split->rtn))
 	{
@@ -104,13 +104,13 @@ int	fill_str(t_split *split, char *line)
 int	split_line(t_split *split, char *line)
 {
 	split->rtn = 0;
-	while (check_white_space(line[split->i]))
+	while (is_white_space(line[split->i]))
 	{
 		split->i++;
 		if (line[split->i] == 0)
 			return (0);
 	}
-	while (!check_white_space(line[split->i]) && !ft_strchr("|<>\0", line[split->i]))
+	while (!is_white_space(line[split->i]) && !ft_strchr("|<>\0", line[split->i]))
 	{
 		if (line[split->i] == '\'' || line[split->i] == '\"')
 		{

@@ -9,7 +9,7 @@ static int	possible_next_question(char *str)
 		return (0);
 	while (*str)
 	{
-		if (check_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
+		if (is_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
 			|| *str == '|' || *str == '=' || *str == '/' || *str == '\\')
 			break ;
 		len++;
@@ -34,7 +34,7 @@ int	env_key_valid_checker(char *str)
 	temp++;
 	while (*temp)
 	{
-		if (check_white_space(*temp) || *temp == '\'' || *temp == '\"' || *temp == '$'
+		if (is_white_space(*temp) || *temp == '\'' || *temp == '\"' || *temp == '$'
 			|| *temp == '|' || *temp == '=' || *temp == '/' || *temp == '\\')
 			break ;
 		if (!(ft_isalnum(*temp) || *temp == '_'))
