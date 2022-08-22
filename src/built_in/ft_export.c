@@ -35,11 +35,11 @@ static void	export_display(void)
 	}
 }
 
-static t_env	*get_overlap_env(t_list *env_list, char *key)
+static t_env	*get_overlap_env(char *key)
 {
 	t_env	*temp;
 	
-	temp = get_env_by_key(env_list, key);
+	temp = get_env_by_key(key);
 	if (temp)
 	{
 		free(key);
@@ -70,7 +70,7 @@ static void	export_get_list(t_token *token)
 
 	str = ft_strchr(token->next->value, '=');
 	key = ft_substr(token->next->value, 0, str - token->next->value);
-	overlap_env = get_overlap_env(g_minishell.env_list, key);
+	overlap_env = get_overlap_env(key);
 	if (overlap_env)
 		return (update_value_when_overlap(overlap_env, str));
 	if (str == NULL)

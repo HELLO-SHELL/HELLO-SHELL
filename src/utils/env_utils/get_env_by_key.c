@@ -1,10 +1,10 @@
 #include "../../../include/minishell.h"
 
-t_env	*get_env_by_key(t_list *env_list, char *key)
+t_env	*get_env_by_key(char *key)
 {
     t_list  *temp;
 
-    temp = env_list;
+    temp = g_minishell.env_list;
     while (temp)
 		{
 			if (is_same_string(((t_env *)temp->content)->key, key))
@@ -14,11 +14,11 @@ t_env	*get_env_by_key(t_list *env_list, char *key)
     return (NULL);
 }
 
-char	*get_env_value_by_key(t_list *env_list, char *key)
+char	*get_env_value_by_key(char *key)
 {
     t_list  *temp;
 
-    temp = env_list;
+    temp = g_minishell.env_list;
     while (temp)
 		{
 			if (is_same_string(((t_env *)temp->content)->key, key))
