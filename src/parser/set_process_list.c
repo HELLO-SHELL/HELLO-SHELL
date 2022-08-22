@@ -18,6 +18,7 @@ static void word_token_to_char_list(t_process *ps_list)
 		idx++;
 		token_curr = token_curr->next;
 	}
+	ps_list->argv = new_argv;
 }
 
 static void insert_process_argv(t_process **ps_list)
@@ -56,7 +57,10 @@ static void insert_process_head(t_process **ps_list, t_token *tk_list)
 			tk_listdelone(&for_delete);
 		}
 		else
+		{
 			pslist_curr->cmd_line = token_head;
+			insert_process_argv(ps_list);
+		}
 		pslist_curr = pslist_curr->next;
 	}
 }
@@ -69,4 +73,20 @@ void set_process_list(t_process	**ps_list, t_token *tk_list)
 	init_pslist(ps_list, pipe_cnt);
 	(*ps_list)->size = pipe_cnt + 1;
 	insert_process_head(ps_list, tk_list);
+
+	// 아래 삭제
+	// int idx = 0;
+	// t_process *ps_curr = *ps_list;
+	// while (ps_curr)
+	// {
+	// 	while ((ps_curr)->argv && (ps_curr)->argv[idx])
+	// 	{
+	// 		ft_putstr_fd("argv : ", 1);
+	// 		ft_putstr_fd((ps_curr)->argv[idx], 1);
+	// 		ft_putstr_fd("\n", 1);
+	// 		idx++;
+	// 	}
+	// 	idx = 0;
+	// 	ps_curr = ps_curr->next;
+	// }
 }
