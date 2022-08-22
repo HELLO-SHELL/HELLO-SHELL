@@ -68,7 +68,6 @@ void	print_wallpaper(void);
 void	init_minishell(t_minishell *minishell);
 
 char	**command_split(char *str);
-int		check_white_space(char c);
 int		count_split_size(char *str);
 int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);
@@ -112,6 +111,7 @@ void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	get_new_prompt();
 void	heredoc_new_prompt();
 char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
+int		is_white_space(char c);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);

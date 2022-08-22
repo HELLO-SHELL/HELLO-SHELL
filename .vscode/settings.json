@@ -7,5 +7,6 @@
     "stdio.h": "c",
     "minishell.h": "c",
     "signal.h": "c"
-  }
+  },
+  "C_Cpp.errorSquiggles": "Disabled"
 }
