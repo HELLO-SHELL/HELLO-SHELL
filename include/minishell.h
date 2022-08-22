@@ -72,7 +72,7 @@ void	print_wallpaper(void);
 void	init_minishell(void);
 
 char	**command_split(char *str);
-int		check_white_space(char c);
+int		is_white_space(char c);
 int		count_split_size(char *str);
 int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);

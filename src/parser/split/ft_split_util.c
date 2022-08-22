@@ -1,6 +1,6 @@
 #include "../../../include/minishell.h"
 
-int	check_white_space(char c)
+int	is_white_space(char c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
 		return (1);
@@ -17,11 +17,11 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (check_white_space(str[i]))
+		if (is_white_space(str[i]))
 			i++;
 		else
 		{
-			while (str[i] != 0 && !(check_white_space(str[i])))
+			while (str[i] != 0 && !(is_white_space(str[i])))
 				i++;
 			length++;
 		}
@@ -56,7 +56,7 @@ int	fill_str(t_split *split, char *line)
 
 	i = 0;
 	split->str = safe_malloc(sizeof(char) * (split->rtn + 1));
-	while (check_white_space(line[split->j]))
+	while (is_white_space(line[split->j]))
 		(split->j)++;
 	while (i < (split->rtn))
 	{
@@ -74,13 +74,13 @@ int	fill_str(t_split *split, char *line)
 int	split_line(t_split *split, char *line)
 {
 	split->rtn = 0;
-	while (check_white_space(line[split->i]))
+	while (is_white_space(line[split->i]))
 	{
 		split->i++;
 		if (line[split->i] == 0)
 			return (0);
 	}
-	while (!check_white_space(line[split->i]) && line[split->i] != '\0')
+	while (!is_white_space(line[split->i]) && line[split->i] != '\0')
 	{
 		if (line[split->i] == '\'' || line[split->i] == '\"')
 		{
