@@ -24,7 +24,7 @@ void make_node_to_envp()
 	t_list	*lst_curr;
 	int		idx;
 
-	envp = safe_malloc(sizeof(char *) * ft_lstsize(g_minishell.env_list));
+	envp = safe_malloc(sizeof(char *) * (ft_lstsize(g_minishell.env_list) + 1));
 	lst_curr = g_minishell.env_list;
 	idx = 0;
 	while (lst_curr)
@@ -34,5 +34,14 @@ void make_node_to_envp()
 		idx++;
 		lst_curr = lst_curr->next;
 	}
+	envp[idx] = NULL;
 	g_minishell.ps_list->envp = envp;
+	// 아래는 삭제해야겠지
+	// idx = 0;
+	// while (envp[idx])
+	// {
+	// 	ft_putstr_fd(envp[idx], 1);
+	// 	ft_putstr_fd("\n", 1);
+	// 	idx++;
+	// }
 }
