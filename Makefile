@@ -24,8 +24,8 @@ MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 UTILS_DIR = src/utils/
 UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
 	  env_utils/make_node_to_envp.c \
-	  replace_dollar/replace_dollar.c chore_utils/ft_memccpy_under.c \
-	  chore_utils/is_same_string.c chore_utils/safe_malloc.c \
+	  replace_dollar/replace_dollar.c replace_dollar/replace_dollar_append_utils.c replace_dollar/replace_dollar_len_utils.c \
+	  chore_utils/is_same_string.c chore_utils/safe_malloc.c chore_utils/ft_memccpy_under.c \
 	  free_utils/free_utils.c \
 	  signal.c get_token_head.c ft_error.c word_check.c
 UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
