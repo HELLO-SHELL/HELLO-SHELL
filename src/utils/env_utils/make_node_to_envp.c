@@ -31,6 +31,8 @@ void make_node_to_envp()
 	{
 		envp[idx] = ft_env_strjoin(((t_env *)(lst_curr->content))->key,
 			((t_env *)(lst_curr->content))->value);
+		if (is_same_string(((t_env *)(lst_curr->content))->key, "PATH"))
+			(g_minishell.ps_list)->paths = ft_split(((t_env *)(lst_curr->content))->value, ':');
 		idx++;
 		lst_curr = lst_curr->next;
 	}
@@ -38,9 +40,9 @@ void make_node_to_envp()
 	g_minishell.ps_list->envp = envp;
 	// 아래는 삭제해야겠지
 	// idx = 0;
-	// while (envp[idx])
+	// while (((g_minishell.ps_list)->paths)[idx])
 	// {
-	// 	ft_putstr_fd(envp[idx], 1);
+	// 	ft_putstr_fd(((g_minishell.ps_list)->paths)[idx], 1);
 	// 	ft_putstr_fd("\n", 1);
 	// 	idx++;
 	// }
