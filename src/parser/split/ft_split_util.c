@@ -1,10 +1,39 @@
 #include "../../../include/minishell.h"
 
-int	check_white_space(char c)
+static void	skip_qoute_in_split(char *str, int *i)
 {
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
+	char	qoute;
+
+	qoute = str[*i];
+	while (str[*i])
+	{
+		(*i)++;
+		if (str[*i] == qoute)
+			break;
+	}
+	if (!str[*i])
+		ft_error_exit("qoute parse error");
+	else
+		(*i)++;
+}
+
+void	skip_word(char *str, int *i)
+{
+	if (ft_strchr("<>", str[*i]))
+	{
+		if (ft_strchr("<>", str[*i + 1]))
+			(*i)++;
+		(*i)++;
+	}
+	else if (ft_strchr("\'\"", str[*i]))
+		skip_qoute_in_split(str, i);
+	else if (ft_strchr("|", str[*i]))
+		(*i)++;
+	else
+	{
+		while (str[*i] != 0 && !(ft_strchr(" <>|\'\"", str[*i])))
+			(*i)++;
+	}
 }
 
 int	count_split_size(char *str)
@@ -17,15 +46,16 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (check_white_space(str[i]))
+		if (ft_strchr(" ", str[i]))
 			i++;
 		else
 		{
-			while (str[i] != 0 && !(check_white_space(str[i])))
-				i++;
+			skip_word(str, &i);
 			length++;
 		}
 	}
+	// 나중에 아래 줄 삭제하기
+	printf("split length: %d\n", length);
 	return (length);
 }
 
