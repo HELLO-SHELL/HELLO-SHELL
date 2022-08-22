@@ -1,6 +1,6 @@
 #include "../../../include/minishell.h"
 
-static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishell)
+static char	*replace_dollar(char *input_buffer, char *temp)
 {
 	char	*replaced_value;
 	char	*new_input_buffer;
@@ -10,13 +10,13 @@ static char	*replace_dollar(char *input_buffer, char *temp, t_minishell *minishe
 	{
 		temp++;
 		// 실행부에서 ? 처리예정 (ex. last status ...)
-		replaced_value = get_env_value_by_key(minishell->env_list, "?");
+		replaced_value = get_env_value_by_key("?");
 	}
 	else
 	{
 		temp_key = safe_malloc(get_env_len(temp));
 		ft_strlcpy(temp_key, temp, get_env_len(temp) + 1);
-		replaced_value = get_env_value_by_key(minishell->env_list, temp_key);
+		replaced_value = get_env_value_by_key(temp_key);
 		free(temp_key);
 		temp_key = NULL;
 	}
@@ -47,7 +47,7 @@ static void	handle_single_quote(char **input_buffer, char **input_ptr)
 }
 
 static void	make_dollar_replaced_input(\
-	char **input_buffer, char **input_ptr, t_minishell *minishell)
+	char **input_buffer, char **input_ptr)
 {
 	while (TRUE)
 	{
@@ -62,7 +62,7 @@ static void	make_dollar_replaced_input(\
 		if (env_key_valid_checker(*input_ptr))
 		{
 			*input_buffer = \
-				replace_dollar(*input_buffer, *input_ptr, minishell);
+				replace_dollar(*input_buffer, *input_ptr);
 			*input_ptr += get_env_len(*input_ptr);
 		}
 		handle_single_quote(&*input_buffer, &*input_ptr);
@@ -85,7 +85,7 @@ int	is_not_single_quote_validate(char *input)
 	return (cnt_single_quote % 2);
 }
 
-char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
+char	*replace_whole_input_dollar(char *input)
 {
 	char	*input_buffer;
 	char	*input_ptr;
@@ -102,7 +102,7 @@ char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 	input_ptr = input;
 	handle_single_quote(&input_buffer, &input_ptr);
 	input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
-	make_dollar_replaced_input(&input_buffer, &input_ptr, minishell);
+	make_dollar_replaced_input(&input_buffer, &input_ptr);
 	free(input);
 	input = NULL;
 	return (input_buffer);

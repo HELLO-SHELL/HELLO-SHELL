@@ -9,7 +9,7 @@ int	get_env_len(char *str)
 		return (0);
 	while (*str)
 	{
-		if (check_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
+		if (is_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
 			|| *str == '|' || *str == '=' || *str == '/' || *str == '\\')
 			break ;
 		len++;

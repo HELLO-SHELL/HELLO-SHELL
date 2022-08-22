@@ -16,11 +16,11 @@ void    init_minishell(void)
 		if (!input)
 			exit(EXIT_SUCCESS);
 		add_history(input);
-		replaced_input = replace_whole_input_dollar(input, minishell);
+		replaced_input = replace_whole_input_dollar(input);
 		printf("replcaed_input : %s%s%s\n", GRN, replaced_input, COLOR_RESET);
 		if (replaced_input && *replaced_input) 
 		{
-      splitted_input = command_split(replaced_input);
+      		splitted_input = command_split(replaced_input);
 			curr_token = make_token_list(splitted_input);
 			set_process_list(&g_minishell.ps_list, curr_token);
 			executor();

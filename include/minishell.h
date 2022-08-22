@@ -93,8 +93,8 @@ void	*safe_malloc(size_t size);
 /*		env_utils		*/
 void	split_env(t_env *env_node, char **env, int i);
 void	env_linked_list(char **env);
-t_env *get_env_by_key(t_list *env_list, char *key);
-char	*get_env_value_by_key(t_list *env_list, char *key);
+t_env *get_env_by_key(char *key);
+char	*get_env_value_by_key(char *key);
 int		env_key_valid_checker(char *str);
 t_token	*get_token_head(t_token *token);
 
@@ -111,19 +111,18 @@ int		get_env_len(char *str);
 int		get_single_quote_len(char *input_ptr);
 int		get_under_single_quote_len(char *input_ptr);
 int		get_under_dollar_len(char *input_ptr);
-char	*replace_whole_input_dollar(char *input, t_minishell *minishell);
+char	*replace_whole_input_dollar(char *input);
 
 
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
-t_env	*get_env_by_key(t_list *env_list, char *key);
+t_env	*get_env_by_key(char *key);
 int		env_key_valid_checker(char *str);
 void	make_node_to_envp(t_minishell *minishell);
 void	get_new_prompt();
 void	heredoc_new_prompt();
-char	*replace_whole_input_dollar(char *input);
 int		is_white_space(char c);
 
 /* parser */
