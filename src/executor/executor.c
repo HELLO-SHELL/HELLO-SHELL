@@ -41,8 +41,8 @@ void	execute_built_in(t_process *process)
 		ft_exit(0, "exit");
 	else if (is_same_string(cmd, UNSET))
 		ft_unset();
-	// else if (cmd == ECHO)
-	// 	ft_echo(void);
+	else if (is_same_string(cmd, ECHO))
+		ft_echo();
 	return ;
 }
 
@@ -122,7 +122,7 @@ void	executor(void)
 {
 	heredoc_to_temp_files();
 	// size 설정이 잘 안됨 -> 원인 파악 필요
-	if (g_minishell.ps_list->size == 1)
+	if (g_minishell.ps_list->size != 1)
 		execute_single_cmdline();
 	else
 		execute_pipeline();

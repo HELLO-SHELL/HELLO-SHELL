@@ -23,7 +23,7 @@ UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 UTILS_OBJS = $(UTILS_PATH:.c=.o)
 
 BUILT_IN_DIR = src/built_in/
-BUILT_IN_SRCS = ft_exit.c ft_env.c ft_export.c ft_cd.c ft_pwd.c
+BUILT_IN_SRCS = ft_exit.c ft_env.c ft_export.c ft_cd.c ft_pwd.c ft_unset.c ft_echo.c
 BUILT_IN_PATH = $(addprefix $(BUILT_IN_DIR), $(BUILT_IN_SRCS))
 BUILT_IN_OBJS = $(BUILT_IN_PATH:.c=.o)
 
