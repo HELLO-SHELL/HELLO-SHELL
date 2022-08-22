@@ -25,7 +25,6 @@ typedef struct s_token
 
 typedef struct s_process
 {
-	int					argc;
 	char				**argv;
 	char				**envp;
 	char				**paths;
@@ -72,7 +71,6 @@ void	print_wallpaper(void);
 void	init_minishell(void);
 
 char	**command_split(char *str);
-int		is_white_space(char c);
 int		count_split_size(char *str);
 int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);
@@ -86,19 +84,18 @@ void	ft_cd(void);
 void	ft_unset(void);
 void	ft_export(void);
 void	ft_exit(int status, char *err_msg);
-void	ft_echo(char **argv);
+void	ft_echo(void);
 
 /* utils */
 /*		chore_utils		*/
 int		is_same_string(char *str1, char *str2);
-void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	*safe_malloc(size_t size);
 
 /*		env_utils		*/
 void	split_env(t_env *env_node, char **env, int i);
 void	env_linked_list(char **env);
-t_env *get_env_by_key(t_list *env_list, char *key);
-char	*get_env_value_by_key(t_list *env_list, char *key);
+t_env 	*get_env_by_key(char *key);
+char	*get_env_value_by_key(char *key);
 int		env_key_valid_checker(char *str);
 t_token	*get_token_head(t_token *token);
 
@@ -106,13 +103,29 @@ t_token	*get_token_head(t_token *token);
 void	safe_free(void *p);
 void    free_all(char *replaced_input, char **splitted_input);
 
+/*		replace_dollar	*/
+char	*append_buffer_under_dollar(char *save, char const *buffer);
+char	*append_buffer_under_single_quote(char *save, char const *buffer);
+char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_len);
+char	*append_buffer_after_all(char *save, char const *buffer);
+int		get_env_len(char *str);
+int		get_single_quote_len(char *input_ptr);
+int		get_under_single_quote_len(char *input_ptr);
+int		get_under_dollar_len(char *input_ptr);
+char	*replace_whole_input_dollar(char *input);
+
+
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
+t_env	*get_env_by_key(char *key);
+int		env_key_valid_checker(char *str);
+void	make_node_to_envp();
+void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	get_new_prompt();
 void	heredoc_new_prompt();
-char	*replace_whole_input_dollar(char *input);
+int		is_white_space(char c);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);
@@ -121,9 +134,9 @@ void	init_pslist(t_process **lst, int cnt);
 void	pslist_new(t_process **lst);
 void	pslist_addback(t_process **lst);
 void	init_process_struct(t_process **cmd_list);
-void	cut_tail_by_pipe(t_token **tk_list);
+void	cut_token_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
-
+int		word_type_count(t_token *token);
 
 /* executor */
 /* 		executor.c	*/

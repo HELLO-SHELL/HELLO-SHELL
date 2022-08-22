@@ -63,7 +63,6 @@ void	execute_process(t_process *process, t_pipes *pipes)
 	safe_dup2(pipes->prev_pipe[READ], STDIN_FILENO);
 	safe_dup2(pipes->next_pipe[WRITE], STDOUT_FILENO);
 	safe_close_pipes(pipes);
-	// 여기
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
@@ -105,7 +104,6 @@ void	execute_single_cmdline(void)
 
 	process = g_minishell.ps_list;
 	apply_redirections(process->cmd_line);
-	// 여기
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
@@ -121,8 +119,7 @@ void	execute_single_cmdline(void)
 void	executor(void)
 {
 	heredoc_to_temp_files();
-	// size 설정이 잘 안됨 -> 원인 파악 필요
-	if (g_minishell.ps_list->size != 1)
+	if (g_minishell.ps_list->size == 1)
 		execute_single_cmdline();
 	else
 		execute_pipeline();

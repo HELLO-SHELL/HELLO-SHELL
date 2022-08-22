@@ -17,19 +17,15 @@ void    init_minishell(void)
 			exit(EXIT_SUCCESS);
 		add_history(input);
 		replaced_input = replace_whole_input_dollar(input);
-		printf("%s%s%s\n", GRN,replaced_input,COLOR_RESET);
-		if (replaced_input) 
+		printf("replcaed_input : %s%s%s\n", GRN, replaced_input, COLOR_RESET);
+		if (replaced_input && *replaced_input) 
 		{
-			if (*replaced_input)
-			{
-				splitted_input = command_split(replaced_input);
-				curr_token = make_token_list(splitted_input);
-				set_process_list(&g_minishell.ps_list, curr_token);
-				executor();
-			}
+			splitted_input = command_split(replaced_input);
+			curr_token = make_token_list(splitted_input);
+			set_process_list(&g_minishell.ps_list, curr_token);
+			make_node_to_envp();
+			executor();
 		}
-		else
-			break ;
 		free_all(replaced_input, splitted_input);
 	}
 }
