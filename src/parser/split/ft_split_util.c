@@ -110,7 +110,7 @@ int	split_line(t_split *split, char *line)
 		if (line[split->i] == 0)
 			return (0);
 	}
-	while (!check_white_space(line[split->i]) && !ft_strchr("|\0", line[split->i]))
+	while (!check_white_space(line[split->i]) && !ft_strchr("|<>\0", line[split->i]))
 	{
 		if (line[split->i] == '\'' || line[split->i] == '\"')
 		{
@@ -121,7 +121,14 @@ int	split_line(t_split *split, char *line)
 		split->rtn++;
 		split->i++;
 	}
-	if (line[split->i] == '|' && split->rtn == 0)
+	if (ft_strchr("|<>", line[split->i]) && split->rtn == 0)
+	{
+		if (ft_strchr("<>", line[split->i]) && ft_strchr("<>", line[split->i + 1]))
+		{
+			split->rtn++;
+			split->i++;
+		}
 		split->rtn++;
+	}
 	return (fill_str(split, line));
 }
