@@ -57,17 +57,17 @@ int	execute_command(t_process *process)
 	return (execve(command, process->argv, process->envp));
 }
 
-void	execute_process(t_process *ps_info, t_pipes *pipes)
+void	execute_process(t_process *process, t_pipes *pipes)
 {
-	apply_redirections(ps_info->cmd_line);
+	apply_redirections(process->cmd_line);
 	safe_dup2(pipes->prev_pipe[READ], STDIN_FILENO);
 	safe_dup2(pipes->next_pipe[WRITE], STDOUT_FILENO);
 	safe_close_pipes(pipes);
 	// 여기
-	if (is_built_in(ps_info))
-		execute_built_in(ps_info);
+	if (is_built_in(process))
+		execute_built_in(process);
 	else
-		execute_command(ps_info);
+		execute_command(process);
 }
 
 void	execute_pipeline(void)
@@ -95,12 +95,15 @@ void	execute_pipeline(void)
 		}
 		ps_curr = ps_curr->next;
 	}
-	wait_childs(g_minishell.ps_list);
+	g_minishell.last_status = wait_childs();
 }
 
-void	execute_single_cmdline(t_process *process)
+void	execute_single_cmdline(void)
 {
-	pid_t	pid;
+	pid_t		pid;
+	t_process	*process;
+
+	process = g_minishell.ps_list;
 	apply_redirections(process->cmd_line);
 	// 여기
 	if (is_built_in(process))
@@ -117,13 +120,10 @@ void	execute_single_cmdline(t_process *process)
 
 void	executor(void)
 {
-	t_process	*ps_list;
-
-	ps_list = g_minishell.ps_list;
-	heredoc_to_temp_files(ps_list);
+	heredoc_to_temp_files();
 	// size 설정이 잘 안됨 -> 원인 파악 필요
-	if (ps_list->size != 1)
-		execute_single_cmdline(ps_list);
+	if (g_minishell.ps_list->size == 1)
+		execute_single_cmdline();
 	else
 		execute_pipeline();
 }

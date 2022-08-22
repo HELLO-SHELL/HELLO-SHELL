@@ -41,16 +41,19 @@ int	wait_child(pid_t pid)
 	return (_trans_status(status));
 }
 
-pid_t	_get_last_pid(t_process *ps_list)
+pid_t	_get_last_pid()
 {
-	while (ps_list->next)
-		ps_list = ps_list->next;
-	return (ps_list->pid);
+	t_process *ps_curr;
+
+	ps_curr = g_minishell.ps_list;
+	while (ps_curr->next)
+		ps_curr = ps_curr->next;
+	return (ps_curr->pid);
 }
 
-int	wait_childs(t_process *ps_list)
+int	wait_childs(void)
 {
-	const pid_t	last_pid = _get_last_pid(ps_list);
+	const pid_t	last_pid = _get_last_pid();
 	pid_t		pid;
 	int			status;
 	int			last_status;
