@@ -6,7 +6,8 @@ CC = cc
 CFLAGS= -Wall -Wextra -Werror
 # 아래의 brew info readline 에서 주소를 얻어와서 넣어주어야 합니다
 
-READLINE = -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
+READLINE = -lreadline -L /Users/jaekim/.brew/opt/readline/lib -I /Users/jaekim/.brew/opt/readline/include
+# READLINE = -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
 RM = rm -rf
 
 MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
