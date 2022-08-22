@@ -25,7 +25,6 @@ typedef struct s_token
 
 typedef struct s_process
 {
-	int					argc;
 	char				**argv;
 	char				**envp;
 	char				**paths;
@@ -72,7 +71,6 @@ void	print_wallpaper(void);
 void	init_minishell(void);
 
 char	**command_split(char *str);
-int		check_white_space(char c);
 int		count_split_size(char *str);
 int		split_line(t_split *split, char *line);
 void	print_wallpaper(void);
@@ -109,9 +107,14 @@ void    free_all(char *replaced_input, char **splitted_input);
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
+t_env	*get_env_by_key(t_list *env_list, char *key);
+int		env_key_valid_checker(char *str);
+void	make_node_to_envp(t_minishell *minishell);
+void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	get_new_prompt();
 void	heredoc_new_prompt();
 char	*replace_whole_input_dollar(char *input);
+int		is_white_space(char c);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);
@@ -120,9 +123,9 @@ void	init_pslist(t_process **lst, int cnt);
 void	pslist_new(t_process **lst);
 void	pslist_addback(t_process **lst);
 void	init_process_struct(t_process **cmd_list);
-void	cut_tail_by_pipe(t_token **tk_list);
+void	cut_token_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
-
+int		word_type_count(t_token *token);
 
 /* executor */
 /* 		executor.c	*/

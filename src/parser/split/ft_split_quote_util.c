@@ -49,20 +49,9 @@ void	handle_double_quote(t_split *split, char *line)
 int	handle_quote(t_split *split, char *line)
 {
 	split->flag = 0;
-	while (line[split->i] != '\0')
-	{
-		if ((split->flag == 0 && line[split->i] == ' ')
-			|| line[split->i] == '\0')
-			break ;
-		else if (line[split->i] == '\'')
-			handle_single_quote(split, line);
-		else if (line[split->i] == '\"')
-			handle_double_quote(split, line);
-		else
-		{
-			split->i++;
-			split->rtn++;
-		}
-	}
+	if (line[split->i] == '\'')
+		handle_single_quote(split, line);
+	else if (line[split->i] == '\"')
+		handle_double_quote(split, line);
 	return (0);
 }
