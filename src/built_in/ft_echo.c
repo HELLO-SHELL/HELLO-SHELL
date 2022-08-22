@@ -4,6 +4,7 @@ void	print_arg_with_idx(char **argv, int idx)
 {
 	int	flag;
 
+	flag = 0;
 	flag = idx;
 	while (argv[idx])
 	{
@@ -20,9 +21,9 @@ void	check_flag(char **argv, int *idx)
 {
 	int i;
 
-	i = 0;
 	while (argv[*idx])
 	{
+		i = 0;
 		if (argv[*idx][i] == '-')
 		{
 			i++;
