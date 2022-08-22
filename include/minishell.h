@@ -104,6 +104,7 @@ void    free_all(t_minishell *minishell, char *replaced_input, char **splitted_i
 char	*append_buffer_under_dollar(char *save, char const *buffer);
 char	*append_buffer_under_single_quote(char *save, char const *buffer);
 char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_len);
+char	*append_buffer_after_all(char *save, char const *buffer);
 int		get_env_len(char *str);
 int		get_single_quote_len(char *input_ptr);
 int		get_under_single_quote_len(char *input_ptr);

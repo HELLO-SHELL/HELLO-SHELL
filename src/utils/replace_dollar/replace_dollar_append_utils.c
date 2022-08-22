@@ -65,3 +65,27 @@ char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_
 	input_buffer = NULL;
 	return (new_input_buffer);
 }
+
+char	*append_buffer_after_all(char *save, char const *buffer)
+{
+	char	*new;
+
+	if (buffer == NULL)
+		return (save);
+	else if (save == NULL && buffer)
+	{
+		new = malloc(ft_gnl_strlen(buffer) + 1);
+		if (!new)
+			return (NULL);
+		ft_gnl_strlcpy(new, buffer, ft_gnl_strlen(buffer) + 1);
+		return (new);
+	}
+	new = malloc(ft_gnl_strlen(save) + ft_gnl_strlen(buffer) + 1);
+	if (!new)
+		return (NULL);
+	ft_gnl_strlcpy(new, save, ft_gnl_strlen(save) + 1);
+	ft_gnl_strlcpy(new + ft_gnl_strlen(save), buffer, ft_gnl_strlen(buffer) + 1);
+	free(save);
+	save = NULL;
+	return (new);
+}
