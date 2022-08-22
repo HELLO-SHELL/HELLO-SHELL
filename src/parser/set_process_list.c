@@ -67,5 +67,6 @@ void set_process_list(t_process	**ps_list, t_token *tk_list)
 
 	pipe_cnt = count_pipe(tk_list);
 	init_pslist(ps_list, pipe_cnt);
+	(*ps_list)->size = pipe_cnt + 1;
 	insert_process_head(ps_list, tk_list);
 }
