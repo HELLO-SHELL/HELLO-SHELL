@@ -25,6 +25,7 @@ void    init_minishell(void)
 				splitted_input = command_split(replaced_input);
 				curr_token = make_token_list(splitted_input);
 				set_process_list(&g_minishell.ps_list, curr_token);
+				make_node_to_envp();
 				executor();
 			}
 		}

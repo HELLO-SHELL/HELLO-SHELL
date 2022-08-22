@@ -109,7 +109,7 @@ void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 t_env	*get_env_by_key(t_list *env_list, char *key);
 int		env_key_valid_checker(char *str);
-void	make_node_to_envp(t_minishell *minishell);
+void	make_node_to_envp();
 void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	get_new_prompt();
 void	heredoc_new_prompt();

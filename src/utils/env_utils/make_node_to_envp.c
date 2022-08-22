@@ -18,14 +18,14 @@ static char	*ft_env_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-void make_node_to_envp(t_minishell *minishell)
+void make_node_to_envp()
 {
 	char	**envp;
 	t_list	*lst_curr;
 	int		idx;
 
-	envp = safe_malloc(sizeof(char *) * ft_lstsize(minishell->env_list));
-	lst_curr = minishell->env_list;
+	envp = safe_malloc(sizeof(char *) * ft_lstsize(g_minishell.env_list));
+	lst_curr = g_minishell.env_list;
 	idx = 0;
 	while (lst_curr)
 	{
@@ -34,5 +34,5 @@ void make_node_to_envp(t_minishell *minishell)
 		idx++;
 		lst_curr = lst_curr->next;
 	}
-	minishell->ps_list->envp = envp;
+	g_minishell.ps_list->envp = envp;
 }
