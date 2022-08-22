@@ -31,9 +31,8 @@ static void	handle_single_quote(char **input_buffer, char **input_ptr)
 {
 	int	s_quote_len;
 
-	if (*input_ptr == NULL)
+	if (!**input_ptr || !*input_ptr)
 		return ;
-	s_quote_len = get_single_quote_len(*input_ptr);
 	if (ft_strchr(*input_ptr, '\'') < ft_strchr(*input_ptr, '$'))
 	{
 		*input_buffer = \
@@ -72,11 +71,31 @@ static void	make_dollar_replaced_input(\
 	}
 }
 
+int	is_not_single_quote_validate(char *input)
+{
+	int	cnt_single_quote;
+
+	cnt_single_quote = 0;
+	while (*input)
+	{
+		if (*input == '\'')
+			cnt_single_quote += 1;
+		input++;
+	}
+	return (cnt_single_quote % 2);
+}
+
 char	*replace_whole_input_dollar(char *input, t_minishell *minishell)
 {
 	char	*input_buffer;
 	char	*input_ptr;
 
+	if (is_not_single_quote_validate(input))
+	{
+		print_error_message("no valid single quote count, please input again");
+		free(input);
+		return (NULL);
+	}
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));

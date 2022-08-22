@@ -70,7 +70,7 @@ char	*append_buffer_after_all(char *save, char const *buffer)
 {
 	char	*new;
 
-	if (buffer == NULL)
+	if (buffer == NULL || !*buffer)
 		return (save);
 	else if (save == NULL && buffer)
 	{
