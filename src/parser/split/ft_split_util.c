@@ -46,7 +46,7 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_strchr(" ", str[i]))
+		if (check_white_space(str[i]))
 			i++;
 		else
 		{
@@ -69,14 +69,14 @@ void	fill_char(t_split *split, char *line, int *i, char quote)
 	}	
 	else
 	{
-		(split->j)++;
+		split->j++;
 		while (line[split->j] != '\0' && line[split->j] != quote)
 		{
 			split->str[*i] = line[split->j];
 			(*i)++;
-			(split->j)++;
+			split->j++;
 		}
-		(split->j)++;
+		split->j++;
 	}
 }
 
@@ -110,7 +110,7 @@ int	split_line(t_split *split, char *line)
 		if (line[split->i] == 0)
 			return (0);
 	}
-	while (!check_white_space(line[split->i]) && line[split->i] != '\0')
+	while (!check_white_space(line[split->i]) && !ft_strchr("|\0", line[split->i]))
 	{
 		if (line[split->i] == '\'' || line[split->i] == '\"')
 		{
@@ -121,5 +121,7 @@ int	split_line(t_split *split, char *line)
 		split->rtn++;
 		split->i++;
 	}
+	if (line[split->i] == '|' && split->rtn == 0)
+		split->rtn++;
 	return (fill_str(split, line));
 }

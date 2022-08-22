@@ -13,8 +13,9 @@ static void	make_result_from_line(t_split *split, char *line)
 		split_line(split, line);
 		split->result[idx] = split->str;
 		split->str = NULL;
+		if (is_same_string(split->result[idx], "|") || line[split->i] != '|')
+			split->i++;
 		idx++;
-		split->i++;
 	}
 }
 
@@ -39,6 +40,10 @@ char	**command_split(char *str)
 	while (i < split->split_size)
 	{
 		result[i] = ft_strdup(split->result[i]);
+		// 아래 나중에 삭제
+		ft_putstr_fd("splitted str ",1);
+		ft_putstr_fd(split->result[i],1);
+		ft_putstr_fd("\n",1);
 		free(split->result[i]);
 		i++;
 	}
