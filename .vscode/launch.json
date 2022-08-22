@@ -8,14 +8,14 @@
 			"name": "(lldb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/minishell",
+			"program": "${workspaceFolder}/test/unit_test",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": true,
 			"MIMode": "lldb",
-			"preLaunchTask": "make debug output"
+			// "preLaunchTask": "make debug output"
 		},
 	]
 }

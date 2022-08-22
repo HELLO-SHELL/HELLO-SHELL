@@ -86,6 +86,7 @@ void	ft_cd(void);
 void	ft_unset(void);
 void	ft_export(void);
 void	ft_exit(int status, char *err_msg);
+void	ft_echo(char **argv);
 
 /* utils */
 /*		chore_utils		*/
