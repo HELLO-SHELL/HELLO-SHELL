@@ -43,4 +43,6 @@ enum e_env_key_result {
 # define TRUE 1
 # define FALSE 0
 
+# define EXIT_255 255
+
 #endif

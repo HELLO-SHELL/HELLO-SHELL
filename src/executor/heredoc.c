@@ -11,6 +11,7 @@ void	make_temp_file(int file_index, char *delim)
 	filename[5] = idx_char[file_index];
 	fd = safe_openfile(filename, APPEND);
 	line = get_next_line(STDIN_FILENO);
+	line = replace_whole_input_dollar(line);
 	while (is_same_string(line, delim) == FALSE)
 	{
 		ft_putstr_fd(line, fd);
@@ -49,7 +50,7 @@ void	heredoc_to_temp_files(void)
 	idx = 0;
 	pid = fork();
 	// pid 에러처리 해라
-	ps_curr = g_minishell.ps_list;
+	ps_curr = g_minishell_info.ps_list;
 	if (pid > 0)
 	{
 		signal(SIGINT, SIG_IGN);

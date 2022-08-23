@@ -26,7 +26,7 @@ void    env_linked_list(char **env)
         env_node->key = NULL;
         env_node->value = NULL;
         split_env(env_node, env, i);
-        ft_lstadd_back(&g_minishell.env_list, ft_lstnew(env_node));
+        ft_lstadd_back(&g_minishell_info.env_list, ft_lstnew(env_node));
         i++;
     }
 }

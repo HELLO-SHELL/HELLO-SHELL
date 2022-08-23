@@ -49,8 +49,8 @@ void  ft_cd(void)
 
     path = NULL;
     change_pwd = NULL;
-    env_list = g_minishell.env_list;
-    cmd_list = g_minishell.ps_list->cmd_line->next;
+    env_list = g_minishell_info.env_list;
+    cmd_list = g_minishell_info.ps_list->cmd_line->next;
     // 리팩토링 필요 set_path
     if (set_path_to_home(env_list, cmd_list, &path))
         ;
