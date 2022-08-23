@@ -65,7 +65,7 @@ typedef struct s_minishell
 	char		*last_status;
 }	t_minishell;
 
-extern t_minishell g_minishell;
+extern t_minishell g_minishell_info;
 
 void	print_wallpaper(void);
 void	init_minishell(void);

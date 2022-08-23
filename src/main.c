@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-t_minishell	g_minishell;
+t_minishell	g_minishell_info;
 
 int main(int ac, char **av, char **env)
 {

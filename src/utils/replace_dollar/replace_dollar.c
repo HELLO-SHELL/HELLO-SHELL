@@ -9,7 +9,7 @@ static char	*replace_dollar(char *input_buffer, char *temp)
 	if (*temp == '?')
 	{
 		temp++;
-		replaced_value = g_minishell.last_status;
+		replaced_value = g_minishell_info.last_status;
 	}
 	else
 	{

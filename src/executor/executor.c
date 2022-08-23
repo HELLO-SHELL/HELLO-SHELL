@@ -76,26 +76,26 @@ void	execute_pipeline(void)
 	t_process	*ps_curr;
 
 	idx = 0;
-	ps_curr = g_minishell.ps_list;
-	init_pipe(&g_minishell.pipes);
+	ps_curr = g_minishell_info.ps_list;
+	init_pipe(&g_minishell_info.pipes);
 	while (ps_curr)
 	{
-		swap_pipe(&g_minishell.pipes);
-		if (pipe(g_minishell.pipes.next_pipe))
+		swap_pipe(&g_minishell_info.pipes);
+		if (pipe(g_minishell_info.pipes.next_pipe))
 			ft_error_exit("fail_pipe()");
 		ps_curr->pid = fork();
 		if (ps_curr->pid == -1)
 			ft_error_exit("fail fork()\n");
 		else if (ps_curr->pid == 0)
-			execute_process(ps_curr, &(g_minishell.pipes));
+			execute_process(ps_curr, &(g_minishell_info.pipes));
 		else
 		{
-			safe_close_pipe(&g_minishell.pipes.prev_pipe[READ]);
-			safe_close_pipe(&g_minishell.pipes.next_pipe[WRITE]);
+			safe_close_pipe(&g_minishell_info.pipes.prev_pipe[READ]);
+			safe_close_pipe(&g_minishell_info.pipes.next_pipe[WRITE]);
 		}
 		ps_curr = ps_curr->next;
 	}
-	g_minishell.last_status = ft_itoa(wait_childs());
+	g_minishell_info.last_status = ft_itoa(wait_childs());
 }
 
 void	execute_single_cmdline(void)
@@ -103,7 +103,7 @@ void	execute_single_cmdline(void)
 	pid_t		pid;
 	t_process	*process;
 
-	process = g_minishell.ps_list;
+	process = g_minishell_info.ps_list;
 	apply_redirections(process->cmd_line);
 	// 여기
 	if (is_built_in(process))
@@ -122,7 +122,7 @@ void	executor(void)
 {
 	heredoc_to_temp_files();
 	// size 설정이 잘 안됨 -> 원인 파악 필요
-	if (g_minishell.ps_list->size == 1)
+	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
 		execute_pipeline();
