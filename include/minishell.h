@@ -62,13 +62,14 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
-	int			last_status;
+	char		*last_status;
 }	t_minishell;
 
-extern t_minishell g_minishell;
+extern t_minishell g_minishell_info;
 
 void	print_wallpaper(void);
 void	init_minishell(void);
+void 	init_minishell_info(void);
 
 char	**command_split(char *str);
 int		count_split_size(char *str);
