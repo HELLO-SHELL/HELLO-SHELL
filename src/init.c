@@ -22,10 +22,18 @@ void    init_minishell(void)
 		{
 			splitted_input = command_split(replaced_input);
 			curr_token = make_token_list(splitted_input);
-			set_process_list(&g_minishell.ps_list, curr_token);
+			set_process_list(&g_minishell_info.ps_list, curr_token);
 			make_node_to_envp();
 			executor();
 		}
 		free_all(replaced_input, splitted_input);
 	}
+}
+
+void init_minishell_info(void)
+{
+	g_minishell_info.env_list = NULL;
+	g_minishell_info.last_status = ft_itoa(0);
+	init_pipe(&g_minishell_info.pipes);
+	g_minishell_info.ps_list = NULL;
 }

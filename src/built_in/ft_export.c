@@ -24,7 +24,7 @@ static void	export_display(void)
 {
 	t_list	*curr;
 
-	curr = g_minishell.env_list;
+	curr = g_minishell_info.env_list;
 	while (curr)
 	{
 		if (((t_env *)(curr->content))->value == NULL)
@@ -80,7 +80,7 @@ static void	export_get_list(t_token *token)
 	env_node = safe_malloc(sizeof(t_env));
 	env_node->key = key;
 	env_node->value = value;
-	ft_lstadd_back(&(g_minishell.env_list), ft_lstnew(env_node));
+	ft_lstadd_back(&(g_minishell_info.env_list), ft_lstnew(env_node));
 }
 
 void	ft_export(void)
@@ -88,7 +88,7 @@ void	ft_export(void)
 	t_env	*env_node;
 	t_token *token;	
 
-	token = g_minishell.ps_list->cmd_line;
+	token = g_minishell_info.ps_list->cmd_line;
 	if (token->next == NULL)
 		export_display();
 	else
