@@ -1,14 +1,50 @@
 #include "../../include/minishell.h"
 
-
-void	ft_exit(int status, char *err_msg) // 추후 minishell 구조체가 확정되면 수정 필요
+static int	is_digit_string(char *check)
 {
-	// argc는 최소 1개 (cmd) => 분기점
-	// - argc == 2, 즉 argv 유효 원소가 1개일때
-	// - argc > 2 && 첫번째 유효원소가 빈스트링
-	// - argc > 2
-	// - argc == 1
-	if (*err_msg)
-		print_error_message(err_msg);
-	exit(status);
+	int	i;
+
+	i = 0;
+	if (check[i] == '\0')
+		return (0);
+	else if (check[i] == '-' || check[i] == '+')
+		i++;
+	while (check[i] != '\0')
+	{
+		if (!ft_isdigit(check[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	ft_exit(void)
+{
+	char	**argv;
+	int		ac;
+
+	argv = g_minishell.ps_list->argv;
+	ac = 0;
+	while (argv[ac] != NULL)
+		ac++;
+	if (ac == 1)
+	{
+		ft_putendl_fd(EXIT, STDOUT_FILENO);
+		exit(EXIT_SUCCESS);
+	}
+	if (is_digit_string(argv[1]))
+	{
+		if (ac == 2)
+		{
+			ft_putendl_fd(EXIT, STDOUT_FILENO);
+			exit(ft_atoi(argv[1]));
+		}
+		else
+			print_error_message("helloshell: exit: too many arguments");
+		return ;
+	}
+	ft_putstr_fd("helloshell: exit: ", STDERR_FILENO);
+	ft_putstr_fd(argv[1], STDERR_FILENO);
+	ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+	exit(EXIT_255);
 }

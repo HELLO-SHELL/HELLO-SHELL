@@ -38,7 +38,7 @@ void	execute_built_in(t_process *process)
 	else if (is_same_string(cmd, EXPORT))
 		ft_export();
 	else if (is_same_string(cmd, EXIT))
-		ft_exit(0, "exit");
+		ft_exit();
 	else if (is_same_string(cmd, UNSET))
 		ft_unset();
 	else if (is_same_string(cmd, ECHO))
@@ -119,7 +119,7 @@ void	execute_single_cmdline(void)
 void	executor(void)
 {
 	heredoc_to_temp_files();
-	if (g_minishell.ps_list->size == 1)
+	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
 		execute_pipeline();
