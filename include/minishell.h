@@ -97,6 +97,7 @@ t_env *get_env_by_key(char *key);
 char	*get_env_value_by_key(char *key);
 int		env_key_valid_checker(char *str);
 t_token	*get_token_head(t_token *token);
+void	free_envp();
 
 /*		free_utils		*/
 void	safe_free(void *p);

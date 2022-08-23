@@ -25,6 +25,7 @@ void    init_minishell(void)
 			set_process_list(&g_minishell.ps_list, curr_token);
 			make_node_to_envp();
 			executor();
+			free_envp();
 		}
 		free_all(replaced_input, splitted_input);
 	}
