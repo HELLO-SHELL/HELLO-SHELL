@@ -38,7 +38,7 @@ void	execute_built_in(t_process *process)
 	else if (is_same_string(cmd, EXPORT))
 		ft_export();
 	else if (is_same_string(cmd, EXIT))
-		ft_exit(0, "exit");
+		ft_exit();
 	else if (is_same_string(cmd, UNSET))
 		ft_unset();
 	else if (is_same_string(cmd, ECHO))
