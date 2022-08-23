@@ -1,10 +1,39 @@
 #include "../../../include/minishell.h"
 
-int	check_white_space(char c)
+static void	skip_qoute_in_split(char *str, int *i)
 {
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	return (0);
+	char	qoute;
+
+	qoute = str[*i];
+	while (str[*i])
+	{
+		(*i)++;
+		if (str[*i] == qoute)
+			break;
+	}
+	if (!str[*i])
+		ft_error_exit("qoute parse error");
+	else
+		(*i)++;
+}
+
+void	skip_word(char *str, int *i)
+{
+	if (ft_strchr("<>", str[*i]))
+	{
+		if (ft_strchr("<>", str[*i + 1]))
+			(*i)++;
+		(*i)++;
+	}
+	else if (ft_strchr("\'\"", str[*i]))
+		skip_qoute_in_split(str, i);
+	else if (ft_strchr("|", str[*i]))
+		(*i)++;
+	else
+	{
+		while (str[*i] != 0 && !(ft_strchr(" <>|\'\"", str[*i])))
+			(*i)++;
+	}
 }
 
 int	count_split_size(char *str)
@@ -17,15 +46,16 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (check_white_space(str[i]))
+		if (is_white_space(str[i]))
 			i++;
 		else
 		{
-			while (str[i] != 0 && !(check_white_space(str[i])))
-				i++;
+			skip_word(str, &i);
 			length++;
 		}
 	}
+	// 나중에 아래 줄 삭제하기
+	// printf("split length = %d\n", length);
 	return (length);
 }
 
@@ -39,14 +69,14 @@ void	fill_char(t_split *split, char *line, int *i, char quote)
 	}	
 	else
 	{
-		(split->j)++;
+		split->j++;
 		while (line[split->j] != '\0' && line[split->j] != quote)
 		{
 			split->str[*i] = line[split->j];
 			(*i)++;
-			(split->j)++;
+			split->j++;
 		}
-		(split->j)++;
+		split->j++;
 	}
 }
 
@@ -56,7 +86,7 @@ int	fill_str(t_split *split, char *line)
 
 	i = 0;
 	split->str = safe_malloc(sizeof(char) * (split->rtn + 1));
-	while (check_white_space(line[split->j]))
+	while (is_white_space(line[split->j]))
 		(split->j)++;
 	while (i < (split->rtn))
 	{
@@ -74,13 +104,13 @@ int	fill_str(t_split *split, char *line)
 int	split_line(t_split *split, char *line)
 {
 	split->rtn = 0;
-	while (check_white_space(line[split->i]))
+	while (is_white_space(line[split->i]))
 	{
 		split->i++;
 		if (line[split->i] == 0)
 			return (0);
 	}
-	while (!check_white_space(line[split->i]) && line[split->i] != '\0')
+	while (!is_white_space(line[split->i]) && !ft_strchr("|<>\0", line[split->i]))
 	{
 		if (line[split->i] == '\'' || line[split->i] == '\"')
 		{
@@ -90,6 +120,15 @@ int	split_line(t_split *split, char *line)
 		}
 		split->rtn++;
 		split->i++;
+	}
+	if (ft_strchr("|<>", line[split->i]) && split->rtn == 0)
+	{
+		if (ft_strchr("<>", line[split->i]) && ft_strchr("<>", line[split->i + 1]))
+		{
+			split->rtn++;
+			split->i++;
+		}
+		split->rtn++;
 	}
 	return (fill_str(split, line));
 }

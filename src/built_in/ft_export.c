@@ -20,11 +20,11 @@ int	export_check_error(t_token *token)
 	return (0);
 }
 
-void	export_display(t_minishell *minishell)
+static void	export_display(void)
 {
 	t_list	*curr;
 
-	curr = minishell->env_list;
+	curr = g_minishell.env_list;
 	while (curr)
 	{
 		if (((t_env *)(curr->content))->value == NULL)
@@ -35,11 +35,11 @@ void	export_display(t_minishell *minishell)
 	}
 }
 
-static t_env	*get_overlap_env(t_list *env_list, char *key)
+static t_env	*get_overlap_env(char *key)
 {
 	t_env	*temp;
 	
-	temp = get_env_by_key(env_list, key);
+	temp = get_env_by_key(key);
 	if (temp)
 	{
 		free(key);
@@ -60,7 +60,7 @@ static void	update_value_when_overlap(t_env *temp, char *str)
 	updated_env->value = ft_substr(str + 1, 0, ft_strlen(str));
 }
 
-void	export_get_list(t_minishell *minishell, t_token *token)
+static void	export_get_list(t_token *token)
 {
 	char *key;
 	char *value;
@@ -70,7 +70,7 @@ void	export_get_list(t_minishell *minishell, t_token *token)
 
 	str = ft_strchr(token->next->value, '=');
 	key = ft_substr(token->next->value, 0, str - token->next->value);
-	overlap_env = get_overlap_env(minishell->env_list, key);
+	overlap_env = get_overlap_env(key);
 	if (overlap_env)
 		return (update_value_when_overlap(overlap_env, str));
 	if (str == NULL)
@@ -80,17 +80,17 @@ void	export_get_list(t_minishell *minishell, t_token *token)
 	env_node = safe_malloc(sizeof(t_env));
 	env_node->key = key;
 	env_node->value = value;
-	ft_lstadd_back(&(minishell->env_list), ft_lstnew(env_node));
+	ft_lstadd_back(&(g_minishell.env_list), ft_lstnew(env_node));
 }
 
-void	ft_export(t_minishell *minishell)
+void	ft_export(void)
 {
 	t_env	*env_node;
 	t_token *token;	
 
-	token = minishell->ps_list->cmd_line;
+	token = g_minishell.ps_list->cmd_line;
 	if (token->next == NULL)
-		export_display(minishell);
+		export_display();
 	else
 	{
 		while (token->next)
@@ -99,13 +99,13 @@ void	ft_export(t_minishell *minishell)
 			{
 				// print_error 로 수정해야함
 				token = token->next;
-                write(2,"HELLO-SHELL: `", 14);
-                write(2, token->value, ft_strlen(token->value));
-                write(2, "': command not found\n", 22);
+				write(2,"HELLO-SHELL: `", 14);
+				write(2, token->value, ft_strlen(token->value));
+				write(2, "': command not found\n", 22);
 			}
 			else
 			{
-				export_get_list(minishell, token);
+				export_get_list(token);
 				token = token->next;
 			}
 		}
