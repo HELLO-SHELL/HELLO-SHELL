@@ -23,7 +23,7 @@ void	ft_exit(void)
 	char	**argv;
 	int		ac;
 
-	argv = g_minishell.ps_list->argv;
+	argv = g_minishell_info.ps_list->argv;
 	ac = 0;
 	while (argv[ac] != NULL)
 		ac++;
