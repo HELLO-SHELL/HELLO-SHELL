@@ -9,21 +9,18 @@ static char	*replace_dollar(char *input_buffer, char *temp)
 	if (*temp == '?')
 	{
 		temp++;
-		replaced_value = ft_itoa(g_minishell.last_status);
+		replaced_value = g_minishell.last_status;
 	}
 	else
 	{
 		temp_key = safe_malloc(get_env_len(temp));
 		ft_strlcpy(temp_key, temp, get_env_len(temp) + 1);
-		replaced_value = ft_strdup(get_env_value_by_key(temp_key));
+		replaced_value = get_env_value_by_key(temp_key);
 		free(temp_key);
 		temp_key = NULL;
 	}
 	if (replaced_value)
-	{
 		new_input_buffer = append_buffer(input_buffer, replaced_value);
-		free(replaced_value);
-	}
 	else
 		new_input_buffer = input_buffer;
 	return (new_input_buffer);
