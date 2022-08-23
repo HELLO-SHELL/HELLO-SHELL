@@ -94,6 +94,7 @@ void	execute_pipeline(void)
 		}
 		ps_curr = ps_curr->next;
 	}
+	free(g_minishell_info.last_status);
 	g_minishell_info.last_status = ft_itoa(wait_childs());
 }
 
