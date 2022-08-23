@@ -49,7 +49,7 @@ void	heredoc_to_temp_files(void)
 	idx = 0;
 	pid = fork();
 	// pid 에러처리 해라
-	ps_curr = g_minishell.ps_list;
+	ps_curr = g_minishell_info.ps_list;
 	if (pid > 0)
 	{
 		signal(SIGINT, SIG_IGN);

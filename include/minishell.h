@@ -62,13 +62,14 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
-	int			last_status;
+	char		*last_status;
 }	t_minishell;
 
-extern t_minishell g_minishell;
+extern t_minishell g_minishell_info;
 
 void	print_wallpaper(void);
 void	init_minishell(void);
+void 	init_minishell_info(void);
 
 char	**command_split(char *str);
 int		count_split_size(char *str);
@@ -83,7 +84,8 @@ void	ft_env(t_list *env);
 void	ft_cd(void);
 void	ft_unset(void);
 void	ft_export(void);
-void	ft_exit(int status, char *err_msg);
+void	ft_exit(void);
+void	ft_echo(void);
 
 /* utils */
 /*		chore_utils		*/
@@ -93,7 +95,7 @@ void	*safe_malloc(size_t size);
 /*		env_utils		*/
 void	split_env(t_env *env_node, char **env, int i);
 void	env_linked_list(char **env);
-t_env *get_env_by_key(char *key);
+t_env 	*get_env_by_key(char *key);
 char	*get_env_value_by_key(char *key);
 int		env_key_valid_checker(char *str);
 t_token	*get_token_head(t_token *token);

@@ -24,25 +24,25 @@ void make_node_to_envp()
 	t_list	*lst_curr;
 	int		idx;
 
-	envp = safe_malloc(sizeof(char *) * (ft_lstsize(g_minishell.env_list) + 1));
-	lst_curr = g_minishell.env_list;
+	envp = safe_malloc(sizeof(char *) * (ft_lstsize(g_minishell_info.env_list) + 1));
+	lst_curr = g_minishell_info.env_list;
 	idx = 0;
 	while (lst_curr)
 	{
 		envp[idx] = ft_env_strjoin(((t_env *)(lst_curr->content))->key,
 			((t_env *)(lst_curr->content))->value);
 		if (is_same_string(((t_env *)(lst_curr->content))->key, "PATH"))
-			(g_minishell.ps_list)->paths = ft_split(((t_env *)(lst_curr->content))->value, ':');
+			(g_minishell_info.ps_list)->paths = ft_split(((t_env *)(lst_curr->content))->value, ':');
 		idx++;
 		lst_curr = lst_curr->next;
 	}
 	envp[idx] = NULL;
-	g_minishell.ps_list->envp = envp;
+	g_minishell_info.ps_list->envp = envp;
 	// 아래는 삭제해야겠지
 	// idx = 0;
-	// while (((g_minishell.ps_list)->paths)[idx])
+	// while (((g_minishell_info.ps_list)->paths)[idx])
 	// {
-	// 	ft_putstr_fd(((g_minishell.ps_list)->paths)[idx], 1);
+	// 	ft_putstr_fd(((g_minishell_info.ps_list)->paths)[idx], 1);
 	// 	ft_putstr_fd("\n", 1);
 	// 	idx++;
 	// }

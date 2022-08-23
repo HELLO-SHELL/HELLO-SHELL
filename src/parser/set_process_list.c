@@ -12,7 +12,7 @@ static void word_token_to_char_list(t_process *ps_list)
 	new_argv = safe_malloc(sizeof(char *) * (count + 1));
 	token_curr = ps_list->cmd_line;
 	while(token_curr)
-	{
+	{ 
 		if (token_curr->type == TK_WORD)
 			new_argv[idx] = ft_strdup(token_curr->value);
 		idx++;

@@ -45,7 +45,7 @@ pid_t	_get_last_pid()
 {
 	t_process *ps_curr;
 
-	ps_curr = g_minishell.ps_list;
+	ps_curr = g_minishell_info.ps_list;
 	while (ps_curr->next)
 		ps_curr = ps_curr->next;
 	return (ps_curr->pid);

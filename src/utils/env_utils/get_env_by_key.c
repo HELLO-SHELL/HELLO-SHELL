@@ -4,7 +4,7 @@ t_env	*get_env_by_key(char *key)
 {
     t_list  *temp;
 
-    temp = g_minishell.env_list;
+    temp = g_minishell_info.env_list;
     while (temp)
 		{
 			if (is_same_string(((t_env *)temp->content)->key, key))
@@ -18,7 +18,7 @@ char	*get_env_value_by_key(char *key)
 {
     t_list  *temp;
 
-    temp = g_minishell.env_list;
+    temp = g_minishell_info.env_list;
     while (temp)
 		{
 			if (is_same_string(((t_env *)temp->content)->key, key))

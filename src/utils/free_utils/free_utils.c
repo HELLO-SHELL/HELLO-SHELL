@@ -17,8 +17,8 @@ void free_envp()
 	int		envp_idx;
 	int		path_idx;
 
-	envp_curr = g_minishell.ps_list->envp;
-	path_curr = g_minishell.ps_list->paths;
+	envp_curr = g_minishell_info.ps_list->envp;
+	path_curr = g_minishell_info.ps_list->paths;
 	envp_idx = 0;
 	path_idx = 0;
 	while (envp_curr && envp_curr[envp_idx])
@@ -40,7 +40,7 @@ void free_argv()
 	char	**argv_curr;
 	int		argv_idx;
 
-	argv_curr = g_minishell.ps_list->argv;
+	argv_curr = g_minishell_info.ps_list->argv;
 	argv_idx = 0;
 	while (argv_curr[argv_idx])
 	{
@@ -67,7 +67,7 @@ void free_all(char *replaced_input, char **splitted_input)
 	safe_free(splitted_input);
 	free_envp();
 	free_argv();
-	curr_process = g_minishell.ps_list;
+	curr_process = g_minishell_info.ps_list;
 	while (curr_process && curr_process->cmd_line)
 	{
 		temp_process = curr_process;
