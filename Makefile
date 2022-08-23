@@ -8,12 +8,13 @@ CFLAGS= -Wall -Wextra -Werror
 # readline 경로를 아키텍쳐 별로 변경하는 코드. M1 Mac, Cluster Mac, arm Linux 환경 대응
 detected_OS := $(shell uname -sm)
 ifeq ($(detected_OS), Linux aarch64)
-#### linux 경로대로 변경
-READLINE = -lreadline 
+LINKING_FLAGS = -lreadline
 else ifeq ($(detected_OS), Darwin x86_64)
-READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
+LINKING_FLAGS = -lreadline -L ${HOME}/.brew/opt/readline/lib
+COMFILE_FLAGS = -I ${HOME}/.brew/opt/readline/include
 else ifeq ($(detected_OS), Darwin arm64)
-READLINE = -lreadline -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
+LINKING_FLAGS = -lreadline -L /opt/homebrew/opt/readline/lib
+COMFILE_FLAGS = -I /opt/homebrew/opt/readline/include
 endif
 
 RM = rm -rf
@@ -51,7 +52,7 @@ OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJ
 $(NAME) : $(OBJS)
 	make bonus -j -C $(LIB_DIR)/libft
 	make -j -C $(LIB_DIR)/get_next_line
-	$(CC) $(CFLAGS) $(OBJS) $(READLINE) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LINKING_FLAGS) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
 #  -fsanitize=address
@@ -73,6 +74,6 @@ re :
 	make all
 
 %.o :   %.c
-	$(CC) $(READLINE) -c $^ -o $@
+	$(CC) -c $^ $(COMFILE_FLAGS) -o $@
 
 .PHONY : all clean fclean re
