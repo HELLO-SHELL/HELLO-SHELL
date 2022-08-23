@@ -76,10 +76,13 @@ void free_all(char *replaced_input, char **splitted_input)
 		while (curr_token)
 		{
 			safe_free(curr_token->value);
+			curr_token->value = NULL;
 			temp_token = curr_token;
 			curr_token = curr_token->next;
 			safe_free(temp_token);
+			temp_token = NULL;
 		}
 		safe_free(temp_process);
+		temp_process = NULL;
 	}
 }
