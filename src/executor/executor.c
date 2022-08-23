@@ -33,16 +33,16 @@ void	execute_built_in(t_process *process)
 		ft_cd();
 	else if (is_same_string(cmd, PWD))
 		ft_pwd();
-	// else if (cmd == ENV)
-	// 	ft_env(void);
-	// else if (cmd == EXPORT)
-	// 	ft_export(void);	
-	// else if (cmd == EXIT)
-	// 	ft_exit(void);
-	// else if (cmd == ECHO)
-	// 	ft_echo(void);
-	// else if (cmd == UNSET)
-	// 	ft_unset(void);
+	else if (is_same_string(cmd, ENV))
+		ft_env(g_minishell.env_list);
+	else if (is_same_string(cmd, EXPORT))
+		ft_export();
+	else if (is_same_string(cmd, EXIT))
+		ft_exit();
+	else if (is_same_string(cmd, UNSET))
+		ft_unset();
+	else if (is_same_string(cmd, ECHO))
+		ft_echo();
 	return ;
 }
 
@@ -63,7 +63,6 @@ void	execute_process(t_process *process, t_pipes *pipes)
 	safe_dup2(pipes->prev_pipe[READ], STDIN_FILENO);
 	safe_dup2(pipes->next_pipe[WRITE], STDOUT_FILENO);
 	safe_close_pipes(pipes);
-	// 여기
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
@@ -105,7 +104,6 @@ void	execute_single_cmdline(void)
 
 	process = g_minishell_info.ps_list;
 	apply_redirections(process->cmd_line);
-	// 여기
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
@@ -121,7 +119,6 @@ void	execute_single_cmdline(void)
 void	executor(void)
 {
 	heredoc_to_temp_files();
-	// size 설정이 잘 안됨 -> 원인 파악 필요
 	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
