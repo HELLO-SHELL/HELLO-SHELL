@@ -62,7 +62,7 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
-	int			last_status;
+	char		*last_status;
 }	t_minishell;
 
 extern t_minishell g_minishell;

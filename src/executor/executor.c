@@ -95,7 +95,7 @@ void	execute_pipeline(void)
 		}
 		ps_curr = ps_curr->next;
 	}
-	g_minishell.last_status = wait_childs();
+	g_minishell.last_status = ft_itoa(wait_childs());
 }
 
 void	execute_single_cmdline(void)
