@@ -39,7 +39,6 @@ void	ft_exit(void)
 			{
 				if (ac == 2)
 				{
-					g_minishell.last_status = ft_atoi(argv[1]);
 					if (argv[1][0] == '0')
 						ft_putendl_fd(EXIT, STDOUT_FILENO);
 					else
@@ -52,7 +51,6 @@ void	ft_exit(void)
 			}
 		}
 		i++;
-		g_minishell.last_status = EXIT_255;
 		ft_putstr_fd("helloshell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(argv[1], STDERR_FILENO);
 		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
