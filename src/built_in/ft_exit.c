@@ -28,19 +28,26 @@ void	ft_exit(void)
 			{
 				if (ac == 2)
 				{
-					ft_putendl_fd(EXIT, STDERR_FILENO);
-					// 에러 출력
-					exit(ft_atoi(argv[1]));
+					g_minishell.last_status = ft_atoi(argv[1]);
+					if (argv[1][0] == 0 || argv[1][1] == NULL)
+						ft_putendl_fd(EXIT, STDOUT_FILENO);
+					else
+					{
+						// 상태값 출력을 어떤 방식으로 할 것 인가?
+						print_error_message(EXIT);
+						exit(ft_atoi(argv[1]));
+					}
 				}
 				else
-				{
-					// helloshell: exit: too many arguments
-					return ; // int 반환??
-				}
+					print_error_message("helloshell: exit: too many arguments");
+				return ;
 			}
 		}
 		i++;
-		// helloshell: exit: argv[1]: numeric argument required
+		g_minishell.last_status = EXIT_255;
+		ft_putstr_fd("helloshell: exit: ", STDERR_FILENO);
+		ft_putstr_fd(argv[1], STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required", STDERR_FILENO);
 		exit(EXIT_255);		
 	}
 	// argc 1개 일 때 -> exit -> exit 출력하면서 종료
