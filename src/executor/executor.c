@@ -34,7 +34,7 @@ void	execute_built_in(t_process *process)
 	else if (is_same_string(cmd, PWD))
 		ft_pwd();
 	else if (is_same_string(cmd, ENV))
-		ft_env(g_minishell.env_list);
+		ft_env(g_minishell_info.env_list);
 	else if (is_same_string(cmd, EXPORT))
 		ft_export();
 	else if (is_same_string(cmd, EXIT))

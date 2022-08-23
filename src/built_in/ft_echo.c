@@ -7,7 +7,7 @@ static void	print_arg_with_idx(int idx)
 
 	flag = 0;
 	flag = idx;
-	argv = g_minishell.ps_list->argv;
+	argv = g_minishell_info.ps_list->argv;
 	while (argv[idx])
 	{
 		ft_putstr_fd(argv[idx], 1);
@@ -24,7 +24,7 @@ static void	check_flag(int *idx)
 	int		i;
 	char	**argv;
 
-	argv = g_minishell.ps_list->argv;
+	argv = g_minishell_info.ps_list->argv;
 	while (argv[*idx])
 	{
 		i = 0;
