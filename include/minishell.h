@@ -69,6 +69,7 @@ extern t_minishell g_minishell_info;
 
 void	print_wallpaper(void);
 void	init_minishell(void);
+void 	init_minishell_info(void);
 
 char	**command_split(char *str);
 int		count_split_size(char *str);

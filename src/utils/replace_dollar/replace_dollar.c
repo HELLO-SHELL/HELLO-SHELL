@@ -7,10 +7,7 @@ static char	*replace_dollar(char *input_buffer, char *temp)
 	char	*temp_key;
 
 	if (*temp == '?')
-	{
-		temp++;
 		replaced_value = g_minishell_info.last_status;
-	}
 	else
 	{
 		temp_key = safe_malloc(get_env_len(temp));
