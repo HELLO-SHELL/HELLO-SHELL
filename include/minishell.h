@@ -81,7 +81,7 @@ int		check_size(char *line, char **str, int *i);
 
 /* built-in */
 int		ft_pwd(void);
-void	ft_env(t_list *env);
+void	ft_env(void);
 void	ft_cd(void);
 void	ft_unset(void);
 void	ft_export(void);
