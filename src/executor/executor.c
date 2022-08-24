@@ -94,6 +94,7 @@ void	execute_pipeline(void)
 		}
 		ps_curr = ps_curr->next;
 	}
+	free(g_minishell_info.last_status);
 	g_minishell_info.last_status = ft_itoa(wait_childs());
 }
 
@@ -103,7 +104,7 @@ void	execute_single_cmdline(void)
 	t_process	*process;
 
 	process = g_minishell_info.ps_list;
-	apply_redirections(process->cmd_line);
+	// apply_redirections(process->cmd_line);
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
@@ -112,13 +113,16 @@ void	execute_single_cmdline(void)
 		if (pid == 0)
 			execute_command(process);
 		else
-			wait_child(pid);
-	}
+		{
+			free(g_minishell_info.last_status);
+			g_minishell_info.last_status = ft_itoa(wait_child(pid));
+		}
+	} 
 }
 
 void	executor(void)
 {
-	heredoc_to_temp_files();
+	// heredoc_to_temp_files();
 	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
