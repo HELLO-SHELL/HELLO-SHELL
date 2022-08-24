@@ -17,7 +17,7 @@ static void    set_path(char **path)
 
     env_list = g_minishell_info.env_list;
     cmd_list = g_minishell_info.ps_list->cmd_line->next;
-    if (is_path_home(cmd_list))
+    if (is_path_only_home(cmd_list))
         set_path_to_home(env_list, cmd_list, path);
     else if (is_path_pass_home(cmd_list))
         set_path_at_home(env_list, cmd_list, path);

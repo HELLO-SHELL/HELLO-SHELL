@@ -1,6 +1,6 @@
 #include "../../../include/minishell.h"
 
-int is_path_home(t_token *cmd_list)
+int is_path_only_home(t_token *cmd_list)
 {
     if (cmd_list == NULL
         || (cmd_list->value[0] == '~' && cmd_list->value[1] == '\0')

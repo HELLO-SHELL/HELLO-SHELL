@@ -90,7 +90,7 @@ void	ft_echo(void);
 
 /* utils */
 /* built-in */
-int			is_path_home(t_token *cmd_list);
+int			is_path_only_home(t_token *cmd_list);
 int 		is_path_pass_home(t_token *cmd_list);
 void 		set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
 void 		set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
