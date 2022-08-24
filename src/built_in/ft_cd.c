@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int set_path_to_home(t_list *env_list, t_token *cmd_list, char **path)
+static int set_path_to_home(t_list *env_list, t_token *cmd_list, char **path)
 {
     if (cmd_list == NULL
         || (cmd_list->value[0] == '~' && cmd_list->value[1] == '\0')
@@ -27,39 +27,51 @@ int set_path_at_home(t_list *env_list, t_token *cmd_list, char **path)
     return (0);
 }
 
-void    set_path_to_input(t_token *cmd_list, char **path)
+static void    set_path_to_input(t_token *cmd_list, char **path)
 {
     *path = cmd_list->value;
 }
 
-void    update_env_pwd(t_list **env_list, t_env **change_pwd)
+static void    update_env_pwd(t_env **change_pwd)
 {
+    t_list *env_list;
+
+    env_list = g_minishell_info.env_list;
     *change_pwd = get_env_by_key("PWD");
     free((*change_pwd)->value);
     (*change_pwd)->value = NULL;
     (*change_pwd)->value = getcwd(NULL, 0);
 }
 
-void  ft_cd(void)
+static void    set_path(char **path)
 {
     t_list *env_list;
     t_token *cmd_list;
+
+    env_list = g_minishell_info.env_list;
+    cmd_list = g_minishell_info.ps_list->cmd_line->next;
+    if (set_path_to_home(env_list, cmd_list, path))
+        ;
+    else if (set_path_at_home(env_list, cmd_list, path))
+        ;
+    else
+        set_path_to_input(cmd_list, path);
+}
+
+static void change_directory(char **path)
+{
+    if (chdir(*path) != 0)
+        print_error_message("bash: cd: No such file or directory");
+}
+
+void  ft_cd(void)
+{
     t_env *change_pwd;
     char *path;
 
     path = NULL;
     change_pwd = NULL;
-    env_list = g_minishell_info.env_list;
-    cmd_list = g_minishell_info.ps_list->cmd_line->next;
-    // 리팩토링 필요 set_path
-    if (set_path_to_home(env_list, cmd_list, &path))
-        ;
-    else if (set_path_at_home(env_list, cmd_list, &path))
-        ;
-    else
-        set_path_to_input(cmd_list, &path);
-    // 리팩토링 필요 change_directory
-    if (chdir(path) != 0)
-        print_error_message("bash: cd: No such file or directory");
-    update_env_pwd(&env_list, &change_pwd);
+    set_path(&path);
+    change_directory(&path);
+    update_env_pwd(&change_pwd);
 }
