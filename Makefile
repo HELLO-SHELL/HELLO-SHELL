@@ -60,7 +60,7 @@ all : $(NAME)
 	./minishell
 
 debug :
-	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c $(READLINE) -o minishell
+	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c $(COMFILE_FLAGS) $(LINKING_FLAGS) -o minishell
 
 clean :
 	$(RM) $(OBJS)
