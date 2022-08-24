@@ -89,6 +89,12 @@ void	ft_exit(void);
 void	ft_echo(void);
 
 /* utils */
+/* built-in */
+int set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
+int set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
+void    set_path_to_input(t_token *cmd_list, char **path);
+
+
 /*		chore_utils		*/
 int		is_same_string(char *str1, char *str2);
 void	*safe_malloc(size_t size);
