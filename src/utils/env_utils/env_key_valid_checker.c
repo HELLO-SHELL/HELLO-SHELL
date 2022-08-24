@@ -9,8 +9,7 @@ static int	possible_next_question(char *str)
 		return (0);
 	while (*str)
 	{
-		if (is_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
-			|| *str == '|' || *str == '=' || *str == '/' || *str == '\\')
+		if (is_dollar_replacement_end_condition(*str))
 			break ;
 		len++;
 		str++;
@@ -27,15 +26,16 @@ int	env_key_valid_checker(char *str)
 	if (!str)
 		return (FALSE);
 	temp = str;
+	if (*temp != '$')
+		return (FALSE);
+	temp++;
 	if (*temp == '?' && possible_next_question(temp + 1))
 		return (ENV_KEY_QUESTION);
 	if (!(ft_isalpha(*temp) || *temp == '_'))
 		return (FALSE);
-	temp++;
 	while (*temp)
 	{
-		if (is_white_space(*temp) || *temp == '\'' || *temp == '\"' || *temp == '$'
-			|| *temp == '|' || *temp == '=' || *temp == '/' || *temp == '\\')
+		if (is_dollar_replacement_end_condition(*temp))
 			break ;
 		if (!(ft_isalnum(*temp) || *temp == '_'))
 			return (FALSE);
