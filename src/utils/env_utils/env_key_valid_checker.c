@@ -33,6 +33,7 @@ int	env_key_valid_checker(char *str)
 		return (ENV_KEY_QUESTION);
 	if (!(ft_isalpha(*temp) || *temp == '_'))
 		return (FALSE);
+	temp++;
 	while (*temp)
 	{
 		if (is_dollar_replacement_end_condition(*temp))
