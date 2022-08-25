@@ -64,8 +64,8 @@ int	count_split_size(char *str)
 			skip_word(str, &i, &length);
 	}
 	// 나중에 아래 줄 삭제하기
-	ft_putstr_fd("splitted size : ", 1);
-	ft_putnbr_fd(length, 1);
-	ft_putstr_fd("\n", 1);
+	// ft_putstr_fd("splitted size : ", 1);
+	// ft_putnbr_fd(length, 1);
+	// ft_putstr_fd("\n", 1);
 	return (length);
 }
