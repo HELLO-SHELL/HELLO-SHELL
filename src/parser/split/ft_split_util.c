@@ -3,19 +3,23 @@
 void	handle_pipe_and_arrow(char *str, int *i, int *res)
 {
 	if (ft_strchr("<>|", str[*i]) && str[*i] != '\0')
-	{
 		(*res)++;
-	}
 	if (str[*i] == '<')
 	{
 		if (str[*i + 1] == '<')
+		{
+			(*res)++;
 			(*i)++;
+		}
 		(*i)++;
 	}
 	if (str[*i] == '>')
 	{
 		if (str[*i + 1] == '>')
+		{
+			(*res)++;
 			(*i)++;
+		}
 		(*i)++;
 	}
 	else if (ft_strchr("|", str[*i]))
