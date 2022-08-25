@@ -14,8 +14,7 @@ static void word_token_to_argv(t_process *ps_list)
 	while(token_curr)
 	{ 
 		if (token_curr->type == TK_WORD)
-			new_argv[idx] = ft_strdup(token_curr->value);
-		idx++;
+			new_argv[idx++] = ft_strdup(token_curr->value);
 		token_curr = token_curr->next;
 	}
 	ps_list->argv = new_argv;
