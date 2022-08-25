@@ -13,8 +13,6 @@ static void	make_result_from_line(t_split *split, char *line)
 		split_line(split, line);
 		split->result[idx] = split->str;
 		split->str = NULL;
-		if (!ft_strchr("|<>", line[split->j]))
-			split->i++;
 		idx++;
 	}
 }
