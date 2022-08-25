@@ -129,7 +129,8 @@ int	execute_single_cmdline(void)
 
 void	executor(void)
 {
-	//heredoc_to_temp_files();
+	if (heredoc_to_temp_files())
+		return ;
 	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
