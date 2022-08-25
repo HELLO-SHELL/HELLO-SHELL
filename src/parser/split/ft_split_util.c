@@ -1,62 +1,29 @@
 #include "../../../include/minishell.h"
 
-static void	skip_qoute_in_split(char *str, int *i)
+void	handle_pipe_and_arrow(char *str, int *i, int *res)
 {
-	char	qoute;
-
-	qoute = str[*i];
-	while (str[*i])
+	if (ft_strchr("<>|", str[*i]) && str[*i] != '\0')
+		(*res)++;
+	if (str[*i] == '<')
 	{
-		(*i)++;
-		if (str[*i] == qoute)
-			break;
-	}
-	if (!str[*i])
-		ft_error_exit("qoute parse error");
-	else
-		(*i)++;
-}
-
-void	skip_word(char *str, int *i)
-{
-	if (ft_strchr("<>", str[*i]))
-	{
-		if (ft_strchr("<>", str[*i + 1]))
+		if (str[*i + 1] == '<')
+		{
+			(*res)++;
 			(*i)++;
+		}
 		(*i)++;
 	}
-	else if (ft_strchr("\'\"", str[*i]))
-		skip_qoute_in_split(str, i);
+	if (str[*i] == '>')
+	{
+		if (str[*i + 1] == '>')
+		{
+			(*res)++;
+			(*i)++;
+		}
+		(*i)++;
+	}
 	else if (ft_strchr("|", str[*i]))
 		(*i)++;
-	else
-	{
-		while (str[*i] != 0 && !(ft_strchr(" <>|\'\"", str[*i])))
-			(*i)++;
-	}
-}
-
-int	count_split_size(char *str)
-{
-	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
-	int	i;
-	int	length;
-
-	i = 0;
-	length = 0;
-	while (str[i] != '\0')
-	{
-		if (is_white_space(str[i]))
-			i++;
-		else
-		{
-			skip_word(str, &i);
-			length++;
-		}
-	}
-	// 나중에 아래 줄 삭제하기
-	// printf("split length = %d\n", length);
-	return (length);
 }
 
 void	fill_char(t_split *split, char *line, int *i, char quote)
@@ -110,25 +77,18 @@ int	split_line(t_split *split, char *line)
 		if (line[split->i] == 0)
 			return (0);
 	}
-	while (!is_white_space(line[split->i]) && !ft_strchr("|<>\0", line[split->i]))
-	{
-		if (line[split->i] == '\'' || line[split->i] == '\"')
+	if (ft_strchr("<>|", line[split->i]) || is_white_space(line[split->i]))
+		handle_pipe_and_arrow(line, &(split->i), &(split->rtn));
+	else {
+		while (!is_white_space(line[split->i]) && !ft_strchr("<>|\0", line[split->i]))
 		{
-			if (handle_quote(split, line))
-				return (0);
-			break ;
+			if (ft_strchr("\'\"", line[split->i]))
+				handle_quote(split, line);
+			else {
+				split->rtn++;
+				split->i++;
+			}
 		}
-		split->rtn++;
-		split->i++;
-	}
-	if (ft_strchr("|<>", line[split->i]) && split->rtn == 0)
-	{
-		if (ft_strchr("<>", line[split->i]) && ft_strchr("<>", line[split->i + 1]))
-		{
-			split->rtn++;
-			split->i++;
-		}
-		split->rtn++;
 	}
 	return (fill_str(split, line));
 }
