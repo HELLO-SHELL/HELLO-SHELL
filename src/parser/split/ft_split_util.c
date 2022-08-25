@@ -1,23 +1,6 @@
 #include "../../../include/minishell.h"
 
-static void	skip_qoute_in_split(char *str, int *i)
-{
-	char	qoute;
-
-	qoute = str[*i];
-	while (str[*i])
-	{
-		(*i)++;
-		if (str[*i] == qoute)
-			break;
-	}
-	if (!str[*i])
-		ft_error_exit("qoute parse error");
-	else
-		(*i)++;
-}
-
-void	skip_word(char *str, int *i, int *res)
+void	handle_pipe_and_arrow(char *str, int *i, int *res)
 {
 	if (ft_strchr("<>|", str[*i]) && str[*i] != '\0')
 	{
@@ -37,37 +20,6 @@ void	skip_word(char *str, int *i, int *res)
 	}
 	else if (ft_strchr("|", str[*i]))
 		(*i)++;
-}
-
-int	count_split_size(char *str)
-{
-	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
-	int	i;
-	int	length;
-
-	i = 0;
-	length = 0;
-	while (str[i] != '\0')
-	{
-		while (is_white_space(str[i]))
-			i++;
-		while (!ft_strchr("<>|\0", str[i]) && !is_white_space(str[i]))
-		{
-			if (ft_strchr("\'\"", str[i]))
-				skip_qoute_in_split(str, &i);
-			else
-				i++;
-			if (ft_strchr("<>|\0", str[i]) || is_white_space(str[i]))
-				length++;
-		}
-		if (ft_strchr("<>|\0", str[i]) || is_white_space(str[i]))
-			skip_word(str, &i, &length);
-	}
-	// 나중에 아래 줄 삭제하기
-	ft_putstr_fd("splitted size : ", 1);
-	ft_putnbr_fd(length, 1);
-	ft_putstr_fd("\n", 1);
-	return (length);
 }
 
 void	fill_char(t_split *split, char *line, int *i, char quote)
@@ -122,7 +74,7 @@ int	split_line(t_split *split, char *line)
 			return (0);
 	}
 	if (ft_strchr("<>|", line[split->i]) || is_white_space(line[split->i]))
-		skip_word(line, &(split->i), &(split->rtn));
+		handle_pipe_and_arrow(line, &(split->i), &(split->rtn));
 	else {
 		while (!is_white_space(line[split->i]) && !ft_strchr("<>|\0", line[split->i]))
 		{

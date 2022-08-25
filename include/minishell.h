@@ -139,7 +139,6 @@ void	init_process_struct(t_process **cmd_list);
 void	cut_token_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
 int		word_type_count(t_token *token);
-void	skip_word(char *str, int *i, int *res);
 
 /* executor */
 /* 		executor.c	*/
