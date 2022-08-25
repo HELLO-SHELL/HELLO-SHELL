@@ -24,7 +24,7 @@ MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 
 UTILS_DIR = src/utils/
 UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
-	  env_utils/make_node_to_envp.c \
+	  env_utils/make_node_to_envp.c  \
 	  replace_dollar/replace_dollar.c replace_dollar/replace_dollar_append_utils.c replace_dollar/replace_dollar_len_utils.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c  \
 	  free_utils/free_utils.c \
@@ -39,7 +39,7 @@ BUILT_IN_OBJS = $(BUILT_IN_PATH:.c=.o)
 
 PARSER_DIR = src/parser/
 PARSER_SRCS = make_arr_to_list.c set_process_list.c  process_list_utils.c process_utils.c \
-	split/ft_split_util.c split/ft_split.c split/ft_split_quote_util.c
+	split/ft_split_util.c split/ft_split.c split/ft_split_quote_util.c split/ft_split_count.c
 PARSER_PATH = $(addprefix $(PARSER_DIR), $(PARSER_SRCS))
 PARSER_OBJS = $(PARSER_PATH:.c=.o)
 
@@ -60,7 +60,7 @@ all : $(NAME)
 	./minishell
 
 debug :
-	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c $(LINKING_FLAGS) $(COMFILE_FLAGS) -o minishell
+	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c $(COMFILE_FLAGS) $(LINKING_FLAGS) -o minishell
 
 clean :
 	$(RM) $(OBJS)

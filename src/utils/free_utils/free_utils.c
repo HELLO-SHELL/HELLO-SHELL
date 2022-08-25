@@ -10,7 +10,47 @@ void	safe_free(void *p)
 	return ;
 }
 
-void    free_all(char *replaced_input, char **splitted_input)
+void free_envp(t_process *ps_list)
+{
+	char	**envp_curr;
+	char	**path_curr;
+	int		envp_idx;
+	int		path_idx;
+
+	envp_curr = ps_list->envp;
+	path_curr = ps_list->paths;
+	envp_idx = 0;
+	path_idx = 0;
+	while (envp_curr && envp_curr[envp_idx])
+	{
+		safe_free(envp_curr[envp_idx]);
+		envp_idx++;
+	}
+	safe_free(envp_curr);
+	while (path_curr && path_curr[path_idx])
+	{
+		safe_free(path_curr[path_idx]);
+		path_idx++;
+	}
+	safe_free(path_curr);
+}
+
+void free_argv(t_process *ps_list)
+{
+	char	**argv_curr;
+	int		argv_idx;
+
+	argv_curr = ps_list->argv;
+	argv_idx = 0;
+	while (argv_curr[argv_idx])
+	{
+		safe_free(argv_curr[argv_idx]);
+		argv_idx++;
+	}
+	safe_free(argv_curr);
+}
+
+void free_all(char *replaced_input, char **splitted_input)
 {
 	int			i;
 	t_token		*temp_token;
@@ -18,7 +58,7 @@ void    free_all(char *replaced_input, char **splitted_input)
 	t_process	*curr_process;
 	t_process	*temp_process;
 
-    safe_free(replaced_input);
+	safe_free(replaced_input);
 	if (!(*replaced_input))
 		return ;
 	i = -1;
@@ -34,10 +74,15 @@ void    free_all(char *replaced_input, char **splitted_input)
 		while (curr_token)
 		{
 			safe_free(curr_token->value);
+			curr_token->value = NULL;
 			temp_token = curr_token;
 			curr_token = curr_token->next;
 			safe_free(temp_token);
+			temp_token = NULL;
 		}
+		free_envp(temp_process);
+		free_argv(temp_process);
 		safe_free(temp_process);
+		temp_process = NULL;
 	}
 }

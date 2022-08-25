@@ -53,10 +53,9 @@ static void	make_dollar_replaced_input(\
 			break ;
 		}
 		*input_ptr = ft_strchr(*input_ptr, '$');
-		if (*input_ptr)
-			*input_ptr += 1;
-		if (env_key_valid_checker(*input_ptr))
+		if (env_key_valid_checker(*input_ptr) && *input_ptr)
 		{
+			*input_ptr += 1;
 			*input_buffer = \
 				replace_dollar(*input_buffer, *input_ptr);
 			*input_ptr += get_env_len(*input_ptr);
@@ -87,11 +86,7 @@ char	*replace_whole_input_dollar(char *input)
 	char	*input_ptr;
 
 	if (is_not_single_quote_validate(input))
-	{
-		print_error_message("no valid single quote count, please input again");
-		free(input);
-		return (NULL);
-	}
+		ft_error_exit("qoute parse error");
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));

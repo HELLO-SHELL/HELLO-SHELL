@@ -25,6 +25,7 @@ char	*append_buffer_under_dollar(char *save, char const *buffer)
 	*temp = origin_value;
 	return (new);
 }
+
 char	*append_buffer_under_single_quote(char *save, char const *buffer)
 {
 	char	*new;
