@@ -53,10 +53,9 @@ static void	make_dollar_replaced_input(\
 			break ;
 		}
 		*input_ptr = ft_strchr(*input_ptr, '$');
-		if (*input_ptr)
-			*input_ptr += 1;
-		if (env_key_valid_checker(*input_ptr))
+		if (env_key_valid_checker(*input_ptr) && *input_ptr)
 		{
+			*input_ptr += 1;
 			*input_buffer = \
 				replace_dollar(*input_buffer, *input_ptr);
 			*input_ptr += get_env_len(*input_ptr);

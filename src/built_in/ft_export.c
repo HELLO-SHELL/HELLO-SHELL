@@ -30,7 +30,8 @@ static void	export_display(void)
 		if (((t_env *)(curr->content))->value == NULL)
 			printf("declare -x %s\n", ((t_env *)(curr->content))->key);
 		else
-			printf("declare -x %s=\"%s\"\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+			printf("declare -x %s=\"%s\"\n",
+			((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
 		curr = curr->next;
 	}
 }
@@ -86,8 +87,7 @@ static void	export_get_list(t_token *token)
 void	ft_export(t_token *token)
 {
 	if (token->next == NULL)
-		;
-		// export_display();
+		export_display();
 	else
 	{
 		while (token->next)

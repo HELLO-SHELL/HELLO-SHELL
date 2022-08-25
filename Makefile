@@ -40,7 +40,7 @@ BUILT_IN_OBJS = $(BUILT_IN_PATH:.c=.o)
 
 PARSER_DIR = src/parser/
 PARSER_SRCS = make_arr_to_list.c set_process_list.c  process_list_utils.c process_utils.c \
-	split/ft_split_util.c split/ft_split.c split/ft_split_quote_util.c
+	split/ft_split_util.c split/ft_split.c split/ft_split_quote_util.c split/ft_split_count.c
 PARSER_PATH = $(addprefix $(PARSER_DIR), $(PARSER_SRCS))
 PARSER_OBJS = $(PARSER_PATH:.c=.o)
 
