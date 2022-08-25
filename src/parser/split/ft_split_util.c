@@ -17,23 +17,26 @@ static void	skip_qoute_in_split(char *str, int *i)
 		(*i)++;
 }
 
-void	skip_word(char *str, int *i)
+void	skip_word(char *str, int *i, int *res)
 {
-	if (ft_strchr("<>", str[*i]))
+	if (ft_strchr("<>|", str[*i]) && str[*i] != '\0')
 	{
-		if (ft_strchr("<>", str[*i + 1]))
+		(*res)++;
+	}
+	if (str[*i] == '<')
+	{
+		if (str[*i + 1] == '<')
 			(*i)++;
 		(*i)++;
 	}
-	else if (ft_strchr("\'\"", str[*i]))
-		skip_qoute_in_split(str, i);
+	if (str[*i] == '>')
+	{
+		if (str[*i + 1] == '>')
+			(*i)++;
+		(*i)++;
+	}
 	else if (ft_strchr("|", str[*i]))
 		(*i)++;
-	else
-	{
-		while (str[*i] != 0 && !(ft_strchr(" <>|\'\"", str[*i])))
-			(*i)++;
-	}
 }
 
 int	count_split_size(char *str)
@@ -46,16 +49,24 @@ int	count_split_size(char *str)
 	length = 0;
 	while (str[i] != '\0')
 	{
-		if (is_white_space(str[i]))
+		while (is_white_space(str[i]))
 			i++;
-		else
+		while (!ft_strchr("<>|\0", str[i]) && !is_white_space(str[i]))
 		{
-			skip_word(str, &i);
-			length++;
+			if (ft_strchr("\'\"", str[i]))
+				skip_qoute_in_split(str, &i);
+			else
+				i++;
+			if (ft_strchr("<>|\0", str[i]) || is_white_space(str[i]))
+				length++;
 		}
+		if (ft_strchr("<>|\0", str[i]) || is_white_space(str[i]))
+			skip_word(str, &i, &length);
 	}
 	// 나중에 아래 줄 삭제하기
-	// printf("split length = %d\n", length);
+	ft_putstr_fd("splitted size : ", 1);
+	ft_putnbr_fd(length, 1);
+	ft_putstr_fd("\n", 1);
 	return (length);
 }
 
@@ -112,11 +123,11 @@ int	split_line(t_split *split, char *line)
 	}
 	while (!is_white_space(line[split->i]) && !ft_strchr("|<>\0", line[split->i]))
 	{
-		if (line[split->i] == '\'' || line[split->i] == '\"')
+		if (ft_strchr("\'\"", line[split->i]))
 		{
-			if (handle_quote(split, line))
-				return (0);
-			break ;
+			handle_quote(split, line);
+			if (is_white_space(line[split->i]))
+				break ;
 		}
 		split->rtn++;
 		split->i++;
