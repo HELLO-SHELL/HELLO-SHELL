@@ -50,8 +50,8 @@ int	execute_command(t_process *process)
 	char	*command;
 	char	**argv_curr;
 
-	if (is_accessable_command(process->cmd_line, process->paths))
-		command = get_accessable_command(process->cmd_line, process->paths);
+	if (is_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths))
+		command = get_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths);
 	else
 		ft_error_exit("command not found");
 	return (execve(command, process->argv, process->envp));
