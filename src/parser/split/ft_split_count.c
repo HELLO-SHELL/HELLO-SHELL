@@ -41,7 +41,6 @@ static void	skip_word(char *str, int *i, int *res)
 
 int	count_split_size(char *str)
 {
-	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
 	int	i;
 	int	length;
 
@@ -63,9 +62,5 @@ int	count_split_size(char *str)
 		if (ft_strchr("<>|\0", str[i]) || is_white_space(str[i]))
 			skip_word(str, &i, &length);
 	}
-	// 나중에 아래 줄 삭제하기
-	// ft_putstr_fd("splitted size : ", 1);
-	// ft_putnbr_fd(length, 1);
-	// ft_putstr_fd("\n", 1);
 	return (length);
 }

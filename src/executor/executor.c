@@ -48,21 +48,34 @@ void	execute_built_in(t_process *process)
 int	execute_command(t_process *process)
 {
 	char	*command;
+	char	**argv_curr;
 
 	if (is_accessable_command(process->cmd_line, process->paths))
 		command = get_accessable_command(process->cmd_line, process->paths);
 	else
 		ft_error_exit("command not found");
+	print_error_two_messages("command: ", command);
+	argv_curr = process->argv;
+	if (*argv_curr)
+		print_error_message("ITSM?");
+	else
+		print_error_message("HOXY?");
+	while (*argv_curr)
+	{
+		print_error_two_messages("argv_curr: ",*argv_curr);
+		argv_curr++;
+	}
+	exit(0);
 	return (execve(command, process->argv, process->envp));
 }
 
 int	execute_process(t_process *process, t_pipes *pipes)
 {
-	if (apply_redirections(process->cmd_line) == FAILURE)
-		return (FAILURE);
 	safe_dup2(pipes->prev_pipe[READ], STDIN_FILENO);
 	safe_dup2(pipes->next_pipe[WRITE], STDOUT_FILENO);
 	safe_close_pipes(pipes);
+	if (apply_redirections(process->cmd_line) == FAILURE)
+		return (FAILURE);
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
