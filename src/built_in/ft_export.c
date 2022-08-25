@@ -83,13 +83,11 @@ static void	export_get_list(t_token *token)
 	ft_lstadd_back(&(g_minishell_info.env_list), ft_lstnew(env_node));
 }
 
-void	ft_export(void)
+void	ft_export(t_token *token)
 {
-	t_token *token;	
-
-	token = g_minishell_info.ps_list->cmd_line;
 	if (token->next == NULL)
-		export_display();
+		;
+		// export_display();
 	else
 	{
 		while (token->next)

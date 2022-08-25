@@ -84,7 +84,7 @@ int		ft_pwd(void);
 void	ft_env(void);
 void	ft_cd(void);
 void	ft_unset(void);
-void	ft_export(void);
+void	ft_export(t_token *cmd_line);
 void	ft_exit(void);
 void	ft_echo(void);
 
@@ -94,7 +94,7 @@ int			is_path_only_home(t_token *cmd_list);
 int 		is_path_pass_home(t_token *cmd_list);
 void 		set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
 void 		set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
-void    set_path_to_input(t_token *cmd_list, char **path);
+void    	set_path_to_input(t_token *cmd_list, char **path);
 
 
 /*		chore_utils		*/
