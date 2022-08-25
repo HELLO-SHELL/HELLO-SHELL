@@ -9,7 +9,7 @@ static void	skip_qoute_in_split(char *str, int *i)
 	{
 		(*i)++;
 		if (str[*i] == qoute)
-			break;
+			break ;
 	}
 	if (!str[*i])
 		ft_error_exit("qoute parse error");

@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void cut_token_by_pipe(t_token **tk_list)
+void	cut_token_by_pipe(t_token **tk_list)
 {
 	t_token	*curr;
 
@@ -11,7 +11,7 @@ void cut_token_by_pipe(t_token **tk_list)
 	curr->next = NULL;
 }
 
-void tk_listdelone(t_token **tk_list)
+void	tk_listdelone(t_token **tk_list)
 {
 	if ((*tk_list)->prev)
 		(*tk_list)->prev->next = (*tk_list)->next;
@@ -25,14 +25,14 @@ void tk_listdelone(t_token **tk_list)
 	(*tk_list) = NULL;
 }
 
-int word_type_count(t_token *token)
+int	word_type_count(t_token *token)
 {
 	t_token	*token_curr;
 	int		count;
 
 	count = 0;
 	token_curr = token;
-	while(token_curr)
+	while (token_curr)
 	{
 		if (token_curr->type == TK_WORD)
 			count++;
