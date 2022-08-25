@@ -8,11 +8,11 @@ char	*get_accessable_command(t_token *cmd_list, char **paths)
 	char	*path_command;
 
 	curr = cmd_list;
-	while (curr->type != TK_WORD)
+	while (curr && curr->type != TK_WORD)
 		curr = curr->next;
 	command = curr->value;
 	if (!access(command, 0))
-		return (command);
+		return (ft_strdup(command));
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");

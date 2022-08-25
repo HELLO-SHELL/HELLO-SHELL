@@ -14,7 +14,7 @@ int	safe_openfile(char *filename, int mode)
 	if (mode == READ)
 	{
 		if (access(filename, F_OK))
-			ft_error_exit(ft_strjoin("No Such File: ", filename));
+			print_error_two_messages("No Such File: ", filename);
 		else
 			fd = open(filename, O_RDONLY);
 	}
@@ -23,7 +23,7 @@ int	safe_openfile(char *filename, int mode)
 	else if (mode == APPEND)
 		fd = open(filename,  O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd < 0)
-		ft_error_exit(ft_strjoin("No Such File: ", filename));
+		print_error_two_messages("safe openfile fail: ", filename);
 	return (fd);
 }
 
@@ -33,7 +33,8 @@ void	safe_close_pipe(int *fd)
 	{
 		if (close(*fd))
 			print_error_message("fail close()\n");
-		*fd = -1;
+		else
+			*fd = -1;
 	}
 }
 
