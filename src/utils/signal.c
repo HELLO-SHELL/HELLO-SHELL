@@ -1,5 +1,6 @@
 #include "../../include/minishell.h"
-void	get_new_prompt()
+
+void	get_new_prompt(void)
 {
 	rl_replace_line("", 0);
 	write(1, "\n", 1);
@@ -7,7 +8,7 @@ void	get_new_prompt()
 	rl_redisplay();
 }
 
-void	heredoc_new_prompt()
+void	heredoc_new_prompt(void)
 {
 	rl_replace_line("", 0);
 	write(1, "\n", 1);

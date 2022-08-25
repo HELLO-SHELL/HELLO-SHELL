@@ -22,7 +22,7 @@ static int	possible_next_question(char *str)
 
 int	env_key_valid_checker(char *str)
 {
-	char *temp;
+	char	*temp;
 
 	if (!str)
 		return (FALSE);
@@ -34,8 +34,9 @@ int	env_key_valid_checker(char *str)
 	temp++;
 	while (*temp)
 	{
-		if (is_white_space(*temp) || *temp == '\'' || *temp == '\"' || *temp == '$'
-			|| *temp == '|' || *temp == '=' || *temp == '/' || *temp == '\\')
+		if (is_white_space(*temp) || *temp == '\'' || *temp == '\"'
+			|| *temp == '$' || *temp == '|' || *temp == '='
+			|| *temp == '/' || *temp == '\\')
 			break ;
 		if (!(ft_isalnum(*temp) || *temp == '_'))
 			return (FALSE);

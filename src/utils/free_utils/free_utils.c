@@ -10,15 +10,15 @@ void	safe_free(void *p)
 	return ;
 }
 
-void    free_all(char *replaced_input, char **splitted_input)
+void	free_all(char *replaced_input, char **splitted_input)
 {
 	int			i;
 	t_token		*temp_token;
-	t_token 	*curr_token;
+	t_token		*curr_token;
 	t_process	*curr_process;
 	t_process	*temp_process;
 
-    safe_free(replaced_input);
+	safe_free(replaced_input);
 	if (!(*replaced_input))
 		return ;
 	i = -1;
