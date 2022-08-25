@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-
 int	check_cmd(char *word)
 {
 	if (is_same_string(word, CD)
@@ -49,24 +48,39 @@ void	execute_built_in(t_process *process)
 int	execute_command(t_process *process)
 {
 	char	*command;
+	char	**argv_curr;
 
 	if (is_accessable_command(process->cmd_line, process->paths))
 		command = get_accessable_command(process->cmd_line, process->paths);
 	else
 		ft_error_exit("command not found");
+	print_error_two_messages("command: ", command);
+	argv_curr = process->argv;
+	if (*argv_curr)
+		print_error_message("ITSM?");
+	else
+		print_error_message("HOXY?");
+	while (*argv_curr)
+	{
+		print_error_two_messages("argv_curr: ",*argv_curr);
+		argv_curr++;
+	}
+	exit(0);
 	return (execve(command, process->argv, process->envp));
 }
 
-void	execute_process(t_process *process, t_pipes *pipes)
+int	execute_process(t_process *process, t_pipes *pipes)
 {
-	apply_redirections(process->cmd_line);
 	safe_dup2(pipes->prev_pipe[READ], STDIN_FILENO);
 	safe_dup2(pipes->next_pipe[WRITE], STDOUT_FILENO);
 	safe_close_pipes(pipes);
+	if (apply_redirections(process->cmd_line) == FAILURE)
+		return (FAILURE);
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
 		execute_command(process);
+	return (SUCCESS);
 }
 
 void	execute_pipeline(void)
@@ -80,8 +94,11 @@ void	execute_pipeline(void)
 	while (ps_curr)
 	{
 		swap_pipe(&g_minishell_info.pipes);
-		if (pipe(g_minishell_info.pipes.next_pipe))
-			ft_error_exit("fail_pipe()");
+		if (ps_curr->next != NULL)
+		{
+			if (pipe(g_minishell_info.pipes.next_pipe) == -1)
+				ft_error_exit("fail_pipe()");
+		}
 		ps_curr->pid = fork();
 		if (ps_curr->pid == -1)
 			ft_error_exit("fail fork()\n");
@@ -98,13 +115,14 @@ void	execute_pipeline(void)
 	g_minishell_info.last_status = ft_itoa(wait_childs());
 }
 
-void	execute_single_cmdline(void)
+int	execute_single_cmdline(void)
 {
 	pid_t		pid;
 	t_process	*process;
 
 	process = g_minishell_info.ps_list;
-	apply_redirections(process->cmd_line);
+	if (apply_redirections(process->cmd_line) == FAILURE)
+		return (FAILURE);
 	if (is_built_in(process))
 		execute_built_in(process);
 	else
@@ -113,15 +131,20 @@ void	execute_single_cmdline(void)
 		if (pid == 0)
 			execute_command(process);
 		else
-			wait_child(pid);
+		{
+			free(g_minishell_info.last_status);
+			g_minishell_info.last_status = ft_itoa(wait_child(pid));
+		}
 	}
+	return (SUCCESS);
 }
 
 void	executor(void)
 {
-	heredoc_to_temp_files();
+	//heredoc_to_temp_files();
 	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
 		execute_pipeline();
+	restore_stdio();
 }

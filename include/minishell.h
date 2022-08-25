@@ -63,6 +63,9 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
+	int			ft_stdin;
+	int			ft_stdout;
+	int			ft_stderr;
 	char		*last_status;
 }	t_minishell;
 
@@ -121,6 +124,7 @@ char	*replace_whole_input_dollar(char *input);
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
+void	print_error_two_messages(char *str1, char *str2);
 t_env	*get_env_by_key(char *key);
 int		env_key_valid_checker(char *str);
 void	make_node_to_envp();
@@ -144,8 +148,8 @@ int		word_type_count(t_token *token);
 /* 		executor.c	*/
 void	executor(void);
 void	execute_pipeline(void);
-void	execute_single_cmdline(void);
-void	execute_process(t_process *process, t_pipes *pipes);
+int		execute_single_cmdline(void);
+int		execute_process(t_process *process, t_pipes *pipes);
 int		execute_command(t_process *process);
 void	execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
@@ -160,8 +164,9 @@ char	*get_accessable_command(t_token *cmd_list, char **paths);
 void	init_pipe(t_pipes *p);
 void	swap_pipe(t_pipes *p);
 /* 		redirect.c 	*/
-void	apply_redirection(char *filename, int mode);
-void	apply_redirections(t_token *cmd_line);
+int		apply_redirection(char *filename, int mode);
+int		apply_redirections(t_token *cmd_line);
+void	restore_stdio(void);
 
 /* 		safe_func.c	*/
 void	safe_dup2(int fd, int to_fd);
