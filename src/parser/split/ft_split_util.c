@@ -38,10 +38,9 @@ void	skip_word(char *str, int *i)
 
 int	count_split_size(char *str)
 {
-	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
 	int	i;
 	int	length;
-
+	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
 	i = 0;
 	length = 0;
 	while (str[i] != '\0')
