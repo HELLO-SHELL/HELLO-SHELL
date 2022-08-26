@@ -42,11 +42,12 @@ static void	check_option_and_find_print_position(int *idx)
 	}
 }
 
-void	ft_echo(void)
+int	ft_echo(void)
 {
 	int		idx;
 
 	idx = 1;
 	check_option_and_find_print_position(&idx);
 	print_arg_with_idx(idx);
+	return (SUCCESS);
 }
