@@ -54,18 +54,6 @@ int	execute_command(t_process *process)
 		command = get_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths);
 	else
 		ft_error_exit("command not found");
-	print_error_two_messages("command: ", command);
-	argv_curr = process->argv;
-	if (*argv_curr)
-		print_error_message("ITSM?");
-	else
-		print_error_message("HOXY?");
-	while (*argv_curr)
-	{
-		print_error_two_messages("argv_curr: ",*argv_curr);
-		argv_curr++;
-	}
-	exit(0);
 	return (execve(command, process->argv, process->envp));
 }
 
