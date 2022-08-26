@@ -28,16 +28,27 @@ int	apply_redirection(char *filename, int mode)
 	int	fd;
 
 	if (mode == TK_RDINPUT)
+	{
 		fd = safe_openfile(filename, READ);
+		dup2(fd, STDIN_FILENO);
+	}
 	else if (mode == TK_RDOUTPUT)
+	{
 		fd = safe_openfile(filename, WRITE);
+		dup2(fd, STDOUT_FILENO);
+	}
 	else if (mode == TK_APPEND)
+	{
 		fd = safe_openfile(filename, APPEND);
+		dup2(fd, STDIN_FILENO);
+	}
 	else if (mode == TK_HEREDOC)
+	{
 		fd = apply_heredoc();
+		dup2(fd, STDIN_FILENO);
+	}
 	if (fd == -1)
 		return (FAILURE);
-	dup2(fd, STDIN_FILENO);
 	close(fd);
 	return (SUCCESS);
 }
