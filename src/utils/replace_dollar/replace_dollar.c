@@ -66,32 +66,32 @@ static void	make_dollar_replaced_input(\
 	}
 }
 
-int	is_not_single_quote_validate(char *input)
-{
-	int	cnt_single_quote;
-
-	cnt_single_quote = 0;
-	while (*input)
-	{
-		if (*input == '\'')
-			cnt_single_quote += 1;
-		input++;
-	}
-	return (cnt_single_quote % 2);
-}
-
 char	*replace_whole_input_dollar(char *input)
 {
 	char	*input_buffer;
 	char	*input_ptr;
 
-	if (is_not_single_quote_validate(input))
-		ft_error_exit("qoute parse error");
 	if (!ft_strchr(input, '$'))
 		return (input);
 	input_buffer = safe_malloc(ft_strlen(input));
 	input_ptr = input;
 	handle_single_quote(&input_buffer, &input_ptr);
+	input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
+	make_dollar_replaced_input(&input_buffer, &input_ptr);
+	free(input);
+	input = NULL;
+	return (input_buffer);
+}
+
+char	*replace_dollar_in_heredoc(char *input)
+{
+	char	*input_buffer;
+	char	*input_ptr;
+
+	if (!ft_strchr(input, '$'))
+		return (input);
+	input_buffer = safe_malloc(ft_strlen(input));
+	input_ptr = input;
 	input_buffer = append_buffer_under_dollar(input_buffer, input_ptr);
 	make_dollar_replaced_input(&input_buffer, &input_ptr);
 	free(input);

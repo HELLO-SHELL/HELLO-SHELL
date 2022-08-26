@@ -86,7 +86,8 @@ void	executor(void)
 {
 	int	status;
 
-	//heredoc_to_temp_files();
+	if (execute_heredoc())
+		return ;
 	if (g_minishell_info.ps_list->size == 1)
 		status = execute_single_cmdline();
 	else
