@@ -64,21 +64,19 @@ int	execute_single_cmdline(void)
 
 	process = g_minishell_info.ps_list;
 	if (apply_redirections(process->cmd_line) == FAILURE)
+	{
+		print_error_message("redirection error");
 		return (EXIT_FAILURE);
+	}
 	if (is_built_in(process))
 		return (execute_built_in(process));
 	pid = fork();
 	if (pid == -1)
 		ft_error_exit("fork error");
 	else if (pid == 0)
-		execute_command(process);//exit
+		execute_command(process);
 	else
-	{
-		// free(g_minishell_info.last_status);
-		// g_minishell_info.last_status = ft_itoa(wait_child(pid));
-		// return (ft_atoi(g_minishell_info.last_status));
 		return (wait_child(pid));
-	}
 	return (EXIT_FAILURE);
 }
 
@@ -89,10 +87,8 @@ void	executor(void)
 	if (execute_heredoc())
 		return ;
 	if (g_minishell_info.ps_list->size == 1)
-		status = execute_single_cmdline();
+		set_last_status(execute_single_cmdline());
 	else
-		status = execute_pipeline();
-	free(g_minishell_info.last_status);
-	g_minishell_info.last_status = ft_itoa(status);
+		set_last_status(execute_pipeline());
 	restore_stdio();
 }

@@ -147,6 +147,7 @@ void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	get_new_prompt();
 void	heredoc_new_prompt();
 int		is_white_space(char c);
+void	set_last_status(int status);
 
 /* parser */
 void	set_process_list(t_process **ps_list, t_token *tk_lst);
