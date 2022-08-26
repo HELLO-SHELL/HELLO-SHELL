@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-static void	_swap(int *a, int *b)
+static void	swap(int *a, int *b)
 {
 	int	temp;
 
