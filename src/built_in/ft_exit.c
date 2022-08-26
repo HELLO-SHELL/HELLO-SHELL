@@ -27,7 +27,7 @@ void	exit_with_no_param(int ac)
 	}
 }
 
-void	ft_exit(void)
+int	ft_exit(void)
 {
 	char	**argv;
 	int		ac;
@@ -45,7 +45,7 @@ void	ft_exit(void)
 	if (is_digit_string(argv[1]) && ac > 2)
 	{
 		print_error_message("helloshell: exit: too many arguments");
-		return ;
+		return (EXIT_FAILURE);
 	}
 	ft_putstr_fd("helloshell: exit: ", STDERR_FILENO);
 	ft_putstr_fd(argv[1], STDERR_FILENO);

@@ -24,24 +24,24 @@ int	is_built_in(t_process *ps_info)
 	return (0);
 }
 
-void	execute_built_in(t_process *process)
+int execute_built_in(t_process *process)
 {
 	char *cmd;
 
 	cmd = process->cmd_line->value;
 	if (is_same_string(cmd, CD))
-		ft_cd();
+	    return (ft_cd());
 	else if (is_same_string(cmd, PWD))
-		ft_pwd();
+		return (ft_pwd());
 	else if (is_same_string(cmd, ENV))
-		ft_env();
+		return (ft_env());
 	else if (is_same_string(cmd, EXPORT))
-		ft_export(process->cmd_line);
+		return (ft_export(process->cmd_line));
 	else if (is_same_string(cmd, EXIT))
-		ft_exit();
+		return (ft_exit());
 	else if (is_same_string(cmd, UNSET))
-		ft_unset();
+		return (ft_unset());
 	else if (is_same_string(cmd, ECHO))
-		ft_echo();
-	return ;
+		return (ft_echo());
+	return (FAILURE);
 }
