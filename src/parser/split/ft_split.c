@@ -38,10 +38,6 @@ char	**command_split(char *str)
 	while (split->result[i] != NULL)
 	{
 		result[i] = ft_strdup(split->result[i]);
-		// 아래 나중에 삭제
-		ft_putstr_fd("splitted str = ",1);
-		ft_putstr_fd(split->result[i],1);
-		ft_putstr_fd("\n",1);
 		free(split->result[i]);
 		i++;
 	}
