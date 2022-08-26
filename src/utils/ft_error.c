@@ -10,7 +10,7 @@ void	print_error_message(char *str)
 void	ft_error_exit(char *str)
 {
 	print_error_message(str);
-	exit(EXIT_FAILURE);
+    exit(EXIT_FAILURE);
 }
 
 void	print_error_two_messages(char *str1, char *str2)

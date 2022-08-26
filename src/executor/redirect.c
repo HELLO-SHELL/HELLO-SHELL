@@ -14,7 +14,6 @@ int	apply_heredoc(void)
 	const char	*idx_char = "0123456789abcdef";
 	int			fd;
 
-	print_error_two_messages("heredoc_cnt: ", ft_itoa(g_minishell_info.heredoc_cnt));
 	ft_strlcpy(filename, ".temp.", 7);
 	filename[6] = idx_char[g_minishell_info.heredoc_cnt];
 	fd = safe_openfile(filename, READ);
@@ -50,8 +49,6 @@ int	apply_redirections(t_token *cmd_line)
 	curr = cmd_line;
 	while (curr != NULL)
 	{
-		print_error_two_messages("type: ", ft_itoa(curr->type));
-		print_error_two_messages("value: ", curr->value); 
 		if (curr->type == TK_RDINPUT &&
 				apply_redirection(curr->next->value, TK_RDINPUT) == FAILURE)
 			return (FAILURE);

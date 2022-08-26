@@ -24,6 +24,7 @@ void	init_minishell(void)
 			make_node_to_envp();
 			executor();
 			free_all(replaced_input, splitted_input);
+//			system("leaks minishell");
 		}
 	}
 }
