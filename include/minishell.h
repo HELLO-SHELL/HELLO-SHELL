@@ -128,6 +128,7 @@ int		get_single_quote_len(char *input_ptr);
 int		get_under_single_quote_len(char *input_ptr);
 int		get_under_dollar_len(char *input_ptr);
 char	*replace_whole_input_dollar(char *input);
+char	*replace_dollar_in_heredoc(char *input);
 
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
