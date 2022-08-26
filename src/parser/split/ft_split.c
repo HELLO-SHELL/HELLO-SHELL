@@ -17,6 +17,18 @@ static void	make_result_from_line(t_split *split, char *line)
 	}
 }
 
+static t_split	*init_split_list(char *str)
+{
+	t_split		*split;
+
+	split = safe_malloc(sizeof(t_split));
+	split->result = NULL;
+	split->split_size = count_split_size(str);
+	split->result = safe_malloc(sizeof(char *) * (split->split_size + 1));
+	split->result[split->split_size] = NULL;
+	return (split);
+}
+
 char	**command_split(char *str)
 {
 	t_split		*split;
@@ -25,14 +37,9 @@ char	**command_split(char *str)
 
 	if (!str)
 		return (NULL);
-	split = safe_malloc(sizeof(t_split));
-	split->result = NULL;
-	// 파이프 및 리다이렉트(|,<,>,<<,>>, ', ") 단위를 추가해야하기 때문에 추가
-	split->split_size = count_split_size(str);
-	split->result = safe_malloc(sizeof(char *) * (split->split_size + 1));
-	split->result[split->split_size] = NULL;
-	make_result_from_line(split, str);
+	split = init_split_list(str);
 	i = 0;
+	make_result_from_line(split, str);
 	result = safe_malloc(sizeof(char *) * (split->split_size + 1));
 	result[split->split_size] = NULL;
 	while (split->result[i] != NULL)

@@ -59,8 +59,6 @@ void free_all(char *replaced_input, char **splitted_input)
 	t_process	*temp_process;
 
 	safe_free(replaced_input);
-	if (!(*replaced_input))
-		return ;
 	i = -1;
 	while (splitted_input[++i])
 		safe_free(splitted_input[i]);

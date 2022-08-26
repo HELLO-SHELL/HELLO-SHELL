@@ -40,3 +40,39 @@ int	word_type_count(t_token *token)
 	}
 	return (count);
 }
+
+// static int	all_token_type_count(t_token *token)
+// {
+// 	t_token	*token_curr;
+// 	int		count;
+
+// 	count = 0;
+// 	token_curr = token;
+// 	while (token_curr)
+// 	{
+// 		count++;
+// 		token_curr = token_curr->next;
+// 	}
+// 	return (count);
+// }
+
+// int	check_token_error(t_token *token)
+// {
+// 	t_token	*token_curr;
+// 	int		count;
+// 	int		idx;
+
+// 	idx = 0;
+// 	count = all_token_type_count(token);
+// 	token_curr = token;
+// 	while (token_curr)
+// 	{
+// 		if (idx == 0 && is_same_string(token->value, "|"))
+// 		{
+// 			print_error_message("pipe can not be located in the first location.");
+// 			// free_all()
+// 		}
+// 		idx++;
+// 		token_curr = token_curr->next;
+// 	}
+// }
