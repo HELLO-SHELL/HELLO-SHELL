@@ -13,7 +13,7 @@ void	init_minishell(void)
 		signal(SIGQUIT, SIG_IGN);
 		input = readline("HELLO-SHELL-0.0$ :");
 		if (!input)
-			exit(EXIT_SUCCESS);
+			exit(ft_atoi(g_minishell_info.last_status));
 		add_history(input);
 		replaced_input = replace_whole_input_dollar(input);
 		if (replaced_input && *replaced_input)
