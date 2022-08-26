@@ -13,6 +13,8 @@ char	*get_accessable_command(t_token *cmd_list, char **paths)
 	command = curr->value;
 	if (!access(command, 0))
 		return (ft_strdup(command));
+	if (paths == NULL)
+		ft_error_exit("I will Find You.. and I will Kill you");
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");

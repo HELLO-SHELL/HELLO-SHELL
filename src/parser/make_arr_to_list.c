@@ -5,13 +5,13 @@ static void	check_and_set_type(t_token *lst)
 	if (is_same_string(lst->value, "<"))
 		lst->type = TK_RDINPUT;
 	else if (is_same_string(lst->value, ">"))
-		lst->type =  TK_RDOUTPUT;
+		lst->type = TK_RDOUTPUT;
 	else if (is_same_string(lst->value, "<<"))
-		lst->type =  TK_HEREDOC;
+		lst->type = TK_HEREDOC;
 	else if (is_same_string(lst->value, ">>"))
-		lst->type =  TK_APPEND;
+		lst->type = TK_APPEND;
 	else if (is_same_string(lst->value, "|"))
-		lst->type =  TK_PIPE;
+		lst->type = TK_PIPE;
 	else if (lst->prev && (lst->prev->type == TK_RDOUTPUT \
 	|| lst->prev->type == TK_RDINPUT || lst->prev->type == TK_APPEND))
 		lst->type = TK_FILE;
@@ -23,7 +23,7 @@ static void	check_and_set_type(t_token *lst)
 
 static void	insert_first_into_list(t_token **lst, char *str)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = safe_malloc(sizeof(t_token));
 	temp->type = 0;
@@ -36,7 +36,7 @@ static void	insert_first_into_list(t_token **lst, char *str)
 
 static void	insert_str_into_list_back(t_token **lst, char *str)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = safe_malloc(sizeof(t_token));
 	temp->type = 0;

@@ -18,6 +18,15 @@ static int	is_digit_string(char *check)
 	return (1);
 }
 
+void	exit_with_no_param(int ac)
+{
+	if (ac == 1)
+	{
+		ft_putendl_fd(EXIT, STDOUT_FILENO);
+		exit(EXIT_SUCCESS);
+	}
+}
+
 void	ft_exit(void)
 {
 	char	**argv;
@@ -27,20 +36,15 @@ void	ft_exit(void)
 	ac = 0;
 	while (argv[ac] != NULL)
 		ac++;
-	if (ac == 1)
+	exit_with_no_param(ac);
+	if (is_digit_string(argv[1]) && ac == 2)
 	{
 		ft_putendl_fd(EXIT, STDOUT_FILENO);
-		exit(EXIT_SUCCESS);
+		exit(ft_atoi(argv[1]));
 	}
-	if (is_digit_string(argv[1]))
+	if (is_digit_string(argv[1]) && ac > 2)
 	{
-		if (ac == 2)
-		{
-			ft_putendl_fd(EXIT, STDOUT_FILENO);
-			exit(ft_atoi(argv[1]));
-		}
-		else
-			print_error_message("helloshell: exit: too many arguments");
+		print_error_message("helloshell: exit: too many arguments");
 		return ;
 	}
 	ft_putstr_fd("helloshell: exit: ", STDERR_FILENO);

@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-static void word_token_to_argv(t_process *ps_list)
+static void	word_token_to_argv(t_process *ps_list)
 {
 	int		count;
 	char	**new_argv;
@@ -11,17 +11,16 @@ static void word_token_to_argv(t_process *ps_list)
 	count = word_type_count(ps_list->cmd_line);
 	new_argv = safe_malloc(sizeof(char *) * (count + 1));
 	token_curr = ps_list->cmd_line;
-	while(token_curr)
-	{ 
+	while (token_curr)
+	{
 		if (token_curr->type == TK_WORD)
-			new_argv[idx] = ft_strdup(token_curr->value);
-		idx++;
+			new_argv[idx++] = ft_strdup(token_curr->value);
 		token_curr = token_curr->next;
 	}
 	ps_list->argv = new_argv;
 }
 
-static void insert_process_argv(t_process **ps_list)
+static void	insert_process_argv(t_process **ps_list)
 {
 	t_process	*lst_curr;
 
@@ -33,7 +32,7 @@ static void insert_process_argv(t_process **ps_list)
 	}
 }
 
-static void insert_process_head(t_process **ps_list, t_token *tk_list)
+static void	insert_process_head(t_process **ps_list, t_token *tk_list)
 {
 	t_process	*pslist_curr;
 	t_token		*token_head;
@@ -59,7 +58,7 @@ static void insert_process_head(t_process **ps_list, t_token *tk_list)
 	}
 }
 
-void set_process_list(t_process	**ps_list, t_token *tk_list)
+void	set_process_list(t_process	**ps_list, t_token *tk_list)
 {
 	int			pipe_cnt;
 

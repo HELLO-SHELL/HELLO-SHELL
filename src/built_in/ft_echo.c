@@ -19,7 +19,7 @@ static void	print_arg_with_idx(int idx)
 		ft_putchar_fd('\n', 1);
 }
 
-static void	check_flag(int *idx)
+static void	check_option_and_find_print_position(int *idx)
 {
 	int		i;
 	char	**argv;
@@ -47,6 +47,6 @@ void	ft_echo(void)
 	int		idx;
 
 	idx = 1;
-	check_flag(&idx);
+	check_option_and_find_print_position(&idx);
 	print_arg_with_idx(idx);
 }

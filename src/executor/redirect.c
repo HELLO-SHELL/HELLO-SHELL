@@ -8,30 +8,37 @@ void	restore_stdio(void)
 	dup2(g_minishell_info.ft_stderr, STDERR_FILENO);
 }
 
+int	apply_heredoc(void)
+{
+	char		filename[8];
+	const char	*idx_char = "0123456789abcdef";
+	int			fd;
+
+	print_error_two_messages("heredoc_cnt: ", ft_itoa(g_minishell_info.heredoc_cnt));
+	ft_strlcpy(filename, ".temp.", 7);
+	filename[6] = idx_char[g_minishell_info.heredoc_cnt];
+	fd = safe_openfile(filename, READ);
+	if (fd == -1)
+		ft_error_exit("heredoc file error");
+	g_minishell_info.heredoc_cnt++;
+	return (fd);
+}
+
 int	apply_redirection(char *filename, int mode)
 {
 	int	fd;
+
 	if (mode == TK_RDINPUT)
-	{
 		fd = safe_openfile(filename, READ);
-		if (fd == -1)
-			return (FAILURE);
-		dup2(fd, STDIN_FILENO);
-	}
 	else if (mode == TK_RDOUTPUT)
-	{
 		fd = safe_openfile(filename, WRITE);
-		if (fd == -1)
-			return (FAILURE);
-		dup2(fd, STDOUT_FILENO);
-	}
 	else if (mode == TK_APPEND)
-	{
 		fd = safe_openfile(filename, APPEND);
-		if (fd == -1)
-			return (FAILURE);
-		dup2(fd, STDOUT_FILENO);
-	}
+	else if (mode == TK_HEREDOC)
+		fd = apply_heredoc();
+	if (fd == -1)
+		return (FAILURE);
+	dup2(fd, STDIN_FILENO);
 	close(fd);
 	return (SUCCESS);
 }
@@ -51,6 +58,9 @@ int	apply_redirections(t_token *cmd_line)
 			return (FAILURE);
 		else if (curr->type == TK_APPEND &&
 				apply_redirection(curr->next->value, TK_APPEND) == FAILURE)
+			return (FAILURE);
+		else if (curr->type == TK_HEREDOC && 
+				apply_redirection(NULL, TK_HEREDOC) == FAILURE)
 			return (FAILURE);
 		curr = curr->next;
 	}

@@ -33,9 +33,9 @@ void	execute_built_in(t_process *process)
 	else if (is_same_string(cmd, PWD))
 		ft_pwd();
 	else if (is_same_string(cmd, ENV))
-		ft_env(g_minishell_info.env_list);
+		ft_env();
 	else if (is_same_string(cmd, EXPORT))
-		ft_export();
+		ft_export(process->cmd_line);
 	else if (is_same_string(cmd, EXIT))
 		ft_exit();
 	else if (is_same_string(cmd, UNSET))
@@ -50,8 +50,8 @@ int	execute_command(t_process *process)
 	char	*command;
 	char	**argv_curr;
 
-	if (is_accessable_command(process->cmd_line, process->paths))
-		command = get_accessable_command(process->cmd_line, process->paths);
+	if (is_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths))
+		command = get_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths);
 	else
 		ft_error_exit("command not found");
 	print_error_two_messages("command: ", command);
@@ -141,7 +141,8 @@ int	execute_single_cmdline(void)
 
 void	executor(void)
 {
-	//heredoc_to_temp_files();
+	if (execute_heredoc())
+		return ;
 	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
