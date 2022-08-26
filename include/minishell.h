@@ -102,6 +102,7 @@ void    	set_path_to_input(t_token *cmd_list, char **path);
 
 
 /*		chore_utils		*/
+int		quote_validator(char *input);
 int		is_same_string(char *str1, char *str2);
 void	*safe_malloc(size_t size);
 

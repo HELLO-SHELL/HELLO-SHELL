@@ -15,17 +15,21 @@ void	init_minishell(void)
 		if (!input)
 			exit(ft_atoi(g_minishell_info.last_status));
 		add_history(input);
-		replaced_input = replace_whole_input_dollar(input);
-		if (replaced_input && *replaced_input)
+		if (quote_validator(input))
 		{
-			splitted_input = command_split(replaced_input);
-			curr_token = make_token_list(splitted_input);
-			set_process_list(&g_minishell_info.ps_list, curr_token);
-			make_node_to_envp();
-			executor();
-			free_all(replaced_input, splitted_input);
-//			system("leaks minishell");
+			replaced_input = replace_whole_input_dollar(input);
+			if (replaced_input && *replaced_input)
+			{
+				splitted_input = command_split(replaced_input);
+				curr_token = make_token_list(splitted_input);
+				set_process_list(&g_minishell_info.ps_list, curr_token);
+				make_node_to_envp();
+				executor();
+				free_all(replaced_input, splitted_input);
+			}
 		}
+		else
+			free(input);
 	}
 }
 
