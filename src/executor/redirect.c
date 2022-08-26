@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <unistd.h>
 
 void	restore_stdio(void)
 {

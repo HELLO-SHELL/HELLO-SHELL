@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <stdlib.h>
 
 void	make_temp_file(int file_index, char *delim)
 {
