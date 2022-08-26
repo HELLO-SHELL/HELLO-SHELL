@@ -115,7 +115,7 @@ t_token	*get_token_head(t_token *token);
 
 /*		free_utils		*/
 void	safe_free(void *p);
-void    free_all(char *replaced_input, char **splitted_input);
+void    free_all();
 
 /*		replace_dollar	*/
 char	*append_buffer_under_dollar(char *save, char const *buffer);
