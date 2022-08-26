@@ -10,7 +10,7 @@ int	trans_status(int status)
 		return (EXIT_FAILURE);
 }
 
-int	_signal_print(int status)
+int	signal_print(int status)
 {
 	if (WIFSIGNALED(status))
 	{
@@ -67,7 +67,7 @@ int	wait_childs(void)
 		if (pid == -1)
 			return (trans_status(last_status));
 		if (printed == 0)
-			printed = _signal_print(status);
+			printed = signal_print(status);
 		if (pid == last_pid)
 			last_status = status;
 	}
