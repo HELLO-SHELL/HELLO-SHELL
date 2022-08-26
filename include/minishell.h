@@ -63,6 +63,7 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
+	int			heredoc_cnt;
 	int			ft_stdin;
 	int			ft_stdout;
 	int			ft_stderr;
@@ -162,8 +163,7 @@ int		execute_command(t_process *process);
 void	execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
 /* 		heredoc.c 	*/
-void	heredoc_to_temp_files(void);
-void	change_heredoc_to_redirect(t_token *cmd_curr ,int idx);
+int		execute_heredoc(void);
 void	make_temp_file(int file_index, char *delim);
 /* 		is_func.c 	*/
 int		is_accessable_command(t_token *cmd_list, char **paths);
