@@ -98,6 +98,10 @@ int 		is_path_pass_home(t_token *cmd_list);
 void 		set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
 void 		set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
 void    	set_path_to_input(t_token *cmd_list, char **path);
+void		execute_built_in(t_process *process);
+int			is_built_in(t_process *ps_info);
+int			check_cmd(char *word);
+
 
 
 /*		chore_utils		*/
