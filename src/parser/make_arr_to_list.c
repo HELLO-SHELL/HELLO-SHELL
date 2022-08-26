@@ -67,12 +67,22 @@ static int	set_str_into_list(t_token **lst, char **str)
 t_token	*make_token_list(char **token_arr)
 {
 	t_token	*token_list_head;
+	int		idx;
 
+	idx = 0;
 	if (!token_arr || !*token_arr)
 		exit(EXIT_FAILURE);
 	if (set_str_into_list(&token_list_head, token_arr))
 		token_list_head = get_token_head(token_list_head);
 	else
 		return (0);
+	while (token_arr[idx])
+	{
+		safe_free(token_arr[idx]);
+		token_arr[idx] = NULL;
+		idx++;
+	}
+	safe_free(token_arr);
+	token_arr = NULL;
 	return (token_list_head);
 }
