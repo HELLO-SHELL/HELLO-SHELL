@@ -21,9 +21,9 @@ void	print_error_two_messages(char *str1, char *str2)
 	write(2, COLOR_RESET, ft_strlen(COLOR_RESET));
 }
 
-void	print_error_with_new_prompt(char *str)
+int	print_error_with_new_prompt(char *str)
 {
-	print_error_message("pipe can not be located in the first location.");
+	print_error_message(str);
 	free_all();
-	get_new_prompt();
+	return (TRUE);
 }

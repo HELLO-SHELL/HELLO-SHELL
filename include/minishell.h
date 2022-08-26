@@ -132,7 +132,7 @@ char	*replace_whole_input_dollar(char *input);
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
-void	print_error_with_new_prompt(char *str);
+int		print_error_with_new_prompt(char *str);
 void	ft_error_exit(char *str);
 void	print_error_two_messages(char *str1, char *str2);
 t_env	*get_env_by_key(char *key);
@@ -144,7 +144,7 @@ void	heredoc_new_prompt();
 int		is_white_space(char c);
 
 /* parser */
-void	set_process_list(t_process **ps_list, t_token *tk_lst);
+int		set_process_list(t_process **ps_list, t_token *tk_lst);
 int		count_pipe(t_token *tk_list);
 void	init_pslist(t_process **lst, int cnt);
 void	pslist_new(t_process **lst);
@@ -153,7 +153,6 @@ void	init_process_struct(t_process **cmd_list);
 void	cut_token_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
 int		token_word_count(t_token *token);
-int		all_token_count(t_token *token);
 int		check_token_error(t_token *token);
 
 /* executor */
