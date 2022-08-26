@@ -25,43 +25,49 @@ void	make_temp_file(int file_index, char *delim)
 	line = NULL;
 }
 
-int	heredoc_to_temp_files(void)
+static void	heredoc_to_temp_files(void)
 {
-	int			pid;
 	t_process	*ps_curr;
 	t_token		*cmd_curr;
 	char		*delim;
 	int			idx;
-	
+
 	idx = 0;
-	pid = fork();
 	ps_curr = g_minishell_info.ps_list;
+	while (ps_curr != NULL)
+	{
+		cmd_curr = ps_curr->cmd_line;
+		while (cmd_curr != NULL)
+		{
+			if (cmd_curr->type == TK_HEREDOC)
+			{
+				delim = cmd_curr->next->value;
+				make_temp_file(idx, delim);
+				idx++;
+			}
+			cmd_curr = cmd_curr->next;
+		}
+		ps_curr = ps_curr->next;
+	}
+}
+
+int	execute_heredoc(void)
+{
+	int			pid;
+
+	pid = fork();
 	if (pid == -1)
 		ft_error_exit("fork error");
-	else if (pid > 0)
+	else if (pid == 0)
 	{
-		signal(SIGINT, SIG_IGN);
-		return (wait_child(pid));
+		signal(SIGINT, heredoc_new_prompt);
+		heredoc_to_temp_files();
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{
-		signal(SIGINT, heredoc_new_prompt);
-		while (ps_curr != NULL)
-		{
-			cmd_curr = ps_curr->cmd_line;
-			while (cmd_curr != NULL)
-			{
-				if (cmd_curr->type == TK_HEREDOC)
-				{
-					delim = cmd_curr->next->value;
-					make_temp_file(idx, delim);
-					idx++;
-				}
-				cmd_curr = cmd_curr->next;
-			}
-			ps_curr = ps_curr->next;
-		}
-		exit(EXIT_SUCCESS);
+		signal(SIGINT, SIG_IGN);
+		return (wait_child(pid));
 	}
 	return (0);
 }
