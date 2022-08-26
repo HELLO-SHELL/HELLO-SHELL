@@ -5,6 +5,8 @@ static char	*ft_env_strjoin(char *s1, char *s2)
 	char	*result;
 	char	*temp;
 
+	if (!s1 || !s2)
+		return (0);	
 	temp = safe_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!temp)
 		return (0);

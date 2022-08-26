@@ -30,7 +30,8 @@ static void	export_display(void)
 		if (((t_env *)(curr->content))->value == NULL)
 			printf("declare -x %s\n", ((t_env *)(curr->content))->key);
 		else
-			printf("declare -x %s=\"%s\"\n", ((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+			printf("declare -x %s=\"%s\"\n",
+			((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
 		curr = curr->next;
 	}
 }
@@ -83,12 +84,8 @@ static void	export_get_list(t_token *token)
 	ft_lstadd_back(&(g_minishell_info.env_list), ft_lstnew(env_node));
 }
 
-void	ft_export(void)
+void	ft_export(t_token *token)
 {
-	t_env	*env_node;
-	t_token *token;	
-
-	token = g_minishell_info.ps_list->cmd_line;
 	if (token->next == NULL)
 		export_display();
 	else
@@ -97,11 +94,10 @@ void	ft_export(void)
 		{
 			if (export_check_error(token))
 			{
-				// print_error 로 수정해야함
 				token = token->next;
-				write(2,"HELLO-SHELL: `", 14);
-				write(2, token->value, ft_strlen(token->value));
-				write(2, "': command not found\n", 22);
+				ft_putstr_fd("HELLO-SHELL: `", STDERR_FILENO);
+				ft_putstr_fd(token->value, STDERR_FILENO);
+				ft_putendl_fd("': command not found", STDERR_FILENO);
 			}
 			else
 			{
