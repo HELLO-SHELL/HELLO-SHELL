@@ -17,7 +17,6 @@ void    init_minishell(void)
 			exit(EXIT_SUCCESS);
 		add_history(input);
 		replaced_input = replace_whole_input_dollar(input);
-		// printf("replcaed_input : %s%s%s\n", GRN, replaced_input, COLOR_RESET);
 		if (replaced_input && *replaced_input) 
 		{
 			splitted_input = command_split(replaced_input);
@@ -25,8 +24,9 @@ void    init_minishell(void)
 			set_process_list(&g_minishell_info.ps_list, curr_token);
 			make_node_to_envp();
 			executor();
+			free_all(replaced_input, splitted_input);
+//			system("leaks minishell");
 		}
-		free_all(replaced_input, splitted_input);
 	}
 }
 

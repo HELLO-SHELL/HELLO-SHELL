@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void    unsetting(t_list *env_list, t_token *token)
+static void    unsetting(t_list *env_list, t_token *token)
 {
     t_list  *curr;
     t_list  *temp;
@@ -26,7 +26,7 @@ void    unsetting(t_list *env_list, t_token *token)
     }
 }
 
-int unset_have_no_parm(t_token *token)
+static int unset_have_no_parm(t_token *token)
 {
     if (token->next == NULL)
     {

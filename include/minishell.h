@@ -63,6 +63,9 @@ typedef struct s_minishell
 	t_list		*env_list;
 	t_process	*ps_list;
 	t_pipes		pipes;
+	int			ft_stdin;
+	int			ft_stdout;
+	int			ft_stderr;
 	char		*last_status;
 }	t_minishell;
 
@@ -81,14 +84,22 @@ int		check_size(char *line, char **str, int *i);
 
 /* built-in */
 int		ft_pwd(void);
-void	ft_env(t_list *env);
+void	ft_env(void);
 void	ft_cd(void);
 void	ft_unset(void);
-void	ft_export(void);
+void	ft_export(t_token *cmd_line);
 void	ft_exit(void);
 void	ft_echo(void);
 
 /* utils */
+/* built-in */
+int			is_path_only_home(t_token *cmd_list);
+int 		is_path_pass_home(t_token *cmd_list);
+void 		set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
+void 		set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
+void    	set_path_to_input(t_token *cmd_list, char **path);
+
+
 /*		chore_utils		*/
 int		is_same_string(char *str1, char *str2);
 void	*safe_malloc(size_t size);
@@ -110,17 +121,18 @@ char	*append_buffer_under_dollar(char *save, char const *buffer);
 char	*append_buffer_under_single_quote(char *save, char const *buffer);
 char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_len);
 char	*append_buffer_after_all(char *save, char const *buffer);
+int		is_dollar_replacement_end_condition(char c);
 int		get_env_len(char *str);
 int		get_single_quote_len(char *input_ptr);
 int		get_under_single_quote_len(char *input_ptr);
 int		get_under_dollar_len(char *input_ptr);
 char	*replace_whole_input_dollar(char *input);
 
-
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
+void	print_error_two_messages(char *str1, char *str2);
 t_env	*get_env_by_key(char *key);
 int		env_key_valid_checker(char *str);
 void	make_node_to_envp();
@@ -144,8 +156,8 @@ int		word_type_count(t_token *token);
 /* 		executor.c	*/
 void	executor(void);
 void	execute_pipeline(void);
-void	execute_single_cmdline(void);
-void	execute_process(t_process *process, t_pipes *pipes);
+int		execute_single_cmdline(void);
+int		execute_process(t_process *process, t_pipes *pipes);
 int		execute_command(t_process *process);
 void	execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
@@ -160,8 +172,9 @@ char	*get_accessable_command(t_token *cmd_list, char **paths);
 void	init_pipe(t_pipes *p);
 void	swap_pipe(t_pipes *p);
 /* 		redirect.c 	*/
-void	apply_redirection(char *filename, int mode);
-void	apply_redirections(t_token *cmd_line);
+int		apply_redirection(char *filename, int mode);
+int		apply_redirections(t_token *cmd_line);
+void	restore_stdio(void);
 
 /* 		safe_func.c	*/
 void	safe_dup2(int fd, int to_fd);

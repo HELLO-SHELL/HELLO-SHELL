@@ -7,11 +7,17 @@ int	count_pipe(t_token *tk_list)
 
 	curr = tk_list;
 	cnt = 0;
+	if (*(curr->value) == '|')
+		ft_error_exit("pipe can not be located in the first location.");
 	while (curr)
 	{
 		if (*(curr->value) == '|')
 			cnt++;
 		curr = curr->next;
+		if (curr == NULL)
+			return (cnt);
+		if (curr->next == NULL && *(curr->value) == '|')
+			ft_error_exit("pipe can not be located in the last location.");
 	}
 	return (cnt);
 }

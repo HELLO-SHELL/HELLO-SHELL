@@ -1,5 +1,18 @@
 #include "../../../include/minishell.h"
 
+int	is_dollar_replacement_end_condition(char c)
+{
+	if (is_white_space(c))
+		return (1);
+	if (c == '\'' || c == '\"' || c == '\\')
+		return (1);
+	if (c == '|' || c == '=' || c == '/')
+		return (1);
+	if (c == '$' || c == '-')
+		return (1);
+	return (0);
+}
+
 int	get_env_len(char *str)
 {
 	int	len;
@@ -9,8 +22,7 @@ int	get_env_len(char *str)
 		return (0);
 	while (*str)
 	{
-		if (is_white_space(*str) || *str == '\'' || *str == '\"' || *str == '$'
-			|| *str == '|' || *str == '=' || *str == '/' || *str == '\\')
+		if (is_dollar_replacement_end_condition(*str))
 			break ;
 		len++;
 		str++;
