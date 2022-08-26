@@ -40,7 +40,7 @@ int	apply_redirection(char *filename, int mode)
 	else if (mode == TK_APPEND)
 	{
 		fd = safe_openfile(filename, APPEND);
-		dup2(fd, STDIN_FILENO);
+		dup2(fd, STDOUT_FILENO);
 	}
 	else if (mode == TK_HEREDOC)
 	{
