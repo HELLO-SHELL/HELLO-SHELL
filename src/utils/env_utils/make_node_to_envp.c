@@ -20,7 +20,7 @@ static char	*ft_env_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-void make_node_to_envp()
+void	make_node_to_envp(void)
 {
 	char	**envp;
 	t_list	*lst_curr;
@@ -32,7 +32,7 @@ void make_node_to_envp()
 	while (lst_curr)
 	{
 		envp[idx] = ft_env_strjoin(((t_env *)(lst_curr->content))->key,
-			((t_env *)(lst_curr->content))->value);
+				((t_env *)(lst_curr->content))->value);
 		if (is_same_string(((t_env *)(lst_curr->content))->key, "PATH"))
 			(g_minishell_info.ps_list)->paths = ft_split(((t_env *)(lst_curr->content))->value, ':');
 		idx++;
@@ -40,12 +40,4 @@ void make_node_to_envp()
 	}
 	envp[idx] = NULL;
 	g_minishell_info.ps_list->envp = envp;
-	// 아래는 삭제해야겠지
-	// idx = 0;
-	// while (((g_minishell_info.ps_list)->paths)[idx])
-	// {
-	// 	ft_putstr_fd(((g_minishell_info.ps_list)->paths)[idx], 1);
-	// 	ft_putstr_fd("\n", 1);
-	// 	idx++;
-	// }
 }

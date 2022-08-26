@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int count_pipe(t_token *tk_list)
+int	count_pipe(t_token *tk_list)
 {
 	t_token	*curr;
 	int		cnt;
@@ -22,7 +22,7 @@ int count_pipe(t_token *tk_list)
 	return (cnt);
 }
 
-void pslist_new(t_process **lst)
+void	pslist_new(t_process **lst)
 {
 	t_process	*ps_temp;
 
@@ -33,7 +33,7 @@ void pslist_new(t_process **lst)
 	(*lst) = ps_temp;
 }
 
-void pslist_addback(t_process **lst)
+void	pslist_addback(t_process **lst)
 {
 	t_process	*lst_idx;
 	t_process	*ps_temp;
@@ -50,7 +50,7 @@ void pslist_addback(t_process **lst)
 	lst_idx->next = ps_temp;
 }
 
-void init_pslist(t_process **lst, int cnt)
+void	init_pslist(t_process **lst, int cnt)
 {
 	int	i;
 

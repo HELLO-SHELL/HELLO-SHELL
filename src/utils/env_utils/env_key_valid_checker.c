@@ -21,7 +21,7 @@ static int	possible_next_question(char *str)
 
 int	env_key_valid_checker(char *str)
 {
-	char *temp;
+	char	*temp;
 
 	if (!str)
 		return (FALSE);

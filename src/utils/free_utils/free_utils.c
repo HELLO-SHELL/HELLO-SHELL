@@ -54,7 +54,7 @@ void free_all(char *replaced_input, char **splitted_input)
 {
 	int			i;
 	t_token		*temp_token;
-	t_token 	*curr_token;
+	t_token		*curr_token;
 	t_process	*curr_process;
 	t_process	*temp_process;
 

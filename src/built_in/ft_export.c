@@ -3,7 +3,7 @@
 int	export_check_error(t_token *token)
 {
 	t_token	*curr;
-	int	i;
+	int		i;
 
 	i = 0;
 	curr = token->next;
@@ -15,7 +15,7 @@ int	export_check_error(t_token *token)
 		if (ft_isalnum(curr->value[i]) || curr->value[i] == '_')
 			i++;
 		else
-			return (1);	
+			return (1);
 	}
 	return (0);
 }
@@ -31,7 +31,7 @@ static void	export_display(void)
 			printf("declare -x %s\n", ((t_env *)(curr->content))->key);
 		else
 			printf("declare -x %s=\"%s\"\n",
-			((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+				((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
 		curr = curr->next;
 	}
 }
@@ -39,7 +39,7 @@ static void	export_display(void)
 static t_env	*get_overlap_env(char *key)
 {
 	t_env	*temp;
-	
+
 	temp = get_env_by_key(key);
 	if (temp)
 	{
@@ -63,9 +63,9 @@ static void	update_value_when_overlap(t_env *temp, char *str)
 
 static void	export_get_list(t_token *token)
 {
-	char *key;
-	char *value;
-	char *str;
+	char	*key;
+	char	*value;
+	char	*str;
 	t_env	*env_node;
 	t_env	*overlap_env;
 
@@ -76,7 +76,7 @@ static void	export_get_list(t_token *token)
 		return (update_value_when_overlap(overlap_env, str));
 	if (str == NULL)
 		value = 0;
-	else 
+	else
 		value = ft_substr(str + 1, 0, ft_strlen(str));
 	env_node = safe_malloc(sizeof(t_env));
 	env_node->key = key;
