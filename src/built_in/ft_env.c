@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-void	ft_env(void)
+int	ft_env(void)
 {
 	t_list	*env;
 
@@ -12,4 +12,5 @@ void	ft_env(void)
 				((t_env *)(env->content))->value);
 		env = env->next;
 	}
+	return (SUCCESS);
 }

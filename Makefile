@@ -25,7 +25,7 @@ MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 UTILS_DIR = src/utils/
 UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/get_env_by_key.c \
 	  env_utils/make_node_to_envp.c  \
-	  built_in_utils/cd_utils.c \
+	  built_in_utils/cd_utils.c built_in_utils/execute_built_in.c \
 	  replace_dollar/replace_dollar.c replace_dollar/replace_dollar_append_utils.c replace_dollar/replace_dollar_len_utils.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c chore_utils/quote_validator.c \
 	  free_utils/free_utils.c \

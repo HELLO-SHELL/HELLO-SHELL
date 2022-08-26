@@ -84,7 +84,7 @@ static void	export_get_list(t_token *token)
 	ft_lstadd_back(&(g_minishell_info.env_list), ft_lstnew(env_node));
 }
 
-void	ft_export(t_token *token)
+int	ft_export(t_token *token)
 {
 	if (token->next == NULL)
 		export_display();
@@ -98,6 +98,7 @@ void	ft_export(t_token *token)
 				ft_putstr_fd("HELLO-SHELL: `", STDERR_FILENO);
 				ft_putstr_fd(token->value, STDERR_FILENO);
 				ft_putendl_fd("': command not found", STDERR_FILENO);
+				return (FAILURE);
 			}
 			else
 			{
@@ -106,4 +107,5 @@ void	ft_export(t_token *token)
 			}
 		}
 	}
+	return (SUCCESS);
 }

@@ -84,21 +84,25 @@ t_token	*make_token_list(char **token_arr);
 int		check_size(char *line, char **str, int *i);
 
 /* built-in */
-int		ft_pwd(void);
-void	ft_env(void);
-void	ft_cd(void);
-void	ft_unset(void);
-void	ft_export(t_token *cmd_line);
-void	ft_exit(void);
-void	ft_echo(void);
+int	ft_pwd(void);
+int	ft_env(void);
+int	ft_cd(void);
+int	ft_unset(void);
+int	ft_export(t_token *cmd_line);
+int	ft_exit(void);
+int	ft_echo(void);
 
 /* utils */
 /* built-in */
-int			is_path_only_home(t_token *cmd_list);
-int 		is_path_pass_home(t_token *cmd_list);
-void 		set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
-void 		set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
-void    	set_path_to_input(t_token *cmd_list, char **path);
+int	is_path_only_home(t_token *cmd_list);
+int	is_path_pass_home(t_token *cmd_list);
+int	set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
+int	set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
+int	set_path_to_input(t_token *cmd_list, char **path);
+int	execute_built_in(t_process *process);
+int	is_built_in(t_process *ps_info);
+int	check_cmd(char *word);
+
 
 
 /*		chore_utils		*/
@@ -158,11 +162,11 @@ int		word_type_count(t_token *token);
 /* executor */
 /* 		executor.c	*/
 void	executor(void);
-void	execute_pipeline(void);
+int		execute_pipeline(void);
 int		execute_single_cmdline(void);
 int		execute_process(t_process *process, t_pipes *pipes);
 int		execute_command(t_process *process);
-void	execute_built_in(t_process *process);
+int		execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
 /* 		heredoc.c 	*/
 int		execute_heredoc(void);
