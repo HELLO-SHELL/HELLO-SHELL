@@ -30,6 +30,8 @@ static void	insert_first_into_list(t_token **lst, char *str)
 	temp->value = ft_strdup(str);
 	temp->next = NULL;
 	temp->prev = NULL;
+	if (temp->value == NULL)
+		ft_error_exit("malloc error");
 	check_and_set_type(temp);
 	*lst = temp;
 }
@@ -43,12 +45,14 @@ static void	insert_str_into_list_back(t_token **lst, char *str)
 	temp->value = ft_strdup(str);
 	temp->next = NULL;
 	temp->prev = *lst;
+	if (temp->value == NULL)
+		ft_error_exit("malloc error");
 	check_and_set_type(temp);
 	(*lst)->next = temp;
 	(*lst) = (*lst)->next;
 }
 
-static int	set_str_into_list(t_token **lst, char **str)
+static void	set_str_into_list(t_token **lst, char **str)
 {
 	int		i;
 
@@ -61,7 +65,6 @@ static int	set_str_into_list(t_token **lst, char **str)
 			insert_str_into_list_back(lst, str[i]);
 		i++;
 	}
-	return (1);
 }
 
 t_token	*make_token_list(char **token_arr)
@@ -72,10 +75,8 @@ t_token	*make_token_list(char **token_arr)
 	idx = 0;
 	if (!token_arr || !*token_arr)
 		exit(EXIT_FAILURE);
-	if (set_str_into_list(&token_list_head, token_arr))
-		token_list_head = get_token_head(token_list_head);
-	else
-		return (0);
+	set_str_into_list(&token_list_head, token_arr);
+	token_list_head = get_token_head(token_list_head);
 	while (token_arr[idx])
 	{
 		safe_free(token_arr[idx]);

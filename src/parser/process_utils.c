@@ -25,54 +25,33 @@ void	tk_listdelone(t_token **tk_list)
 	(*tk_list) = NULL;
 }
 
-int	word_type_count(t_token *token)
+static int	is_special_token(int type)
+{
+	if (type == TK_FILE || type == TK_WORD || type == TK_DELIM)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	check_token_error(t_token *token)
 {
 	t_token	*token_curr;
 	int		count;
 
-	count = 0;
+	count = all_token_count(token);
 	token_curr = token;
 	while (token_curr)
 	{
-		if (token_curr->type == TK_WORD)
-			count++;
+		if (token->prev == NULL && is_same_string(token_curr->value, "|"))
+			print_error_with_new_prompt("pipe can not be located in the first location.");
+		else if (token->next == NULL && is_same_string(token_curr->value, "|"))
+			print_error_with_new_prompt("pipe can not be located in the last location.");
+		if (is_special_token(token_curr->type))
+		{
+			if (token->prev && is_special_token(token->prev->type))
+				print_error_with_new_prompt("special token can't stuck each other");
+			if (token->next && is_special_token(token->next->type))
+				print_error_with_new_prompt("special token can't stuck each other");
+		}
 		token_curr = token_curr->next;
 	}
-	return (count);
 }
-
-// static int	all_token_type_count(t_token *token)
-// {
-// 	t_token	*token_curr;
-// 	int		count;
-
-// 	count = 0;
-// 	token_curr = token;
-// 	while (token_curr)
-// 	{
-// 		count++;
-// 		token_curr = token_curr->next;
-// 	}
-// 	return (count);
-// }
-
-// int	check_token_error(t_token *token)
-// {
-// 	t_token	*token_curr;
-// 	int		count;
-// 	int		idx;
-
-// 	idx = 0;
-// 	count = all_token_type_count(token);
-// 	token_curr = token;
-// 	while (token_curr)
-// 	{
-// 		if (idx == 0 && is_same_string(token->value, "|"))
-// 		{
-// 			print_error_message("pipe can not be located in the first location.");
-// 			// free_all()
-// 		}
-// 		idx++;
-// 		token_curr = token_curr->next;
-// 	}
-// }

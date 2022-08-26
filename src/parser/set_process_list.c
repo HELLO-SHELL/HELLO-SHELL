@@ -8,7 +8,7 @@ static void	word_token_to_argv(t_process *ps_list)
 	int		idx;
 
 	idx = 0;
-	count = word_type_count(ps_list->cmd_line);
+	count = token_word_count(ps_list->cmd_line);
 	new_argv = safe_malloc(sizeof(char *) * (count + 1));
 	token_curr = ps_list->cmd_line;
 	while (token_curr)
@@ -62,6 +62,7 @@ void	set_process_list(t_process	**ps_list, t_token *tk_list)
 {
 	int			pipe_cnt;
 
+	check_token_error(tk_list);
 	pipe_cnt = count_pipe(tk_list);
 	init_pslist(ps_list, pipe_cnt);
 	(*ps_list)->size = pipe_cnt + 1;
