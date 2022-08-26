@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-static void	_swap(int *a, int *b)
+static void	swap(int *a, int *b)
 {
 	int	temp;
 
@@ -11,8 +11,8 @@ static void	_swap(int *a, int *b)
 
 void	swap_pipe(t_pipes *p)
 {
-	_swap(&(p->prev_pipe[READ]), &(p->next_pipe[READ]));
-	_swap(&(p->prev_pipe[WRITE]), &(p->next_pipe[WRITE]));
+	swap(&(p->prev_pipe[READ]), &(p->next_pipe[READ]));
+	swap(&(p->prev_pipe[WRITE]), &(p->next_pipe[WRITE]));
 }
 
 void	init_pipe(t_pipes *p)
