@@ -185,7 +185,7 @@ void	safe_close_pipe(int *fd);
 
 /*		wait.c		*/
 int		wait_childs(void);
-pid_t	_get_last_pid(void);
+pid_t	get_last_pid(void);
 int		wait_child(pid_t pid);
 int		_signal_print(int status);
 int		_trans_status(int status);

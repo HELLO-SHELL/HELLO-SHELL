@@ -41,7 +41,7 @@ int	wait_child(pid_t pid)
 	return (_trans_status(status));
 }
 
-pid_t	_get_last_pid()
+pid_t	get_last_pid()
 {
 	t_process *ps_curr;
 
@@ -53,7 +53,7 @@ pid_t	_get_last_pid()
 
 int	wait_childs(void)
 {
-	const pid_t	last_pid = _get_last_pid();
+	const pid_t	last_pid = get_last_pid();
 	pid_t		pid;
 	int			status;
 	int			last_status;
