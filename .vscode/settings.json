@@ -23,7 +23,8 @@
     "system_error": "c",
     "tuple": "c",
     "type_traits": "c",
-    "vector": "c"
+    "vector": "c",
+    "sstream": "c"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }

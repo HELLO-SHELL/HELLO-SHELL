@@ -20,16 +20,14 @@ static void	skip_qoute_in_split(char *str, int *i)
 static void	skip_word(char *str, int *i, int *res)
 {
 	if (ft_strchr("<>|", str[*i]) && str[*i] != '\0')
-	{
 		(*res)++;
-	}
 	if (str[*i] == '<')
 	{
 		if (str[*i + 1] == '<')
 			(*i)++;
 		(*i)++;
 	}
-	if (str[*i] == '>')
+	else if (str[*i] == '>')
 	{
 		if (str[*i + 1] == '>')
 			(*i)++;
