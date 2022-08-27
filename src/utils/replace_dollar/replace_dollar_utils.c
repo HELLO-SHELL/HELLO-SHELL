@@ -80,7 +80,7 @@ void	make_dollar_replaced_input(char **input_buffer, char **input_ptr)
 			break ;
 		}
 		*input_ptr = ft_strchr(*input_ptr, '$');
-        r_handle_dollar(&*input_buffer, &*input_ptr);
+		r_handle_dollar(&*input_buffer, &*input_ptr);
 		r_handle_single_quote(&*input_buffer, &*input_ptr);
 		*input_buffer = append_buffer_under_dollar(*input_buffer, *input_ptr);
 		*input_ptr += get_under_dollar_len(*input_ptr);
