@@ -34,7 +34,7 @@ char	*get_accessable_command(t_token *cmd_list, char **paths)
 		path_command = NULL;
 		paths++;
 	}
-	ft_error_exit(ft_strjoin(": command not found", command));
+	ft_error_exit(ft_strjoin(":command not found : ", command));
 	return (0);
 }
 
