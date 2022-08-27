@@ -21,7 +21,7 @@ char	*get_accessable_command(t_token *cmd_list, char **paths)
 	if (!access(command, 0))
 		return (ft_strdup(command));
 	if (paths == NULL)
-		ft_error_exit("I will Find You.. and I will Kill you");
+		return (NULL);
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");
@@ -34,8 +34,7 @@ char	*get_accessable_command(t_token *cmd_list, char **paths)
 		path_command = NULL;
 		paths++;
 	}
-	ft_error_exit(ft_strjoin(": command not found", command));
-	return (0);
+	return (NULL);
 }
 
 int	is_accessable_command(t_token *cmd_list, char **paths)

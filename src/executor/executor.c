@@ -8,7 +8,7 @@ void	execute_command(t_process *process)
 	if (is_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths))
 		command = get_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths);
 	else
-		ft_error_exit("command not found");
+		ft_error_two_exit("command not found: ", *process->argv);
 	execve(command, process->argv, process->envp);
 	exit(EXIT_FAILURE);
 }

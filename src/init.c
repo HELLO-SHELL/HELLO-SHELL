@@ -26,7 +26,6 @@ void	init_minishell(void)
 				make_node_to_envp();
 				executor();
 				free_all();
-				
 			}
 		}
 		else
