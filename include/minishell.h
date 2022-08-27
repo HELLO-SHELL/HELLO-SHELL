@@ -150,7 +150,7 @@ void	heredoc_new_prompt();
 int		is_white_space(char c);
 
 /* parser */
-int		set_process_list(t_process **ps_list, t_token *tk_lst);
+void	set_process_list(t_process **ps_list, t_token *tk_lst);
 int		count_pipe(t_token *tk_list);
 void	init_pslist(t_process **lst, int cnt);
 void	pslist_new(t_process **lst);
