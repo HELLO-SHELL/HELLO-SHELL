@@ -32,12 +32,3 @@ void	init_minishell(void)
 			free(input);
 	}
 }
-
-void	init_minishell_info(void)
-{
-	g_minishell_info.env_list = NULL;
-	g_minishell_info.last_status = ft_itoa(0);
-	init_pipe(&g_minishell_info.pipes);
-	g_minishell_info.ps_list = NULL;
-	g_minishell_info.heredoc_cnt = 0;
-}

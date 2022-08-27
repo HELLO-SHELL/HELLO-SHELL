@@ -148,6 +148,7 @@ void	*ft_memccpy_under(void *dest, const void *src, int c, size_t n);
 void	get_new_prompt();
 void	heredoc_new_prompt();
 int		is_white_space(char c);
+void	set_last_status(int status);
 
 /* parser */
 int		set_process_list(t_process **ps_list, t_token *tk_lst);
@@ -165,9 +166,9 @@ int		check_token_error(t_token *token);
 /* 		executor.c	*/
 void	executor(void);
 int		execute_pipeline(void);
-int		execute_single_cmdline(void);
-int		execute_process(t_process *process, t_pipes *pipes);
-int		execute_command(t_process *process);
+void	execute_single_cmdline(void);
+void	execute_process(t_process *process, t_pipes *pipes);
+void	execute_command(t_process *process);
 int		execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
 /* 		heredoc.c 	*/
@@ -176,6 +177,7 @@ void	make_temp_file(int file_index, char *delim);
 /* 		is_func.c 	*/
 int		is_accessable_command(t_token *cmd_list, char **paths);
 char	*get_accessable_command(t_token *cmd_list, char **paths);
+int		is_argv_null(char **argv);
 /* 		pipe.c	 	*/
 void	init_pipe(t_pipes *p);
 void	swap_pipe(t_pipes *p);

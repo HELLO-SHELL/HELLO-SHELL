@@ -10,10 +10,12 @@ void	make_temp_file(int file_index, char *delim)
 	ft_strlcpy(filename, ".temp.", 7);
 	filename[6] = idx_char[file_index];
 	fd = safe_openfile(filename, WRITE);
+	if (fd == -1)
+		ft_error_exit("heredoc file error");
 	line = readline("HereDoc> ");
 	while (is_same_string(line, delim) == FALSE)
 	{
-		line = replace_whole_input_dollar(line);
+		line = replace_dollar_in_heredoc(line);
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 		free(line);

@@ -1,5 +1,12 @@
 #include "../../include/minishell.h"
 
+int	is_argv_null(char **argv)
+{
+	if (*argv)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
 char	*get_accessable_command(t_token *cmd_list, char **paths)
 {
 	t_token	*curr;

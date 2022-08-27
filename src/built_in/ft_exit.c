@@ -40,7 +40,7 @@ int	ft_exit(void)
 	if (is_digit_string(argv[1]) && ac == 2)
 	{
 		ft_putendl_fd(EXIT, STDOUT_FILENO);
-		exit(ft_atoi(argv[1]));
+		exit((unsigned char) ft_atoi(argv[1]));
 	}
 	if (is_digit_string(argv[1]) && ac > 2)
 	{
