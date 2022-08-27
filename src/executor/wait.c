@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-int	_trans_status(int status)
+int	trans_status(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
@@ -10,7 +10,7 @@ int	_trans_status(int status)
 		return (EXIT_FAILURE);
 }
 
-int	_signal_print(int status)
+int	signal_print(int status)
 {
 	if (WIFSIGNALED(status))
 	{
@@ -38,10 +38,10 @@ int	wait_child(pid_t pid)
 		else if (WTERMSIG(status) == SIGQUIT)
 			print_error_message("Quit: 3\n");
 	}
-	return (_trans_status(status));
+	return (trans_status(status));
 }
 
-pid_t	_get_last_pid()
+pid_t	get_last_pid()
 {
 	t_process *ps_curr;
 
@@ -53,7 +53,7 @@ pid_t	_get_last_pid()
 
 int	wait_childs(void)
 {
-	const pid_t	last_pid = _get_last_pid();
+	const pid_t	last_pid = get_last_pid();
 	pid_t		pid;
 	int			status;
 	int			last_status;
@@ -65,9 +65,9 @@ int	wait_childs(void)
 	{
 		pid = wait(&status);
 		if (pid == -1)
-			return (_trans_status(last_status));
+			return (trans_status(last_status));
 		if (printed == 0)
-			printed = _signal_print(status);
+			printed = signal_print(status);
 		if (pid == last_pid)
 			last_status = status;
 	}
