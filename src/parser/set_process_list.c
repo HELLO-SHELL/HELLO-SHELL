@@ -20,18 +20,6 @@ static void	word_token_to_argv(t_process *ps_list)
 	ps_list->argv = new_argv;
 }
 
-static void	insert_process_argv(t_process **ps_list)
-{
-	t_process	*lst_curr;
-
-	lst_curr = *ps_list;
-	while (lst_curr && lst_curr->cmd_line)
-	{
-		word_token_to_argv(lst_curr);
-		lst_curr = lst_curr->next;
-	}
-}
-
 static void	insert_process_head(t_process **ps_list, t_token *tk_list)
 {
 	t_process	*pslist_curr;
@@ -53,7 +41,7 @@ static void	insert_process_head(t_process **ps_list, t_token *tk_list)
 			token_curr = token_curr->next;
 			tk_listdelone(&for_delete);
 		}
-		insert_process_argv(&pslist_curr);
+		word_token_to_argv(pslist_curr);
 		pslist_curr = pslist_curr->next;
 	}
 }
