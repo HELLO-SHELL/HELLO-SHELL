@@ -3,14 +3,14 @@
 int	is_dollar_replacement_end_condition(char c)
 {
 	if (is_white_space(c))
-		return (1);
+		return (TRUE);
 	if (c == '\'' || c == '\"' || c == '\\')
-		return (1);
+		return (TRUE);
 	if (c == '|' || c == '=' || c == '/')
-		return (1);
+		return (TRUE);
 	if (c == '$' || c == '-')
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 int	get_env_len(char *str)

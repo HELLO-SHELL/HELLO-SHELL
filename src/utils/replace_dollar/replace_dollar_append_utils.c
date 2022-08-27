@@ -67,6 +67,22 @@ char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_
 	return (new_input_buffer);
 }
 
+char	*append_buffer_single_dollar(char *save)
+{
+	char	*buffer;
+	char	*new;
+
+	if (!save)
+		return (NULL);
+	buffer = "$";
+	new = safe_malloc(ft_strlen(save) + ft_strlen(buffer) + 1);
+	ft_strlcpy(new, save, ft_strlen(save) + 1);
+	ft_strlcpy(new + ft_strlen(save), buffer, ft_strlen(buffer) + 1);
+	free(save);
+	save = NULL;
+	return (new);
+}
+
 char	*append_buffer_after_all(char *save, char const *buffer)
 {
 	char	*new;
