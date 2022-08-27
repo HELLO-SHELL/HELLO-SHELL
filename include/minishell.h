@@ -160,6 +160,7 @@ void	cut_token_by_pipe(t_token **tk_list);
 void	tk_listdelone(t_token **tk_list);
 int		token_word_count(t_token *token);
 int		check_token_error(t_token *token);
+int		is_special_token(int type);
 
 /* executor */
 /* 		executor.c	*/
