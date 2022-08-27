@@ -38,7 +38,7 @@ void	r_handle_single_quote(char **input_buffer, char **input_ptr)
 		*input_buffer = \
 			append_single_quote(*input_buffer, *input_ptr, s_quote_len);
 		if (s_quote_len > 0)
-			*input_ptr += (s_quote_len);
+			*input_ptr += (s_quote_len + 2);
 	}
 }
 
@@ -49,6 +49,13 @@ void    r_handle_dollar(char **input_buffer, char **input_ptr)
         *input_buffer = append_buffer_single_dollar(*input_buffer);
         *input_ptr += 1;
     }
+	if (is_symbol_in_dollar_replace(**input_ptr))
+	{
+		*input_ptr += 1;
+		*input_buffer = \
+			replace_dollar(*input_buffer, *input_ptr);
+		*input_ptr += 1;
+	}
 	if (env_key_valid_checker(*input_ptr) && *input_ptr)
     {
         *input_ptr += 1;
@@ -56,22 +63,6 @@ void    r_handle_dollar(char **input_buffer, char **input_ptr)
             replace_dollar(*input_buffer, *input_ptr);
         *input_ptr += get_env_len(*input_ptr);
     }
-}
-
-int	is_only_dollar(char *input_ptr)
-{
-	if (*input_ptr != '$')
-		return (FALSE);
-	input_ptr++;
-	if (ft_isalnum(*input_ptr))
-		return (FALSE);
-	if (*input_ptr == '-' || *input_ptr == '_')
-		return (FALSE);
-	if (*input_ptr == '#' || *input_ptr == '@' || *input_ptr == '*')
-		return (FALSE);
-	if (*input_ptr == '!' || *input_ptr == '$' || *input_ptr == '?')
-		return (FALSE);
-	return (TRUE);
 }
 
 void	make_dollar_replaced_input(char **input_buffer, char **input_ptr)
