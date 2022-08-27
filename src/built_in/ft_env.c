@@ -12,5 +12,5 @@ int	ft_env(void)
 				((t_env *)(env->content))->value);
 		env = env->next;
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

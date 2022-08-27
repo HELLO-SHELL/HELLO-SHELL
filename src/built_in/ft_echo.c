@@ -49,5 +49,5 @@ int	ft_echo(void)
 	idx = 1;
 	check_option_and_find_print_position(&idx);
 	print_arg_with_idx(idx);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

@@ -16,10 +16,9 @@ int	check_cmd(char *word)
 
 int	is_built_in(t_process *ps_info)
 {
-	char *word;
+	const char *command = *ps_info->argv;
 
-	word = ps_info->cmd_line->value;
-	if (check_cmd(word))
+	if (check_cmd((char *) command))
 		return (1);
 	return (0);
 }
@@ -43,5 +42,5 @@ int execute_built_in(t_process *process)
 		return (ft_unset());
 	else if (is_same_string(cmd, ECHO))
 		return (ft_echo());
-	return (FAILURE);
+	return (EXIT_FAILURE);
 }

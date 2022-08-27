@@ -8,9 +8,9 @@ int	ft_pwd(void)
 	if (!buf)
 	{
 		free(buf);
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	}
 	printf("%s\n", buf);
 	free(buf);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

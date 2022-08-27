@@ -45,12 +45,12 @@ int	ft_unset(void)
 	env_list = g_minishell_info.env_list;
 	token = g_minishell_info.ps_list->cmd_line;
 	if (unset_have_no_parm(token))
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	token = token->next;
 	while (token)
 	{
 		unsetting(env_list, token);
 		token = token->next;
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

@@ -164,9 +164,9 @@ int		word_type_count(t_token *token);
 /* 		executor.c	*/
 void	executor(void);
 int		execute_pipeline(void);
-int		execute_single_cmdline(void);
-int		execute_process(t_process *process, t_pipes *pipes);
-int		execute_command(t_process *process);
+void	execute_single_cmdline(void);
+void	execute_process(t_process *process, t_pipes *pipes);
+void	execute_command(t_process *process);
 int		execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
 /* 		heredoc.c 	*/
@@ -175,6 +175,7 @@ void	make_temp_file(int file_index, char *delim);
 /* 		is_func.c 	*/
 int		is_accessable_command(t_token *cmd_list, char **paths);
 char	*get_accessable_command(t_token *cmd_list, char **paths);
+int		is_argv_null(char **argv);
 /* 		pipe.c	 	*/
 void	init_pipe(t_pipes *p);
 void	swap_pipe(t_pipes *p);

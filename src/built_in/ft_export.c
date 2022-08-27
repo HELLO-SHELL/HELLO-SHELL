@@ -98,7 +98,7 @@ int	ft_export(t_token *token)
 				ft_putstr_fd("HELLO-SHELL: `", STDERR_FILENO);
 				ft_putstr_fd(token->value, STDERR_FILENO);
 				ft_putendl_fd("': command not found", STDERR_FILENO);
-				return (FAILURE);
+				return (EXIT_FAILURE);
 			}
 			else
 			{
@@ -107,5 +107,5 @@ int	ft_export(t_token *token)
 			}
 		}
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

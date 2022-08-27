@@ -25,19 +25,12 @@ void	init_minishell(void)
 				set_process_list(&g_minishell_info.ps_list, curr_token);
 				make_node_to_envp();
 				executor();
+				printf("last_status: %s\n", g_minishell_info.last_status);
 				free_all(replaced_input, splitted_input);
+				printf("last_status: %s\n", g_minishell_info.last_status);
 			}
 		}
 		else
 			free(input);
 	}
-}
-
-void	init_minishell_info(void)
-{
-	g_minishell_info.env_list = NULL;
-	g_minishell_info.last_status = ft_itoa(0);
-	init_pipe(&g_minishell_info.pipes);
-	g_minishell_info.ps_list = NULL;
-	g_minishell_info.heredoc_cnt = 0;
 }
