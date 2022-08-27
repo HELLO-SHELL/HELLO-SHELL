@@ -20,8 +20,10 @@ void	init_minishell(void)
 			if (replaced_input && *replaced_input)
 			{
 				curr_token = make_token_list(command_split(replaced_input));
-				if (set_process_list(&g_minishell_info.ps_list, curr_token))
-					continue;
+				if (check_token_error(curr_token))
+					continue ;
+				else
+					set_process_list(&g_minishell_info.ps_list, curr_token);
 				make_node_to_envp();
 				executor();
 				free_all();
