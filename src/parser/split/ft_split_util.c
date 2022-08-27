@@ -13,7 +13,7 @@ void	handle_pipe_and_arrow(char *str, int *i, int *res)
 		}
 		(*i)++;
 	}
-	if (str[*i] == '>')
+	else if (str[*i] == '>')
 	{
 		if (str[*i + 1] == '>')
 		{
