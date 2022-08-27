@@ -67,6 +67,10 @@ int	is_only_dollar(char *input_ptr)
 		return (FALSE);
 	if (*input_ptr == '-' || *input_ptr == '_')
 		return (FALSE);
+	if (*input_ptr == '#' || *input_ptr == '@' || *input_ptr == '*')
+		return (FALSE);
+	if (*input_ptr == '!' || *input_ptr == '$' || *input_ptr == '?')
+		return (FALSE);
 	return (TRUE);
 }
 
