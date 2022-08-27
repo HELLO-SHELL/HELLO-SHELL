@@ -20,10 +20,3 @@ void	print_error_two_messages(char *str1, char *str2)
 	ft_putendl_fd(str2, STDERR_FILENO);
 	write(2, COLOR_RESET, ft_strlen(COLOR_RESET));
 }
-
-int	print_error_with_new_prompt(char *str)
-{
-	print_error_message(str);
-	free_all();
-	return (TRUE);
-}

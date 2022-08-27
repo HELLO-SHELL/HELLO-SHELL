@@ -1,21 +1,17 @@
 #include "../../include/minishell.h"
 
-int	count_pipe(t_token *tk_list)
+void	tk_listdelone(t_token **tk_list)
 {
-	t_token	*curr;
-	int		cnt;
-
-	curr = tk_list;
-	cnt = 0;
-	while (curr)
-	{
-		if (*(curr->value) == '|')
-			cnt++;
-		curr = curr->next;
-		if (curr == NULL)
-			return (cnt);
-	}
-	return (cnt);
+	if ((*tk_list)->prev)
+		(*tk_list)->prev->next = (*tk_list)->next;
+	if ((*tk_list)->next)
+		(*tk_list)->next->prev = (*tk_list)->prev;
+	(*tk_list)->prev = NULL;
+	(*tk_list)->next = NULL;
+	free((*tk_list)->value);
+	(*tk_list)->value = NULL;
+	free(*tk_list);
+	(*tk_list) = NULL;
 }
 
 void	pslist_new(t_process **lst)
