@@ -84,7 +84,7 @@ void	execute_single_cmdline(void)
 	else if (pid == 0)
 		execute_command(process);
 	else
-		wait_child(pid);
+		set_last_status(wait_child(pid));
 	return ;
 }
 
