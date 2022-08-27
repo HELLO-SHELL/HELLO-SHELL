@@ -29,8 +29,6 @@ int	env_key_valid_checker(char *str)
 	if (*temp != '$')
 		return (FALSE);
 	temp++;
-	if (*temp == '?' && possible_next_question(temp + 1))
-		return (ENV_KEY_QUESTION);
 	if (!(ft_isalpha(*temp) || *temp == '_'))
 		return (FALSE);
 	temp++;
