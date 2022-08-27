@@ -79,12 +79,15 @@ int	split_line(t_split *split, char *line)
 	}
 	if (ft_strchr("<>|", line[split->i]) || is_white_space(line[split->i]))
 		handle_pipe_and_arrow(line, &(split->i), &(split->rtn));
-	else {
-		while (!is_white_space(line[split->i]) && !ft_strchr("<>|\0", line[split->i]))
+	else
+	{
+		while (!is_white_space(line[split->i])
+			&& !ft_strchr("<>|\0", line[split->i]))
 		{
 			if (ft_strchr("\'\"", line[split->i]))
 				handle_quote(split, line);
-			else {
+			else
+			{
 				split->rtn++;
 				split->i++;
 			}
