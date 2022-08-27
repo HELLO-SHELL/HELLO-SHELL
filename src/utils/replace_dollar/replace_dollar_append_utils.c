@@ -59,7 +59,6 @@ char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_
 	if (single_quote_len <= 0)
 		return (input_buffer);
 	new_input_buffer = safe_malloc(ft_strlen(input_buffer) + single_quote_len + 1);
-	input_ptr += 1;
 	ft_strlcpy(new_input_buffer, input_buffer, ft_strlen(input_buffer) + 1);
 	ft_strlcpy(new_input_buffer + ft_strlen(input_buffer), input_ptr, single_quote_len + 1);
 	free(input_buffer);
