@@ -30,7 +30,8 @@ int	check_token_error(t_token *token)
 			err_msg = check_near_token(token_curr);
 		if (!is_same_string("", err_msg))
 		{
-			print_error_with_new_prompt(err_msg);
+			print_error_message(err_msg);
+			free_token_list(token);
 			return (TRUE);
 		}
 		token_curr = token_curr->next;

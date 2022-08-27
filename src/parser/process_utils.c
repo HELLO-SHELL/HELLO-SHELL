@@ -31,7 +31,7 @@ void	cut_token_by_pipe(t_token **tk_list)
 
 int	is_special_token(int type)
 {
-	if (type == TK_RDINPUT || type == TK_RDOUTPUT 
+	if (type == TK_RDINPUT || type == TK_RDOUTPUT
 		|| type == TK_HEREDOC || type == TK_APPEND || type == TK_PIPE)
 		return (TRUE);
 	return (FALSE);

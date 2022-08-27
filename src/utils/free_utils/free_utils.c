@@ -10,7 +10,7 @@ void	safe_free(void *p)
 	return ;
 }
 
-void free_envp(t_process *ps_list)
+void	free_envp(t_process *ps_list)
 {
 	char	**envp_curr;
 	char	**path_curr;
@@ -35,7 +35,7 @@ void free_envp(t_process *ps_list)
 	safe_free(path_curr);
 }
 
-void free_argv(t_process *ps_list)
+void	free_argv(t_process *ps_list)
 {
 	char	**argv_curr;
 	int		argv_idx;
@@ -50,7 +50,23 @@ void free_argv(t_process *ps_list)
 	safe_free(argv_curr);
 }
 
-void free_all()
+void	free_token_list(t_token *token)
+{
+	t_token	*temp_token;
+	t_token	*curr_token;
+
+	curr_token = token;
+	while (curr_token)
+	{
+		temp_token = curr_token;
+		curr_token = curr_token->next;
+		safe_free(temp_token->value);
+		temp_token->value = NULL;
+		safe_free(temp_token);
+	}
+}
+
+void	free_all()
 {
 	t_token		*temp_token;
 	t_token		*curr_token;
