@@ -147,6 +147,7 @@ int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
 void	ft_error_exit(char *str);
 void	print_error_two_messages(char *str1, char *str2);
+void	ft_error_two_exit(char *str1, char *str2);
 t_env	*get_env_by_key(char *key);
 int		env_key_valid_checker(char *str);
 void	make_node_to_envp();
