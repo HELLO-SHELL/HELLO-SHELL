@@ -33,7 +33,7 @@ int	get_env_len(char *str)
 int	get_single_quote_len(char *input_ptr)
 {
 	if (ft_strchr(input_ptr, '\''))
-		return (ft_strchr(input_ptr + 1, '\'') - ft_strchr(input_ptr, '\'') - 1);
+		return (ft_strchr(input_ptr + 1, '\'') - ft_strchr(input_ptr, '\'') + 1);
 	return (0);
 }
 
