@@ -135,7 +135,6 @@ void    r_handle_dollar(char **input_buffer, char **input_ptr);
 int		is_only_dollar(char *input_ptr);
 void	make_dollar_replaced_input(char **input_buffer, char **input_ptr);
 int		is_dollar_replacement_end_condition(char c);
-int		is_symbol_in_dollar(char c);
 int		is_symbol_in_dollar_replace(char c);
 int		get_env_len(char *str);
 int		get_single_quote_len(char *input_ptr);
