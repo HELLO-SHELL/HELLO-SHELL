@@ -95,9 +95,7 @@ int	ft_export(t_token *token)
 			if (export_check_error(token))
 			{
 				token = token->next;
-				ft_putstr_fd("HELLO-SHELL: `", STDERR_FILENO);
-				ft_putstr_fd(token->value, STDERR_FILENO);
-				ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+				print_error_two_messages(token->value, "': not a valid identifier");
 				return (EXIT_FAILURE);
 			}
 			else
