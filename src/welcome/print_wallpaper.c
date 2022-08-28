@@ -20,7 +20,7 @@ void	print_wallpaper(void)
 	char	*line;
 	size_t	i;
 
-	fd = open("./assest/wallpaper", O_RDONLY);
+	fd = open("./asset/wallpaper", O_RDONLY);
 	if (fd < 0)
 		return ;
 	while (1) // need to change enum! 
