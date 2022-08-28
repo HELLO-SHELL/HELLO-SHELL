@@ -49,7 +49,7 @@ void    r_handle_dollar(char **input_buffer, char **input_ptr)
         *input_buffer = append_buffer_single_dollar(*input_buffer);
         *input_ptr += 1;
     }
-	if (is_symbol_in_dollar_replace(**input_ptr))
+	if (is_symbol_in_dollar_replace(*input_ptr))
 	{
 		*input_ptr += 1;
 		*input_buffer = \

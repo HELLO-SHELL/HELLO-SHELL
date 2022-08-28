@@ -47,9 +47,9 @@ int	ft_cd(void)
 
 	path = NULL;
 	if (!set_path(&path))
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	if (!change_directory(&path))
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	if (!update_env_pwd())
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
