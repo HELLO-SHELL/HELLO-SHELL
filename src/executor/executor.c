@@ -4,13 +4,18 @@ void	execute_command(t_process *process)
 {
 	char	*command;
 	char	**argv_curr;
+	char	**paths;
 
-	if (is_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths))
-		command = get_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths);
+	command = process->argv[0];
+	paths = g_minishell_info.ps_list->paths;
+	command = get_accessable_command(command, paths);
+	if (command)
+	{
+		if (execve(command, process->argv, process->envp))
+			error_two_exit_status(127, command, "command not found");
+	}
 	else
-		ft_error_two_exit(*process->argv, ": No Such file or directory");
-	execve(command, process->argv, process->envp);
-	exit(EXIT_FAILURE);
+		error_two_exit_status(127, "", "command not found");
 }
 
 void	execute_process(t_process *process, t_pipes *pipes)
@@ -19,7 +24,7 @@ void	execute_process(t_process *process, t_pipes *pipes)
 	safe_dup2(pipes->next_pipe[WRITE], STDOUT_FILENO);
 	safe_close_pipes(pipes);
 	if (apply_redirections(process->cmd_line) == FAILURE)
-		ft_error_exit("redirection error");
+		exit(EXIT_FAILURE);
 	if (is_argv_null(process->argv))
 		exit(EXIT_SUCCESS);
 	if (is_built_in(process))
@@ -42,11 +47,11 @@ int	execute_pipeline(void)
 		if (ps_curr->next != NULL)
 		{
 			if (pipe(g_minishell_info.pipes.next_pipe) == -1)
-				ft_error_exit("fail_pipe()");
+				error_exit("fail_pipe()");
 		}
 		ps_curr->pid = fork();
 		if (ps_curr->pid == -1)
-			ft_error_exit("fail fork()\n");
+			error_exit("fail fork()\n");
 		else if (ps_curr->pid == 0)
 			execute_process(ps_curr, &(g_minishell_info.pipes));
 		else
@@ -67,7 +72,6 @@ void	execute_single_cmdline(void)
 	process = g_minishell_info.ps_list;
 	if (apply_redirections(process->cmd_line) == FAILURE)
 	{
-		print_error_message("redirection error");
 		set_last_status(EXIT_FAILURE);
 		return ;
 	}
@@ -80,7 +84,7 @@ void	execute_single_cmdline(void)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_error_exit("fork error");
+		error_exit("fork error");
 	else if (pid == 0)
 		execute_command(process);
 	else

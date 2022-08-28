@@ -3,7 +3,7 @@
 void	safe_dup2(int fd, int to_fd)
 {
 	if (fd >= 0 && to_fd >= 0 && dup2(fd, to_fd) == -1)
-		ft_error_exit("fail dup2()\n");
+		error_exit("fail dup2()\n");
 }
 
 int	safe_openfile(char *filename, int mode)
@@ -14,7 +14,10 @@ int	safe_openfile(char *filename, int mode)
 	if (mode == READ)
 	{
 		if (access(filename, F_OK))
-			print_error_two_messages("No Such File: ", filename);
+		{
+			print_error_two_messages(filename, ": No such file or directory");
+			return (fd);
+		}
 		else
 			fd = open(filename, O_RDONLY);
 	}
@@ -23,7 +26,7 @@ int	safe_openfile(char *filename, int mode)
 	else if (mode == APPEND)
 		fd = open(filename,  O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd < 0)
-		print_error_two_messages("safe openfile fail: ", filename);
+		print_error_two_messages(filename, ": Permission denied");
 	return (fd);
 }
 

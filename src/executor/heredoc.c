@@ -11,7 +11,7 @@ void	make_temp_file(int file_index, char *delim)
 	filename[6] = idx_char[file_index];
 	fd = safe_openfile(filename, WRITE);
 	if (fd == -1)
-		ft_error_exit("heredoc file error");
+		error_exit("heredoc file error");
 	line = readline("HereDoc> ");
 	while (is_same_string(line, delim) == FALSE)
 	{
@@ -58,7 +58,7 @@ int	execute_heredoc(void)
 
 	pid = fork();
 	if (pid == -1)
-		ft_error_exit("fork error");
+		error_exit("fork error");
 	else if (pid == 0)
 	{
 		signal(SIGINT, heredoc_new_prompt);

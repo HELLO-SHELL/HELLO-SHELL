@@ -47,7 +47,7 @@ PARSER_PATH = $(addprefix $(PARSER_DIR), $(PARSER_SRCS))
 PARSER_OBJS = $(PARSER_PATH:.c=.o)
 
 EXECUTOR_DIR = src/executor/
-EXECUTOR_SRCS = executor.c heredoc.c is_func.c pipe.c redirect.c safe_func.c wait.c
+EXECUTOR_SRCS = check.c executor.c heredoc.c is_func.c pipe.c redirect.c safe_func.c wait.c
 EXECUTOR_PATH = $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_SRCS))
 EXECUTOR_OBJS = $(EXECUTOR_PATH:.c=.o)
 OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJS) $(EXECUTOR_OBJS)

@@ -15,11 +15,19 @@ enum e_token_type
 	TK_WORD
 };
 
-enum file_type
+enum e_file_permission_type
 {
 	READ,
 	WRITE,
-	APPEND
+	APPEND,
+	EXECUTE
+};
+
+enum e_file_type
+{
+	DIRECTORY,
+	COMMON_FILE,
+	NOTFOUND
 };
 
 enum e_boolean {

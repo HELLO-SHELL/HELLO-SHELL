@@ -31,19 +31,12 @@ int	is_heredoc_error(void)
 	return (TRUE);
 }
 
-char	*get_accessable_command(t_token *cmd_list, char **paths)
+char	*get_accessable_joined_command(const char *command, char **paths)
 {
-	t_token	*curr;
-	char	*tmp;
-	char	*command;
 	char	*path_command;
+	char	*tmp;
+	int		file_type;
 
-	curr = cmd_list;
-	while (curr && curr->type != TK_WORD)
-		curr = curr->next;
-	command = curr->value;
-	if (!access(command, 0))
-		return (ft_strdup(command));
 	if (paths == NULL)
 		return (NULL);
 	while (*paths)
@@ -52,7 +45,10 @@ char	*get_accessable_command(t_token *cmd_list, char **paths)
 		path_command = ft_strjoin(tmp, command);
 		free(tmp);
 		tmp = 0;
-		if (!access(path_command, 0))
+		file_type = check_file_type(path_command);
+		if (file_type == DIRECTORY)
+			error_two_exit_status(126, ft_strdup(command), ": is a directory");
+		else if (file_type == COMMON_FILE)
 			return (path_command);
 		free(path_command);
 		path_command = NULL;
@@ -61,10 +57,28 @@ char	*get_accessable_command(t_token *cmd_list, char **paths)
 	return (NULL);
 }
 
-int	is_accessable_command(t_token *cmd_list, char **paths)
+char	*get_accessable_command(const char *command, char **paths)
 {
-	if (get_accessable_command(cmd_list, paths))
-		return (TRUE);
+	char	*path_command;
+	int		file_type;
+
+	path_command = NULL;
+	if (ft_strchr(command, '/'))
+	{
+		file_type = check_file_type(command);
+		if (file_type == DIRECTORY)
+			error_two_exit_status(126, ft_strdup(command), ": is a directory");
+		else if (file_type == NOTFOUND)
+			error_two_exit_status(127, (char *) command, ": No such file or directory");
+		else
+		{
+			if (access(command, X_OK) == 0)
+				return ((char *) command);
+			else
+				error_two_exit_status(126, (char *) command, ": Permission denied");
+		}
+	}
 	else
-		return (FALSE);
+		path_command = get_accessable_joined_command(command, paths);
+	return (path_command);
 }
