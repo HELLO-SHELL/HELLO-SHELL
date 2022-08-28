@@ -4,13 +4,15 @@ void	execute_command(t_process *process)
 {
 	char	*command;
 	char	**argv_curr;
+	char	**paths;
 
-	if (is_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths))
-		command = get_accessable_command(process->cmd_line, g_minishell_info.ps_list->paths);
+	command = process->argv[0];
+	paths = g_minishell_info.ps_list->paths;
+	command = get_accessable_command(command, paths);
+	if (command)
+		execve(command, process->argv, process->envp);
 	else
-		ft_error_two_exit(*process->argv, ": No Such file or directory");
-	execve(command, process->argv, process->envp);
-	exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 }
 
 void	execute_process(t_process *process, t_pipes *pipes)

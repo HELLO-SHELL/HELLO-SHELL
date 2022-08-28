@@ -2,6 +2,7 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
@@ -188,8 +189,8 @@ int		is_built_in(t_process *ps_info);
 int		execute_heredoc(void);
 void	make_temp_file(int file_index, char *delim);
 /* 		is_func.c 	*/
-int		is_accessable_command(t_token *cmd_list, char **paths);
-char	*get_accessable_command(t_token *cmd_list, char **paths);
+int		is_accessable_command(const char *command, char **paths);
+char	*get_accessable_command(const char *command, char **paths);
 int		is_argv_null(char **argv);
 /* 		pipe.c	 	*/
 void	init_pipe(t_pipes *p);
