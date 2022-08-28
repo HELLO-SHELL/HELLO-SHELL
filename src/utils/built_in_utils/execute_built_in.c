@@ -41,6 +41,6 @@ int execute_built_in(t_process *process)
 	else if (is_same_string(cmd, UNSET))
 		return (ft_unset());
 	else if (is_same_string(cmd, ECHO))
-		return (ft_echo());
+		return (ft_echo(process->argv));
 	return (EXIT_FAILURE);
 }

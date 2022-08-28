@@ -1,13 +1,11 @@
 #include "../../include/minishell.h"
 
-static void	print_arg_with_idx(int idx)
+static void	print_arg_with_idx(char **argv, int idx)
 {
 	int		flag;
-	char	**argv;
 
 	flag = 0;
 	flag = idx;
-	argv = g_minishell_info.ps_list->argv;
 	while (argv[idx])
 	{
 		ft_putstr_fd(argv[idx], 1);
@@ -19,12 +17,10 @@ static void	print_arg_with_idx(int idx)
 		ft_putchar_fd('\n', 1);
 }
 
-static void	check_option_and_find_print_position(int *idx)
+static void	check_option_and_find_print_position(char **argv, int *idx)
 {
 	int		i;
-	char	**argv;
 
-	argv = g_minishell_info.ps_list->argv;
 	while (argv[*idx])
 	{
 		i = 0;
@@ -42,12 +38,12 @@ static void	check_option_and_find_print_position(int *idx)
 	}
 }
 
-int	ft_echo(void)
+int	ft_echo(char **argv)
 {
 	int		idx;
 
 	idx = 1;
-	check_option_and_find_print_position(&idx);
-	print_arg_with_idx(idx);
+	check_option_and_find_print_position(argv, &idx);
+	print_arg_with_idx(argv, idx);
 	return (EXIT_SUCCESS);
 }
