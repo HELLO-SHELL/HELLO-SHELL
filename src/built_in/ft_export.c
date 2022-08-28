@@ -97,7 +97,7 @@ int	ft_export(t_token *token)
 				token = token->next;
 				ft_putstr_fd("HELLO-SHELL: `", STDERR_FILENO);
 				ft_putstr_fd(token->value, STDERR_FILENO);
-				ft_putendl_fd("': command not found", STDERR_FILENO);
+				ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 				return (EXIT_FAILURE);
 			}
 			else
