@@ -12,7 +12,7 @@ static void	skip_qoute_in_split(char *str, int *i)
 			break ;
 	}
 	if (!str[*i])
-		ft_error_exit("qoute parse error");
+		error_exit("qoute parse error");
 	else
 		(*i)++;
 }

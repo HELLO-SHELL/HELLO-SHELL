@@ -26,7 +26,8 @@ enum e_file_permission_type
 enum e_file_type
 {
 	DIRECTORY,
-	COMMON_FILE
+	COMMON_FILE,
+	NOTFOUND
 };
 
 enum e_boolean {

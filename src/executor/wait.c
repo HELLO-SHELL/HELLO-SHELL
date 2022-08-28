@@ -30,7 +30,7 @@ int	wait_child(pid_t pid)
 	int	status;
 
 	if (waitpid(pid, &status, 0) == -1)
-		ft_error_exit("fail waitpid\n");
+		error_exit("fail waitpid\n");
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGINT)

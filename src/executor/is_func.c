@@ -7,14 +7,12 @@ int	is_argv_null(char **argv)
 	return (SUCCESS);
 }
 
-char	*get_accessable_command(const char *command, char **paths)
+char	*get_accessable_joined_command(const char *command, char **paths)
 {
-	t_token	*curr;
-	char	*tmp;
 	char	*path_command;
+	char	*tmp;
+	int		file_type;
 
-	if (!access(command, 0))
-		return (ft_strdup(command));
 	if (paths == NULL)
 		return (NULL);
 	while (*paths)
@@ -23,11 +21,40 @@ char	*get_accessable_command(const char *command, char **paths)
 		path_command = ft_strjoin(tmp, command);
 		free(tmp);
 		tmp = 0;
-		if (!access(path_command, X_OK))
+		file_type = check_file_type(path_command);
+		if (file_type == DIRECTORY)
+			error_two_exit_status(126, ft_strdup(command), ": is a directory");
+		else if (file_type == COMMON_FILE)
 			return (path_command);
 		free(path_command);
 		path_command = NULL;
 		paths++;
 	}
 	return (NULL);
+}
+
+char	*get_accessable_command(const char *command, char **paths)
+{
+	char	*path_command;
+	int		file_type;
+
+	path_command = NULL;
+	if (ft_strchr(command, '/'))
+	{
+		file_type = check_file_type(command);
+		if (file_type == DIRECTORY)
+			error_two_exit_status(126, ft_strdup(command), ": is a directory");
+		else if (file_type == NOTFOUND)
+			error_two_exit_status(127, (char *) command, ": No such file or directory");
+		else
+		{
+			if (access(command, X_OK) == 0)
+				return ((char *) command);
+			else
+				error_two_exit_status(126, (char *) command, ": Permission denied");
+		}
+	}
+	else
+		path_command = get_accessable_joined_command(command, paths);
+	return (path_command);
 }

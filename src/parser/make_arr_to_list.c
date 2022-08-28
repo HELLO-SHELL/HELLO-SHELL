@@ -31,7 +31,7 @@ static void	insert_first_into_list(t_token **lst, char *str)
 	temp->next = NULL;
 	temp->prev = NULL;
 	if (temp->value == NULL)
-		ft_error_exit("malloc error");
+		error_exit("malloc error");
 	check_and_set_type(temp);
 	*lst = temp;
 }
@@ -46,7 +46,7 @@ static void	insert_str_into_list_back(t_token **lst, char *str)
 	temp->next = NULL;
 	temp->prev = *lst;
 	if (temp->value == NULL)
-		ft_error_exit("malloc error");
+		error_exit("malloc error");
 	check_and_set_type(temp);
 	(*lst)->next = temp;
 	(*lst) = (*lst)->next;

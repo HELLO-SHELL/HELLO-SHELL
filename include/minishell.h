@@ -151,9 +151,10 @@ char	*replace_dollar_in_heredoc(char *input);
 /*		other			*/
 int		handle_quote(t_split *split, char *line);
 void	print_error_message(char *str);
-void	ft_error_exit(char *str);
+void	error_exit(char *str);
 void	print_error_two_messages(char *str1, char *str2);
-void	ft_error_two_exit(char *str1, char *str2);
+void	error_two_exit(char *str1, char *str2);
+void	error_two_exit_status(int status, char *str1, char *str2);
 t_env	*get_env_by_key(char *key);
 int		env_key_valid_checker(char *str);
 void	make_node_to_envp();
@@ -185,12 +186,14 @@ void	execute_process(t_process *process, t_pipes *pipes);
 void	execute_command(t_process *process);
 int		execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
+/*		check.c		*/
+int		check_file_type(const char *command);
 /* 		heredoc.c 	*/
 int		execute_heredoc(void);
 void	make_temp_file(int file_index, char *delim);
 /* 		is_func.c 	*/
-int		is_accessable_command(const char *command, char **paths);
 char	*get_accessable_command(const char *command, char **paths);
+char	*get_accessable_joined_command(const char *command, char **paths);
 int		is_argv_null(char **argv);
 /* 		pipe.c	 	*/
 void	init_pipe(t_pipes *p);

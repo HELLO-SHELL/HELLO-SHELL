@@ -17,7 +17,7 @@ int	apply_heredoc(void)
 	filename[6] = idx_char[g_minishell_info.heredoc_cnt];
 	fd = safe_openfile(filename, READ);
 	if (fd == -1)
-		ft_error_exit("heredoc file error");
+		error_exit("heredoc file error");
 	g_minishell_info.heredoc_cnt++;
 	return (fd);
 }
