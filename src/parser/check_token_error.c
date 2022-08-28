@@ -10,7 +10,7 @@ static char	*check_near_token(t_token *token)
 		err_msg = "special token can't stuck each other";
 	else if (token->prev == NULL && token->next == NULL)
 		err_msg = "special token can't exist alone";
-	return (err_msg);
+	return ("");
 }
 
 int	check_token_error(t_token *token)
