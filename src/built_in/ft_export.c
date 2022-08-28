@@ -31,34 +31,10 @@ static void	export_display(void)
 			printf("declare -x %s\n", ((t_env *)(curr->content))->key);
 		else
 			printf("declare -x %s=\"%s\"\n",
-				((t_env *)(curr->content))->key, ((t_env *)(curr->content))->value);
+				((t_env *)(curr->content))->key,
+				((t_env *)(curr->content))->value);
 		curr = curr->next;
 	}
-}
-
-static t_env	*get_overlap_env(char *key)
-{
-	t_env	*temp;
-
-	temp = get_env_by_key(key);
-	if (temp)
-	{
-		free(key);
-		key = NULL;
-		return (temp);
-	}
-	return (NULL);
-}
-
-static void	update_value_when_overlap(t_env *temp, char *str)
-{
-	t_env	*updated_env;
-
-	if (temp == NULL || str == NULL)
-		return ;
-	updated_env = temp;
-	free(updated_env->value);
-	updated_env->value = ft_substr(str + 1, 0, ft_strlen(str));
 }
 
 static void	export_get_list(t_token *token)
@@ -95,7 +71,8 @@ int	ft_export(t_token *token)
 			if (export_check_error(token))
 			{
 				token = token->next;
-				print_error_two_messages(token->value, "': not a valid identifier");
+				print_error_two_messages(token->value,
+					"': not a valid identifier");
 				return (EXIT_FAILURE);
 			}
 			else
