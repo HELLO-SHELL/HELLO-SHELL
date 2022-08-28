@@ -49,7 +49,7 @@ minishell
 *.pdb
 
 # tester
-minishell_tester
+minishell_tester/
 
 # Kernel Module Compile Results
 *.mod*
