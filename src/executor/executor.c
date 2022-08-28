@@ -1,5 +1,4 @@
 #include "../../include/minishell.h"
-#include <stdlib.h>
 
 void	execute_command(t_process *process)
 {
