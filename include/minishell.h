@@ -93,22 +93,21 @@ int	ft_echo(char **argv);
 int	ft_export(t_token *cmd_line);
 
 /* utils */
-/* built-in */
+/*		cd_utils		*/
 int	is_path_only_home(t_token *cmd_list);
 int	is_path_pass_home(t_token *cmd_list);
 int	set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
 int	set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
 int	set_path_to_input(t_token *cmd_list, char **path);
+
+/*		executor_utils		*/
 int	execute_built_in(t_process *process);
 int	is_built_in(t_process *ps_info);
 int	check_cmd(char *word);
 
-
-
-/*		chore_utils		*/
-int		quote_validator(char *input);
-int		is_same_string(char *str1, char *str2);
-void	*safe_malloc(size_t size);
+/*		export_utils		*/
+void	update_value_when_overlap(t_env *temp, char *str);
+t_env	*get_overlap_env(char *key);
 
 /*		env_utils		*/
 void	split_env(t_env *env_node, char **env, int i);
@@ -117,6 +116,11 @@ t_env 	*get_env_by_key(char *key);
 char	*get_env_value_by_key(char *key);
 int		env_key_valid_checker(char *str);
 t_token	*get_token_head(t_token *token);
+
+/*		chore_utils		*/
+int		quote_validator(char *input);
+int		is_same_string(char *str1, char *str2);
+void	*safe_malloc(size_t size);
 
 /*		free_utils		*/
 void	safe_free(void *p);
