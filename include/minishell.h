@@ -195,6 +195,7 @@ void	make_temp_file(int file_index, char *delim);
 char	*get_accessable_command(const char *command, char **paths);
 char	*get_accessable_joined_command(const char *command, char **paths);
 int		is_argv_null(char **argv);
+int	is_heredoc_error(void);
 /* 		pipe.c	 	*/
 void	init_pipe(t_pipes *p);
 void	swap_pipe(t_pipes *p);
