@@ -92,6 +92,11 @@ void	executor(void)
 {
 	int	status;
 
+	if (is_heredoc_error())
+	{
+		print_error_message("too many heredoc");
+		return ;
+	}
 	if (execute_heredoc())
 		return ;
 	if (g_minishell_info.ps_list->size == 1)
