@@ -48,6 +48,9 @@ minishell
 *.idb
 *.pdb
 
+# tester
+minishell_tester
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
