@@ -191,6 +191,7 @@ void	make_temp_file(int file_index, char *delim);
 int		is_accessable_command(t_token *cmd_list, char **paths);
 char	*get_accessable_command(t_token *cmd_list, char **paths);
 int		is_argv_null(char **argv);
+int	is_heredoc_error(void);
 /* 		pipe.c	 	*/
 void	init_pipe(t_pipes *p);
 void	swap_pipe(t_pipes *p);
