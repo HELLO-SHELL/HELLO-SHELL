@@ -26,17 +26,6 @@ static void	unsetting(t_list *env_list, t_token *token)
 	}
 }
 
-static int	unset_have_no_param(t_token *token)
-{
-	if (token->next == NULL)
-	{
-		token = token->next;
-		return (TRUE);
-	}
-	token = token->next;
-	return (FALSE);
-}
-
 int	ft_unset(void)
 {
 	t_list	*env_list;
@@ -44,8 +33,6 @@ int	ft_unset(void)
 
 	env_list = g_minishell_info.env_list;
 	token = g_minishell_info.ps_list->cmd_line;
-	if (unset_have_no_param(token))
-		return (EXIT_FAILURE);
 	token = token->next;
 	while (token)
 	{
