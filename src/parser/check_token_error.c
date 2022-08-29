@@ -18,9 +18,17 @@ static char	*check_near_token(t_token *token)
 
 	err_msg = "";
 	if (token->prev && is_special_token(token->prev->type))
-		err_msg = "special token can't stuck each other";
+	{
+		if (!(token->prev->type == TK_PIPE
+			&& token->type != TK_PIPE))
+			err_msg = "special token can't stuck each other";
+	}
 	else if (token->next && is_special_token(token->next->type))
-		err_msg = "special token can't stuck each other";
+	{
+		if (!(token->type == TK_PIPE
+			&& token->next->type != TK_PIPE))
+			err_msg = "special token can't stuck each other";
+	}
 	else if (token->prev == NULL && token->next == NULL)
 		err_msg = "special token can't exist alone";
 	return (err_msg);
