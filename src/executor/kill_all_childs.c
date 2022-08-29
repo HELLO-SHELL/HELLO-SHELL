@@ -2,6 +2,7 @@
 
 void	kill_all_childs(int input)
 {
+<<<<<<< Updated upstream
 
 	t_process	*ps_curr;
 
@@ -12,6 +13,14 @@ void	kill_all_childs(int input)
 	while (ps_curr)
 	{
 		printf("pid: %d\n", ps_curr->pid);
+=======
+	t_process	*ps_curr;
+
+	(void) input;
+	ps_curr = g_minishell_info.ps_list;
+	while (ps_curr)
+	{
+>>>>>>> Stashed changes
 		kill(ps_curr->pid, SIGINT);
 		ps_curr = ps_curr->next;
 	}
@@ -19,7 +28,10 @@ void	kill_all_childs(int input)
 
 void	kill_all_child(int input)
 {
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 	t_process	*ps_curr;
 
 	(void) input;

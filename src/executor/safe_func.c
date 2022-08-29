@@ -24,7 +24,7 @@ int	safe_openfile(char *filename, int mode)
 	else if (mode == WRITE)
 		fd = open(filename, O_TRUNC | O_CREAT | O_RDWR, 0644);
 	else if (mode == APPEND)
-		fd = open(filename,  O_WRONLY | O_APPEND | O_CREAT, 0644);
+		fd = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd < 0)
 		print_error_two_messages(filename, ": Permission denied");
 	return (fd);
