@@ -10,6 +10,8 @@ void	execute_process(t_process *process, t_pipes *pipes);
 void	execute_command(t_process *process);
 int		execute_built_in(t_process *process);
 int		is_built_in(t_process *ps_info);
+void	kill_all_childs(int input);
+void	kill_all_child(int input);
 /*		check.c		*/
 int		check_file_type(const char *command);
 /* 		heredoc.c 	*/
