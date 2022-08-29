@@ -41,6 +41,7 @@ int	execute_pipeline(void)
 	idx = 0;
 	ps_curr = g_minishell_info.ps_list;
 	init_pipe(&g_minishell_info.pipes);
+	signal(SIGINT, kill_all_childs);
 	while (ps_curr)
 	{
 		swap_pipe(&g_minishell_info.pipes);
@@ -66,10 +67,10 @@ int	execute_pipeline(void)
 
 void	execute_single_cmdline(void)
 {
-	pid_t		pid;
 	t_process	*process;
 
 	process = g_minishell_info.ps_list;
+	signal(SIGINT, kill_all_childs);
 	if (apply_redirections(process->cmd_line) == FAILURE)
 	{
 		set_last_status(EXIT_FAILURE);
@@ -82,13 +83,13 @@ void	execute_single_cmdline(void)
 		set_last_status(execute_built_in(process));
 		return ;
 	}
-	pid = fork();
-	if (pid == -1)
+	g_minishell_info.ps_list->pid = fork();
+	if (g_minishell_info.ps_list->pid == -1)
 		error_exit("fork error");
-	else if (pid == 0)
+	else if (g_minishell_info.ps_list->pid == 0)
 		execute_command(process);
 	else
-		set_last_status(wait_child(pid));
+		set_last_status(wait_child(g_minishell_info.ps_list->pid));
 	return ;
 }
 
@@ -107,5 +108,6 @@ void	executor(void)
 		execute_single_cmdline();
 	else
 		set_last_status(execute_pipeline());
+	signal(SIGINT, get_new_prompt);
 	restore_stdio();
 }
