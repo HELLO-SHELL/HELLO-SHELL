@@ -45,11 +45,8 @@ int	execute_pipeline(void)
 	while (ps_curr)
 	{
 		swap_pipe(&g_minishell_info.pipes);
-		if (ps_curr->next != NULL)
-		{
-			if (pipe(g_minishell_info.pipes.next_pipe) == -1)
-				error_exit("fail_pipe()");
-		}
+		if (ps_curr->next != 0 && pipe(g_minishell_info.pipes.next_pipe) == -1)
+			error_exit("fail_pipe()");
 		ps_curr->pid = fork();
 		if (ps_curr->pid == -1)
 			error_exit("fail fork()\n");
