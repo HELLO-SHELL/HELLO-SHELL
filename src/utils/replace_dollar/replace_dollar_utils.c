@@ -50,7 +50,7 @@ void	r_handle_single_quote(char **input_buffer, char **input_ptr)
 		*input_buffer = \
 			append_single_quote(*input_buffer, *input_ptr, s_quote_len);
 		if (s_quote_len > 0)
-			*input_ptr += (s_quote_len + 2);
+			*input_ptr += (s_quote_len);
 	}
 }
 
