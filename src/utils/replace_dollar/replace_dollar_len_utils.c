@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace_dollar_len_utils.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 17:30:39 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 17:30:40 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 int	get_env_len(char *str)
@@ -20,7 +32,8 @@ int	get_env_len(char *str)
 int	get_single_quote_len(char *input_ptr)
 {
 	if (ft_strchr(input_ptr, '\''))
-		return (ft_strchr(input_ptr + 1, '\'') - ft_strchr(input_ptr, '\'') + 1);
+		return (ft_strchr(input_ptr + 1, '\'')
+			- ft_strchr(input_ptr, '\'') + 1);
 	return (0);
 }
 

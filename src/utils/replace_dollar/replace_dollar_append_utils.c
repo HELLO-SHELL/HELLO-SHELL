@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace_dollar_append_utils.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 17:27:47 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 17:29:04 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 char	*append_buffer_under_dollar(char *save, char const *buffer)
@@ -52,15 +64,18 @@ char	*append_buffer_under_single_quote(char *save, char const *buffer)
 	return (new);
 }
 
-char	*append_single_quote(char *input_buffer, char *input_ptr, int single_quote_len)
+char	*append_single_quote(
+		char *input_buffer, char *input_ptr, int single_quote_len)
 {
 	char	*new_input_buffer;
 
 	if (single_quote_len <= 0)
 		return (input_buffer);
-	new_input_buffer = safe_malloc(ft_strlen(input_buffer) + single_quote_len + 1);
+	new_input_buffer = safe_malloc(ft_strlen(input_buffer)
+			+ single_quote_len + 1);
 	ft_strlcpy(new_input_buffer, input_buffer, ft_strlen(input_buffer) + 1);
-	ft_strlcpy(new_input_buffer + ft_strlen(input_buffer), input_ptr, single_quote_len + 1);
+	ft_strlcpy(new_input_buffer
+		+ ft_strlen(input_buffer), input_ptr, single_quote_len + 1);
 	free(input_buffer);
 	input_buffer = NULL;
 	return (new_input_buffer);
@@ -100,7 +115,8 @@ char	*append_buffer_after_all(char *save, char const *buffer)
 	if (!new)
 		return (NULL);
 	ft_gnl_strlcpy(new, save, ft_gnl_strlen(save) + 1);
-	ft_gnl_strlcpy(new + ft_gnl_strlen(save), buffer, ft_gnl_strlen(buffer) + 1);
+	ft_gnl_strlcpy(new
+		+ ft_gnl_strlen(save), buffer, ft_gnl_strlen(buffer) + 1);
 	free(save);
 	save = NULL;
 	return (new);

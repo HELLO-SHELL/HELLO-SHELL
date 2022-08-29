@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace_dollar_is_utils.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 17:20:03 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 17:20:05 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
-int is_symbol_in_dollar_replace(char *input_ptr)
+int	is_symbol_in_dollar_replace(char *input_ptr)
 {
 	if (*input_ptr != '$')
 		return (FALSE);
