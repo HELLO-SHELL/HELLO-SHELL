@@ -57,6 +57,7 @@ int	execute_pipeline(void)
 			execute_process(ps_curr, &(g_minishell_info.pipes));
 		else
 		{
+			// signal(SIGINT, get_new_prompt);
 			safe_close_pipe(&g_minishell_info.pipes.prev_pipe[READ]);
 			safe_close_pipe(&g_minishell_info.pipes.next_pipe[WRITE]);
 		}
