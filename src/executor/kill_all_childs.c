@@ -1,26 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   kill_all_childs.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 18:16:18 by jimin             #+#    #+#             */
+/*   Updated: 2022/08/29 18:16:19 by jimin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	kill_all_childs(int input)
 {
-<<<<<<< Updated upstream
-
-	t_process	*ps_curr;
-
-	printf("I'M HERE!!!\n");
-	(void) input;
-	ps_curr = g_minishell_info.ps_list;
-	printf("ps_curr: %p\n", ps_curr);
-	while (ps_curr)
-	{
-		printf("pid: %d\n", ps_curr->pid);
-=======
 	t_process	*ps_curr;
 
 	(void) input;
 	ps_curr = g_minishell_info.ps_list;
 	while (ps_curr)
 	{
->>>>>>> Stashed changes
 		kill(ps_curr->pid, SIGINT);
 		ps_curr = ps_curr->next;
 	}
@@ -28,10 +27,6 @@ void	kill_all_childs(int input)
 
 void	kill_all_child(int input)
 {
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 	t_process	*ps_curr;
 
 	(void) input;
