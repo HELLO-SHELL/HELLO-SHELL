@@ -16,7 +16,7 @@
 # include "constant.h"
 # include "get_next_line.h"
 # include "color.h"
-# include "./minishell_src/minishell_struct.h"
+# include "./minishell_struct.h"
 
 extern t_minishell g_minishell_info;
 

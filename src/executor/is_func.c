@@ -69,13 +69,15 @@ char	*get_accessable_command(const char *command, char **paths)
 		if (file_type == DIRECTORY)
 			error_two_exit_status(126, ft_strdup(command), ": is a directory");
 		else if (file_type == NOTFOUND)
-			error_two_exit_status(127, (char *) command, ": No such file or directory");
+			error_two_exit_status(127, (char *) command, \
+					": No such file or directory");
 		else
 		{
 			if (access(command, X_OK) == 0)
 				return ((char *) command);
 			else
-				error_two_exit_status(126, (char *) command, ": Permission denied");
+				error_two_exit_status(126, (char *) command, \
+						": Permission denied");
 		}
 	}
 	else

@@ -19,6 +19,7 @@ int	apply_heredoc(void)
 	if (fd == -1)
 		error_exit("heredoc file error");
 	g_minishell_info.heredoc_cnt++;
+	dup2(fd, STDIN_FILENO);
 	return (fd);
 }
 
@@ -42,10 +43,7 @@ int	apply_redirection(char *filename, int mode)
 		dup2(fd, STDOUT_FILENO);
 	}
 	else if (mode == TK_HEREDOC)
-	{
 		fd = apply_heredoc();
-		dup2(fd, STDIN_FILENO);
-	}
 	if (fd == -1)
 		return (FAILURE);
 	close(fd);
@@ -59,16 +57,16 @@ int	apply_redirections(t_token *cmd_line)
 	curr = cmd_line;
 	while (curr != NULL)
 	{
-		if (curr->type == TK_RDINPUT &&
+		if (curr->type == TK_RDINPUT && \
 				apply_redirection(curr->next->value, TK_RDINPUT) == FAILURE)
 			return (FAILURE);
-		else if (curr->type == TK_RDOUTPUT &&
+		else if (curr->type == TK_RDOUTPUT && \
 				apply_redirection(curr->next->value, TK_RDOUTPUT) == FAILURE)
 			return (FAILURE);
-		else if (curr->type == TK_APPEND &&
+		else if (curr->type == TK_APPEND && \
 				apply_redirection(curr->next->value, TK_APPEND) == FAILURE)
 			return (FAILURE);
-		else if (curr->type == TK_HEREDOC && 
+		else if (curr->type == TK_HEREDOC && \
 				apply_redirection(NULL, TK_HEREDOC) == FAILURE)
 			return (FAILURE);
 		curr = curr->next;
