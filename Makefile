@@ -5,7 +5,6 @@ GNL = get_next_line/libgnl.a
 CC = cc
 CFLAGS= -Wall -Wextra -Werror
 
-# readline 경로를 아키텍쳐 별로 변경하는 코드. M1 Mac, Cluster Mac, arm Linux 환경 대응
 detected_OS := $(shell uname -sm)
 ifeq ($(detected_OS), Linux aarch64)
 LINKING_FLAGS = -lreadline
@@ -19,7 +18,7 @@ endif
 
 RM = rm -rf
 
-MAIN_SRCS = src/main.c src/welcome/print_wallpaper.c src/init.c
+MAIN_SRCS = src/main.c src/init.c
 MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 
 UTILS_DIR = src/utils/
@@ -29,8 +28,9 @@ UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/g
 	  replace_dollar/replace_dollar.c replace_dollar/replace_dollar_append_utils.c replace_dollar/replace_dollar_len_utils.c \
 	  replace_dollar/replace_dollar_utils.c replace_dollar/replace_dollar_is_utils.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c chore_utils/quote_validator.c \
-	  free_utils/free_utils.c \
-	  signal.c get_token_head.c ft_error.c word_check.c last_status.c
+	  chore_utils/is_white_space.c \
+	  free_utils/free_utils.c welcome/print_wallpaper.c \
+	  signal.c get_token_head.c ft_error.c last_status.c
 UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))
 UTILS_OBJS = $(UTILS_PATH:.c=.o)
 
@@ -58,9 +58,8 @@ $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LINKING_FLAGS) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
-#  -fsanitize=address
+
 all : $(NAME)
-	./minishell
 
 debug :
 	$(CC) src/*.c src/**/*.c src/**/**/*.c -g3 lib/*/*.c $(COMFILE_FLAGS) $(LINKING_FLAGS) -o minishell

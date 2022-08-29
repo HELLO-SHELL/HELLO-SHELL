@@ -1,17 +1,17 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static int	is_border(char c)
 {
 	if (c == '/' || c == '|' || c == '\\' || c == '-')
-		return (1);
-	return (0); // need to change enum!
+		return (TRUE);
+	return (FALSE);
 }
 
 static int	is_star(char c)
 {
 	if (c == '*' || c == '.')
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 void	print_wallpaper(void)
@@ -23,7 +23,7 @@ void	print_wallpaper(void)
 	fd = open("./assets/wallpaper", O_RDONLY);
 	if (fd < 0)
 		return ;
-	while (1) // need to change enum! 
+	while (TRUE)
 	{
 		line = get_next_line(fd);
 		if (!line)
