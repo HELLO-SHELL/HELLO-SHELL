@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace_dollar_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 17:25:22 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 17:25:23 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 char	*replace_dollar(char *input_buffer, char *temp)
@@ -42,27 +54,25 @@ void	r_handle_single_quote(char **input_buffer, char **input_ptr)
 	}
 }
 
-void    r_handle_dollar(char **input_buffer, char **input_ptr)
+void	r_handle_dollar(char **input_buffer, char **input_ptr)
 {
 	if (is_only_dollar(*input_ptr))
-    {
-        *input_buffer = append_buffer_single_dollar(*input_buffer);
-        *input_ptr += 1;
-    }
+	{
+		*input_buffer = append_buffer_single_dollar(*input_buffer);
+		*input_ptr += 1;
+	}
 	if (is_symbol_in_dollar_replace(*input_ptr))
 	{
 		*input_ptr += 1;
-		*input_buffer = \
-			replace_dollar(*input_buffer, *input_ptr);
+		*input_buffer = replace_dollar(*input_buffer, *input_ptr);
 		*input_ptr += 1;
 	}
 	if (env_key_valid_checker(*input_ptr) && *input_ptr)
-    {
-        *input_ptr += 1;
-        *input_buffer = \
-            replace_dollar(*input_buffer, *input_ptr);
-        *input_ptr += get_env_len(*input_ptr);
-    }
+	{
+		*input_ptr += 1;
+		*input_buffer = replace_dollar(*input_buffer, *input_ptr);
+		*input_ptr += get_env_len(*input_ptr);
+	}
 }
 
 void	make_dollar_replaced_input(char **input_buffer, char **input_ptr)

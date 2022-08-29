@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 17:15:47 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 17:15:47 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 void	safe_free(void *p)
@@ -66,7 +78,7 @@ void	free_token_list(t_token *token)
 	}
 }
 
-void	free_all()
+void	free_all(void)
 {
 	t_token		*temp_token;
 	t_token		*curr_token;

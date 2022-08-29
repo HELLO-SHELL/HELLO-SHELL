@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 18:28:52 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 18:40:30 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -18,14 +30,12 @@
 # include "color.h"
 # include "./minishell_struct.h"
 
-extern t_minishell g_minishell_info;
-
 # include "./minishell_src/minishell_built_in.h"
 # include "./minishell_src/minishell_executor.h"
 # include "./minishell_src/minishell_init.h"
 # include "./minishell_src/minishell_parser.h"
 # include "./minishell_src/minishell_utils.h"
 
-
+extern t_minishell	g_minishell_info;
 
 #endif

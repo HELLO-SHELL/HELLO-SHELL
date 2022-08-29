@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_built_in.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 17:03:35 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 17:03:36 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 int	check_cmd(char *word)
@@ -9,27 +21,27 @@ int	check_cmd(char *word)
 		|| is_same_string(word, ECHO)
 		|| is_same_string(word, UNSET)
 		|| is_same_string(word, EXPORT)
-		)
+	)
 		return (1);
 	return (0);
 }
 
 int	is_built_in(t_process *ps_info)
 {
-	const char *command = *ps_info->argv;
+	const char	*command = *ps_info->argv;
 
 	if (check_cmd((char *) command))
 		return (1);
 	return (0);
 }
 
-int execute_built_in(t_process *process)
+int	execute_built_in(t_process *process)
 {
-	char *cmd;
+	char	*cmd;
 
 	cmd = process->cmd_line->value;
 	if (is_same_string(cmd, CD))
-	    return (ft_cd());
+		return (ft_cd());
 	else if (is_same_string(cmd, PWD))
 		return (ft_pwd());
 	else if (is_same_string(cmd, ENV))

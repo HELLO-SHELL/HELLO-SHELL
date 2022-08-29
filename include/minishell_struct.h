@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_struct.h                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 18:29:50 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 18:30:24 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_STRUCT_H
 # define MINISHELL_STRUCT_H
 
@@ -37,7 +49,7 @@ typedef struct s_split
 	int		j;
 }	t_split;
 
-typedef struct	s_pipes
+typedef struct s_pipes
 {
 	int	prev_pipe[2];
 	int	next_pipe[2];
@@ -54,6 +66,5 @@ typedef struct s_minishell
 	int			ft_stderr;
 	char		*last_status;
 }	t_minishell;
-
 
 #endif

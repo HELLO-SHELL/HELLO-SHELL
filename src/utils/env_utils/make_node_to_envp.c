@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   make_node_to_envp.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 17:04:14 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 17:09:03 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 static char	*ft_env_strjoin(char *s1, char *s2)
@@ -6,7 +18,7 @@ static char	*ft_env_strjoin(char *s1, char *s2)
 	char	*temp;
 
 	if (!s1 || !s2)
-		return (0);	
+		return (0);
 	temp = safe_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!temp)
 		return (0);
@@ -26,7 +38,8 @@ void	make_node_to_envp(void)
 	t_list	*lst_curr;
 	int		idx;
 
-	envp = safe_malloc(sizeof(char *) * (ft_lstsize(g_minishell_info.env_list) + 1));
+	envp = safe_malloc(sizeof(char *)
+			* (ft_lstsize(g_minishell_info.env_list) + 1));
 	lst_curr = g_minishell_info.env_list;
 	idx = 0;
 	while (lst_curr)
@@ -34,7 +47,8 @@ void	make_node_to_envp(void)
 		envp[idx] = ft_env_strjoin(((t_env *)(lst_curr->content))->key,
 				((t_env *)(lst_curr->content))->value);
 		if (is_same_string(((t_env *)(lst_curr->content))->key, "PATH"))
-			(g_minishell_info.ps_list)->paths = ft_split(((t_env *)(lst_curr->content))->value, ':');
+			(g_minishell_info.ps_list)->paths
+				= ft_split(((t_env *)(lst_curr->content))->value, ':');
 		idx++;
 		lst_curr = lst_curr->next;
 	}
