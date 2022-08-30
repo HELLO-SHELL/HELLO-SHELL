@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: kyungsle <kyungsle@student.42.kr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 09:07:27 by jimin             #+#    #+#              #
-#    Updated: 2022/08/30 09:08:23 by jimin            ###   ########.fr        #
+#    Updated: 2022/08/30 15:29:02 by kyungsle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ UTILS_SRCS = env_utils/env_utils.c env_utils/env_key_valid_checker.c env_utils/g
 	  replace_dollar/replace_dollar.c replace_dollar/replace_dollar_append_utils.c replace_dollar/replace_dollar_len_utils.c \
 	  replace_dollar/replace_dollar_utils.c replace_dollar/replace_dollar_is_utils.c \
 	  chore_utils/is_same_string.c chore_utils/safe_malloc.c chore_utils/quote_validator.c \
-	  chore_utils/is_white_space.c \
+	  chore_utils/is_white_space.c free_utils/free_char_arr.c \
 	  free_utils/free_utils.c welcome/print_wallpaper.c \
 	  signal.c get_token_head.c ft_error.c last_status.c
 UTILS_PATH = $(addprefix $(UTILS_DIR), $(UTILS_SRCS))

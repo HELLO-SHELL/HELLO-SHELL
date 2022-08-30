@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: kyungsle <kyungsle@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:38:53 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/30 09:29:44 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 15:18:35 by kyungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		is_white_space(char c);
 void	safe_free(void *p);
 void	free_all(void);
 void	free_token_list(t_token *token);
+void	free_char_arr(char **arr);
 
 /*		replace_dollar	*/
 /*		replace_dollar_append_utils.c	*/

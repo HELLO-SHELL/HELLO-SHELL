@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_arr_to_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kyungsle <kyungsle@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:10:30 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/30 13:08:28 by jaekim           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:19:52 by kyungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,15 @@ static void	set_str_into_list(t_token **lst, char **str)
 t_token	*make_token_list(char **token_arr)
 {
 	t_token	*token_list_head;
-	int		idx;
 
-	idx = 0;
 	if (!token_arr || !*token_arr)
+	{
+		free_char_arr(token_arr);
 		return (NULL);
+	}
 	set_str_into_list(&token_list_head, token_arr);
 	token_list_head = get_token_head(token_list_head);
-	while (token_arr[idx])
-	{
-		safe_free(token_arr[idx]);
-		token_arr[idx] = NULL;
-		idx++;
-	}
-	safe_free(token_arr);
+	free_char_arr(token_arr);
 	token_arr = NULL;
 	return (token_list_head);
 }

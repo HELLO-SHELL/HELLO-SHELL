@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kyungsle <kyungsle@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:05:40 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 09:05:43 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 15:28:23 by kyungsle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	execute_minishell(char *input)
 	if (replaced_input && *replaced_input)
 	{
 		curr_token = make_token_list(command_split(replaced_input));
-		if (check_token_error(curr_token))
+		if (!curr_token || check_token_error(curr_token))
 			return ;
 		set_process_list(&g_minishell_info.ps_list, curr_token);
 		make_node_to_envp();
@@ -43,7 +43,7 @@ void	init_minishell(void)
 		if (!input)
 			exit(ft_atoi(g_minishell_info.last_status));
 		add_history(input);
-		if (quote_validator(input))
+		if (*input && quote_validator(input))
 			execute_minishell(input);
 		else
 			free(input);
