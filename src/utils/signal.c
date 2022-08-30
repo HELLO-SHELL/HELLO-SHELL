@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:00:05 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 09:01:17 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 23:35:49 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_new_prompt(int input)
 {
-	(void) input;
+	set_last_status(input + 128);
 	rl_replace_line("", 0);
 	write(1, "\n", 1);
 	rl_on_new_line();
@@ -23,9 +23,8 @@ void	get_new_prompt(int input)
 
 void	heredoc_new_prompt(int input)
 {
-	(void) input;
 	rl_replace_line("", 0);
 	write(1, "\n", 1);
 	rl_on_new_line();
-	exit(EXIT_FAILURE);
+	exit(input);
 }

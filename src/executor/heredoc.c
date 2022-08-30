@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:28 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 13:22:48 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 23:40:04 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	make_temp_file(int file_index, char *delim)
 	if (fd == -1)
 		error_exit("heredoc file error");
 	line = readline("HereDoc> ");
-	while (is_same_string(line, delim) == FALSE)
+	while (line && is_same_string(line, delim) == FALSE)
 	{
 		line = replace_dollar_in_heredoc(line);
 		ft_putstr_fd(line, fd);
@@ -34,8 +34,8 @@ static void	make_temp_file(int file_index, char *delim)
 		line = readline("HereDoc> ");
 	}
 	close(fd);
-	free(line);
-	line = NULL;
+	if (line)
+		free(line);
 }
 
 static void	heredoc_to_temp_files(void)
