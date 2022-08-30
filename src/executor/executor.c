@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:22 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 01:55:21 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 05:57:29 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	execute_pipeline(void)
 	idx = 0;
 	ps_curr = g_minishell_info.ps_list;
 	init_pipe(&g_minishell_info.pipes);
-	signal(SIGINT, kill_all_childs);
 	while (ps_curr)
 	{
 		swap_pipe(&g_minishell_info.pipes);
@@ -63,7 +62,11 @@ int	execute_pipeline(void)
 		if (ps_curr->pid == -1)
 			error_exit("fail fork()\n");
 		else if (ps_curr->pid == 0)
+		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
 			execute_process(ps_curr, &(g_minishell_info.pipes));
+		}
 		else
 		{
 			safe_close_pipe(&g_minishell_info.pipes.prev_pipe[READ]);
@@ -79,7 +82,6 @@ void	execute_single_cmdline(void)
 	t_process	*process;
 
 	process = g_minishell_info.ps_list;
-	signal(SIGINT, kill_all_childs);
 	if (apply_redirections(process->cmd_line) == FAILURE)
 	{
 		set_last_status(EXIT_FAILURE);
@@ -96,7 +98,11 @@ void	execute_single_cmdline(void)
 	if (g_minishell_info.ps_list->pid == -1)
 		error_exit("fork error");
 	else if (g_minishell_info.ps_list->pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		execute_command(process);
+	}
 	else
 		set_last_status(wait_childs());
 	return ;
@@ -116,6 +122,5 @@ void	executor(void)
 		execute_single_cmdline();
 	else
 		set_last_status(execute_pipeline());
-	signal(SIGINT, get_new_prompt);
 	restore_stdio();
 }

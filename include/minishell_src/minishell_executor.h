@@ -6,7 +6,7 @@
 /*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:32:09 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/30 09:13:26 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 05:57:00 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	safe_close_pipe(int *fd);
 /*		wait.c		*/
 int		wait_childs(void);
 pid_t	get_last_pid(void);
-int		wait_child(pid_t pid);
 int		signal_print(int status);
 int		trans_status(int status);
 
