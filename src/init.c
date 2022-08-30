@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 16:59:19 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:31:58 by jimin            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/minishell.h"
 
-void	execute_minishell(char *input)
+static void	execute_minishell(char *input)
 {
 	t_token		*curr_token;
 	char		*replaced_input;

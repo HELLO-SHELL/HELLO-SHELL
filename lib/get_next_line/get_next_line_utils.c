@@ -6,7 +6,7 @@
 /*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 13:34:15 by seongyle          #+#    #+#             */
-/*   Updated: 2022/07/21 12:35:55 by seongyle         ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 18:21:11 by jaekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ char	*append_buffer(char *save, char const *buffer)
 	if (!new)
 		return (NULL);
 	ft_gnl_strlcpy(new, save, ft_gnl_strlen(save) + 1);
-	ft_gnl_strlcpy(new + ft_gnl_strlen(save), buffer, ft_gnl_strlen(buffer) + 1);
+	ft_gnl_strlcpy(new
+		+ ft_gnl_strlen(save), buffer, ft_gnl_strlen(buffer) + 1);
 	free(save);
 	save = NULL;
 	return (new);

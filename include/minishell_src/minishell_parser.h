@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_parser.h                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 18:34:51 by jaekim            #+#    #+#             */
+/*   Updated: 2022/08/29 18:34:57 by jaekim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_PARSER_H
 # define MINISHELL_PARSER_H
 
@@ -18,7 +30,5 @@ char	**command_split(char *str);
 int		count_split_size(char *str);
 int		split_line(t_split *split, char *line);
 t_token	*make_token_list(char **token_arr);
-
-
 
 #endif

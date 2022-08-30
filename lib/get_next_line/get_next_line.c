@@ -6,7 +6,7 @@
 /*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 20:48:37 by seongyle          #+#    #+#             */
-/*   Updated: 2022/07/21 12:36:01 by seongyle         ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 18:21:45 by jaekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 {
 	static t_gnl_list	head;
 	t_gnl_list			*node;
-	char			*line;
+	char				*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);

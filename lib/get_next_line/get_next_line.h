@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongyle <seongyle@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 20:44:05 by seongyle          #+#    #+#             */
-/*   Updated: 2022/04/23 21:31:05 by seongyle         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:22:17 by jaekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_gnl_list
 {
-	int				fd;
-	char			*save;
+	int					fd;
+	char				*save;
 	struct s_gnl_list	*next;
 	struct s_gnl_list	*prev;
 }	t_gnl_list;
