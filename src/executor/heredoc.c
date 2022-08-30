@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:28 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 23:40:04 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 00:24:27 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static void	heredoc_to_temp_files(void)
 
 int	execute_heredoc(void)
 {
-	int			pid;
+	int		pid;
+	int		status;
 
 	g_minishell_info.heredoc_cnt = 0;
 	pid = fork();
@@ -81,7 +82,9 @@ int	execute_heredoc(void)
 	else
 	{
 		signal(SIGINT, SIG_IGN);
-		return (wait_child(pid));
+		status = wait_child(pid);
+		set_last_status(status);
+		return (status);
 	}
 	return (0);
 }

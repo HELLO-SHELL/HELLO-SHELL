@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:16:18 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 08:28:11 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 00:38:06 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ void	kill_all_childs(int input)
 {
 	t_process	*ps_curr;
 
-	(void) input;
 	ps_curr = g_minishell_info.ps_list;
 	while (ps_curr)
 	{
-		kill(ps_curr->pid, SIGINT);
+		kill(ps_curr->pid, input);
 		ps_curr = ps_curr->next;
 	}
 }
@@ -29,7 +28,6 @@ void	kill_all_child(int input)
 {
 	t_process	*ps_curr;
 
-	(void) input;
 	ps_curr = g_minishell_info.ps_list;
-	kill(ps_curr->pid, SIGINT);
+	kill(ps_curr->pid, input);
 }
