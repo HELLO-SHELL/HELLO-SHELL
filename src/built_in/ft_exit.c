@@ -6,7 +6,7 @@
 /*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:58:50 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 16:58:51 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/30 09:16:56 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_digit_string(char *check)
 	return (1);
 }
 
-void	exit_with_no_param(int ac)
+static void	exit_with_no_param(int ac)
 {
 	if (ac == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:32:09 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:32:10 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/30 09:13:26 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,26 @@ int		execute_pipeline(void);
 void	execute_single_cmdline(void);
 void	execute_process(t_process *process, t_pipes *pipes);
 void	execute_command(t_process *process);
-int		execute_built_in(t_process *process);
-int		is_built_in(t_process *ps_info);
+
+/*		kill_all_childs.c	*/
 void	kill_all_childs(int input);
 void	kill_all_child(int input);
 /*		check.c		*/
 int		check_file_type(const char *command);
+
 /* 		heredoc.c 	*/
 int		execute_heredoc(void);
-void	make_temp_file(int file_index, char *delim);
+
 /* 		is_func.c 	*/
 char	*get_accessable_command(const char *command, char **paths);
-char	*get_accessable_joined_command(const char *command, char **paths);
 int		is_argv_null(char **argv);
 int		is_heredoc_error(void);
+
 /* 		pipe.c	 	*/
 void	init_pipe(t_pipes *p);
 void	swap_pipe(t_pipes *p);
+
 /* 		redirect.c 	*/
-int		apply_redirection(char *filename, int mode);
 int		apply_redirections(t_token *cmd_line);
 void	restore_stdio(void);
 

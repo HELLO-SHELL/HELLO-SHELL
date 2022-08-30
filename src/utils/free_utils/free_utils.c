@@ -6,7 +6,7 @@
 /*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:15:47 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:15:47 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/30 09:22:51 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	safe_free(void *p)
 	return ;
 }
 
-void	free_envp(t_process *ps_list)
+static void	free_envp(t_process *ps_list)
 {
 	char	**envp_curr;
 	char	**path_curr;
@@ -47,7 +47,7 @@ void	free_envp(t_process *ps_list)
 	safe_free(path_curr);
 }
 
-void	free_argv(t_process *ps_list)
+static void	free_argv(t_process *ps_list)
 {
 	char	**argv_curr;
 	int		argv_idx;

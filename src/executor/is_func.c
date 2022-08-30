@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:31 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/29 18:15:32 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 09:12:41 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_heredoc_error(void)
 	return (TRUE);
 }
 
-char	*get_accessable_joined_command(const char *command, char **paths)
+static char	*get_accessable_joined_command(const char *command, char **paths)
 {
 	char	*path_command;
 	char	*tmp;
