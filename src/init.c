@@ -16,11 +16,18 @@ static void	execute_minishell(char *input)
 {
 	t_token		*curr_token;
 	char		*replaced_input;
+	char **splited_input;
 
 	replaced_input = replace_whole_input_dollar(input);
 	if (replaced_input && *replaced_input)
 	{
-		curr_token = make_token_list(command_split(replaced_input));
+		splited_input = command_split(replaced_input);
+		if (!splited_input || !*splited_input)
+		{
+			free(splited_input);
+			return;
+		}
+		curr_token = make_token_list(splited_input);
 		if (check_token_error(curr_token))
 			return ;
 		set_process_list(&g_minishell_info.ps_list, curr_token);
@@ -28,6 +35,8 @@ static void	execute_minishell(char *input)
 		executor();
 		free_all();
 	}
+	else
+		free(replaced_input);
 }
 
 void	init_minishell(void)
