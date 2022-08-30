@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:22 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 01:23:29 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 01:55:21 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	execute_single_cmdline(void)
 	else if (g_minishell_info.ps_list->pid == 0)
 		execute_command(process);
 	else
-		set_last_status(wait_child(g_minishell_info.ps_list->pid));
+		set_last_status(wait_childs());
 	return ;
 }
 
