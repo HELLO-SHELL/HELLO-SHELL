@@ -6,7 +6,7 @@
 /*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:10:10 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:10:10 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/30 08:04:32 by jaekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static char	*check_near_token(t_token *token)
 	if (token->prev && is_special_token(token->prev->type))
 	{
 		if (!(token->prev->type == TK_PIPE
-			&& token->type != TK_PIPE))
+				&& token->type != TK_PIPE))
 			err_msg = "special token can't stuck each other";
 	}
 	else if (token->next && is_special_token(token->next->type))
 	{
 		if (!(token->type == TK_PIPE
-			&& token->next->type != TK_PIPE))
+				&& token->next->type != TK_PIPE))
 			err_msg = "special token can't stuck each other";
 	}
 	else if (token->prev == NULL && token->next == NULL)
