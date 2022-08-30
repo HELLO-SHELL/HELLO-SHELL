@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:28 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 00:24:27 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 01:18:36 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	execute_heredoc(void)
 		signal(SIGINT, SIG_IGN);
 		status = wait_child(pid);
 		set_last_status(status);
-		return (status);
 	}
 	return (0);
 }
