@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:22 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 23:19:00 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 01:23:29 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,7 @@ void	executor(void)
 		print_error_message("too many heredoc");
 		return ;
 	}
-	if (execute_heredoc())
-		return ;
+	execute_heredoc();
 	if (g_minishell_info.ps_list->size == 1)
 		execute_single_cmdline();
 	else
