@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:16:24 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 09:13:55 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 13:22:14 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static int	apply_heredoc(void)
 	filename[6] = idx_char[g_minishell_info.heredoc_cnt];
 	fd = safe_openfile(filename, READ);
 	if (fd == -1)
-		error_exit("heredoc file error");
+	{
+		print_error_message("heredoc error");
+		return (fd);
+	}
 	g_minishell_info.heredoc_cnt++;
 	dup2(fd, STDIN_FILENO);
 	return (fd);

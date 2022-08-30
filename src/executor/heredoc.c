@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:28 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 09:12:08 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 13:22:48 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	execute_heredoc(void)
 {
 	int			pid;
 
+	g_minishell_info.heredoc_cnt = 0;
 	pid = fork();
 	if (pid == -1)
 		error_exit("fork error");
