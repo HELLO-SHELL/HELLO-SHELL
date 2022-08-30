@@ -85,8 +85,6 @@ t_token	*make_token_list(char **token_arr)
 	int		idx;
 
 	idx = 0;
-	if (!token_arr || !*token_arr)
-		return (NULL);
 	set_str_into_list(&token_list_head, token_arr);
 	token_list_head = get_token_head(token_list_head);
 	while (token_arr[idx])
