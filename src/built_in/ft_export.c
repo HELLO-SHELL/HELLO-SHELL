@@ -6,13 +6,13 @@
 /*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:58:55 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 16:58:56 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/30 09:17:19 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	export_check_error(t_token *token)
+static int	export_check_error(t_token *token)
 {
 	t_token	*curr;
 	int		i;

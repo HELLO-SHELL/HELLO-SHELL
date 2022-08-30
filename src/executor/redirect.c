@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:16:24 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/29 18:16:25 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 09:13:55 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	restore_stdio(void)
 	dup2(g_minishell_info.ft_stderr, STDERR_FILENO);
 }
 
-int	apply_heredoc(void)
+static int	apply_heredoc(void)
 {
 	char		filename[8];
 	const char	*idx_char = "0123456789abcdef";
@@ -35,7 +35,7 @@ int	apply_heredoc(void)
 	return (fd);
 }
 
-int	apply_redirection(char *filename, int mode)
+static int	apply_redirection(char *filename, int mode)
 {
 	int	fd;
 

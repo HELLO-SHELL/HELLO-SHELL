@@ -6,13 +6,13 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:28 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/29 18:15:29 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 09:12:08 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	make_temp_file(int file_index, char *delim)
+static void	make_temp_file(int file_index, char *delim)
 {
 	char		*line;
 	int			fd;
