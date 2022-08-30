@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_arr_to_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:10:30 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:10:32 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/30 13:08:28 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_token	*make_token_list(char **token_arr)
 
 	idx = 0;
 	if (!token_arr || !*token_arr)
-		exit(EXIT_FAILURE);
+		return (NULL);
 	set_str_into_list(&token_list_head, token_arr);
 	token_list_head = get_token_head(token_list_head);
 	while (token_arr[idx])
