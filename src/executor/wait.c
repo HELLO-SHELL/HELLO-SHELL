@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:16:29 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 00:47:15 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 01:35:43 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	wait_child(pid_t pid)
 	int	status;
 
 	if (waitpid(pid, &status, 0) == -1)
-		error_exit("fail waitpid\n");
+		print_error_message("fail waitpid\n");
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGINT)
