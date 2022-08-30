@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:05:40 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 09:05:43 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/30 18:46:58 by jaekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	execute_minishell(char *input)
 {
 	t_token		*curr_token;
 	char		*replaced_input;
-	char **splited_input;
+	char		**splited_input;
 
 	replaced_input = replace_whole_input_dollar(input);
 	if (replaced_input && *replaced_input)
@@ -25,7 +25,7 @@ static void	execute_minishell(char *input)
 		if (!splited_input || !*splited_input)
 		{
 			free(splited_input);
-			return;
+			return ;
 		}
 		curr_token = make_token_list(splited_input);
 		if (check_token_error(curr_token))
