@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:59:10 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 16:59:11 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/31 01:58:23 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	unsetting(t_list *env_list, t_token *token)
 			safe_free (((t_env *)temp->content)->key);
 			safe_free (((t_env *)temp->content)->value);
 			safe_free((temp->content));
+			safe_free(temp);
 		}
 		else
 			env_prev = temp;

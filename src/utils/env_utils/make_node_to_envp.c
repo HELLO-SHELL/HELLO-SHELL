@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_node_to_envp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:04:14 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:09:03 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/08/31 02:48:21 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*ft_env_strjoin(char *s1, char *s2)
 	char	*result;
 	char	*temp;
 
-	if (!s1 || !s2)
+	if (!s1)
 		return (0);
 	temp = safe_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!temp)
@@ -25,8 +25,10 @@ static char	*ft_env_strjoin(char *s1, char *s2)
 	result = temp;
 	while (*s1)
 		*(temp++) = *(s1++);
+	if (!s2)
+		return (result);
 	*(temp++) = '=';
-	while (*s2)
+	while (!*s2)
 		*(temp++) = *(s2++);
 	*temp = '\0';
 	return (result);
