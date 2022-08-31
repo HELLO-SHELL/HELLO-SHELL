@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:16:29 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 05:56:32 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 11:50:42 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ pid_t	get_last_pid(void)
 	while (ps_curr->next)
 		ps_curr = ps_curr->next;
 	return (ps_curr->pid);
+}
+
+int	wait_child(int pid)
+{
+	int			status;
+
+	waitpid(pid, &status, 0);
+	return (trans_status(status));
 }
 
 int	wait_childs(void)

@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:16:24 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/30 13:22:14 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 11:15:54 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	restore_stdio(void)
 
 static int	apply_heredoc(void)
 {
-	char		filename[8];
+	char		filename[7];
 	const char	*idx_char = "0123456789abcdef";
 	int			fd;
 
 	ft_strlcpy(filename, ".temp.", 7);
-	filename[6] = idx_char[g_minishell_info.heredoc_cnt];
+	filename[5] = idx_char[g_minishell_info.heredoc_cnt];
 	fd = safe_openfile(filename, READ);
 	if (fd == -1)
 	{

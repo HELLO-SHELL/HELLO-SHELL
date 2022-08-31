@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:05:40 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 04:50:34 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 11:57:58 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	execute_minishell(char *input)
 		make_node_to_envp();
 		executor();
 		free_all();
+		unlink_all_tempfiles();
 	}
 	else
 		free(replaced_input);

@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:28 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 01:55:34 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 11:57:04 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	make_temp_file(int file_index, char *delim)
 {
 	char		*line;
 	int			fd;
-	char		filename[8];
+	char		filename[7];
 	const char	*idx_char = "0123456789abcdef";
 
 	ft_strlcpy(filename, ".temp.", 7);
-	filename[6] = idx_char[file_index];
+	filename[5] = idx_char[file_index];
 	fd = safe_openfile(filename, WRITE);
 	if (fd == -1)
 		error_exit("heredoc file error");
@@ -64,6 +64,22 @@ static void	heredoc_to_temp_files(void)
 	}
 }
 
+void	unlink_all_tempfiles(void)
+{
+	int			idx;
+	char		filename[7];
+	const char	*idx_char = "0123456789abcdef";
+
+	ft_strlcpy(filename, ".temp.", 7);
+	while (idx < 16)
+	{
+		filename[5] = idx_char[idx];
+		if (access(filename, F_OK) == 0)
+			unlink(filename);
+		idx++;
+	}
+}
+
 int	execute_heredoc(void)
 {
 	int		pid;
@@ -77,12 +93,14 @@ int	execute_heredoc(void)
 	{
 		signal(SIGINT, heredoc_new_prompt);
 		heredoc_to_temp_files();
-		exit(EXIT_SUCCESS);
+		exit(0);
 	}
 	else
 	{
 		signal(SIGINT, SIG_IGN);
-		set_last_status(wait_childs());
+		set_last_status(wait_child(pid));
+		if (is_same_string(g_minishell_info.last_status, "130"))
+			return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
