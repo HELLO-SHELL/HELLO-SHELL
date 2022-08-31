@@ -6,7 +6,7 @@
 /*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:22 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 05:57:29 by jimin            ###   ########.fr       */
+/*   Updated: 2022/08/31 10:25:43 by jimin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,9 @@ void	execute_process(t_process *process, t_pipes *pipes)
 
 int	execute_pipeline(void)
 {
-	int			idx;
 	t_process	*ps_curr;
 
-	idx = 0;
 	ps_curr = g_minishell_info.ps_list;
-	init_pipe(&g_minishell_info.pipes);
 	while (ps_curr)
 	{
 		swap_pipe(&g_minishell_info.pipes);
@@ -83,17 +80,11 @@ void	execute_single_cmdline(void)
 
 	process = g_minishell_info.ps_list;
 	if (apply_redirections(process->cmd_line) == FAILURE)
-	{
-		set_last_status(EXIT_FAILURE);
-		return ;
-	}
+		return (set_last_status(EXIT_FAILURE));
 	if (is_argv_null(process->argv))
 		return ;
 	if (is_built_in(process))
-	{
-		set_last_status(execute_built_in(process));
-		return ;
-	}
+		return (set_last_status(execute_built_in(process)));
 	g_minishell_info.ps_list->pid = fork();
 	if (g_minishell_info.ps_list->pid == -1)
 		error_exit("fork error");
@@ -104,8 +95,7 @@ void	execute_single_cmdline(void)
 		execute_command(process);
 	}
 	else
-		set_last_status(wait_childs());
-	return ;
+		return (set_last_status(wait_childs()));
 }
 
 void	executor(void)
