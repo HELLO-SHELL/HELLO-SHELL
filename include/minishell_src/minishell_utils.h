@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:38:53 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/31 10:22:38 by jimin            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:02:24 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 /*		cd_utils.c		*/
 int		is_path_only_home(t_token *cmd_list);
 int		is_path_pass_home(t_token *cmd_list);
-int		set_path_to_home(t_list *env_list, t_token *cmd_list, char **path);
-int		set_path_at_home(t_list *env_list, t_token *cmd_list, char **path);
+int		set_path_to_home(char **path);
+int		set_path_at_home(t_token *cmd_list, char **path);
 int		set_path_to_input(t_token *cmd_list, char **path);
 
 /*		executor_built_in.c		*/

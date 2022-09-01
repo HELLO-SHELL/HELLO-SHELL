@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:16:24 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 11:15:54 by jimin            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:12:19 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static int	apply_redirection(char *filename, int mode)
 {
 	int	fd;
 
+	fd = 0;
 	if (mode == TK_RDINPUT)
 	{
 		fd = safe_openfile(filename, READ);

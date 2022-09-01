@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_key_valid_checker.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:03:57 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:03:58 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/09/01 16:55:36 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-static int	possible_next_question(char *str)
-{
-	int	len;
-
-	len = 0;
-	if (!str)
-		return (0);
-	while (*str)
-	{
-		if (is_dollar_replacement_end_condition(*str))
-			break ;
-		len++;
-		str++;
-	}
-	if (len == 0)
-		return (TRUE);
-	return (FALSE);
-}
 
 int	env_key_valid_checker(char *str)
 {

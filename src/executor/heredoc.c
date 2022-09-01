@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:28 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 11:57:04 by jimin            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:11:37 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	unlink_all_tempfiles(void)
 	char		filename[7];
 	const char	*idx_char = "0123456789abcdef";
 
+	idx = 0;
 	ft_strlcpy(filename, ".temp.", 7);
 	while (idx < 16)
 	{
@@ -83,7 +84,6 @@ void	unlink_all_tempfiles(void)
 int	execute_heredoc(void)
 {
 	int		pid;
-	int		status;
 
 	g_minishell_info.heredoc_cnt = 0;
 	pid = fork();

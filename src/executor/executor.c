@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:15:22 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 11:54:01 by jimin            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:07:44 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	execute_command(t_process *process)
 {
 	char	*command;
-	char	**argv_curr;
 	char	**paths;
 
 	command = process->argv[0];
@@ -100,8 +99,6 @@ void	execute_single_cmdline(void)
 
 void	executor(void)
 {
-	int	status;
-
 	if (is_heredoc_error())
 	{
 		print_error_message("too many heredoc");

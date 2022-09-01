@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 09:07:27 by jimin             #+#    #+#              #
-#    Updated: 2022/08/31 05:57:52 by jimin            ###   ########.fr        #
+#    Updated: 2022/09/01 17:17:13 by jaekim           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ OBJS = $(READLINE_OBJS) $(MAIN_OBJS) $(BUILT_IN_OBJS) $(PARSER_OBJS) $(UTILS_OBJ
 $(NAME) : $(OBJS)
 	make bonus -j -C $(LIB_DIR)/libft
 	make -j -C $(LIB_DIR)/get_next_line
-	$(CC) $(CFLAGS) $(OBJS) $(LINKING_FLAGS) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
+	$(CC) $(OBJS) $(LINKING_FLAGS) $(LIB_DIR)/$(LIBFT) $(LIB_DIR)/$(GNL) -o $(NAME)
 	make -j fclean -C $(LIB_DIR)/libft
 	make -j fclean -C $(LIB_DIR)/get_next_line
 
@@ -88,6 +88,6 @@ re :
 	make all
 
 %.o :   %.c
-	$(CC) -c $^ $(COMFILE_FLAGS) -o $@
+	$(CC) $(CFLAGS) -c $^ $(COMFILE_FLAGS) -o $@
 
 .PHONY : all clean fclean re

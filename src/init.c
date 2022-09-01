@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimin <jimin@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:05:40 by jimin             #+#    #+#             */
-/*   Updated: 2022/08/31 11:57:58 by jimin            ###   ########.fr       */
+/*   Updated: 2022/09/01 16:53:49 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void	execute_minishell(char *input)
 
 void	init_minishell(void)
 {
-	t_token		*curr_token;
 	char		*input;
 
 	while (1)
