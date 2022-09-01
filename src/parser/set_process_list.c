@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_process_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:10:21 by jaekim            #+#    #+#             */
-/*   Updated: 2022/09/01 16:54:24 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 18:10:21 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:17:59 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

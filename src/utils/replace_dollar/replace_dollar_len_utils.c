@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollar_len_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:30:39 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:30:40 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 17:30:39 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:11 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_node_to_envp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:04:14 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/31 02:48:21 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 17:04:14 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:07 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

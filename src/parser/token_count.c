@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_count.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:10:26 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:10:27 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 18:10:26 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:01 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote_util.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:09:47 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:09:48 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 18:09:47 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:00 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

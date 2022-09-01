@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:15:22 by jimin             #+#    #+#             */
-/*   Updated: 2022/09/01 17:07:44 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 18:15:22 by seongyle             #+#    #+#             */
+/*   Updated: 2022/09/02 08:17:55 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

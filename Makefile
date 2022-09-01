@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/30 09:07:27 by jimin             #+#    #+#              #
-#    Updated: 2022/09/01 17:17:13 by jaekim           ###   ########seoul.kr   #
+#    Created: 2022/08/30 09:07:27 by seongyle             #+#    #+#              #
+#    Updated: 2022/09/02 08:17:51 by seongyle         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 

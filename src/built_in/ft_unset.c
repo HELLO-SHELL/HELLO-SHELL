@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 16:59:10 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/31 01:58:23 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 16:59:10 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:17:54 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

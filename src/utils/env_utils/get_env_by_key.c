@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_by_key.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:04:04 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:04:05 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 17:04:04 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:06 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

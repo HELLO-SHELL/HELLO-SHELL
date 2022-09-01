@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_init.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:32:20 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:33:02 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 18:32:20 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:17:41 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

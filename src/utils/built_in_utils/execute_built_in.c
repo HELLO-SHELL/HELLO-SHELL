@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_built_in.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:03:35 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:03:36 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 17:03:35 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:02 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

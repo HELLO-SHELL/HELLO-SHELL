@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:00:49 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:00:56 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 17:00:49 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:03 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

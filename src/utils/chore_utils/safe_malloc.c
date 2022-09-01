@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:15:09 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:15:10 by jaekim           ###   ########.fr       */
+/*   Created: 2022/08/29 17:15:09 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:05 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

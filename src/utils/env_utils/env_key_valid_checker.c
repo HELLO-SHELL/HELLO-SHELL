@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_key_valid_checker.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:03:57 by jaekim            #+#    #+#             */
-/*   Updated: 2022/09/01 16:55:36 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 17:03:57 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:05 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

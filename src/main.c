@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 16:59:25 by jaekim            #+#    #+#             */
-/*   Updated: 2022/09/01 17:24:57 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 16:59:25 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:17:57 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

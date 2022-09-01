@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 16:58:55 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/31 02:08:59 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 16:58:55 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:17:53 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

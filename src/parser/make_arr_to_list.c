@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_arr_to_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:10:30 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/30 13:08:28 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 18:10:30 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:17:58 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

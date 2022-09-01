@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_wallpaper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:07:53 by jaekim            #+#    #+#             */
-/*   Updated: 2022/09/01 17:03:41 by jaekim           ###   ########seoul.kr  */
+/*   Created: 2022/08/29 18:07:53 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:18:12 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
