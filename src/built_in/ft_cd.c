@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:58:12 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 16:58:13 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/09/01 17:02:52 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	set_path(char **path)
 	env_list = g_minishell_info.env_list;
 	cmd_list = g_minishell_info.ps_list->cmd_line->next;
 	if (is_path_only_home(cmd_list))
-		return (set_path_to_home(env_list, cmd_list, path));
+		return (set_path_to_home(path));
 	else if (is_path_pass_home(cmd_list))
-		return (set_path_at_home(env_list, cmd_list, path));
+		return (set_path_at_home(cmd_list, path));
 	else
 		return (set_path_to_input(cmd_list, path));
 	return (SUCCESS);

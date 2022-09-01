@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:00:08 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 17:00:10 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/09/01 17:01:53 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_path_pass_home(t_token *cmd_list)
 	return (0);
 }
 
-int	set_path_to_home(t_list *env_list, t_token *cmd_list, char **path)
+int	set_path_to_home(char **path)
 {
 	*path = get_env_value_by_key("HOME");
 	if (!*path)
@@ -37,7 +37,7 @@ int	set_path_to_home(t_list *env_list, t_token *cmd_list, char **path)
 	return (SUCCESS);
 }
 
-int	set_path_at_home(t_list *env_list, t_token *cmd_list, char **path)
+int	set_path_at_home(t_token *cmd_list, char **path)
 {
 	*path = get_env_value_by_key("HOME");
 	if (chdir(*path) != 0)

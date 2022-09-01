@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_process_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:10:21 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:10:22 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/09/01 16:54:24 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	word_token_to_argv(t_process *ps_list)
 static void	insert_process_head(t_process **ps_list, t_token *tk_list)
 {
 	t_process	*pslist_curr;
-	t_token		*token_head;
 	t_token		*token_curr;
 	t_token		*for_delete;
 

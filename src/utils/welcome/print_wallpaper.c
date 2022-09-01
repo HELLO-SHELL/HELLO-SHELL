@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_wallpaper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekim <jaekim@student.42seuol.kr>         +#+  +:+       +#+        */
+/*   By: jaekim <jaekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:07:53 by jaekim            #+#    #+#             */
-/*   Updated: 2022/08/29 18:07:56 by jaekim           ###   ########.fr       */
+/*   Updated: 2022/09/01 17:03:41 by jaekim           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	init_wallpaper(int fd)
 void	print_wallpaper(void)
 {
 	int		fd;
-	char	*line;
 
 	fd = open("./assets/wallpaper", O_RDONLY);
 	if (fd < 0)
