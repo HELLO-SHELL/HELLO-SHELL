@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 09:00:05 by seongyle             #+#    #+#             */
-/*   Updated: 2022/08/31 11:19:28 by seongyle            ###   ########.fr       */
+/*   Created: 2022/08/30 09:00:05 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:25:59 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

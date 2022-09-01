@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:16:29 by seongyle             #+#    #+#             */
-/*   Updated: 2022/08/31 11:50:42 by seongyle            ###   ########.fr       */
+/*   Created: 2022/08/29 18:16:29 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:24:17 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

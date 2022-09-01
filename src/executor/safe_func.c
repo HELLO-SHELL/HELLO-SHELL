@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:16:26 by seongyle             #+#    #+#             */
-/*   Updated: 2022/08/29 18:16:27 by seongyle            ###   ########.fr       */
+/*   Created: 2022/08/29 18:16:26 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:24:07 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:15:31 by seongyle             #+#    #+#             */
-/*   Updated: 2022/08/30 09:12:41 by seongyle            ###   ########.fr       */
+/*   Created: 2022/08/29 18:15:31 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:23:39 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

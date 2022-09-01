@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:15:18 by seongyle             #+#    #+#             */
-/*   Updated: 2022/08/29 18:15:19 by seongyle            ###   ########.fr       */
+/*   Created: 2022/08/29 18:15:18 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:23:13 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongyle <seongyle@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seongyle <seongyle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 18:16:21 by seongyle             #+#    #+#             */
-/*   Updated: 2022/08/29 18:16:22 by seongyle            ###   ########.fr       */
+/*   Created: 2022/08/29 18:16:21 by seongyle          #+#    #+#             */
+/*   Updated: 2022/09/02 08:23:50 by seongyle         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
