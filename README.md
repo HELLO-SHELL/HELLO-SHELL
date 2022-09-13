@@ -16,3 +16,7 @@
 2. 전체 과정은 아래와 같습니다.
 
 <img width="1416" alt="Screen Shot 2022-09-02 at 2 32 52 PM" src="https://user-images.githubusercontent.com/79993356/189474375-fa6f96ad-26df-4003-8020-7bfcfc75434e.png">
+
+
+## 누적 플로우 차트
+<img width="1388" alt="image" src="https://user-images.githubusercontent.com/62806979/189900997-ec689f97-88ad-4ef0-9873-e1050e80bdbe.png">
